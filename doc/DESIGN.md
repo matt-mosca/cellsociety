@@ -1,11 +1,11 @@
-#Cell Society Plan
+# Cell Society Plan
 
 Authors: Matthew Mosca (mjm141), Venkat Subramaniam (vms23), Yiqin Zhou (yz259)
 Professor: Robert Duvall
 Computer Science 308
 09.18.17
 
-###Introduction
+### Introduction
 
 In completing this project, our goal is to design a program that can run various simulations, all of which are in the form of a 2D grid. Each square of the grid will be called a “cell” from here on out, and every cell has its own “state.” This state could be anything depending on the kind of simulation that we are running, from just one within a binary framework to various temperatures of states. Each cell would also have the ability to change its state depending on its neighbor cells’ states, as per the rules of the simulation that is being run. This changing of the states is what enables this program to actually work as a simulation, as when all of the cells fluidly shift from one state to another, it allows the user, or the viewer as it may be, to actually see the bigger picture. Our goal is to create a program that will be able to run rich, interactive simulations that can help people understand different topics. 
 
@@ -13,7 +13,7 @@ In terms of design, the program will be flexible enough to be easily modified to
 
 For the primary architecture of the design, we plan to keep the UI package and all superclasses open. People outside the design group should be able to add additional UIs and modify the existing UIs as they extend the program to handle different simulations. Superclasses are made open so that anyone who would like to modify this project in the future can know their specifications and add more subclasses to facilitate customization. Subclasses themselves will be kept closed so that people outside the design team will not be able to edit them or damage their functionalities. 
 
-###Overview
+### Overview
 
 The program has several logical divisions, which basically will be used as the divisions between classes when writing the program. The primary classes in the program will be Main, Simulation, a Cell superclass, Cell subclasses, and State. Another piece of the program, somewhat separate from the rest, will be the User Interface, contained in a package.
 
@@ -29,7 +29,7 @@ The User Interface package will handle and incorporate the XML file and input en
 
 (See CellSociety_Divisions.png)
 
-###User Interface
+### User Interface
 
 When one opens our program, they will immediately be met with a screen which asks them what kind of simulation they would like to run. After they select one of the simulations, the scene changes and they are taken to the simulation that they chose to use. The way that this happens is that when they select a particular simulation, the XML file which contains the default settings and information for that particular simulation will be read and processed so that it can be set up. Alternatively, this could also work in such a way that the user can create their own XML file with their own default settings, so long as our program supports the simulation that they would like to run.
 
@@ -39,7 +39,7 @@ Whenever the program runs into an error, such as an empty file being read, or a 
 
 (See CellSociety_UI_Diagram.png)
 
-###Design Details
+### Design Details
 
 To elaborate, Main will create the primary stage for the program and hold it as an instance variable. It will also create the first scene of the program and attach it to the stage. Then, it will call methods from the User Interface package to initiate the type of simulation and values for the simulation, and will call methods from Simulation to begin the simulation.
 
@@ -51,7 +51,7 @@ State is a simple class, no more complicated than as described in the Overview s
 
 The User Interface will not be contained within a class, but rather within a package. Within this package, there will be an inheritance hierarchy where the superclass is that of a “general” UI, while all of the subclasses will be those of specific UIs for each simulation. Some of the methods that they share would include play(), pause(), step(), reset(), and switchSim(). In addition to all of these classes which correspond to the UIs, there will also be smaller classes which help define the error messages that the user gets if there is an error in the program, and which allow the reading/parsing of the XML files. Additional classes here would be related to the sliders that are used, which could also potentially be based upon their own inheritance hierarchy. 
  
-####Use cases:
+#### Use cases:
 
 Use Case 1: Apply the rules to a middle cell: set the next state of a cell to dead by counting its number of neighbors using the Game of Life rules for a cell in the middle (i.e., with all its neighbors).
 
@@ -73,7 +73,7 @@ Use Case 5: Switch simulations: use the GUI to change the current simulation fro
 
 The user clicks a button in the scene which leads to a drop down menu asking which simulation the user would like to switch to. When the user clicks on a particular simulation, the animation is paused. The method switchSim would be called. When this method is called, it sets up a new simulation with default parameters by reading about that particular simulation from its designated XML file, or by calling the Simulation class and creating a new Simulation which uses Cells and states which correspond to the new simulation. Once this new Simulation object is created, it is attached to the stage, and the user is given the same option of choosing what settings they would like. This sets the parameters for the new simulation. When the user clicks the “play” button, the simulation starts working because the animation was unpaused. 
 
-###Design Considerations
+### Design Considerations
 
 The design issue we spent the most time discussing was how to incorporate the four required simulations into the class structure of our program. The first design proposed was to make a superclass for Simulation with four subclasses, one for each type of Simulation, and a single class for all Cells. This appears to be a good and logical design at first because we have four simulations to handle, and it therefore makes sense to make four Simulation subclasses. It is also straightforward for anyone who would like to add another simulation to our project later. However, this design would make the Cell class too general, and would require the Simulation subclasses to act upon the Cell to change its values, making the Cell quite passive. The second potential design was to make a Simulation superclass with four subclasses, as well as a Cell superclass with four subclasses. This is the most flexible design because it allows each Simulation subclass to have qualities of each simulation, and also lets the Cell subclasses retain some activity. However, every time someone wanted to add another simulation to the repertoire of the program, they would need to add both a Simulation subclass and a Cell subclass. The third design proposed was to have one class for Simulation class and a Cell superclass with four subclasses, one for each simulation. We eventually reached the conclusion that this design would be the best among the three because simulations are actually differentiated by their cells, and with this design only one class would need to be added to accommodate another simulation. We can implement all rules within the cell class, refactor the common structure out and put it inside one simulation class. We actually did also consider one more design, which was to have a single Simulation class and a single Cell class, with multiple classes acting as intermediaries, or junctions, one for each simulation. This design is conceptually satisfying because it maintains the integrity of the Simulation framework and Cell concepts as unfragmented classes, but we could not figure out the best way to implement this idea. However, this design is a possibility we will keep in mind as we begin to code in case we run into design difficulties and need another solution.
 
@@ -81,7 +81,7 @@ Another issue that we discussed at length is the UI design. We are not sure abou
 
 Our design has dependencies between the Cell subclasses and the Simulation class, as cells are components of a simulation. It is inevitable for them to be tied together. Similarly, there is dependency between Cell classes and the State class. 
 
-###Team Responsibilities
+### Team Responsibilities
 
 We plan to work on the back end and the front end simultaneously because they can be separated and combined together easily. Specifically, Venkat is going to finish the UI design and design relating to handling the XML file. Yiqin and Matt will focus more on back end. Yiqin and Matt will take two Cell subclasses each, coming up with Cell subclass outlines. Then our team will meet again to refactor similar methods out into the Cell superclass. Then Yiqin will be responsible for writing Simulation, two specific Cell classes, and the Cell superclass, while Matt will be responsible for another two specific Cell subclasses and the State class. Venkat will finish Main after all other classes are written.
 
