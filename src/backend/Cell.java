@@ -1,4 +1,4 @@
-package cellsociety_team05;
+package backend;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

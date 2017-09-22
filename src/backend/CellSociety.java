@@ -1,4 +1,4 @@
-package cellsociety_team05;
+package backend;
 
 public class CellSociety {
 	//main class
