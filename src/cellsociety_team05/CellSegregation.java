@@ -1,13 +1,18 @@
 package cellsociety_team05;
 
+import java.util.ArrayList;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class CellSegregation extends Cell{
+	
+	private int previousState;
 
-	public CellSegregation(int state, Image image, Cell[] neighborCells, int rowNumber, int columnNumber) {
+	public CellSegregation(int state, Image image, ArrayList<Cell> neighborCells, int rowNumber, int columnNumber) {
 		super(state, image, neighborCells, rowNumber, columnNumber);
 		// TODO Auto-generated constructor stub
+		setPreviousState(0);
 	}
 	public int getState() {
 		return super.getState();
@@ -22,18 +27,12 @@ public class CellSegregation extends Cell{
 			Image image) {
 		super.setImage(image);
 	}
-	public ImageView getImageView() {
-		return super.getImageView();
-	}
-	public void setImageView(
-			ImageView imageView) {
-		super.setImageView(imageView);
-	}
-	public Cell[] getNeighborCells() {
+	
+	public ArrayList<Cell> getNeighborCells() {
 		return super.getNeighborCells();
 	}
 	public void setNeighborCells(
-			Cell[] neighborCells) {
+			ArrayList<Cell> neighborCells) {
 		super.setNeighborCells(neighborCells);
 	}
 
@@ -53,6 +52,13 @@ public class CellSegregation extends Cell{
 	public void setColumnNumber(
 			int columnNumber) {
 		super.setColumnNumber(columnNumber);
+	}
+	public int getPreviousState() {
+		return previousState;
+	}
+	public void setPreviousState(
+			int previousState) {
+		this.previousState = previousState;
 	}
 
 

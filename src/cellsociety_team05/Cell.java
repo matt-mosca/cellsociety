@@ -1,5 +1,7 @@
 package cellsociety_team05;
 
+import java.util.ArrayList;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -7,13 +9,12 @@ import javafx.scene.image.ImageView;
 //Super class of cell
 public class Cell {
 	private int state;
-	private Image image;
-	private ImageView imageView; 
-	private Cell[] neighborCells;
+	private Image image; 
+	private ArrayList<Cell> neighborCells;
 	private int rowNumber;
 	private int columnNumber;
 	
-	public Cell(int state, Image image, Cell[]neighborCells, int rowNumber, int columnNumber) {
+	public Cell(int state, Image image, ArrayList<Cell>neighborCells, int rowNumber, int columnNumber) {
 		this.state=state;
 		this.image=image;
 		this.neighborCells=neighborCells;
@@ -35,18 +36,12 @@ public class Cell {
 			Image image) {
 		this.image = image;
 	}
-	public ImageView getImageView() {
-		return imageView;
-	}
-	public void setImageView(
-			ImageView imageView) {
-		this.imageView = imageView;
-	}
-	public Cell[] getNeighborCells() {
+	
+	public ArrayList<Cell> getNeighborCells() {
 		return neighborCells;
 	}
 	public void setNeighborCells(
-			Cell[] neighborCells) {
+			ArrayList<Cell> neighborCells) {
 		this.neighborCells = neighborCells;
 	}
 
