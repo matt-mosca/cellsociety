@@ -2,7 +2,7 @@ package backend;
 
 import java.util.ArrayList;
 
-public class SimulationFire {
+public class SimulationFire{
 	private CellFire[][] array;
 	private int numberOfCells;
 	private int cellNumberHorizontal;
@@ -13,6 +13,7 @@ public class SimulationFire {
 	public SimulationFire(int cellNumberHorizontal, int  cellNumberVertical) {
 		this.cellNumberHorizontal = cellNumberHorizontal;
 		this.cellNumberVertical = cellNumberVertical;
+		this.numberOfCells = cellNumberHorizontal * cellNumberVertical;
 		probCatch = 0.5;
 		initialEmptyPercentage = 0.25;
 		array = new CellFire[cellNumberHorizontal][cellNumberVertical];
