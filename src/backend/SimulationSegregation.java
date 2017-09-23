@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class SimulationSegregation extends Simulation {
-	private CellSegregation[][] array;
+//	private CellSegregation[][] array;
 	private double satisfactionPercentage;
 	private int numberOfCells;
 	private double emptyPercentage;
@@ -18,15 +18,22 @@ public class SimulationSegregation extends Simulation {
 			double redToBlueRatio) {
 		// set up instance variables, put 0s in every cell
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
+		super.array = new CellSegregation[cellNumberHorizontal][cellNumberVertical];
+		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
+			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
+				super.array[rowNumber][columnNumber]=new CellSegregation(0, null, null, rowNumber, columnNumber);
+			}
+		}
+	
 		this.satisfactionPercentage = satisfactionPercentage;
 		super.initializeScene();
 		
 		
 		
-	    
+	    /*
 		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
-				System.out.println(array[rowNumber][columnNumber].getState());
+				System.out.println(super.array[rowNumber][columnNumber].getState());
 			}
 		}
 		System.out.println("separate here");
@@ -43,6 +50,8 @@ public class SimulationSegregation extends Simulation {
 				System.out.println(array[rowNumber][columnNumber].getState());
 			}
 		}
+		
+		*/
 		
 		
 		
@@ -90,7 +99,7 @@ public class SimulationSegregation extends Simulation {
 	
 		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
-				CellSegregation cell = array[rowNumber][columnNumber];
+				CellSegregation cell = (CellSegregation) super.array[rowNumber][columnNumber];
 				if (cell.getState()==0) {continue;}
 				else if (!whetherSatisfied(cell)) {
 					dissatisfied.add(cell);
@@ -118,7 +127,7 @@ public class SimulationSegregation extends Simulation {
 		ArrayList<Cell> empty= new ArrayList<Cell>();
 		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
-				CellSegregation cell=array[rowNumber][columnNumber];
+				CellSegregation cell=(CellSegregation) super.array[rowNumber][columnNumber];
 				if (cell.getState()==0) {
 					empty.add(cell);
 				}
@@ -156,12 +165,12 @@ public class SimulationSegregation extends Simulation {
 	}
 
 	public CellSegregation[][] getArray() {
-		return array;
+		return (CellSegregation[][]) super.array;
 	}
 
 	public void setArray(
 			CellSegregation[][] array) {
-		this.array = array;
+		super.array = array;
 	}
 
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Simulation{
-	private Cell[][] array;
+	protected Cell[][] array;
 	private int numberOfCells;
 	private double emptyPercentage;
 	private double redToBlueRatio;
@@ -20,12 +20,7 @@ public class Simulation{
 	public Simulation(int cellNumberHorizontal, int cellNumberVertical, double emptyPercentage, 
 			double redToBlueRatio) {
 		// set up instance variables, put 0s in every cell
-		array = new Cell[cellNumberHorizontal][cellNumberVertical];
-		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
-				array[rowNumber][columnNumber]=new CellSegregation(0, null, null, rowNumber, columnNumber);
-			}
-		}
+
 		this.emptyPercentage = emptyPercentage;
 		this.redToBlueRatio = redToBlueRatio;
 		this.numberOfCells = cellNumberHorizontal
