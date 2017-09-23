@@ -1,4 +1,4 @@
-package cellsociety_team05;
+package backend;
 
 /**
  * State.java
