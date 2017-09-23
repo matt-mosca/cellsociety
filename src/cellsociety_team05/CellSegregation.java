@@ -7,12 +7,12 @@ import javafx.scene.image.ImageView;
 
 public class CellSegregation extends Cell{
 	
-	private int previousState;
+
 
 	public CellSegregation(int state, Image image, ArrayList<Cell> neighborCells, int rowNumber, int columnNumber) {
 		super(state, image, neighborCells, rowNumber, columnNumber);
 		// TODO Auto-generated constructor stub
-		setPreviousState(0);
+
 	}
 	public int getState() {
 		return super.getState();
@@ -52,13 +52,6 @@ public class CellSegregation extends Cell{
 	public void setColumnNumber(
 			int columnNumber) {
 		super.setColumnNumber(columnNumber);
-	}
-	public int getPreviousState() {
-		return previousState;
-	}
-	public void setPreviousState(
-			int previousState) {
-		this.previousState = previousState;
 	}
 
 
