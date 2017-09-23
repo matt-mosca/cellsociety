@@ -33,7 +33,7 @@ public class SimulationWaTor extends Simulation {
 		
 		
 		
-	    /*
+	    
 		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
 				System.out.println(super.array[rowNumber][columnNumber].getState());
@@ -54,7 +54,7 @@ public class SimulationWaTor extends Simulation {
 			}
 		}
 		
-		*/
+		
 		
 		
 		
