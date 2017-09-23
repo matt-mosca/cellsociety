@@ -66,12 +66,6 @@ public class SimulationWaTor extends Simulation {
 
 	}
 
-	public void initializeScene() {
-		// according to percentage, do random function
-		// call cell to change type
-		super.initializeScene();
-	}
-    
 	@Override
 	public void findNeighbors() {
 		//only four neighbors
@@ -105,22 +99,6 @@ public class SimulationWaTor extends Simulation {
 
 	}
 
-	public void fillInitialRedAndBlue(
-			int[] slots, int state) {
-		
-		super.fillInitialRedAndBlue(slots, state);
-
-		
-	}
-
-	public int[] random(int Number, int range) {
-		return super.random(Number, range);
-	}
-
-	public int findNumber(int state) {
-		return super.findNumber(state);
-	}
-    
 	@Override
 	public void update() {
 		// set up a loop, go through every cell
