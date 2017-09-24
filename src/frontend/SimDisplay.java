@@ -91,18 +91,49 @@ public class SimDisplay {
 	
 	private Button chooseScene(String s){
 		Button b = new Button(s);
-		this.simName = s + "!";
 		b.setPrefSize(100, 50);
 		b.setOnAction(e -> {
 			//shouldn't this call the XML reader and start passing information to the backend?
 			//I think that it should definitely do that. 
 			makeSimulation();
 			window.setScene(scene);
-			changeSimName();
+			changeSimName(s);
 		});
 		return b;
 	}
 	
+	
+	private Button pauseButton() {
+		Button b = new Button("Pause");
+		b.setOnAction(e -> {
+			//do the pause stuff by pausing the animation I guess
+		});
+		return b;
+	}
+	
+	private Button playButton() {
+		Button b = new Button("Play");
+		b.setOnAction(e ->{
+			//do the play stuff by resuming the animation, starting the animation, idk.
+		});
+		return b;
+	}
+	
+	private Button step() {
+		Button b = new Button("Step");
+		b.setOnAction(e ->{
+			//do the step stuff here by calling the step function wtf idk
+		});
+		return b;
+	}
+	
+	private Button reset() {
+		Button b = new Button("Reset");
+		b.setOnAction(e-> {
+			//do the reset stuff here
+		});
+		return b;
+	}
 	
 	private GridPane makeGrid(){
 		GridPane grid = new GridPane();
@@ -135,7 +166,8 @@ public class SimDisplay {
 		return Images;
 	}
 	
-	public void changeSimName() {
+	public void changeSimName(String s) {
+		this.simName = s + "!";
 		window.setTitle(simName);
 	}
 	
