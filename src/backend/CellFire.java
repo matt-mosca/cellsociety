@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import javafx.scene.image.Image;
 
-//Note: technically, the neighborhood of the cells for this simulation should only be the four that are to
-//the north, south, east, and west. Overwrite findNeighbors method from Simulation superclass?
 public class CellFire extends Cell{
 	
 	public static final int EMPTY = 0;
