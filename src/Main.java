@@ -5,6 +5,9 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
+
+import frontend.SimDisplay;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import javafx.animation.Animation;
@@ -26,20 +29,31 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Main extends Application{
-
+	public static final int SIZEx = 900;
+	public static final int SIZEy = 900;
+	
+	
+	Stage window;
+	
+	
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
+		window = primaryStage;
+		SimDisplay s = new SimDisplay(SIZEx, SIZEy);
 		
 	}
 	
 	
-	public Scene getSimulation() {
-		return null;
+	public Scene getSimulation(SimDisplay sim) {
+		return sim.makeSimulation();
 	}
 	
 	public void step() {
 		
 	}
 	
+	public static void main(String[] args) {
+		launch(args);
+	}
 }

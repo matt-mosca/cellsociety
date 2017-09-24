@@ -22,6 +22,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
@@ -39,7 +40,7 @@ public class SimDisplay {
 	private int width;
 	private int height;
 	private GridPane myGrid;
-//	ImageView[][] Images; //Do we need this? 
+	ImageView[][] Images;
 	
 	public SimDisplay(int x, int y) {
 		this.width=x;
@@ -52,8 +53,30 @@ public class SimDisplay {
 	}
 	
 	public Scene startScreen() {
-		
+		VBox layout = new VBox(10);
+		Scene startScene= new Scene(layout, width, height);
+		//Change the image here depending on the kind of image that we want.
+		Image backGround = new Image(getClass().getClassLoader().getResourceAsStream("brickwall.jpeg"));
+		ImagePattern pattern = new ImagePattern(backGround);
+		startScene.setFill(pattern);
+		//get some buttons to choose which of the four simulations they want to do
+		//replace the following code with a for loop and a resource file.
+		Button b1 = chooseScene("WaTor");
+		Button b2 = chooseScene("Fire");
+		Button b3 = chooseScene("Sim3");
+		Button b4 = chooseScene("Sim4");
+		layout.getChildren().addAll(b1,b2,b3,b4);
+		this.scene = startScene;
 		return this.scene;
+	}
+	
+	
+	private Button chooseScene(String s){
+		Button b = new Button(s);
+		b.setOnAction(e -> {
+			makeSimulation();
+		});
+		return b;
 	}
 	
 	
@@ -65,25 +88,28 @@ public class SimDisplay {
 		return myGrid;
 	}
 	
+	
+	
 	private void fillGrid(GridPane grid) {
 		for(int i=0;i<Cells.length;i++) {
 			for (int j=0; j<Cells[i].length; j++) {
-				grid.add(ImageV, columnIndex, rowIndex);
+				grid.add(Images[i][j], j, i);
 			}
 		}
+		this.myGrid=grid;
 	}
 	
 	
 //UNCOMMENT THIS IF YOU END UP NEEDING TO HAVE AN IMAGEVIEW ARRAY
 	
-//	private ImageView[][] makeImageArray(Cell[][] Cells){
-//		for(int i=0; i<Cells.length; i++) {
-//			for (int j=0; j<Cells[i].length; j++) {
-//				Images[i][j] = new ImageView(Cells[i][j].getImage());
-//			}
-//		}
-//		return Images;
-//	}
+	private ImageView[][] makeImageArray(Cell[][] Cells){
+		for(int i=0; i<Cells.length; i++) {
+			for (int j=0; j<Cells[i].length; j++) {
+				Images[i][j] = new ImageView(Cells[i][j].getImage());
+			}
+		}
+		return Images;
+	}
 	
 	
 }
