@@ -200,14 +200,20 @@ public class SimDisplay {
 //UNCOMMENT THIS IF YOU END UP NEEDING TO HAVE AN IMAGEVIEW ARRAY
 	
 	private ImageView[][] makeImageArray(Cell[][] Cells){
+//		int [][] test = new int[Cells.length][Cells[1].length];
+		ImageView[][] images = new ImageView[Cells.length][Cells[0].length];
 		for(int i=0; i<Cells.length; i++) {
 			for (int j=0; j<Cells[i].length; j++) {
 				System.out.print(i);
 				System.out.print(" "+ j);
-				Images[i][j] = new ImageView(Cells[i][j].getImage());
+//				test[i][j] = Cells[i][j].getColumnNumber();
+//				System.out.println(test[i][j]);
+				
+				images[i][j] = new ImageView(Cells[i][j].getImage());
 			}
 		}
-		return Images;
+		this.Images = images;
+		return this.Images;
 	}
 	
 	public void changeSimName(String s) {
