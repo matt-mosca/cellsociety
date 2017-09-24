@@ -123,8 +123,12 @@ public class SimDisplay {
 			}
 			if(s.equals("Fire")) {
 				inputArray = UI.getFire();
-				//in SimulationFire, the constructor is wrong. This is what it should be. 
-				//	this.sim = new SimulationFire((int) inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4]);
+				//in SimulationFire, the constructor is wrong. This is what it should be. fixed.
+				//checking if the xml returned the right things to me.
+//				for (double t: inputArray) {
+//					System.out.println(t);
+//				}
+				this.sim = new SimulationFire((int) inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4]);
 			}
 			if(s.equals("Segregation")) {
 				inputArray = UI.getSegregation();

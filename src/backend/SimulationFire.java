@@ -18,10 +18,9 @@ public class SimulationFire extends Simulation{
 	private double initialEmptyPercentage;
 
 	public SimulationFire(int cellNumberHorizontal, int  cellNumberVertical, double emptyPercentage, 
-			double redToBlueRatio) {
+			double redToBlueRatio, double probCatch) {
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
-		probCatch = 0.5;
-		initialEmptyPercentage = 0.25;
+//		initialEmptyPercentage = 0.25;
 		array = new CellFire[cellNumberHorizontal][cellNumberVertical];
 		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
