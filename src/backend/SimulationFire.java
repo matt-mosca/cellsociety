@@ -20,6 +20,8 @@ public class SimulationFire extends Simulation{
 	public SimulationFire(int cellNumberHorizontal, int  cellNumberVertical, double emptyPercentage, 
 			double redToBlueRatio, double probCatch) {
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
+		this.initialEmptyPercentage = emptyPercentage;
+		this.probCatch = probCatch;
 //		initialEmptyPercentage = 0.25;
 		array = new CellFire[cellNumberHorizontal][cellNumberVertical];
 		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
@@ -59,7 +61,8 @@ public class SimulationFire extends Simulation{
 	
 	private void setRandomFire() {
 		int rand = (int) getRandomNum(numberOfCells);
-		array[rand % cellNumberHorizontal][rand / cellNumberVertical].changeState(CellFire.BURNING);
+		if(cellNumberVertical != 0)
+			array[rand % cellNumberHorizontal][rand / cellNumberVertical].changeState(CellFire.BURNING);
 	}
 	
 	public void findNeighbors() {
@@ -145,5 +148,9 @@ public class SimulationFire extends Simulation{
 
 	public void setArray(CellFire[][] array) {
 		this.array = array;
+	}
+	public static void main(String[] args) {
+		SimulationFire test = new SimulationFire(5, 5, 0.2, 0.5, 0.2);
+		
 	}
 }
