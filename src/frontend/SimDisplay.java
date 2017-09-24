@@ -112,6 +112,7 @@ public class SimDisplay {
 		b.setOnAction(e -> {
 			//shouldn't this call the XML reader and start passing information to the backend?
 			//I think that it should definitely do that. 
+			
 			makeSimulation();
 			changeSimName(s);
 		});

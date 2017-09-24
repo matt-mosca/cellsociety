@@ -35,7 +35,7 @@ public class UserInput {
 
 
 
-	  public void getSegregation() {
+	  public String[] getSegregation() {
 	
 		
 	    try {
@@ -49,16 +49,17 @@ public class UserInput {
 		getInitialSetUp(doc, basic);
 //		makeFinalArray(fun);
 		
+		
 			
 		
 	    } catch (Exception e) {
 		e.printStackTrace();
 	    }
-		
+	    return finalParams;
 	  }
 	  
 	  
-	  public void getWaTor() {
+	  public String[] getWaTor() {
 		
 		
 	    try {
@@ -76,19 +77,20 @@ public class UserInput {
 		getInitialSetUp(doc, basic);
 //		makeFinalArray();
 		
+		
 	
 		
 	    } catch (Exception e) {
 		e.printStackTrace();
 	    }
-		
+	    return finalParams;
 	  }
 	  
 	
 
 
 
-	public void getFire() {
+	public String[] getFire() {
 			
 			
 		    try {
@@ -108,10 +110,10 @@ public class UserInput {
 		    } catch (Exception e) {
 			e.printStackTrace();
 		    }
-			
+			return finalParams;
      }
 	  
-	  public void getGameOfLife() {
+	  public String[] getGameOfLife() {
 			
 			
 		    try {
@@ -126,7 +128,7 @@ public class UserInput {
 		    } catch (Exception e) {
 			e.printStackTrace();
 		    }
-			
+			return finalParams;
    }
 
 
