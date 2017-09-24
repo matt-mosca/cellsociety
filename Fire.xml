@@ -1,0 +1,16 @@
+<Fire>
+    <title>
+        <name>Fire</name>
+    </title>
+
+    <parameters>
+        <probCatch>0.3</probCatch>
+    </parameters>
+
+    <initialSetting>
+        <cellNumberHorizontal>50</cellNumberHorizontal>
+        <cellNumberVertical>50</cellNumberVertical>
+        <emptyPercentage>0.3</emptyPercentage>
+        <redToBlueRatio>0</redToBlueRatio>
+    </initialSetting>
+</Fire>
