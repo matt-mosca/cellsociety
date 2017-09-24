@@ -67,6 +67,7 @@ public class SimDisplay {
 		BorderPane border = new BorderPane();
 		Scene fun = new Scene(border,width, height);
 		this.Cells = sim.getArray();
+		Images = makeImageArray(Cells);
 		makeGrid();
 		fillGrid();
 		border.setCenter(myGrid);
@@ -201,6 +202,8 @@ public class SimDisplay {
 	private ImageView[][] makeImageArray(Cell[][] Cells){
 		for(int i=0; i<Cells.length; i++) {
 			for (int j=0; j<Cells[i].length; j++) {
+				System.out.print(i);
+				System.out.print(" "+ j);
 				Images[i][j] = new ImageView(Cells[i][j].getImage());
 			}
 		}

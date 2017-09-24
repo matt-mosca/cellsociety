@@ -149,6 +149,7 @@ public class SimulationSegregation extends Simulation {
 	
 	private void updateImages() {
 		for(int i = 0; i < cellNumberHorizontal; i++) {
+			System.out.println("I reached here!");
 			for(int j = 0; j < cellNumberVertical; j++) {
 				array[i][j].setImage(chooseImage(array[i][j].getState()));
 			}
