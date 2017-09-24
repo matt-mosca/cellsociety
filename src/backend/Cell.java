@@ -30,7 +30,7 @@ public class Cell {
 		this.state = state;
 	}
 	public Image getImage() {
-		return image;
+		return this.image;
 	}
 	public void setImage(
 			Image image) {

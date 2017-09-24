@@ -24,6 +24,7 @@ public class SimulationSegregation extends Simulation {
 		// set up instance variables, put 0s in every cell
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
 		super.array = new CellSegregation[cellNumberHorizontal][cellNumberVertical];
+		//Image image = new Image(getClass().getClassLoader().getResourceAsStream(RED_IMAGE));
 		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
 				super.array[rowNumber][columnNumber]=new CellSegregation(0, null, null, rowNumber, columnNumber);
