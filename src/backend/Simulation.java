@@ -91,9 +91,6 @@ public class Simulation{
 				}
 				
 				cell.setNeighborCells(neighbors);
-				
-					
-
 			}
 		}
 
