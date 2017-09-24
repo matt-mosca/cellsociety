@@ -1,3 +1,6 @@
+/*
+ * Author: Venkat S.
+ */
 package frontend;
 
 import java.util.ArrayList;
@@ -32,31 +35,34 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.geometry.*;
 
-/*
- * Author: Venkat S.
- */
+
 public class SimDisplay {
+	private static final int VBOX_SPACING = 10;
 	private Scene scene;
-	//private ArrayList<ArrayList<Cell>> Cells;
 	private Cell[][] Cells;
 	private int width;
 	private int height;
 	private GridPane myGrid;
-	ImageView[][] Images;
+	private ImageView[][] Images;
 	private String simName;
+	private Stage window;
 	
-	public SimDisplay(int x, int y) {
+	public SimDisplay(int x, int y, Stage s) {
 		this.width=x;
 		this.height=y;
+		this.window = s;
 	}
 	
 	public Scene makeSimulation(){
-		
+		BorderPane border = new BorderPane();
+		Scene fun = new Scene(border,width, height);
+//		border.setCenter(myGrid);
+		this.scene = fun;
 		return this.scene;
 	}
 	
 	public Scene startScreen() {
-		VBox layout = new VBox(10);
+		VBox layout = new VBox(VBOX_SPACING);
 		Scene startScene= new Scene(layout, width, height);
 		layout.setAlignment(Pos.CENTER);
 		
@@ -85,9 +91,14 @@ public class SimDisplay {
 	
 	private Button chooseScene(String s){
 		Button b = new Button(s);
+		this.simName = s + "!";
 		b.setPrefSize(100, 50);
 		b.setOnAction(e -> {
+			//shouldn't this call the XML reader and start passing information to the backend?
+			//I think that it should definitely do that. 
 			makeSimulation();
+			window.setScene(scene);
+			changeSimName();
 		});
 		return b;
 	}
@@ -124,8 +135,10 @@ public class SimDisplay {
 		return Images;
 	}
 	
-	public String getSimName() {
-		return simName;
+	public void changeSimName() {
+		window.setTitle(simName);
 	}
+	
+	
 	
 }

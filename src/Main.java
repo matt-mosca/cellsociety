@@ -45,7 +45,7 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		window = primaryStage;
-		s = new SimDisplay(SIZEx, SIZEy);
+		s = new SimDisplay(SIZEx, SIZEy, window);
 		window.setTitle(INITIAL_TITLE);
 		myScene = getStartScene(s);
 		window.setScene(myScene);
