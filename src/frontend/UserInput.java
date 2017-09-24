@@ -153,10 +153,10 @@ public class UserInput {
 		String emptyPercentage = doc.getElementsByTagName("emptyPercentage").item(0).getTextContent();
 		String redToBlueRatio = doc.getElementsByTagName("redToBlueRatio").item(0).getTextContent();
 //		things[0] = title;
-		things[1] = Double.parseDouble(cellNumberHorizontal);
-		things[2] = Double.parseDouble(cellNumberVertical);
-		things[3] = Double.parseDouble(emptyPercentage);
-		things[4] = Double.parseDouble(redToBlueRatio);
+		things[0] = Double.parseDouble(cellNumberHorizontal);
+		things[1] = Double.parseDouble(cellNumberVertical);
+		things[2] = Double.parseDouble(emptyPercentage);
+		things[3] = Double.parseDouble(redToBlueRatio);
 		makeFinalArray(things, second);
 //		return things;
 	}
