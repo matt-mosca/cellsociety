@@ -1,0 +1,18 @@
+<WaTor>
+    <title>
+        <name>WaTor</name>
+    </title>
+
+    <parameters>
+        <maxStarveDaysForSharks>5</maxStarveDaysForSharks>
+        <minBreedDaysForSharks>7</minBreedDaysForSharks>
+        <minBreedDaysForFish>5</minBreedDaysForFish>
+    </parameters>
+
+    <initialSetting>
+        <cellNumberHorizontal>50</cellNumberHorizontal>
+        <cellNumberVertical>50</cellNumberVertical>
+        <emptyPercentage>0.3</emptyPercentage>
+        <redToBlueRatio>0.8</redToBlueRatio>
+    </initialSetting>
+</WaTor>
