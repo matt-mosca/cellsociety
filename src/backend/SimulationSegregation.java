@@ -3,6 +3,8 @@ package backend;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javafx.scene.image.Image;
+
 public class SimulationSegregation extends Simulation {
 //	private CellSegregation[][] array;
 	private double satisfactionPercentage;
@@ -11,6 +13,9 @@ public class SimulationSegregation extends Simulation {
 	private double redToBlueRatio;
 	private int cellNumberHorizontal;
 	private int cellNumberVertical;
+	private static final String EMPTY_IMAGE = "empty_block.gif";
+	private static final String RED_IMAGE = "red_block.gif";
+	private static final String BLUE_IMAGE = "blue_block.gif";
 
 	// 0 is empty, 1 is red, 2 is blue
 
@@ -27,6 +32,7 @@ public class SimulationSegregation extends Simulation {
 	
 		this.satisfactionPercentage = satisfactionPercentage;
 		super.initializeScene();
+		updateImages();
 		
 		
 		
@@ -84,6 +90,8 @@ public class SimulationSegregation extends Simulation {
 				emptyCells.remove(theEmptyReadyForFill);}
 
 		}
+		
+		updateImages();
 
 	}
 
@@ -127,6 +135,27 @@ public class SimulationSegregation extends Simulation {
 		}
 		return false;
 	}
+	
+	private Image chooseImage(int state) {
+		Image image = new Image("");
+		if(state == 0)
+			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
+		if(state == 1)
+			image = new Image(getClass().getClassLoader().getResourceAsStream(RED_IMAGE));
+		if(state == 2)
+			image = new Image(getClass().getClassLoader().getResourceAsStream(BLUE_IMAGE));
+		return image;
+	}
+	
+	private void updateImages() {
+		for(int i = 0; i < cellNumberHorizontal; i++) {
+			System.out.println("I reached here!");
+			for(int j = 0; j < cellNumberVertical; j++) {
+				array[i][j].setImage(chooseImage(array[i][j].getState()));
+			}
+		}
+	}
+	
 
 	public CellSegregation[][] getArray() {
 		return (CellSegregation[][]) super.array;

@@ -29,8 +29,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Main extends Application{
-	public static final int SIZEx = 900;
-	public static final int SIZEy = 900;
+	public static final int SIZEx = 700;
+	public static final int SIZEy = 700;
 	public static final String INITIAL_TITLE = "CellSociety!";
 	public static final String WATOR_TITLE = "WaTor!";
 	public static final String FIRE_TITLE  = "FIYAH";

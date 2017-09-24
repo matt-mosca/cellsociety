@@ -6,9 +6,9 @@ import javafx.scene.image.Image;
 
 //Add images
 public class SimulationFire extends Simulation{
-	private static final String EMPTY_IMAGE = "sjdfoijo";
-	private static final String TREE_IMAGE = "sjdfoijo";
-	private static final String BURNING_IMAGE = "sjdfoijo";
+	private static final String EMPTY_IMAGE = "empty_block.gif";
+	private static final String TREE_IMAGE = "tree_block.gif";
+	private static final String BURNING_IMAGE = "fire_block.gif";
 	
 	private CellFire[][] array;
 	private int numberOfCells;
@@ -18,10 +18,9 @@ public class SimulationFire extends Simulation{
 	private double initialEmptyPercentage;
 
 	public SimulationFire(int cellNumberHorizontal, int  cellNumberVertical, double emptyPercentage, 
-			double redToBlueRatio) {
+			double redToBlueRatio, double probCatch) {
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
-		probCatch = 0.5;
-		initialEmptyPercentage = 0.25;
+//		initialEmptyPercentage = 0.25;
 		array = new CellFire[cellNumberHorizontal][cellNumberVertical];
 		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {

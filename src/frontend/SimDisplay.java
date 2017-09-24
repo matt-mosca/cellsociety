@@ -8,6 +8,11 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 import backend.Cell;
+import backend.Simulation;
+import backend.SimulationFire;
+import backend.SimulationGameOfLife;
+import backend.SimulationSegregation;
+import backend.SimulationWaTor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,6 +30,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -37,7 +43,7 @@ import javafx.geometry.*;
 
 
 public class SimDisplay {
-	private static final int VBOX_SPACING = 10;
+	private static final int VBOX_SPACING = 7;
 	private Scene scene;
 	private Cell[][] Cells;
 	private int width;
@@ -46,6 +52,10 @@ public class SimDisplay {
 	private ImageView[][] Images;
 	private String simName;
 	private Stage window;
+	private Simulation sim;
+	private UserInput UI = new UserInput();
+	double[] inputArray;
+	
 	
 	public SimDisplay(int x, int y, Stage s) {
 		this.width=x;
@@ -53,12 +63,27 @@ public class SimDisplay {
 		this.window = s;
 	}
 	
-	public Scene makeSimulation(){
+	private void makeSimulation(){
 		BorderPane border = new BorderPane();
 		Scene fun = new Scene(border,width, height);
-//		border.setCenter(myGrid);
+		this.Cells = sim.getArray();
+		Images = makeImageArray(Cells);
+		makeGrid();
+		fillGrid();
+		border.setCenter(myGrid);
+		//This could use some serious refactoring, potentially creating a new class for just all of the buttons seems
+		//to make sense.
+		VBox controls = new VBox(VBOX_SPACING);
+		Button play = playButton();
+		Button pause = pauseButton();
+		Button step = stepButton();
+		Button reset = resetButton();
+		controls.getChildren().addAll(play, pause, step, reset);
+		border.setBottom(controls);
+		controls.setAlignment(Pos.CENTER);
 		this.scene = fun;
-		return this.scene;
+		window.setScene(scene);
+		//return this.scene;
 	}
 	
 	public Scene startScreen() {
@@ -80,9 +105,7 @@ public class SimDisplay {
 		Button b1 = chooseScene("WaTor");
 		Button b2 = chooseScene("Fire");
 		Button b3 = chooseScene("Segregation");
-		Button b4 = chooseScene("sim4");
-		
-		
+		Button b4 = chooseScene("Game of Life");
 		layout.getChildren().addAll(startMessage, b1,b2,b3,b4);
 		this.scene = startScene;
 		return this.scene;
@@ -95,8 +118,28 @@ public class SimDisplay {
 		b.setOnAction(e -> {
 			//shouldn't this call the XML reader and start passing information to the backend?
 			//I think that it should definitely do that. 
+			if(s.equals("WaTor")) {
+				inputArray = UI.getWaTor();
+				this.sim = new SimulationWaTor((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
+			}
+			if(s.equals("Fire")) {
+				inputArray = UI.getFire();
+				//in SimulationFire, the constructor is wrong. This is what it should be. fixed.
+				//checking if the xml returned the right things to me.
+//				for (double t: inputArray) {
+//					System.out.println(t);
+//				}
+				this.sim = new SimulationFire((int) inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4]);
+			}
+			if(s.equals("Segregation")) {
+				inputArray = UI.getSegregation();
+				this.sim = new SimulationSegregation((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
+			}
+			if(s.equals("Game of Life")) {
+				inputArray = UI.getGameOfLife();
+				this.sim = new SimulationGameOfLife((int)inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3]);
+			}
 			makeSimulation();
-			window.setScene(scene);
 			changeSimName(s);
 		});
 		return b;
@@ -119,7 +162,7 @@ public class SimDisplay {
 		return b;
 	}
 	
-	private Button step() {
+	private Button stepButton() {
 		Button b = new Button("Step");
 		b.setOnAction(e ->{
 			//do the step stuff here by calling the step function wtf idk
@@ -127,7 +170,7 @@ public class SimDisplay {
 		return b;
 	}
 	
-	private Button reset() {
+	private Button resetButton() {
 		Button b = new Button("Reset");
 		b.setOnAction(e-> {
 			//do the reset stuff here
@@ -145,13 +188,12 @@ public class SimDisplay {
 	
 	
 	
-	private void fillGrid(GridPane grid) {
+	private void fillGrid() {
 		for(int i=0;i<Cells.length;i++) {
 			for (int j=0; j<Cells[i].length; j++) {
-				grid.add(Images[i][j], j, i);
+				myGrid.add(Images[i][j], j, i);
 			}
 		}
-		this.myGrid=grid;
 	}
 	
 	
@@ -160,6 +202,8 @@ public class SimDisplay {
 	private ImageView[][] makeImageArray(Cell[][] Cells){
 		for(int i=0; i<Cells.length; i++) {
 			for (int j=0; j<Cells[i].length; j++) {
+				System.out.print(i);
+				System.out.print(" "+ j);
 				Images[i][j] = new ImageView(Cells[i][j].getImage());
 			}
 		}
