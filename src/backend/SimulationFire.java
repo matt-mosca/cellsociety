@@ -6,9 +6,9 @@ import javafx.scene.image.Image;
 
 //Add images
 public class SimulationFire extends Simulation{
-	private static final String EMPTY_IMAGE = "sjdfoijo";
-	private static final String TREE_IMAGE = "sjdfoijo";
-	private static final String BURNING_IMAGE = "sjdfoijo";
+	private static final String EMPTY_IMAGE = "empty_block.gif";
+	private static final String TREE_IMAGE = "tree_block.gif";
+	private static final String BURNING_IMAGE = "fire_block.gif";
 	
 	private CellFire[][] array;
 	private int numberOfCells;
