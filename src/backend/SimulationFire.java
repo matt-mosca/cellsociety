@@ -40,7 +40,7 @@ public class SimulationFire extends Simulation{
 	}
 	
 	private int findNumberEmpty() {
-		int empty = (int) (numberOfCells* initialEmptyPercentage);
+		int empty = (int) (numberOfCells * initialEmptyPercentage);
 		return empty;
 	}
 	
@@ -151,6 +151,5 @@ public class SimulationFire extends Simulation{
 	}
 	public static void main(String[] args) {
 		SimulationFire test = new SimulationFire(5, 5, 0.2, 0.5, 0.2);
-		
 	}
 }
