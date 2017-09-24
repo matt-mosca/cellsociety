@@ -41,6 +41,7 @@ public class SimDisplay {
 	private int height;
 	private GridPane myGrid;
 	ImageView[][] Images;
+	private String simName;
 	
 	public SimDisplay(int x, int y) {
 		this.width=x;
@@ -55,12 +56,16 @@ public class SimDisplay {
 	public Scene startScreen() {
 		VBox layout = new VBox(10);
 		Scene startScene= new Scene(layout, width, height);
+		
+		
 		//Change the image here depending on the kind of image that we want.
-		Image backGround = new Image(getClass().getClassLoader().getResourceAsStream("brickwall.jpeg"));
-		ImagePattern pattern = new ImagePattern(backGround);
-		startScene.setFill(pattern);
+//		Image backGround = new Image(getClass().getClassLoader().getResourceAsStream("brickwall.jpeg"));
+//		ImagePattern pattern = new ImagePattern(backGround);	
+//		startScene.setFill(pattern);
 		//get some buttons to choose which of the four simulations they want to do
 		//replace the following code with a for loop and a resource file.
+		
+		
 		Button b1 = chooseScene("WaTor");
 		Button b2 = chooseScene("Fire");
 		Button b3 = chooseScene("Sim3");
@@ -111,5 +116,8 @@ public class SimDisplay {
 		return Images;
 	}
 	
+	public String getSimName() {
+		return simName;
+	}
 	
 }

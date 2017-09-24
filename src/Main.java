@@ -31,22 +31,34 @@ import javafx.util.Duration;
 public class Main extends Application{
 	public static final int SIZEx = 900;
 	public static final int SIZEy = 900;
+	public static final String INITIAL_TITLE = "CellSociety!";
+	public static final String WATOR_TITLE = "WaTor!";
+	public static final String FIRE_TITLE  = "FIYAH";
+	public static final String SEGREGATION_TITLE = "SEGREGATION";
 	
 	
 	Stage window;
-	
+	Scene myScene;
+	SimDisplay s;
 	
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		window = primaryStage;
-		SimDisplay s = new SimDisplay(SIZEx, SIZEy);
-		
+		s = new SimDisplay(SIZEx, SIZEy);
+		window.setTitle(INITIAL_TITLE);
+		myScene = getStartScene(s);
+		window.setScene(myScene);
+		window.show();
 	}
 	
 	
-	public Scene getSimulation(SimDisplay sim) {
-		return sim.makeSimulation();
+//	public Scene getSimulation(SimDisplay sim) {
+//		return sim.makeSimulation();
+//	}
+	
+	public Scene getStartScene(SimDisplay sim) {
+		return sim.startScreen();
 	}
 	
 	public void step() {
