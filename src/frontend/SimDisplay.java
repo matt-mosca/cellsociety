@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -29,6 +30,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.geometry.*;
 
 /*
  * Author: Venkat S.
@@ -56,7 +58,7 @@ public class SimDisplay {
 	public Scene startScreen() {
 		VBox layout = new VBox(10);
 		Scene startScene= new Scene(layout, width, height);
-		
+		layout.setAlignment(Pos.CENTER);
 		
 		//Change the image here depending on the kind of image that we want.
 //		Image backGround = new Image(getClass().getClassLoader().getResourceAsStream("brickwall.jpeg"));
@@ -66,11 +68,16 @@ public class SimDisplay {
 		//replace the following code with a for loop and a resource file.
 		
 		
+		Font f = new Font("Arial", 50);
+		Label startMessage = new Label("Which Simulation would you like to see?");
+		startMessage.setFont(f);
 		Button b1 = chooseScene("WaTor");
 		Button b2 = chooseScene("Fire");
-		Button b3 = chooseScene("Sim3");
-		Button b4 = chooseScene("Sim4");
-		layout.getChildren().addAll(b1,b2,b3,b4);
+		Button b3 = chooseScene("Segregation");
+		Button b4 = chooseScene("sim4");
+		
+		
+		layout.getChildren().addAll(startMessage, b1,b2,b3,b4);
 		this.scene = startScene;
 		return this.scene;
 	}
@@ -78,6 +85,7 @@ public class SimDisplay {
 	
 	private Button chooseScene(String s){
 		Button b = new Button(s);
+		b.setPrefSize(100, 50);
 		b.setOnAction(e -> {
 			makeSimulation();
 		});
