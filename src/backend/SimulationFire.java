@@ -10,7 +10,7 @@ public class SimulationFire extends Simulation{
 	private static final String TREE_IMAGE = "tree_block.gif";
 	private static final String BURNING_IMAGE = "fire_block.gif";
 	
-	private CellFire[][] array;
+//	private CellFire[][] array;
 	private int numberOfCells;
 	private int cellNumberHorizontal;
 	private int cellNumberVertical;
@@ -103,7 +103,7 @@ public class SimulationFire extends Simulation{
 		updateImages();
 	}
 	
-	private boolean potentialForFire(CellFire cell) {
+	private boolean potentialForFire(Cell cell) {
 		for(int i = 0; i < cell.getNeighborCells().size(); i++) {
 			if(cell.getNeighborCells().get(i).getState() == CellFire.BURNING)
 				return true;
@@ -142,7 +142,7 @@ public class SimulationFire extends Simulation{
 		probCatch = prob;
 	}
 	
-	public CellFire[][] getArray() {
+	public Cell[][] getArray() {
 		return array;
 	}
 
