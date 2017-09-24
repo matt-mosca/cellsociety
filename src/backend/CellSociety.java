@@ -1,27 +1,18 @@
 package backend;
 
 public class CellSociety {
-	//main class
-		//0 is empty, 1 is red, 2 is blue
-		private int type;
-		private int rowNumber;
-		private int columnNumber;
-		
-		public CellSociety(int type, int rowNumber, int columnNumber) {
-			this.setType(type);
-		}
-		
-		public CellSociety(int rowNumber, int columnNumber) {
-			this.setType(0);
-		}
-
-		public int getType() {
-			return type;
-		}
-
-		public void setType(int type) {
-			this.type = type;
-		}
+	//test main class
+	public static void main(String[] args) {
+		   
+		   SimulationWaTor testsub=new SimulationWaTor(5,5, 0.2, 0.5, 3,3,3);
+		   Simulation test=testsub;
+				test.initializeScene();
+		   
+	}
+	 
+	   
 
 
 }
+
+
