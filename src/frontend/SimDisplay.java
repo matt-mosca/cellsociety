@@ -9,6 +9,10 @@ import java.util.Scanner;
 
 import backend.Cell;
 import backend.Simulation;
+import backend.SimulationFire;
+import backend.SimulationGameOfLife;
+import backend.SimulationSegregation;
+import backend.SimulationWaTor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -49,6 +53,8 @@ public class SimDisplay {
 	private String simName;
 	private Stage window;
 	private Simulation sim;
+	private UserInput UI = new UserInput();
+	double[] inputArray;
 	
 	
 	public SimDisplay(int x, int y, Stage s) {
@@ -60,7 +66,6 @@ public class SimDisplay {
 	private void makeSimulation(){
 		BorderPane border = new BorderPane();
 		Scene fun = new Scene(border,width, height);
-		this.sim = new Simulation(1,2,3,4);
 		this.Cells = sim.getArray();
 		makeGrid();
 		fillGrid();
@@ -99,7 +104,7 @@ public class SimDisplay {
 		Button b1 = chooseScene("WaTor");
 		Button b2 = chooseScene("Fire");
 		Button b3 = chooseScene("Segregation");
-		Button b4 = chooseScene("sim4");
+		Button b4 = chooseScene("Game of Life");
 		layout.getChildren().addAll(startMessage, b1,b2,b3,b4);
 		this.scene = startScene;
 		return this.scene;
@@ -112,7 +117,23 @@ public class SimDisplay {
 		b.setOnAction(e -> {
 			//shouldn't this call the XML reader and start passing information to the backend?
 			//I think that it should definitely do that. 
-			
+			if(s.equals("WaTor")) {
+				inputArray = UI.getWaTor();
+				this.sim = new SimulationWaTor((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
+			}
+			if(s.equals("Fire")) {
+				inputArray = UI.getFire();
+				//in SimulationFire, the constructor is wrong. This is what it should be. 
+				//	this.sim = new SimulationFire((int) inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4]);
+			}
+			if(s.equals("Segregation")) {
+				inputArray = UI.getSegregation();
+				this.sim = new SimulationSegregation((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
+			}
+			if(s.equals("Game of Life")) {
+				inputArray = UI.getGameOfLife();
+				this.sim = new SimulationGameOfLife((int)inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3]);
+			}
 			makeSimulation();
 			changeSimName(s);
 		});

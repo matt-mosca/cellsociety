@@ -26,7 +26,7 @@ public class UserInput {
 //	  private String minBreedDaysForFish;
 //	  private String maxStarveDaysForSharks;
 //	  private String probCatch;
-	  private String[] finalParams;
+	  private double [] finalParams;
 	  
 	  public UserInput() {
 		  
@@ -35,7 +35,7 @@ public class UserInput {
 
 
 
-	  public String[] getSegregation() {
+	  public double[] getSegregation() {
 	
 		
 	    try {
@@ -44,8 +44,8 @@ public class UserInput {
 		doc.getDocumentElement().normalize();	
 		String satisfactionPercentage = doc.getElementsByTagName("satisfactionPercentage").item(0).getTextContent();
 //		finalParams = new String[SEG_ARRAY_LENGTH];
-		String[] basic = new String[1];
-		basic[0] = satisfactionPercentage;
+		double[] basic = new double[1];
+		basic[0] = Double.parseDouble(satisfactionPercentage);
 		getInitialSetUp(doc, basic);
 //		makeFinalArray(fun);
 		
@@ -59,7 +59,7 @@ public class UserInput {
 	  }
 	  
 	  
-	  public String[] getWaTor() {
+	  public double[] getWaTor() {
 		
 		
 	    try {
@@ -70,10 +70,10 @@ public class UserInput {
 		String minBreedDaysForFish = doc.getElementsByTagName("minBreedDaysForFish").item(0).getTextContent();
 		String maxStarveDaysForSharks = doc.getElementsByTagName("maxStarveDaysForSharks").item(0).getTextContent();
 //		finalParams = new String[WATOR_ARRAY_LENGTH];
-		String[] basic = new String[3];
-		basic[0] = minBreedDaysForSharks;
-		basic[1] = minBreedDaysForFish;
-		basic[2] = maxStarveDaysForSharks;
+		double[] basic = new double[3];
+		basic[0] = Double.parseDouble(minBreedDaysForSharks);
+		basic[1] = Double.parseDouble(minBreedDaysForFish);
+		basic[2] = Double.parseDouble(maxStarveDaysForSharks);
 		getInitialSetUp(doc, basic);
 //		makeFinalArray();
 		
@@ -90,7 +90,7 @@ public class UserInput {
 
 
 
-	public String[] getFire() {
+	public double[] getFire() {
 			
 			
 		    try {
@@ -99,8 +99,8 @@ public class UserInput {
 			doc.getDocumentElement().normalize();	
 		    String probCatch = doc.getElementsByTagName("probCatch").item(0).getTextContent();
 //		    finalParams = new String[SEG_ARRAY_LENGTH];
-		    String[] basic = new String[0];
-		    basic[0] = probCatch;
+		    double[] basic = new double[1];
+		    basic[0] = Double.parseDouble(probCatch);
 			getInitialSetUp(doc, basic);
 //			makeFinalArray(fun);
 			
@@ -113,7 +113,7 @@ public class UserInput {
 			return finalParams;
      }
 	  
-	  public String[] getGameOfLife() {
+	  public double[] getGameOfLife() {
 			
 			
 		    try {
@@ -145,33 +145,33 @@ public class UserInput {
 
 
 
-	public void getInitialSetUp(Document doc, String[] second) {
-		String[] things = new String[5];
-		String title = doc.getElementsByTagName("name").item(0).getTextContent();
+	public void getInitialSetUp(Document doc, double[] second) {
+		double[] things = new double[4];
+//		String title = doc.getElementsByTagName("name").item(0).getTextContent();
 		String cellNumberHorizontal = doc.getElementsByTagName("cellNumberHorizontal").item(0).getTextContent();
 		String cellNumberVertical = doc.getElementsByTagName("cellNumberVertical").item(0).getTextContent();
 		String emptyPercentage = doc.getElementsByTagName("emptyPercentage").item(0).getTextContent();
 		String redToBlueRatio = doc.getElementsByTagName("redToBlueRatio").item(0).getTextContent();
-		things[0] = title;
-		things[1] = cellNumberHorizontal;
-		things[2] = cellNumberVertical;
-		things[3] = emptyPercentage;
-		things[4] = redToBlueRatio;
+//		things[0] = title;
+		things[1] = Double.parseDouble(cellNumberHorizontal);
+		things[2] = Double.parseDouble(cellNumberVertical);
+		things[3] = Double.parseDouble(emptyPercentage);
+		things[4] = Double.parseDouble(redToBlueRatio);
 		makeFinalArray(things, second);
 //		return things;
 	}
 	
-	  private void makeFinalArray(String[] fun, String[] second) {
+	  private void makeFinalArray(double[] fun, double[] second) {
 		   if (second==null) {
 			   finalParams = fun;
 			   return;
 		   }
-		   String[] thing = new String[fun.length+second.length];
+		   double[] thing = new double[fun.length+second.length];
 		   for (int i=0; i<fun.length; i++) {
 			  thing[i] = fun[i];
 		   }
-		   for (int i=fun.length; i<finalParams.length; i++) {
-			   thing[i]= second[i];
+		   for (int i=fun.length; i<thing.length; i++) {
+			   thing[i]= second[i-fun.length];
 		   }
 		   this.finalParams = thing;
 		  }
