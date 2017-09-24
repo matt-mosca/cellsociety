@@ -6,7 +6,7 @@ public class SimulationGameOfLife extends Simulation {
 	private static final String EMPTY_IMAGE = "empty_block.gif";
 	private static final String LIVE_IMAGE = "live_block.gif";
 	
-	private CellGameOfLife[][] array;
+//	private CellGameOfLife[][] array;
 	private int numberOfCells;
 	private int cellNumberHorizontal;
 	private int cellNumberVertical;
@@ -67,7 +67,7 @@ public class SimulationGameOfLife extends Simulation {
 	public void update() {
 		for(int i = 0; i < cellNumberHorizontal; i++) {
 			for(int j = 0; j < cellNumberVertical; j++) {
-				CellGameOfLife cell = array[i][j];
+				CellGameOfLife cell = (CellGameOfLife)array[i][j];
 				int liveCount = 0;
 				for(int k = 0; k < cell.getNeighborCells().size(); k++) {
 					if(cell.getNeighborCells().get(k).getState() == CellGameOfLife.LIVE)
