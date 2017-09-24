@@ -1,0 +1,16 @@
+<Segregation>
+    <title>
+        <name>Segregation</name>
+    </title>
+
+    <parameters>
+        <satisfactionPercentage>0.5</satisfactionPercentage>
+    </parameters>
+
+    <initialSetting>
+        <cellNumberHorizontal>50</cellNumberHorizontal>
+        <cellNumberVertical>50</cellNumberVertical>
+        <emptyPercentage>0.3</emptyPercentage>
+        <redToBlueRatio>0.8</redToBlueRatio>
+    </initialSetting>
+</Segregation>
