@@ -20,7 +20,7 @@ public class SimulationWaTor extends Simulation {
 			int maxStarveDaysForSharks, int minBreedDaysForSharks, int minBreedDaysForFish) {
 		// set up instance variables, put 0s in every cell
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
-		this.redToBlueRatio = redToBlueRatio;
+		
 		this.maxStarveDaysForSharks=maxStarveDaysForSharks;
 		this.minBreedDaysForSharks=minBreedDaysForSharks;
 		this.minBreedDaysForFish=minBreedDaysForFish;
@@ -224,5 +224,36 @@ public class SimulationWaTor extends Simulation {
 	public void setArray(
 			CellWaTor[][] array) {
 		super.array = array;
+	}
+	
+	public static void main(String[] args) {
+		SimulationWaTor test = new SimulationWaTor(5, 5, 0.9, 1, 5,5,5);
+		testArrayPrinter(test.getArray());
+//		System.out.println(test.getArray()[1][1].getNeighborCells());
+//		System.out.println();
+//		System.out.print(test.findNumberEmpty());
+//		System.out.println();
+		int iterations = 5;
+		//Drives test simulation
+		for(int i = 0; i < iterations; i++) {
+			test.update();
+			System.out.println("Iteration " + (i + 1));
+			testArrayPrinter(test.getArray());
+		}
+	}
+	
+	private static void testArrayPrinter(Cell[][] testArray) {
+		
+		
+		
+		
+		for(int i = 0; i < testArray.length; i++) {
+			for(int j = 0; j < testArray[0].length; j++) {
+				System.out.print(testArray[i][j].getState() + " ");
+			}
+			System.out.println();
+		}
+		System.out.println();
+		
 	}
 }
