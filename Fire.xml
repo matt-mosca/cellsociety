@@ -4,7 +4,7 @@
     </title>
 
     <parameters>
-        <probCatch>1.0</probCatch>
+        <probCatch>0.85</probCatch>
     </parameters>
 
     <initialSetting>

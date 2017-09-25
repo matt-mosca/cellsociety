@@ -62,8 +62,6 @@ public class SimulationSegregation extends Simulation {
 		
 		
 		
-		
-		
 	}
 	
 

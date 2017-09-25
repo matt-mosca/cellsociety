@@ -95,7 +95,7 @@ public class SimulationFire extends Simulation{
 	
 	@Override
 	public void update() {
-		System.out.println("fire update");
+//		System.out.println("fire update");
 		int[][] temp = new int[cellNumberHorizontal][cellNumberVertical];
 		for(int i = 0; i < cellNumberHorizontal; i++) {
 			for(int j = 0; j < cellNumberVertical; j++) {
