@@ -30,9 +30,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-//import javafx.scene.layout.HBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Line;
 //import javafx.scene.paint.Color;
 //import javafx.scene.paint.ImagePattern;
 //import javafx.scene.paint.Paint;
@@ -45,6 +46,7 @@ import javafx.geometry.*;
 public class SimDisplay {
 	private static final int VBOX_SPACING = 7;
 	private static final int MILLISECOND_DELAY = 1000;
+	private static final int GRID_FIT_CONSTANT = 650;
 	private static final String WATOR_TITLE = "WaTor!";
 	private static final String FIRE_TITLE  = "FIYAH";
 	private static final String SEGREGATION_TITLE = "SEGREGATION";
@@ -60,8 +62,9 @@ public class SimDisplay {
 	private Stage window;
 	private Simulation sim;
 	private UserInput UI = new UserInput();
-	double[] inputArray;
+	private double[] inputArray;
 	private Timeline animation;
+	private BorderPane border;
 	
 	public SimDisplay(int x, int y, Stage s) {
 		this.width=x;
@@ -70,16 +73,19 @@ public class SimDisplay {
 	}
 	
 	private Scene makeSimulation(){
-		BorderPane border = new BorderPane();
-		Scene fun = new Scene(border,width, height);
+		border = new BorderPane();
+		
 		this.Cells = sim.getArray();
 		Images = makeImageArray(Cells);
 		makeGrid();
 		fillGrid();
+		drawLines();
+		Scene fun = new Scene(border, width, height);
 		border.setCenter(myGrid);
+		myGrid.setAlignment(Pos.CENTER);
 		//This could use some serious refactoring, potentially creating a new class for just all of the buttons seems
 		//to make sense.
-		VBox controls = new VBox(VBOX_SPACING);
+		HBox controls = new HBox(VBOX_SPACING);
 		Button play = playButton();
 		Button pause = pauseButton();
 		Button step = stepButton();
@@ -133,7 +139,7 @@ public class SimDisplay {
 			}
 			if(s.equals("Fire")) {
 				inputArray = UI.getFire();
-				this.sim = new SimulationFire((int) inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4]);
+				this.sim = new SimulationFire((int) inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
 				changeSimName(FIRE_TITLE);
 			}
 			if(s.equals("Segregation")) {
@@ -192,11 +198,50 @@ public class SimDisplay {
 	
 	private GridPane makeGrid(){
 		GridPane grid = new GridPane();
-		grid.getColumnConstraints().add(new ColumnConstraints(width/Cells[0].length));
-		grid.getRowConstraints().add(new RowConstraints(height/Cells.length));
-		grid.setGridLinesVisible(true);
+//		grid.getColumnConstraints().add(new ColumnConstraints(width/Cells[0].length));
+//		grid.getRowConstraints().add(new RowConstraints(height/Cells.length));
+		grid.setPrefHeight(GRID_FIT_CONSTANT);
+		grid.setPrefWidth(GRID_FIT_CONSTANT);
+		grid.getColumnConstraints().add(new ColumnConstraints(GRID_FIT_CONSTANT / Cells[0].length));
+		grid.getRowConstraints().add(new RowConstraints(GRID_FIT_CONSTANT / Cells.length));
+//		grid.setGridLinesVisible(true);
+//		grid.setStyle("-fx-background-color: black; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;");
+//		grid.setSnapToPixel(false);
 		myGrid=grid;
 		return myGrid;
+	}
+
+	private void drawLines() {
+		for (int i = 0; i<Cells.length; i++) {
+			double x = myGrid.getLayoutBounds().getMinX();
+			double y = myGrid.getLayoutBounds().getMinY() + (i*GRID_FIT_CONSTANT/Cells[0].length);
+			for (int j=0; j<Cells[0].length; j++) {
+				Line line1 = new Line();
+				line1.setStartX(x);
+				line1.setStartY(y);
+				line1.setEndX(x+(GRID_FIT_CONSTANT/Cells[0].length));
+				line1.setEndY(y);
+				Line line2 = new Line();
+				line2.setStartX(x);
+				line2.setStartX(y);
+				line2.setEndY(y+(GRID_FIT_CONSTANT/Cells[0].length));
+				line2.setEndX(x);
+				Line line3 = new Line();
+				line3.setStartX(x);
+				line3.setStartY(y+(GRID_FIT_CONSTANT/Cells[0].length));
+				line3.setEndX(x+(GRID_FIT_CONSTANT/Cells[0].length));
+				line3.setEndY(y+(GRID_FIT_CONSTANT/Cells[0].length));
+				
+				Line line4 = new Line();
+				line3.setStartY(y);
+				line3.setStartX(x+(GRID_FIT_CONSTANT/Cells[0].length));
+				line3.setEndY(y+(GRID_FIT_CONSTANT/Cells[0].length));
+				line3.setEndX(x+(GRID_FIT_CONSTANT/Cells[0].length));
+				
+				x+=GRID_FIT_CONSTANT/Cells[0].length;
+				border.getChildren().addAll(line1, line2, line3, line4);
+			}
+		}
 	}
 	
 	
@@ -206,6 +251,8 @@ public class SimDisplay {
 		for(int i=0;i<Cells.length;i++) {
 			for (int j=0; j<Cells[i].length; j++) {
 				myGrid.add(Images[i][j], j, i);
+//				Images[i][j].fitWidthProperty().bind(myGrid.widthProperty());
+//				Images[i][j].fitHeightProperty().bind(myGrid.heightProperty());
 			}
 		}
 	}
@@ -219,6 +266,8 @@ public class SimDisplay {
 		for(int i=0; i<cells.length; i++) {
 			for (int j=0; j<cells[i].length; j++) {
 				images[i][j] = new ImageView(cells[i][j].getImage());
+				images[i][j].setFitWidth(GRID_FIT_CONSTANT / Cells[0].length);
+				images[i][j].setFitHeight(GRID_FIT_CONSTANT / Cells.length);
 			}
 		}
 		this.Images = images;
@@ -266,7 +315,7 @@ public class SimDisplay {
 		animation = new Timeline();
 		animation.setCycleCount(Animation.INDEFINITE);
 		animation.getKeyFrames().add(frame);
-//		animation.play();
+		animation.play();
 	}
 	
 	
