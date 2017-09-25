@@ -121,7 +121,7 @@ public class Simulation{
 
 	}
 	
-	public Image chooseImage(int state) {
+	private Image chooseImage(int state) {
 		
 		return null;
 	}
