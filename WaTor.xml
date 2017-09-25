@@ -4,7 +4,7 @@
     </title>
 
     <parameters>
-        <maxStarveDaysForSharks>5</maxStarveDaysForSharks>
+        <maxStarveDaysForSharks>3</maxStarveDaysForSharks>
         <minBreedDaysForSharks>7</minBreedDaysForSharks>
         <minBreedDaysForFish>5</minBreedDaysForFish>
     </parameters>
@@ -12,7 +12,7 @@
     <initialSetting>
         <cellNumberHorizontal>10</cellNumberHorizontal>
         <cellNumberVertical>10</cellNumberVertical>
-        <emptyPercentage>0.3</emptyPercentage>
-        <redToBlueRatio>0.8</redToBlueRatio>
+        <emptyPercentage>0.5</emptyPercentage>
+        <redToBlueRatio>0.2</redToBlueRatio>
     </initialSetting>
 </WaTor>
