@@ -8,9 +8,9 @@ import javafx.scene.image.Image;
 public class SimulationSegregation extends Simulation {
 //	private CellSegregation[][] array;
 	private double satisfactionPercentage;
-	private int numberOfCells;
-	private double emptyPercentage;
-	private double redToBlueRatio;
+//	private int numberOfCells;
+//	private double emptyPercentage;
+//	private double redToBlueRatio;
 	private int cellNumberHorizontal;
 	private int cellNumberVertical;
 	private static final String EMPTY_IMAGE = "empty_block.gif";
