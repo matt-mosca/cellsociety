@@ -29,15 +29,15 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Main extends Application{
-	public static final int SIZEx = 700;
-	public static final int SIZEy = 700;
-	public static final String INITIAL_TITLE = "CellSociety!";
+	private static final int SIZEx = 700;
+	private static final int SIZEy = 700;
+	private static final String INITIAL_TITLE = "CellSociety!";
 	
 	
 	
-	Stage window;
-	Scene myScene;
-	SimDisplay s;
+	private Stage window;
+	private Scene myScene;
+	private SimDisplay s;
 	
 	
 	@Override
