@@ -146,7 +146,6 @@ public class SimulationFire extends Simulation{
 	protected Image chooseImage(int state) {
 
 		Image image = null;
-		System.out.println(image);
 		if(state == CellFire.EMPTY)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
 		if(state == CellFire.TREE)
@@ -154,6 +153,7 @@ public class SimulationFire extends Simulation{
 		if(state == CellFire.BURNING) {
 			image = new Image(getClass().getClassLoader().getResourceAsStream(BURNING_IMAGE));
 		}
+		System.out.println(image);
 		return image;
 	}
 	
