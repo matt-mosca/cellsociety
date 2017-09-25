@@ -6,9 +6,9 @@ import javafx.scene.image.Image;
 public class SimulationWaTor extends Simulation {
 	
 //	private CellWaTor[][] array;
-	private int numberOfCells;
-	private double emptyPercentage;
-	private double redToBlueRatio;
+//	private int numberOfCells;
+//	private double emptyPercentage;
+//	private double redToBlueRatio;
 	private int cellNumberHorizontal;
 	private int cellNumberVertical;
 	private int maxStarveDaysForSharks;

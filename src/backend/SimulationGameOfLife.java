@@ -16,14 +16,17 @@ public class SimulationGameOfLife extends Simulation {
 			double redToBlueRatio) {
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
 		this.initialEmptyPercentage = emptyPercentage;
+		this.numberOfCells = cellNumberHorizontal * cellNumberVertical;
+		this.cellNumberHorizontal = cellNumberHorizontal;
+		this.cellNumberVertical = cellNumberVertical;
 		array = new CellGameOfLife[cellNumberHorizontal][cellNumberVertical];
 		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
 				array[rowNumber][columnNumber] = new CellGameOfLife(CellGameOfLife.EMPTY, null, null, rowNumber, columnNumber);
 			}
 		}
-		findNeighbors();
 		initializeGridStates();
+		findNeighbors();
 	}
 	
 	private void initializeGridStates() {
@@ -56,7 +59,7 @@ public class SimulationGameOfLife extends Simulation {
 	}
 	
 	private Image chooseImage(int state) {
-		Image image = new Image("");
+		Image image = null;
 		if(state == CellGameOfLife.EMPTY)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
 		if(state == CellGameOfLife.LIVE)
@@ -73,14 +76,19 @@ public class SimulationGameOfLife extends Simulation {
 					if(cell.getNeighborCells().get(k).getState() == CellGameOfLife.LIVE)
 						liveCount++;
 				}
+				//Any live cell with two or three live neighbors lives on to the next generation, so do nothing
+				//Any live cell with fewer than two live neighbors dies
 				if(cell.getState() == CellGameOfLife.LIVE && liveCount < 2)
 					cell.die();
+				//Any live cell with more than three live neighbors dies
 				if(cell.getState() == CellGameOfLife.LIVE && liveCount > 3)
 					cell.die();
-				if(cell.getState() == CellGameOfLife.EMPTY && liveCount ==3)
+				//Any dead cell with exactly three live neighbors becomes a live cell
+				if(cell.getState() == CellGameOfLife.EMPTY && liveCount == 3)
 					cell.live();
 			}
 		}
+		findNeighbors();
 		updateImages();
 	}
 	
@@ -92,7 +100,28 @@ public class SimulationGameOfLife extends Simulation {
 		}
 	}
 	
+	private static void testArrayPrinter(Cell[][] testArray) {
+		for(int i = 0; i < testArray.length; i++) {
+			for(int j = 0; j < testArray[0].length; j++) {
+				System.out.print(testArray[i][j].getState() + " ");
+			}
+			System.out.println();
+		}
+		System.out.println();
+	}
+	
 	public static void main(String[] args) {
-		SimulationGameOfLife test = new SimulationGameOfLife(5, 5, 0.2, 0.2);
+		SimulationGameOfLife test = new SimulationGameOfLife(5, 5, 0.6, 0.2);
+		testArrayPrinter(test.getArray());
+//		System.out.println();
+//		System.out.print(test.findNumberEmpty());
+//		System.out.println();
+		int iterations = 5;
+		//Drives test simulation
+		for(int i = 0; i < iterations; i++) {
+			test.update();
+			System.out.println("Iteration " + (i + 1));
+			testArrayPrinter(test.getArray());
+		}
 	}
 }
