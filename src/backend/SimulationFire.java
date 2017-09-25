@@ -115,7 +115,7 @@ public class SimulationFire extends Simulation{
 		return Math.random() * upperBound;
 	}
 	
-	private Image chooseImage(int state) {
+	public Image chooseImage(int state) {
 		Image image = new Image("");
 		if(state == CellFire.EMPTY)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));

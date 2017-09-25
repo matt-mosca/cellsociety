@@ -6,11 +6,7 @@ import javafx.scene.image.Image;
 public class SimulationWaTor extends Simulation {
 	
 //	private CellWaTor[][] array;
-	private int numberOfCells;
-	private double emptyPercentage;
-	private double redToBlueRatio;
-	private int cellNumberHorizontal;
-	private int cellNumberVertical;
+
 	private int maxStarveDaysForSharks;
 	private int minBreedDaysForSharks;
 	private int minBreedDaysForFish;
@@ -66,46 +62,7 @@ public class SimulationWaTor extends Simulation {
 
 	}
 	
-	@Override
-	public void initializeScene() {
-		// according to percentage, do random function
-		// call cell to change type
-		int redNumber = findNumber(1);
-		int blueNumber = findNumber(2);
-        int[] randomSlots=random(
-				redNumber+blueNumber,numberOfCells);
-        //fill all to blue first, then change some to red
-		fillInitialRedAndBlue(randomSlots,2);
-		int[] redSlots = random(
-				redNumber,randomSlots.length);
-		for (int i=0;i<redSlots.length;i++) {
-			redSlots[i]=randomSlots[redSlots[i]];
-		}
 	
-		
-		fillInitialRedAndBlue(redSlots,
-				1);
-
-		findNeighbors();
-
-	}
-	
-	@Override
-	public void fillInitialRedAndBlue(
-			int[] slots, int state) {
-		
-		for (int i = 0; i < slots.length; i++) {
-			int position = slots[i];
-			int rowNumber = (int) (position
-					/ cellNumberHorizontal);
-			int columnNumber = position
-					% cellNumberHorizontal;
-			array[rowNumber][columnNumber]
-					.changeState(state);
-			array[rowNumber][columnNumber].setImage(chooseImage(state));
-
-		}
-	}
 
 	@Override
 	public void findNeighbors() {
@@ -140,11 +97,12 @@ public class SimulationWaTor extends Simulation {
 
 	}
 	
-	private Image chooseImage(int state) {
-		Image image = new Image("");
-		if(state == 0)
-			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
+	@Override
+	public Image chooseImage(int state) {
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
+		
 		if(state == 1)
+		
 			image = new Image(getClass().getClassLoader().getResourceAsStream(SHARK_IMAGE));
 		if(state == 2)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(FISH_IMAGE));
