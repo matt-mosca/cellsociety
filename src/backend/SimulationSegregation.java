@@ -108,7 +108,8 @@ public class SimulationSegregation extends Simulation {
 			}
 		}
 		return empty;
-		
+		//Are you actually updating the Cell array here? I can't find the point at which you do that. That 
+		//might just be because I'm blind. -V
 		
 	}
 
@@ -150,7 +151,6 @@ public class SimulationSegregation extends Simulation {
 	
 	private void updateImages() {
 		for(int i = 0; i < cellNumberHorizontal; i++) {
-			System.out.println("I reached here!");
 			for(int j = 0; j < cellNumberVertical; j++) {
 				array[i][j].setImage(chooseImage(array[i][j].getState()));
 			}

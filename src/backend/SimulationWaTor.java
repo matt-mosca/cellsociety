@@ -34,12 +34,12 @@ public class SimulationWaTor extends Simulation {
 		
 		
 	    
-		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
-				System.out.println(super.array[rowNumber][columnNumber].getState());
-			}
-		}
-		System.out.println("separate here");
+//		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
+//			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
+//				System.out.println(super.array[rowNumber][columnNumber].getState());
+//			}
+//		}
+//		System.out.println("separate here");
 		
 		
 		
@@ -48,12 +48,12 @@ public class SimulationWaTor extends Simulation {
 		
 	   
 		
-		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
-				System.out.println(array[rowNumber][columnNumber].getState());
-			}
-		}
-		
+//		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
+//			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
+//				System.out.println(array[rowNumber][columnNumber].getState());
+//			}
+//		}
+//		
 		
 		
 		
