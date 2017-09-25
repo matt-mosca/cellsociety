@@ -136,7 +136,7 @@ public class SimDisplay {
 			}
 			if(s.equals("Fire")) {
 				inputArray = UI.getFire();
-				this.sim = new SimulationFire((int) inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4]);
+				this.sim = new SimulationFire((int) inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
 				changeSimName(FIRE_TITLE);
 			}
 			if(s.equals("Segregation")) {
