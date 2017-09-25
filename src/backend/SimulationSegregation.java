@@ -6,31 +6,30 @@ import java.util.ArrayList;
 import javafx.scene.image.Image;
 
 public class SimulationSegregation extends Simulation {
-//	private CellSegregation[][] array;
-	private double satisfactionPercentage;
-	
 	private static final String EMPTY_IMAGE = "empty_block.gif";
 	private static final String RED_IMAGE = "red_block.gif";
 	private static final String BLUE_IMAGE = "blue_block.gif";
-
+	
+	//	private CellSegregation[][] array;
+	private double satisfactionPercentage;
 	// 0 is empty, 1 is red, 2 is blue
 
 	public SimulationSegregation(int cellNumberHorizontal, int cellNumberVertical, double emptyPercentage, double satisfactionPercentage,
 			double redToBlueRatio) {
 		// set up instance variables, put 0s in every cell
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
-		super.array = new CellSegregation[cellNumberHorizontal][cellNumberVertical];
+		array = new CellSegregation[cellNumberHorizontal][cellNumberVertical];
 		//Image image = new Image(getClass().getClassLoader().getResourceAsStream(RED_IMAGE));
 		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
-				super.array[rowNumber][columnNumber]=new CellSegregation(0, new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE)), null, rowNumber, columnNumber);
+
+				array[rowNumber][columnNumber]=new CellSegregation(0, null, null, rowNumber, columnNumber);
+
 			}
 		}
 	
 		this.satisfactionPercentage = satisfactionPercentage;
-		super.initializeScene();
-		
-		
+		initializeScene();
 		
 		
 	    /*
@@ -63,18 +62,15 @@ public class SimulationSegregation extends Simulation {
 		
 	}
 	
-<<<<<<< HEAD
-	@Override
-	public Image chooseImage(int state) {
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
-		
-=======
+
+
 	
-	private Image chooseImage(int state) {
-		Image image = new Image("");
+	protected Image chooseImage(int state) {
+		Image image = null;
+
 		if(state == 0)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
->>>>>>> master
+
 		if(state == 1)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(RED_IMAGE));
 		if(state == 2)
@@ -82,16 +78,11 @@ public class SimulationSegregation extends Simulation {
 		return image;
 	}
 	
-	
-	
 
-	
-	
-	
 	
 
     
-	@Override
+
 	public void update() {
 		// set up a loop, go through every cell
 		// call whetherSatisfied
@@ -100,16 +91,12 @@ public class SimulationSegregation extends Simulation {
 	
 		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
-				CellSegregation cell = (CellSegregation) super.array[rowNumber][columnNumber];
+				CellSegregation cell = (CellSegregation) array[rowNumber][columnNumber];
 				if (cell.getState()==0) {continue;}
 				else if (!whetherSatisfied(cell)) {
-					dissatisfied.add(cell);
-					
+					dissatisfied.add(cell);	
 				}
-				
-
 			}
-			
 		}
 		
 		for (int needMove=0;needMove<dissatisfied.size();needMove++) {
@@ -120,23 +107,19 @@ public class SimulationSegregation extends Simulation {
 				int theEmptyReadyForFill=random(1,emptyCells.size())[0];
 				emptyCells.get(theEmptyReadyForFill).changeState(previousState);
 				emptyCells.get(theEmptyReadyForFill).setImage(chooseImage(previousState));
-				emptyCells.remove(theEmptyReadyForFill);}
-
+				emptyCells.remove(theEmptyReadyForFill);
+				}
 		}
-		
-	
-
 	}
 
 	private ArrayList<Cell> findAllEmpty() {
 		ArrayList<Cell> empty= new ArrayList<Cell>();
 		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
-				CellSegregation cell=(CellSegregation) super.array[rowNumber][columnNumber];
+				CellSegregation cell=(CellSegregation) array[rowNumber][columnNumber];
 				if (cell.getState()==0) {
 					empty.add(cell);
 				}
-				
 			}
 		}
 		return empty;
@@ -159,34 +142,20 @@ public class SimulationSegregation extends Simulation {
 		}
 		if (countFilled==0) {return true;}
 		double satisfaction=(double)countSatisfied/(double)countFilled;
-		
-	
-		
 		if (satisfaction>=satisfactionPercentage) {
-
-			return true;
-			
+			return true;	
 		}
 		return false;
 	}
 	
 	
-	private void updateImages() {
-		for(int i = 0; i < cellNumberHorizontal; i++) {
-			for(int j = 0; j < cellNumberVertical; j++) {
-				array[i][j].setImage(chooseImage(array[i][j].getState()));
-			}
-		}
-	}
-	
-
+	@Override
 	public CellSegregation[][] getArray() {
-		return (CellSegregation[][]) super.array;
+		return (CellSegregation[][]) array;
 	}
 
-	public void setArray(
-			CellSegregation[][] array) {
-		super.array = array;
+	public void setArray(CellSegregation[][] newArray) {
+		array = newArray;
 	}
 
 }

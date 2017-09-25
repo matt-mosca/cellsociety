@@ -91,7 +91,6 @@ public class SimulationFire extends Simulation{
 				cell.setNeighborCells(neighbors);
 			}
 		}
-
 	}
 	
 	public void update() {
@@ -122,13 +121,12 @@ public class SimulationFire extends Simulation{
 		return Math.random() * upperBound;
 	}
 	
-<<<<<<< HEAD
-	public Image chooseImage(int state) {
-		Image image = new Image("");
-=======
-	private Image chooseImage(int state) {
+
+
+	protected Image chooseImage(int state) {
+
 		Image image = null;
->>>>>>> master
+
 		if(state == CellFire.EMPTY)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
 		if(state == CellFire.TREE)
@@ -136,14 +134,6 @@ public class SimulationFire extends Simulation{
 		if(state == CellFire.BURNING)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(BURNING_IMAGE));
 		return image;
-	}
-	
-	private void updateImages() {
-		for(int i = 0; i < cellNumberHorizontal; i++) {
-			for(int j = 0; j < cellNumberVertical; j++) {
-				array[i][j].setImage(chooseImage(array[i][j].getState()));
-			}
-		}
 	}
 	
 	public double getProbCatch() {
@@ -154,8 +144,9 @@ public class SimulationFire extends Simulation{
 		probCatch = prob;
 	}
 	
-	public Cell[][] getArray() {
-		return array;
+	@Override
+	public CellFire[][] getArray() {
+		return (CellFire[][])array;
 	}
 
 	public void setArray(CellFire[][] array) {
