@@ -45,6 +45,7 @@ import javafx.geometry.*;
 public class SimDisplay {
 	private static final int VBOX_SPACING = 7;
 	private static final int MILLISECOND_DELAY = 1000;
+	private static final int GRID_FIT_CONSTANT = 650;
 	private static final String WATOR_TITLE = "WaTor!";
 	private static final String FIRE_TITLE  = "FIYAH";
 	private static final String SEGREGATION_TITLE = "SEGREGATION";
@@ -70,15 +71,15 @@ public class SimDisplay {
 	}
 	
 	private Scene makeSimulation(){
-//		BorderPane border = new BorderPane();
+		BorderPane border = new BorderPane();
 		
 		this.Cells = sim.getArray();
 		Images = makeImageArray(Cells);
 		makeGrid();
 		fillGrid();
-		Scene fun = new Scene(myGrid, width, height);
-		myGrid.setPadding(new Insets(50,50,50,50));
-//		border.setCenter(myGrid);
+		Scene fun = new Scene(border, width, height);
+		border.setCenter(myGrid);
+		myGrid.setAlignment(Pos.CENTER);
 		//This could use some serious refactoring, potentially creating a new class for just all of the buttons seems
 		//to make sense.
 		HBox controls = new HBox(VBOX_SPACING);
@@ -87,7 +88,7 @@ public class SimDisplay {
 		Button step = stepButton();
 		Button reset = resetButton();
 		controls.getChildren().addAll(play, pause, step, reset);
-//		border.setBottom(controls);
+		border.setBottom(controls);
 		controls.setAlignment(Pos.CENTER);
 //		this.scene = fun;
 //		window.setScene(scene);
@@ -196,11 +197,13 @@ public class SimDisplay {
 		GridPane grid = new GridPane();
 //		grid.getColumnConstraints().add(new ColumnConstraints(width/Cells[0].length));
 //		grid.getRowConstraints().add(new RowConstraints(height/Cells.length));
-		grid.getColumnConstraints().add(new ColumnConstraints(10));
-		grid.getRowConstraints().add(new RowConstraints(10));
+		grid.setPrefHeight(GRID_FIT_CONSTANT);
+		grid.setPrefWidth(GRID_FIT_CONSTANT);
+		grid.getColumnConstraints().add(new ColumnConstraints(GRID_FIT_CONSTANT / Cells[0].length));
+		grid.getRowConstraints().add(new RowConstraints(GRID_FIT_CONSTANT / Cells.length));
 //		grid.setGridLinesVisible(true);
-		grid.setStyle("-fx-background-color: black; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;");
-		grid.setSnapToPixel(false);
+//		grid.setStyle("-fx-background-color: black; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;");
+//		grid.setSnapToPixel(false);
 		myGrid=grid;
 		return myGrid;
 	}
@@ -212,8 +215,8 @@ public class SimDisplay {
 		for(int i=0;i<Cells.length;i++) {
 			for (int j=0; j<Cells[i].length; j++) {
 				myGrid.add(Images[i][j], j, i);
-//				if (i%2!=0) {
-//				Rectangle r = new Rectangle (RED,10,10);
+//				Images[i][j].fitWidthProperty().bind(myGrid.widthProperty());
+//				Images[i][j].fitHeightProperty().bind(myGrid.heightProperty());
 			}
 		}
 	}
@@ -227,8 +230,8 @@ public class SimDisplay {
 		for(int i=0; i<cells.length; i++) {
 			for (int j=0; j<cells[i].length; j++) {
 				images[i][j] = new ImageView(cells[i][j].getImage());
-				images[i][j].setFitWidth(width / Cells[0].length);
-				images[i][j].setFitHeight(height / Cells.length);
+				images[i][j].setFitWidth(GRID_FIT_CONSTANT / Cells[0].length);
+				images[i][j].setFitHeight(GRID_FIT_CONSTANT / Cells.length);
 			}
 		}
 		this.Images = images;
