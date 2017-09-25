@@ -175,6 +175,13 @@ public class SimulationFire extends Simulation{
 	private static void testArrayPrinter(Cell[][] testArray) {
 		for(int i = 0; i < testArray.length; i++) {
 			for(int j = 0; j < testArray[0].length; j++) {
+				System.out.print(testArray[i][j].getImage() + " ");
+			}
+			System.out.println();
+		}
+		System.out.println();
+		for(int i = 0; i < testArray.length; i++) {
+			for(int j = 0; j < testArray[0].length; j++) {
 				System.out.print(testArray[i][j].getState() + " ");
 			}
 			System.out.println();
