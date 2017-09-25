@@ -1,7 +1,7 @@
 package frontend;
 
 /*
- * Author: Venkat S., Yiqin Zhou
+ * Authors: Venkat S., Yiqin Zhou
  */
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -69,7 +69,6 @@ public class UserInput {
 		String minBreedDaysForSharks = doc.getElementsByTagName("minBreedDaysForSharks").item(0).getTextContent();
 		String minBreedDaysForFish = doc.getElementsByTagName("minBreedDaysForFish").item(0).getTextContent();
 		String maxStarveDaysForSharks = doc.getElementsByTagName("maxStarveDaysForSharks").item(0).getTextContent();
-//		finalParams = new String[WATOR_ARRAY_LENGTH];
 		double[] basic = new double[3];
 		basic[0] = Double.parseDouble(minBreedDaysForSharks);
 		basic[1] = Double.parseDouble(minBreedDaysForFish);

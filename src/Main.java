@@ -32,9 +32,7 @@ public class Main extends Application{
 	public static final int SIZEx = 700;
 	public static final int SIZEy = 700;
 	public static final String INITIAL_TITLE = "CellSociety!";
-	public static final String WATOR_TITLE = "WaTor!";
-	public static final String FIRE_TITLE  = "FIYAH";
-	public static final String SEGREGATION_TITLE = "SEGREGATION";
+	
 	
 	
 	Stage window;
@@ -61,9 +59,13 @@ public class Main extends Application{
 		return sim.startScreen();
 	}
 	
-	public void step() {
-		
-	}
+//	public void step() {
+//		s.getSimulation().update();
+//	}
+//	
+//	public void playSim() {
+//		
+//	}
 	
 	public static void main(String[] args) {
 		launch(args);

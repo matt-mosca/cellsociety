@@ -63,10 +63,18 @@ public class SimulationSegregation extends Simulation {
 		
 	}
 	
+<<<<<<< HEAD
 	@Override
 	public Image chooseImage(int state) {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
 		
+=======
+	
+	private Image chooseImage(int state) {
+		Image image = new Image("");
+		if(state == 0)
+			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
+>>>>>>> master
 		if(state == 1)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(RED_IMAGE));
 		if(state == 2)
@@ -132,7 +140,8 @@ public class SimulationSegregation extends Simulation {
 			}
 		}
 		return empty;
-		
+		//Are you actually updating the Cell array here? I can't find the point at which you do that. That 
+		//might just be because I'm blind. -V
 		
 	}
 
@@ -162,6 +171,13 @@ public class SimulationSegregation extends Simulation {
 	}
 	
 	
+	private void updateImages() {
+		for(int i = 0; i < cellNumberHorizontal; i++) {
+			for(int j = 0; j < cellNumberVertical; j++) {
+				array[i][j].setImage(chooseImage(array[i][j].getState()));
+			}
+		}
+	}
 	
 
 	public CellSegregation[][] getArray() {

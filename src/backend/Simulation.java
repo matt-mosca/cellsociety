@@ -121,8 +121,13 @@ public class Simulation{
 
 	}
 	
+<<<<<<< HEAD
 	public Image chooseImage(int state) {
 	
+=======
+	private Image chooseImage(int state) {
+		
+>>>>>>> master
 		return null;
 	}
 
