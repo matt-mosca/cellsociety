@@ -73,7 +73,7 @@ public class SimulationSegregation extends Simulation {
 		Image image = null;
 
 		if(state == 0)
-			image = new Image(getClass().getClassLoader().getResourceAsStream(RED_IMAGE));
+			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
 
 		if(state == 1)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(RED_IMAGE));
