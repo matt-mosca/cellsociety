@@ -94,17 +94,35 @@ public class SimulationFire extends Simulation{
 	}
 	
 	public void update() {
+		int[][] temp = new int[cellNumberHorizontal][cellNumberVertical];
 		for(int i = 0; i < cellNumberHorizontal; i++) {
 			for(int j = 0; j < cellNumberVertical; j++) {
+				temp[i][j] = array[i][j].getState();
 				if(array[i][j].getState() == CellFire.BURNING)
-					array[i][j].changeState(CellFire.EMPTY);
+					temp[i][j] = CellFire.EMPTY;
 				if(array[i][j].getState() == CellFire.TREE) {
 					if(potentialForFire(array[i][j]))
 						if(getRandomNum(1) <= probCatch)
-							array[i][j].changeState(CellFire.BURNING);
+							temp[i][j] = CellFire.BURNING;
 				}
 			}
 		}
+		for(int i = 0; i < cellNumberHorizontal; i++) {
+			for(int j = 0; j < cellNumberVertical; j++) {
+				array[i][j].changeState(temp[i][j]);
+			}
+		}
+//		for(int i = 0; i < cellNumberHorizontal; i++) {
+//			for(int j = 0; j < cellNumberVertical; j++) {
+//				if(array[i][j].getState() == CellFire.BURNING)
+//					array[i][j].changeState(CellFire.EMPTY);
+//				if(array[i][j].getState() == CellFire.TREE) {
+//					if(potentialForFire(array[i][j]))
+//						if(getRandomNum(1) <= probCatch)
+//							array[i][j].changeState(CellFire.BURNING);
+//				}
+//			}
+//		}
 		findNeighbors();
 		updateImages();
 	}
@@ -166,6 +184,7 @@ public class SimulationFire extends Simulation{
 	public static void main(String[] args) {
 		SimulationFire test = new SimulationFire(5, 5, 0.2, 0.5, 0.5);
 		testArrayPrinter(test.getArray());
+//		System.out.println(test.getArray()[1][1].getNeighborCells());
 //		System.out.println();
 //		System.out.print(test.findNumberEmpty());
 //		System.out.println();
