@@ -30,7 +30,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-//import javafx.scene.layout.HBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 //import javafx.scene.paint.Color;
@@ -70,22 +70,24 @@ public class SimDisplay {
 	}
 	
 	private Scene makeSimulation(){
-		BorderPane border = new BorderPane();
-		Scene fun = new Scene(border,width, height);
+//		BorderPane border = new BorderPane();
+		
 		this.Cells = sim.getArray();
 		Images = makeImageArray(Cells);
 		makeGrid();
 		fillGrid();
-		border.setCenter(myGrid);
+		Scene fun = new Scene(myGrid, width, height);
+		myGrid.setPadding(new Insets(50,50,50,50));
+//		border.setCenter(myGrid);
 		//This could use some serious refactoring, potentially creating a new class for just all of the buttons seems
 		//to make sense.
-		VBox controls = new VBox(VBOX_SPACING);
+		HBox controls = new HBox(VBOX_SPACING);
 		Button play = playButton();
 		Button pause = pauseButton();
 		Button step = stepButton();
 		Button reset = resetButton();
 		controls.getChildren().addAll(play, pause, step, reset);
-		border.setBottom(controls);
+//		border.setBottom(controls);
 		controls.setAlignment(Pos.CENTER);
 //		this.scene = fun;
 //		window.setScene(scene);
@@ -192,9 +194,13 @@ public class SimDisplay {
 	
 	private GridPane makeGrid(){
 		GridPane grid = new GridPane();
-		grid.getColumnConstraints().add(new ColumnConstraints(width/Cells[0].length));
-		grid.getRowConstraints().add(new RowConstraints(height/Cells.length));
-		grid.setGridLinesVisible(true);
+//		grid.getColumnConstraints().add(new ColumnConstraints(width/Cells[0].length));
+//		grid.getRowConstraints().add(new RowConstraints(height/Cells.length));
+		grid.getColumnConstraints().add(new ColumnConstraints(10));
+		grid.getRowConstraints().add(new RowConstraints(10));
+//		grid.setGridLinesVisible(true);
+		grid.setStyle("-fx-background-color: black; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;");
+		grid.setSnapToPixel(false);
 		myGrid=grid;
 		return myGrid;
 	}
@@ -206,6 +212,8 @@ public class SimDisplay {
 		for(int i=0;i<Cells.length;i++) {
 			for (int j=0; j<Cells[i].length; j++) {
 				myGrid.add(Images[i][j], j, i);
+//				if (i%2!=0) {
+//				Rectangle r = new Rectangle (RED,10,10);
 			}
 		}
 	}
@@ -218,7 +226,9 @@ public class SimDisplay {
 		ImageView[][] images = new ImageView[cells.length][Cells[0].length];
 		for(int i=0; i<cells.length; i++) {
 			for (int j=0; j<cells[i].length; j++) {
+				ImageView fun =  new ImageView(cells[i][j].getImage());
 				images[i][j] = new ImageView(cells[i][j].getImage());
+
 			}
 		}
 		this.Images = images;
