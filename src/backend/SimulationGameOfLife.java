@@ -71,6 +71,7 @@ public class SimulationGameOfLife extends Simulation {
 		return image;
 	}
 
+	@Override
 	public void update() {
 		for(int i = 0; i < cellNumberHorizontal; i++) {
 			for(int j = 0; j < cellNumberVertical; j++) {

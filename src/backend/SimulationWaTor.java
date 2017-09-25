@@ -82,6 +82,7 @@ public class SimulationWaTor extends Simulation {
 		return image;
 	}
 
+	@Override
 	public void update() {
 		// set up a loop, go through every cell
 		//1 is shark, 2 is fish
