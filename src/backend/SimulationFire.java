@@ -140,10 +140,10 @@ public class SimulationFire extends Simulation{
 	}
 	
 
-
 	protected Image chooseImage(int state) {
 
 		Image image = null;
+
 
 		if(state == CellFire.EMPTY)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));

@@ -9,6 +9,7 @@ public class SimulationWaTor extends Simulation {
 	private static final String FISH_IMAGE = "prey_block.gif";
 	
 
+
 	private int maxStarveDaysForSharks;
 	private int minBreedDaysForSharks;
 	private int minBreedDaysForFish;
