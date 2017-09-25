@@ -219,6 +219,8 @@ public class SimDisplay {
 		for(int i=0; i<cells.length; i++) {
 			for (int j=0; j<cells[i].length; j++) {
 				images[i][j] = new ImageView(cells[i][j].getImage());
+				images[i][j].setFitWidth(width / Cells[0].length);
+				images[i][j].setFitHeight(height / Cells.length);
 			}
 		}
 		this.Images = images;
