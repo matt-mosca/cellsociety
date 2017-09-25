@@ -33,6 +33,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Line;
 //import javafx.scene.paint.Color;
 //import javafx.scene.paint.ImagePattern;
 //import javafx.scene.paint.Paint;
@@ -61,8 +62,9 @@ public class SimDisplay {
 	private Stage window;
 	private Simulation sim;
 	private UserInput UI = new UserInput();
-	double[] inputArray;
+	private double[] inputArray;
 	private Timeline animation;
+	private BorderPane border;
 	
 	public SimDisplay(int x, int y, Stage s) {
 		this.width=x;
@@ -71,12 +73,13 @@ public class SimDisplay {
 	}
 	
 	private Scene makeSimulation(){
-		BorderPane border = new BorderPane();
+		border = new BorderPane();
 		
 		this.Cells = sim.getArray();
 		Images = makeImageArray(Cells);
 		makeGrid();
 		fillGrid();
+		drawLines();
 		Scene fun = new Scene(border, width, height);
 		border.setCenter(myGrid);
 		myGrid.setAlignment(Pos.CENTER);
@@ -206,6 +209,39 @@ public class SimDisplay {
 //		grid.setSnapToPixel(false);
 		myGrid=grid;
 		return myGrid;
+	}
+
+	private void drawLines() {
+		for (int i = 0; i<Cells.length; i++) {
+			double x = myGrid.getLayoutBounds().getMinX();
+			double y = myGrid.getLayoutBounds().getMinY() + (i*GRID_FIT_CONSTANT/Cells[0].length);
+			for (int j=0; j<Cells[0].length; j++) {
+				Line line1 = new Line();
+				line1.setStartX(x);
+				line1.setStartY(y);
+				line1.setEndX(x+(GRID_FIT_CONSTANT/Cells[0].length));
+				line1.setEndY(y);
+				Line line2 = new Line();
+				line2.setStartX(x);
+				line2.setStartX(y);
+				line2.setEndY(y+(GRID_FIT_CONSTANT/Cells[0].length));
+				line2.setEndX(x);
+				Line line3 = new Line();
+				line3.setStartX(x);
+				line3.setStartY(y+(GRID_FIT_CONSTANT/Cells[0].length));
+				line3.setEndX(x+(GRID_FIT_CONSTANT/Cells[0].length));
+				line3.setEndY(y+(GRID_FIT_CONSTANT/Cells[0].length));
+				
+				Line line4 = new Line();
+				line3.setStartY(y);
+				line3.setStartX(x+(GRID_FIT_CONSTANT/Cells[0].length));
+				line3.setEndY(y+(GRID_FIT_CONSTANT/Cells[0].length));
+				line3.setEndX(x+(GRID_FIT_CONSTANT/Cells[0].length));
+				
+				x+=GRID_FIT_CONSTANT/Cells[0].length;
+				border.getChildren().addAll(line1, line2, line3, line4);
+			}
+		}
 	}
 	
 	
