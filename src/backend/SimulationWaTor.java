@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import javafx.scene.image.Image;
 
 public class SimulationWaTor extends Simulation {
-	private static final String EMPTY_IMAGE = "empty_block.gif";
+	private static final String EMPTY_IMAGE = "blue_block.gif";
 	private static final String SHARK_IMAGE = "predator_block.gif";
 	private static final String FISH_IMAGE = "prey_block.gif";
 	
@@ -75,10 +75,9 @@ public class SimulationWaTor extends Simulation {
 		Image image = null;
 		if(state == 0)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
-
-		if(state == 1)
-		
+		if(state == 1){
 			image = new Image(getClass().getClassLoader().getResourceAsStream(SHARK_IMAGE));
+		}
 		if(state == 2)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(FISH_IMAGE));
 		return image;
@@ -113,7 +112,7 @@ public class SimulationWaTor extends Simulation {
 			//check whether will die
 			if (shark.getStarveDays()>maxStarveDaysForSharks) {
 				shark.changeState(0);
-				shark.setImage(chooseImage(0));
+//				shark.setImage(chooseImage(0));
 				shark.setBreedDays(0);
 				shark.setStarveDays(0);
 			}
@@ -124,9 +123,10 @@ public class SimulationWaTor extends Simulation {
 				if (allNeighborEmpty.size()>0) {
 				    CellWaTor potentialBreedCell = findRandomNeighbor(allNeighborEmpty);
 				    potentialBreedCell.changeState(1);
-				    potentialBreedCell.setImage(chooseImage(1));
+//				    potentialBreedCell.setImage(chooseImage(1));
 				}
-			}			
+			}
+			updateImages();
 		}
 		
 		ArrayList<Cell> allFish=findallType(2);
@@ -146,7 +146,7 @@ public class SimulationWaTor extends Simulation {
 				if (allNeighborEmpty.size()>0) {
 				    CellWaTor potentialBreedCell = findRandomNeighbor(allNeighborEmpty);
 				    potentialBreedCell.changeState(2);
-				    potentialBreedCell.setImage(chooseImage(2));
+//				    potentialBreedCell.setImage(chooseImage(2));
 				}	
 			}
 		}		
