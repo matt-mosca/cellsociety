@@ -3,9 +3,9 @@
  */
 package frontend;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
+//import java.util.ArrayList;
+//import java.util.Iterator;
+//import java.util.Scanner;
 
 import backend.Cell;
 import backend.Simulation;
@@ -14,28 +14,28 @@ import backend.SimulationGameOfLife;
 import backend.SimulationSegregation;
 import backend.SimulationWaTor;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+//import java.io.File;
+//import java.io.FileNotFoundException;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
-import javafx.scene.Group;
+//import javafx.application.Application;
+//import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
+//import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
+//import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+//import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
+//import javafx.scene.paint.Color;
+//import javafx.scene.paint.ImagePattern;
+//import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -44,6 +44,12 @@ import javafx.geometry.*;
 
 public class SimDisplay {
 	private static final int VBOX_SPACING = 7;
+	private static final int MILLISECOND_DELAY = 1000;
+	private static final String WATOR_TITLE = "WaTor!";
+	private static final String FIRE_TITLE  = "FIYAH";
+	private static final String SEGREGATION_TITLE = "SEGREGATION";
+	private static final String GAME_OF_LIFE_TITLE = "GAME OF LIFE";
+	
 	private Scene scene;
 	private Cell[][] Cells;
 	private int width;
@@ -55,7 +61,7 @@ public class SimDisplay {
 	private Simulation sim;
 	private UserInput UI = new UserInput();
 	double[] inputArray;
-	
+	private Timeline animation;
 	
 	public SimDisplay(int x, int y, Stage s) {
 		this.width=x;
@@ -63,7 +69,7 @@ public class SimDisplay {
 		this.window = s;
 	}
 	
-	private void makeSimulation(){
+	private Scene makeSimulation(){
 		BorderPane border = new BorderPane();
 		Scene fun = new Scene(border,width, height);
 		this.Cells = sim.getArray();
@@ -81,8 +87,9 @@ public class SimDisplay {
 		controls.getChildren().addAll(play, pause, step, reset);
 		border.setBottom(controls);
 		controls.setAlignment(Pos.CENTER);
-		this.scene = fun;
-		window.setScene(scene);
+//		this.scene = fun;
+//		window.setScene(scene);
+		return fun;
 		//return this.scene;
 	}
 	
@@ -95,9 +102,10 @@ public class SimDisplay {
 //		Image backGround = new Image(getClass().getClassLoader().getResourceAsStream("brickwall.jpeg"));
 //		ImagePattern pattern = new ImagePattern(backGround);	
 //		startScene.setFill(pattern);
+		
+		
 		//get some buttons to choose which of the four simulations they want to do
 		//replace the following code with a for loop and a resource file.
-		
 		
 		Font f = new Font("Arial", 50);
 		Label startMessage = new Label("Which Simulation would you like to see?");
@@ -121,26 +129,25 @@ public class SimDisplay {
 			if(s.equals("WaTor")) {
 				inputArray = UI.getWaTor();
 				this.sim = new SimulationWaTor((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
+				changeSimName(WATOR_TITLE);
 			}
 			if(s.equals("Fire")) {
 				inputArray = UI.getFire();
-				//in SimulationFire, the constructor is wrong. This is what it should be. fixed.
-				//checking if the xml returned the right things to me.
-//				for (double t: inputArray) {
-//					System.out.println(t);
-//				}
 				this.sim = new SimulationFire((int) inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4]);
+				changeSimName(FIRE_TITLE);
 			}
 			if(s.equals("Segregation")) {
 				inputArray = UI.getSegregation();
 				this.sim = new SimulationSegregation((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
+				changeSimName(SEGREGATION_TITLE);
 			}
 			if(s.equals("Game of Life")) {
 				inputArray = UI.getGameOfLife();
 				this.sim = new SimulationGameOfLife((int)inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3]);
+				changeSimName(GAME_OF_LIFE_TITLE);
 			}
-			makeSimulation();
-			changeSimName(s);
+//			makeSimulation();
+			playSim();
 		});
 		return b;
 	}
@@ -150,6 +157,7 @@ public class SimDisplay {
 		Button b = new Button("Pause");
 		b.setOnAction(e -> {
 			//do the pause stuff by pausing the animation I guess
+			animation.pause();
 		});
 		return b;
 	}
@@ -158,6 +166,7 @@ public class SimDisplay {
 		Button b = new Button("Play");
 		b.setOnAction(e ->{
 			//do the play stuff by resuming the animation, starting the animation, idk.
+			animation.play();
 		});
 		return b;
 	}
@@ -166,6 +175,8 @@ public class SimDisplay {
 		Button b = new Button("Step");
 		b.setOnAction(e ->{
 			//do the step stuff here by calling the step function wtf idk
+			animation.pause();
+			step();
 		});
 		return b;
 	}
@@ -174,6 +185,7 @@ public class SimDisplay {
 		Button b = new Button("Reset");
 		b.setOnAction(e-> {
 			//do the reset stuff here
+			
 		});
 		return b;
 	}
@@ -189,6 +201,7 @@ public class SimDisplay {
 	
 	
 	private void fillGrid() {
+		myGrid.getChildren().clear();
 		for(int i=0;i<Cells.length;i++) {
 			for (int j=0; j<Cells[i].length; j++) {
 				myGrid.add(Images[i][j], j, i);
@@ -198,18 +211,13 @@ public class SimDisplay {
 	
 	
 //UNCOMMENT THIS IF YOU END UP NEEDING TO HAVE AN IMAGEVIEW ARRAY
+//Looks like we're using an ImageView array. Seems to make sense.
 	
-	private ImageView[][] makeImageArray(Cell[][] Cells){
-//		int [][] test = new int[Cells.length][Cells[1].length];
-		ImageView[][] images = new ImageView[Cells.length][Cells[0].length];
-		for(int i=0; i<Cells.length; i++) {
-			for (int j=0; j<Cells[i].length; j++) {
-				System.out.print(i);
-				System.out.print(" "+ j);
-//				test[i][j] = Cells[i][j].getColumnNumber();
-//				System.out.println(test[i][j]);
-				
-				images[i][j] = new ImageView(Cells[i][j].getImage());
+	private ImageView[][] makeImageArray(Cell[][] cells){
+		ImageView[][] images = new ImageView[cells.length][Cells[0].length];
+		for(int i=0; i<cells.length; i++) {
+			for (int j=0; j<cells[i].length; j++) {
+				images[i][j] = new ImageView(cells[i][j].getImage());
 			}
 		}
 		this.Images = images;
@@ -221,6 +229,44 @@ public class SimDisplay {
 		window.setTitle(simName);
 	}
 	
+	public Simulation getSimulation() {
+		return this.sim;
+	}
+	
+	public Scene getScene() {
+		return this.scene;
+	}
+	
+	private void step() {
+		sim.update();
+		Cells = sim.getArray(); //I can't help but feel that this is stupidly inefficient. Is there an easier way? - V 
+		//I don't think you guys are updating this array in the backend, because I'm not getting an animation. 
+		updateImageArray(Cells);
+		fillGrid();
+	}
+	
+	private void updateImageArray(Cell[][] cells) {
+		for (int i=0; i<cells.length; i++) {
+			for(int j=0; j<cells[i].length; j++) {
+				this.Images[i][j].setImage(cells[i][j].getImage()); //the n^2 algo is really starting to make me sad, but I'm not sure how to get it to be faster. Suggestions? -V
+			}
+		}
+		
+	}
+
+	private void playSim() {
+		this.scene = makeSimulation();
+		window.setScene(scene);
+		createAnimation();
+	}
+
+	private void createAnimation() {
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
+		animation = new Timeline();
+		animation.setCycleCount(Animation.INDEFINITE);
+		animation.getKeyFrames().add(frame);
+//		animation.play();
+	}
 	
 	
 }

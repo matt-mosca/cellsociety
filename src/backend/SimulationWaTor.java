@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 public class SimulationWaTor extends Simulation {
 	
 //	private CellWaTor[][] array;
-//	private int numberOfCells;
+	private int numberOfCells;
 //	private double emptyPercentage;
 //	private double redToBlueRatio;
 	private int cellNumberHorizontal;
@@ -38,33 +38,21 @@ public class SimulationWaTor extends Simulation {
 		initializeScene();
 		
 		
-		
-	    /*
-		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
-				System.out.println(super.array[rowNumber][columnNumber].getState());
-			}
-		}
-		System.out.println("separate here");
+//		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
+//			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
+//				System.out.println(super.array[rowNumber][columnNumber].getState());
+//			}
+//		}
+//		System.out.println("separate here");
+
 		
 		
 		
 		
 		update();
-		
-	   
-		
-		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
-				System.out.println(array[rowNumber][columnNumber].getState());
-			}
-		}
-		*/
-		
+	}
 		
 			
-
-	}
 	
 	@Override
 	public void initializeScene() {
