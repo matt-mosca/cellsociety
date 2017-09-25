@@ -12,7 +12,10 @@ public class CellSegregation extends Cell{
 		// TODO Auto-generated constructor stub
 	}
 	
+
+	
 	//For testing
+	/*
 	public static void main(String[] args) {
 //		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
 		Image image = new Image("the");
@@ -20,4 +23,5 @@ public class CellSegregation extends Cell{
 		CellSegregation test = new CellSegregation(0, image, neighbors, 1, 1);
 		test.changeState(2);
 	}
+	*/
 }

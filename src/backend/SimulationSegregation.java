@@ -8,11 +8,7 @@ import javafx.scene.image.Image;
 public class SimulationSegregation extends Simulation {
 //	private CellSegregation[][] array;
 	private double satisfactionPercentage;
-	private int numberOfCells;
-	private double emptyPercentage;
-	private double redToBlueRatio;
-	private int cellNumberHorizontal;
-	private int cellNumberVertical;
+	
 	private static final String EMPTY_IMAGE = "empty_block.gif";
 	private static final String RED_IMAGE = "red_block.gif";
 	private static final String BLUE_IMAGE = "blue_block.gif";
@@ -33,7 +29,7 @@ public class SimulationSegregation extends Simulation {
 	
 		this.satisfactionPercentage = satisfactionPercentage;
 		super.initializeScene();
-		updateImages();
+		
 		
 		
 		
@@ -60,6 +56,24 @@ public class SimulationSegregation extends Simulation {
 		
 		*/
 	}
+	
+	
+	@Override
+	public Image chooseImage(int state) {
+		Image image = new Image("");
+		if(state == 0)
+			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
+		if(state == 1)
+			image = new Image(getClass().getClassLoader().getResourceAsStream(RED_IMAGE));
+		if(state == 2)
+			image = new Image(getClass().getClassLoader().getResourceAsStream(BLUE_IMAGE));
+		return image;
+	}
+	
+	
+	
+	
+
     
 	@Override
 	public void update() {
@@ -86,13 +100,15 @@ public class SimulationSegregation extends Simulation {
 			if (emptyCells.size()>0){
 				int previousState=dissatisfied.get(needMove).getState();
 				dissatisfied.get(needMove).changeState(0);
+				dissatisfied.get(needMove).setImage(chooseImage(0));
 				int theEmptyReadyForFill=random(1,emptyCells.size())[0];
 				emptyCells.get(theEmptyReadyForFill).changeState(previousState);
+				emptyCells.get(theEmptyReadyForFill).setImage(chooseImage(previousState));
 				emptyCells.remove(theEmptyReadyForFill);}
 
 		}
 		
-		updateImages();
+	
 
 	}
 
@@ -137,25 +153,7 @@ public class SimulationSegregation extends Simulation {
 		return false;
 	}
 	
-	private Image chooseImage(int state) {
-		Image image = new Image("");
-		if(state == 0)
-			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
-		if(state == 1)
-			image = new Image(getClass().getClassLoader().getResourceAsStream(RED_IMAGE));
-		if(state == 2)
-			image = new Image(getClass().getClassLoader().getResourceAsStream(BLUE_IMAGE));
-		return image;
-	}
 	
-	private void updateImages() {
-		for(int i = 0; i < cellNumberHorizontal; i++) {
-			System.out.println("I reached here!");
-			for(int j = 0; j < cellNumberVertical; j++) {
-				array[i][j].setImage(chooseImage(array[i][j].getState()));
-			}
-		}
-	}
 	
 
 	public CellSegregation[][] getArray() {

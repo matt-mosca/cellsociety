@@ -1,6 +1,8 @@
 package backend;
 import java.util.ArrayList;
 
+import javafx.scene.image.Image;
+
 public class SimulationWaTor extends Simulation {
 	
 //	private CellWaTor[][] array;
@@ -12,6 +14,10 @@ public class SimulationWaTor extends Simulation {
 	private int maxStarveDaysForSharks;
 	private int minBreedDaysForSharks;
 	private int minBreedDaysForFish;
+	
+	private static final String EMPTY_IMAGE = "empty_block.gif";
+	private static final String SHARK_IMAGE = "predator_block.gif";
+	private static final String FISH_IMAGE = "prey_block.gif";
 
 	// 0 is empty, 1 is shark, 2 is fish
 
@@ -29,11 +35,11 @@ public class SimulationWaTor extends Simulation {
 			}
 		}
 	
-		super.initializeScene();
+		initializeScene();
 		
 		
 		
-	    
+	    /*
 		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
 				System.out.println(super.array[rowNumber][columnNumber].getState());
@@ -53,17 +59,52 @@ public class SimulationWaTor extends Simulation {
 				System.out.println(array[rowNumber][columnNumber].getState());
 			}
 		}
+		*/
 		
 		
-		
-		
-		
+			
+
+	}
+	
+	@Override
+	public void initializeScene() {
+		// according to percentage, do random function
+		// call cell to change type
+		int redNumber = findNumber(1);
+		int blueNumber = findNumber(2);
+        int[] randomSlots=random(
+				redNumber+blueNumber,numberOfCells);
+        //fill all to blue first, then change some to red
+		fillInitialRedAndBlue(randomSlots,2);
+		int[] redSlots = random(
+				redNumber,randomSlots.length);
+		for (int i=0;i<redSlots.length;i++) {
+			redSlots[i]=randomSlots[redSlots[i]];
+		}
 	
 		
-		
-		
-		
+		fillInitialRedAndBlue(redSlots,
+				1);
 
+		findNeighbors();
+
+	}
+	
+	@Override
+	public void fillInitialRedAndBlue(
+			int[] slots, int state) {
+		
+		for (int i = 0; i < slots.length; i++) {
+			int position = slots[i];
+			int rowNumber = (int) (position
+					/ cellNumberHorizontal);
+			int columnNumber = position
+					% cellNumberHorizontal;
+			array[rowNumber][columnNumber]
+					.changeState(state);
+			array[rowNumber][columnNumber].setImage(chooseImage(state));
+
+		}
 	}
 
 	@Override
@@ -97,6 +138,17 @@ public class SimulationWaTor extends Simulation {
 			}
 		}
 
+	}
+	
+	private Image chooseImage(int state) {
+		Image image = new Image("");
+		if(state == 0)
+			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
+		if(state == 1)
+			image = new Image(getClass().getClassLoader().getResourceAsStream(SHARK_IMAGE));
+		if(state == 2)
+			image = new Image(getClass().getClassLoader().getResourceAsStream(FISH_IMAGE));
+		return image;
 	}
 
 	@Override
@@ -132,6 +184,7 @@ public class SimulationWaTor extends Simulation {
 			//check whether will die
 			if (shark.getStarveDays()>maxStarveDaysForSharks) {
 				shark.changeState(0);
+				shark.setImage(chooseImage(0));
 				shark.setBreedDays(0);
 				shark.setStarveDays(0);
 			}
@@ -142,6 +195,7 @@ public class SimulationWaTor extends Simulation {
 				if (allNeighborEmpty.size()>0) {
 				    CellWaTor potentialBreedCell = findRandomNeighbor(allNeighborEmpty);
 				    potentialBreedCell.changeState(1);
+				    potentialBreedCell.setImage(chooseImage(1));
 				}
 				
 			}
@@ -174,6 +228,7 @@ public class SimulationWaTor extends Simulation {
 				if (allNeighborEmpty.size()>0) {
 				    CellWaTor potentialBreedCell = findRandomNeighbor(allNeighborEmpty);
 				    potentialBreedCell.changeState(2);
+				    potentialBreedCell.setImage(chooseImage(2));
 				}
 				
 			}
@@ -194,9 +249,11 @@ public class SimulationWaTor extends Simulation {
 
 	private void fishMove(CellWaTor fish,CellWaTor randomEmpty) {
 		randomEmpty.changeState(2);
+		randomEmpty.setImage(chooseImage(2));
 		randomEmpty.setBreedDays(fish.getBreedDays()+1);
 		fish.changeState(0);
 		fish.setBreedDays(0);
+		fish.setImage(chooseImage(0));
 		
 	}
 
@@ -213,6 +270,7 @@ public class SimulationWaTor extends Simulation {
 			CellWaTor shark,
 			CellWaTor randomSlot, String code) {
 		randomSlot.changeState(2);
+		randomSlot.setImage(chooseImage(2));
 		randomSlot.setBreedDays(shark.getBreedDays()+1);
 		if (code=="eat") {
 			randomSlot.setStarveDays(0);	
@@ -226,6 +284,7 @@ public class SimulationWaTor extends Simulation {
 		shark.changeState(0);
 		shark.setBreedDays(0);
 		shark.setStarveDays(0);
+		shark.setImage(chooseImage(0));
 	}
 
 	
