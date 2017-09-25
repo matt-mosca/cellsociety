@@ -118,7 +118,7 @@ public class Simulation{
 	}
 	
 
-	private Image chooseImage(int state) {
+	protected Image chooseImage(int state) {
 		return null;
 	}
 
