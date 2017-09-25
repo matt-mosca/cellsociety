@@ -58,7 +58,8 @@ public class SimulationGameOfLife extends Simulation {
 		return Math.random() * upperBound;
 	}
 	
-	private Image chooseImage(int state) {
+	@Override
+	protected Image chooseImage(int state) {
 		Image image = null;
 		if(state == CellGameOfLife.EMPTY)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
@@ -66,7 +67,7 @@ public class SimulationGameOfLife extends Simulation {
 			image = new Image(getClass().getClassLoader().getResourceAsStream(LIVE_IMAGE));
 		return image;
 	}
-	
+
 	public void update() {
 		for(int i = 0; i < cellNumberHorizontal; i++) {
 			for(int j = 0; j < cellNumberVertical; j++) {
@@ -92,12 +93,13 @@ public class SimulationGameOfLife extends Simulation {
 		updateImages();
 	}
 	
-	private void updateImages() {
-		for(int i = 0; i < cellNumberHorizontal; i++) {
-			for(int j = 0; j < cellNumberVertical; j++) {
-				array[i][j].setImage(chooseImage(array[i][j].getState()));
-			}
-		}
+	@Override
+	public CellGameOfLife[][] getArray() {
+		return (CellGameOfLife[][])array;
+	}
+
+	public void setArray(CellGameOfLife[][] array) {
+		this.array = array;
 	}
 	
 	private static void testArrayPrinter(Cell[][] testArray) {
