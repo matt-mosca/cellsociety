@@ -95,6 +95,7 @@ public class SimulationFire extends Simulation{
 	
 	@Override
 	public void update() {
+		System.out.println("fire update");
 		int[][] temp = new int[cellNumberHorizontal][cellNumberVertical];
 		for(int i = 0; i < cellNumberHorizontal; i++) {
 			for(int j = 0; j < cellNumberVertical; j++) {
@@ -142,16 +143,16 @@ public class SimulationFire extends Simulation{
 	
 
 	protected Image chooseImage(int state) {
-
 		Image image = null;
-
 
 		if(state == CellFire.EMPTY)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
 		if(state == CellFire.TREE)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(TREE_IMAGE));
-		if(state == CellFire.BURNING)
+		if(state == CellFire.BURNING) {
 			image = new Image(getClass().getClassLoader().getResourceAsStream(BURNING_IMAGE));
+		}
+		System.out.println(image);
 		return image;
 	}
 	
@@ -175,6 +176,13 @@ public class SimulationFire extends Simulation{
 	private static void testArrayPrinter(Cell[][] testArray) {
 		for(int i = 0; i < testArray.length; i++) {
 			for(int j = 0; j < testArray[0].length; j++) {
+				System.out.print(testArray[i][j].getImage() + " ");
+			}
+			System.out.println();
+		}
+		System.out.println();
+		for(int i = 0; i < testArray.length; i++) {
+			for(int j = 0; j < testArray[0].length; j++) {
 				System.out.print(testArray[i][j].getState() + " ");
 			}
 			System.out.println();
@@ -182,19 +190,19 @@ public class SimulationFire extends Simulation{
 		System.out.println();
 	}
 	
-	public static void main(String[] args) {
-		SimulationFire test = new SimulationFire(5, 5, 0.2, 0.5, 0.5);
-		testArrayPrinter(test.getArray());
-//		System.out.println(test.getArray()[1][1].getNeighborCells());
-//		System.out.println();
-//		System.out.print(test.findNumberEmpty());
-//		System.out.println();
-		int iterations = 5;
-		//Drives test simulation
-		for(int i = 0; i < iterations; i++) {
-			test.update();
-			System.out.println("Iteration " + (i + 1));
-			testArrayPrinter(test.getArray());
-		}
-	}
+//	public static void main(String[] args) {
+//		SimulationFire test = new SimulationFire(5, 5, 0.2, 0.5, 0.5);
+//		testArrayPrinter(test.getArray());
+////		System.out.println(test.getArray()[1][1].getNeighborCells());
+////		System.out.println();
+////		System.out.print(test.findNumberEmpty());
+////		System.out.println();
+//		int iterations = 5;
+//		//Drives test simulation
+//		for(int i = 0; i < iterations; i++) {
+//			test.update();
+//			System.out.println("Iteration " + (i + 1));
+//			testArrayPrinter(test.getArray());
+//		}
+//	}
 }
