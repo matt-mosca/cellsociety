@@ -204,6 +204,7 @@ public class SimDisplay {
 		grid.setPrefWidth(GRID_FIT_CONSTANT);
 		grid.getColumnConstraints().add(new ColumnConstraints(GRID_FIT_CONSTANT / Cells[0].length));
 		grid.getRowConstraints().add(new RowConstraints(GRID_FIT_CONSTANT / Cells.length));
+		grid.setStyle("-fx-background-color: white; -fx-grid-lines-visible: true");
 //		grid.setGridLinesVisible(true);
 //		grid.setStyle("-fx-background-color: black; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;");
 //		grid.setSnapToPixel(false);
