@@ -64,7 +64,7 @@ public class SimulationSegregation extends Simulation {
 	
 
 
-	
+	@Override
 	protected Image chooseImage(int state) {
 		Image image = null;
 

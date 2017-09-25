@@ -69,6 +69,7 @@ public class SimulationWaTor extends Simulation {
 		}
 	}
 	
+	@Override
 	protected Image chooseImage(int state) {
 		Image image = null;
 		if(state == 0)
