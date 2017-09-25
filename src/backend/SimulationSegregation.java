@@ -53,7 +53,9 @@ public class SimulationSegregation extends Simulation {
 			
 			}
 		}
+		
 		*/
+		
 		
 		
 		
@@ -153,5 +155,7 @@ public class SimulationSegregation extends Simulation {
 	public void setArray(CellSegregation[][] newArray) {
 		array = newArray;
 	}
+	
+	
 
 }
