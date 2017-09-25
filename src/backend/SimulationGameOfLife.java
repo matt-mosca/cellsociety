@@ -70,6 +70,7 @@ public class SimulationGameOfLife extends Simulation {
 
 	@Override
 	public void update() {
+		int[][] temp = new int[cellNumberHorizontal][cellNumberVertical];
 		for(int i = 0; i < cellNumberHorizontal; i++) {
 			for(int j = 0; j < cellNumberVertical; j++) {
 				CellGameOfLife cell = (CellGameOfLife)array[i][j];
@@ -78,18 +79,44 @@ public class SimulationGameOfLife extends Simulation {
 					if(cell.getNeighborCells().get(k).getState() == CellGameOfLife.LIVE)
 						liveCount++;
 				}
+				temp[i][j] = array[i][j].getState();
 				//Any live cell with two or three live neighbors lives on to the next generation, so do nothing
 				//Any live cell with fewer than two live neighbors dies
 				if(cell.getState() == CellGameOfLife.LIVE && liveCount < 2)
-					cell.die();
+					temp[i][j] = CellGameOfLife.EMPTY;
 				//Any live cell with more than three live neighbors dies
 				if(cell.getState() == CellGameOfLife.LIVE && liveCount > 3)
-					cell.die();
+					temp[i][j] = CellGameOfLife.EMPTY;
 				//Any dead cell with exactly three live neighbors becomes a live cell
 				if(cell.getState() == CellGameOfLife.EMPTY && liveCount == 3)
-					cell.live();
+					temp[i][j] = CellGameOfLife.LIVE;
 			}
 		}
+		for(int i = 0; i < cellNumberHorizontal; i++) {
+			for(int j = 0; j < cellNumberVertical; j++) {
+				array[i][j].changeState(temp[i][j]);
+			}
+		}
+//		for(int i = 0; i < cellNumberHorizontal; i++) {
+//			for(int j = 0; j < cellNumberVertical; j++) {
+//				CellGameOfLife cell = (CellGameOfLife)array[i][j];
+//				int liveCount = 0;
+//				for(int k = 0; k < cell.getNeighborCells().size(); k++) {
+//					if(cell.getNeighborCells().get(k).getState() == CellGameOfLife.LIVE)
+//						liveCount++;
+//				}
+//				//Any live cell with two or three live neighbors lives on to the next generation, so do nothing
+//				//Any live cell with fewer than two live neighbors dies
+//				if(cell.getState() == CellGameOfLife.LIVE && liveCount < 2)
+//					cell.die();
+//				//Any live cell with more than three live neighbors dies
+//				if(cell.getState() == CellGameOfLife.LIVE && liveCount > 3)
+//					cell.die();
+//				//Any dead cell with exactly three live neighbors becomes a live cell
+//				if(cell.getState() == CellGameOfLife.EMPTY && liveCount == 3)
+//					cell.live();
+//			}
+//		}
 		findNeighbors();
 		updateImages();
 	}
@@ -116,7 +143,7 @@ public class SimulationGameOfLife extends Simulation {
 	public static void main(String[] args) {
 		SimulationGameOfLife test = new SimulationGameOfLife(5, 5, 0.6, 0.2);
 		testArrayPrinter(test.getArray());
-		System.out.println(test.getArray()[0][0].getNeighborCells());
+//		System.out.println(test.getArray()[0][0].getNeighborCells());
 //		System.out.println();
 //		System.out.print(test.findNumberEmpty());
 //		System.out.println();
