@@ -2,6 +2,7 @@ package backend;
 
 import java.util.ArrayList;
 
+
 import javafx.scene.image.Image;
 
 public class SimulationSegregation extends Simulation {
@@ -21,7 +22,9 @@ public class SimulationSegregation extends Simulation {
 		//Image image = new Image(getClass().getClassLoader().getResourceAsStream(RED_IMAGE));
 		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
+
 				array[rowNumber][columnNumber]=new CellSegregation(0, null, null, rowNumber, columnNumber);
+
 			}
 		}
 	
@@ -47,17 +50,27 @@ public class SimulationSegregation extends Simulation {
 		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
 				System.out.println(array[rowNumber][columnNumber].getState());
+			
 			}
 		}
-		
 		*/
+		
+		
+		
+		
+		
+		
 	}
 	
-	@Override
+
+
+	
 	protected Image chooseImage(int state) {
 		Image image = null;
+
 		if(state == 0)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
+
 		if(state == 1)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(RED_IMAGE));
 		if(state == 2)

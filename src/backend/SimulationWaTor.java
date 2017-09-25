@@ -8,12 +8,7 @@ public class SimulationWaTor extends Simulation {
 	private static final String SHARK_IMAGE = "predator_block.gif";
 	private static final String FISH_IMAGE = "prey_block.gif";
 	
-//	private CellWaTor[][] array;
-	private int numberOfCells;
-//	private double emptyPercentage;
-//	private double redToBlueRatio;
-	private int cellNumberHorizontal;
-	private int cellNumberVertical;
+
 	private int maxStarveDaysForSharks;
 	private int minBreedDaysForSharks;
 	private int minBreedDaysForFish;
@@ -48,6 +43,7 @@ public class SimulationWaTor extends Simulation {
 		update();
 	}
 
+
 	@Override
 	public void findNeighbors() {
 		//only four neighbors
@@ -73,12 +69,13 @@ public class SimulationWaTor extends Simulation {
 		}
 	}
 	
-	@Override
 	protected Image chooseImage(int state) {
 		Image image = null;
 		if(state == 0)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
+
 		if(state == 1)
+		
 			image = new Image(getClass().getClassLoader().getResourceAsStream(SHARK_IMAGE));
 		if(state == 2)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(FISH_IMAGE));

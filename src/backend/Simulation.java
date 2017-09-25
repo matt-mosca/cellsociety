@@ -29,9 +29,6 @@ public class Simulation{
 		this.cellNumberVertical = cellNumberVertical;
 	}
 	
-	protected Image chooseImage(int state) {
-		return null;
-	}
 	
 	
 	protected void initializeScene() {
@@ -120,7 +117,16 @@ public class Simulation{
 		}
 	}
 	
+
+	private Image chooseImage(int state) {
+		return null;
+	}
+
+//
+//	public int[] random(int Number, int range) {
+//=======
 	protected int[] random(int Number, int range) {
+
 		return new Random().ints(0, range).distinct().limit(Number).toArray();
 	}
 	

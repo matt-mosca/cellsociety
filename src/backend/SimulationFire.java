@@ -140,9 +140,12 @@ public class SimulationFire extends Simulation{
 		return Math.random() * upperBound;
 	}
 	
-	@Override
+
+
 	protected Image chooseImage(int state) {
+
 		Image image = null;
+
 		if(state == CellFire.EMPTY)
 			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
 		if(state == CellFire.TREE)
