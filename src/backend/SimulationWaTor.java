@@ -32,9 +32,7 @@ public class SimulationWaTor extends Simulation {
 		}
 	
 		initializeScene();
-		
-		
-	
+		updateImages();
 	}
 
 
@@ -96,7 +94,7 @@ public class SimulationWaTor extends Simulation {
 				CellWaTor randomFish = findRandomNeighbor(allNeighborFish);
 				sharkMove(shark,randomFish,"eat");
 				shark=randomFish;
-				System.out.println("eat");
+				
 			}
 			
 			//no fish, move to an empty cell
@@ -104,7 +102,7 @@ public class SimulationWaTor extends Simulation {
 				CellWaTor randomEmpty = findRandomNeighbor(allNeighborEmpty);
 				sharkMove(shark,randomEmpty,"starve");
 				shark=randomEmpty;
-				System.out.println("move");
+				
 			}
 			
 			//check whether will die
