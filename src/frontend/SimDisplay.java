@@ -315,7 +315,7 @@ public class SimDisplay {
 		animation = new Timeline();
 		animation.setCycleCount(Animation.INDEFINITE);
 		animation.getKeyFrames().add(frame);
-		animation.play();
+//		animation.play();
 	}
 	
 	
