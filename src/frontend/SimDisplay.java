@@ -79,7 +79,7 @@ public class SimDisplay {
 		Images = makeImageArray(Cells);
 		makeGrid();
 		fillGrid();
-		drawLines();
+//		drawLines();
 		Scene fun = new Scene(border, width, height);
 		border.setCenter(myGrid);
 		myGrid.setAlignment(Pos.CENTER);
@@ -211,38 +211,38 @@ public class SimDisplay {
 		return myGrid;
 	}
 
-	private void drawLines() {
-		for (int i = 0; i<Cells.length; i++) {
-			double x = myGrid.getLayoutBounds().getMinX();
-			double y = myGrid.getLayoutBounds().getMinY() + (i*GRID_FIT_CONSTANT/Cells[0].length);
-			for (int j=0; j<Cells[0].length; j++) {
-				Line line1 = new Line();
-				line1.setStartX(x);
-				line1.setStartY(y);
-				line1.setEndX(x+(GRID_FIT_CONSTANT/Cells[0].length));
-				line1.setEndY(y);
-				Line line2 = new Line();
-				line2.setStartX(x);
-				line2.setStartX(y);
-				line2.setEndY(y+(GRID_FIT_CONSTANT/Cells[0].length));
-				line2.setEndX(x);
-				Line line3 = new Line();
-				line3.setStartX(x);
-				line3.setStartY(y+(GRID_FIT_CONSTANT/Cells[0].length));
-				line3.setEndX(x+(GRID_FIT_CONSTANT/Cells[0].length));
-				line3.setEndY(y+(GRID_FIT_CONSTANT/Cells[0].length));
-				
-				Line line4 = new Line();
-				line3.setStartY(y);
-				line3.setStartX(x+(GRID_FIT_CONSTANT/Cells[0].length));
-				line3.setEndY(y+(GRID_FIT_CONSTANT/Cells[0].length));
-				line3.setEndX(x+(GRID_FIT_CONSTANT/Cells[0].length));
-				
-				x+=GRID_FIT_CONSTANT/Cells[0].length;
-				border.getChildren().addAll(line1, line2, line3, line4);
-			}
-		}
-	}
+//	private void drawLines() {
+//		for (int i = 0; i<Cells.length; i++) {
+//			double x = myGrid.getLayoutBounds().getMinX();
+//			double y = myGrid.getLayoutBounds().getMinY() + (i*GRID_FIT_CONSTANT/Cells[0].length);
+//			for (int j=0; j<Cells[0].length; j++) {
+//				Line line1 = new Line();
+//				line1.setStartX(x);
+//				line1.setStartY(y);
+//				line1.setEndX(x+(GRID_FIT_CONSTANT/Cells[0].length));
+//				line1.setEndY(y);
+//				Line line2 = new Line();
+//				line2.setStartX(x);
+//				line2.setStartX(y);
+//				line2.setEndY(y+(GRID_FIT_CONSTANT/Cells[0].length));
+//				line2.setEndX(x);
+//				Line line3 = new Line();
+//				line3.setStartX(x);
+//				line3.setStartY(y+(GRID_FIT_CONSTANT/Cells[0].length));
+//				line3.setEndX(x+(GRID_FIT_CONSTANT/Cells[0].length));
+//				line3.setEndY(y+(GRID_FIT_CONSTANT/Cells[0].length));
+//				
+//				Line line4 = new Line();
+//				line3.setStartY(y);
+//				line3.setStartX(x+(GRID_FIT_CONSTANT/Cells[0].length));
+//				line3.setEndY(y+(GRID_FIT_CONSTANT/Cells[0].length));
+//				line3.setEndX(x+(GRID_FIT_CONSTANT/Cells[0].length));
+//				
+//				x+=GRID_FIT_CONSTANT/Cells[0].length;
+//				border.getChildren().addAll(line1, line2, line3, line4);
+//			}
+//		}
+//	}
 	
 	
 	
@@ -296,6 +296,12 @@ public class SimDisplay {
 	}
 	
 	private void updateImageArray(Cell[][] cells) {
+		//does this fix the memory issue?
+//		for (int i=0; i<Cells.length; i++) {
+//			for(int j = 0; j<Cells.length; j++) {
+//				Images[i][j].setImage(null);
+//			}
+//		}
 		for (int i=0; i<cells.length; i++) {
 			for(int j=0; j<cells[i].length; j++) {
 				this.Images[i][j].setImage(cells[i][j].getImage()); //the n^2 algo is really starting to make me sad, but I'm not sure how to get it to be faster. Suggestions? -V
