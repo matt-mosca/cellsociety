@@ -115,6 +115,7 @@ public class SimulationGameOfLife extends Simulation {
 	public static void main(String[] args) {
 		SimulationGameOfLife test = new SimulationGameOfLife(5, 5, 0.6, 0.2);
 		testArrayPrinter(test.getArray());
+		System.out.println(test.getArray()[0][0].getNeighborCells());
 //		System.out.println();
 //		System.out.print(test.findNumberEmpty());
 //		System.out.println();
