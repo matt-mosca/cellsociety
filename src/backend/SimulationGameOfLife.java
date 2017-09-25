@@ -58,10 +58,10 @@ public class SimulationGameOfLife extends Simulation {
 		return Math.random() * upperBound;
 	}
 	
-    
-	
-	protected Image chooseImage(int state) {
 
+    
+	@Override
+	protected Image chooseImage(int state) {
 		Image image = null;
 
 		if(state == CellGameOfLife.EMPTY)

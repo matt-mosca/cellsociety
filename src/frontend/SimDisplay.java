@@ -194,6 +194,7 @@ public class SimDisplay {
 		GridPane grid = new GridPane();
 		grid.getColumnConstraints().add(new ColumnConstraints(width/Cells[0].length));
 		grid.getRowConstraints().add(new RowConstraints(height/Cells.length));
+		grid.setGridLinesVisible(true);
 		myGrid=grid;
 		return myGrid;
 	}
