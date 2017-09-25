@@ -93,6 +93,7 @@ public class SimulationFire extends Simulation{
 		}
 	}
 	
+	@Override
 	public void update() {
 		int[][] temp = new int[cellNumberHorizontal][cellNumberVertical];
 		for(int i = 0; i < cellNumberHorizontal; i++) {

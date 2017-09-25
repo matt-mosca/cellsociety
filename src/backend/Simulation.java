@@ -33,6 +33,7 @@ public class Simulation{
 		return null;
 	}
 	
+	
 	protected void initializeScene() {
 		// according to percentage, do random function
 		// call cell to change type
@@ -65,6 +66,9 @@ public class Simulation{
 			return (int) (filled/ (redToBlueRatio+ 1));
 		}
 		return 0;
+	}
+	
+	public void update() {
 	}
 	
 	protected void fillInitialRedAndBlue(int[] slots, int state) {

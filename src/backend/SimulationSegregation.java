@@ -65,6 +65,7 @@ public class SimulationSegregation extends Simulation {
 		return image;
 	}
 	
+	@Override
 	public void update() {
 		// set up a loop, go through every cell
 		// call whetherSatisfied
