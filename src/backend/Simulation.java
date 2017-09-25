@@ -7,13 +7,17 @@ package backend;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javafx.scene.image.Image;
+
 public class Simulation{
 	protected Cell[][] array;
-	private int numberOfCells;
-	private double emptyPercentage;
-	private double redToBlueRatio;
-	private int cellNumberHorizontal;
-	private int cellNumberVertical;
+	protected int numberOfCells;
+	protected double emptyPercentage;
+	protected double redToBlueRatio;
+	protected int cellNumberHorizontal;
+	protected int cellNumberVertical;
+	
+
 
 	// 0 is empty, 1 is red, 2 is blue
 
@@ -31,8 +35,11 @@ public class Simulation{
 		
 		
 		
+		
 
 	}
+	
+	
 
 	public void initializeScene() {
 		// according to percentage, do random function
@@ -56,6 +63,24 @@ public class Simulation{
 		findNeighbors();
 
 	}
+	
+	public void fillInitialRedAndBlue(
+			int[] slots, int state) {
+		
+		for (int i = 0; i < slots.length; i++) {
+			int position = slots[i];
+			int rowNumber = (int) (position
+					/ cellNumberHorizontal);
+			int columnNumber = position
+					% cellNumberHorizontal;
+			array[rowNumber][columnNumber]
+					.changeState(state);
+			array[rowNumber][columnNumber].setImage(chooseImage(state));
+
+		}
+	}
+	
+	
     
 	//neighbors counted as 8 surrounding cells
 	public void findNeighbors() {
@@ -98,23 +123,12 @@ public class Simulation{
 		}
 
 	}
-
-	public void fillInitialRedAndBlue(
-			int[] slots, int state) {
+	
+	public Image chooseImage(int state) {
 		
-		for (int i = 0; i < slots.length; i++) {
-			int position = slots[i];
-			int rowNumber = (int) (position
-					/ cellNumberHorizontal);
-			int columnNumber = position
-					% cellNumberHorizontal;
-			array[rowNumber][columnNumber]
-					.changeState(state);
-		
-	     
-
-		}
+		return null;
 	}
+
 
 	public int[] random(int Number, int range) {
 		return new Random().ints(0, range).distinct().limit(Number).toArray();
