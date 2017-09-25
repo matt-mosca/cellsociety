@@ -107,6 +107,12 @@ public class SimulationWaTor extends Simulation {
 				System.out.println("move");
 			}
 			
+			//cannot move, cannot eat
+			if (allNeighborEmpty.size()==0 && allNeighborFish.size()==0) {
+				shark.setBreedDays(shark.getBreedDays()+1);
+				shark.setStarveDays(shark.getStarveDays()+1);
+			}
+			
 			//check whether will die
 			if (shark.getStarveDays()>maxStarveDaysForSharks) {
 				shark.changeState(0);
@@ -137,6 +143,11 @@ public class SimulationWaTor extends Simulation {
 			    CellWaTor randomEmpty = findRandomNeighbor(allNeighborEmpty);
 			    fishMove(fish, randomEmpty);
 			    fish=randomEmpty;
+			}
+			
+			//fish not move, but still breed days increase
+			if (allNeighborEmpty.size()==0) {
+				fish.setBreedDays(fish.getBreedDays()+1);
 			}
 			//check whether breed
 			if (fish.getBreedDays()>=minBreedDaysForFish) {
