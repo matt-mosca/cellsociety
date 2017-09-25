@@ -69,6 +69,7 @@ public class Simulation{
 	}
 	
 	public void update() {
+		System.out.println("superclass");
 	}
 	
 	protected void fillInitialRedAndBlue(int[] slots, int state) {
