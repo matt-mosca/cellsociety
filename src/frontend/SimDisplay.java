@@ -48,9 +48,9 @@ public class SimDisplay {
 	private static final int MILLISECOND_DELAY = 1000;
 	private static final int GRID_FIT_CONSTANT = 650;
 	private static final String WATOR_TITLE = "WaTor!";
-	private static final String FIRE_TITLE  = "FIYAH";
-	private static final String SEGREGATION_TITLE = "SEGREGATION";
-	private static final String GAME_OF_LIFE_TITLE = "GAME OF LIFE";
+	private static final String FIRE_TITLE  = "FIYAH!";
+	private static final String SEGREGATION_TITLE = "SEGREGATION!";
+	private static final String GAME_OF_LIFE_TITLE = "GAME OF LIFE!";
 	
 	private Scene scene;
 	private Cell[][] Cells;
@@ -190,6 +190,20 @@ public class SimDisplay {
 	private Button resetButton() {
 		Button b = new Button("Reset");
 		b.setOnAction(e-> {
+			animation.pause();
+			if(simName.equals(GAME_OF_LIFE_TITLE)) {
+				this.sim = new SimulationGameOfLife((int)inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3]);
+			}
+			if(simName.equals(FIRE_TITLE)) {
+				this.sim = new SimulationFire((int) inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
+			}
+			if(simName.equals(SEGREGATION_TITLE)) {
+				this.sim = new SimulationSegregation((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
+			}
+			if(simName.equalsIgnoreCase(WATOR_TITLE)) {
+				this.sim = new SimulationWaTor((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
+			}
+			playSim();
 			//do the reset stuff here
 			
 		});
@@ -205,55 +219,19 @@ public class SimDisplay {
 		grid.getColumnConstraints().add(new ColumnConstraints(GRID_FIT_CONSTANT / Cells[0].length));
 		grid.getRowConstraints().add(new RowConstraints(GRID_FIT_CONSTANT / Cells.length));
 		grid.setStyle("-fx-background-color: white; -fx-grid-lines-visible: true");
-//		grid.setGridLinesVisible(true);
-//		grid.setStyle("-fx-background-color: black; -fx-padding: 2; -fx-hgap: 2; -fx-vgap: 2;");
-//		grid.setSnapToPixel(false);
 		myGrid=grid;
 		return myGrid;
 	}
 
-//	private void drawLines() {
-//		for (int i = 0; i<Cells.length; i++) {
-//			double x = myGrid.getLayoutBounds().getMinX();
-//			double y = myGrid.getLayoutBounds().getMinY() + (i*GRID_FIT_CONSTANT/Cells[0].length);
-//			for (int j=0; j<Cells[0].length; j++) {
-//				Line line1 = new Line();
-//				line1.setStartX(x);
-//				line1.setStartY(y);
-//				line1.setEndX(x+(GRID_FIT_CONSTANT/Cells[0].length));
-//				line1.setEndY(y);
-//				Line line2 = new Line();
-//				line2.setStartX(x);
-//				line2.setStartX(y);
-//				line2.setEndY(y+(GRID_FIT_CONSTANT/Cells[0].length));
-//				line2.setEndX(x);
-//				Line line3 = new Line();
-//				line3.setStartX(x);
-//				line3.setStartY(y+(GRID_FIT_CONSTANT/Cells[0].length));
-//				line3.setEndX(x+(GRID_FIT_CONSTANT/Cells[0].length));
-//				line3.setEndY(y+(GRID_FIT_CONSTANT/Cells[0].length));
-//				
-//				Line line4 = new Line();
-//				line3.setStartY(y);
-//				line3.setStartX(x+(GRID_FIT_CONSTANT/Cells[0].length));
-//				line3.setEndY(y+(GRID_FIT_CONSTANT/Cells[0].length));
-//				line3.setEndX(x+(GRID_FIT_CONSTANT/Cells[0].length));
-//				
-//				x+=GRID_FIT_CONSTANT/Cells[0].length;
-//				border.getChildren().addAll(line1, line2, line3, line4);
-//			}
-//		}
-//	}
 	
 	
 	
 	private void fillGrid() {
 		myGrid.getChildren().clear();
+		myGrid.setStyle("-fx-background-color: white; -fx-grid-lines-visible: true");
 		for(int i=0;i<Cells.length;i++) {
 			for (int j=0; j<Cells[i].length; j++) {
 				myGrid.add(Images[i][j], j, i);
-//				Images[i][j].fitWidthProperty().bind(myGrid.widthProperty());
-//				Images[i][j].fitHeightProperty().bind(myGrid.heightProperty());
 			}
 		}
 	}
@@ -276,7 +254,7 @@ public class SimDisplay {
 	}
 	
 	public void changeSimName(String s) {
-		this.simName = s + "!";
+		this.simName = s;
 		window.setTitle(simName);
 	}
 	
