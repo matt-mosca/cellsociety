@@ -113,7 +113,7 @@ public class SimDisplay {
 		//get some buttons to choose which of the four simulations they want to do
 		//replace the following code with a for loop and a resource file.
 		
-		Font f = new Font("Arial", 50);
+		Font f = new Font("Arial", 30);
 		Label startMessage = new Label("Which Simulation would you like to see?");
 		startMessage.setFont(f);
 		Button b1 = chooseScene("WaTor");
@@ -294,6 +294,8 @@ public class SimDisplay {
 		//I don't think you guys are updating this array in the backend, because I'm not getting an animation. 
 		updateImageArray(Cells);
 		fillGrid();
+		myGrid.setGridLinesVisible(true);
+		
 	}
 	
 	private void updateImageArray(Cell[][] cells) {
@@ -306,6 +308,7 @@ public class SimDisplay {
 		for (int i=0; i<cells.length; i++) {
 			for(int j=0; j<cells[i].length; j++) {
 				this.Images[i][j].setImage(cells[i][j].getImage()); //the n^2 algo is really starting to make me sad, but I'm not sure how to get it to be faster. Suggestions? -V
+				
 			}
 		}
 		

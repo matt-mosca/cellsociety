@@ -3,6 +3,7 @@ package backend;
 import java.util.ArrayList;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 //Add images
 public class SimulationFire extends Simulation{
@@ -40,7 +41,7 @@ public class SimulationFire extends Simulation{
 	private void initializeGridStates() {
 		fillGridStates();
 		setRandomFire();
-		updateImages();
+		updateColors();
 	}
 	
 	private int findNumberEmpty() {
@@ -126,13 +127,13 @@ public class SimulationFire extends Simulation{
 //			}
 //		}
 		findNeighbors();
-		updateImages();
+		updateColors();
 	}
 	
-	protected void updateImages() {
+	protected void updateColors() {
 		for(int i = 0; i < cellNumberHorizontal; i++) {
 			for(int j = 0; j < cellNumberVertical; j++) {
-				array[i][j].setImage(chooseImage(array[i][j].getState()));
+				array[i][j].setColor(chooseColor(array[i][j].getState()));
 			}
 		}
 	}
@@ -150,18 +151,18 @@ public class SimulationFire extends Simulation{
 	}
 	
 
-	protected Image chooseImage(int state) {
-		Image image = null;
+	protected Color chooseColor(int state) {
+		Color color = null;
 
 		if(state == CellFire.EMPTY)
-			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
+			color=Color.WHITE;
 		if(state == CellFire.TREE)
-			image = new Image(getClass().getClassLoader().getResourceAsStream(TREE_IMAGE));
+			color=Color.GREEN;
 		if(state == CellFire.BURNING) {
-			image = new Image(getClass().getClassLoader().getResourceAsStream(BURNING_IMAGE));
+			color=Color.RED;
 		}
 //		System.out.println(image);
-		return image;
+		return color;
 	}
 	
 	public double getProbCatch() {

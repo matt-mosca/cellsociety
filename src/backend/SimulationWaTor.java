@@ -2,6 +2,7 @@ package backend;
 import java.util.ArrayList;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 public class SimulationWaTor extends Simulation {
 	private static final String EMPTY_IMAGE = "blue_block.gif";
@@ -32,7 +33,7 @@ public class SimulationWaTor extends Simulation {
 		}
 	
 		initializeScene();
-		updateImages();
+		updateColors();
 	}
 
 
@@ -63,16 +64,16 @@ public class SimulationWaTor extends Simulation {
 	}
 	
 	@Override
-	protected Image chooseImage(int state) {
-		Image image = null;
+	protected Color chooseColor(int state) {
+		Color color = null;
 		if(state == 0)
-			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
+			color = Color.WHITE;
 		if(state == 1){
-			image = new Image(getClass().getClassLoader().getResourceAsStream(SHARK_IMAGE));
+			color = Color.PINK;
 		}
 		if(state == 2)
-			image = new Image(getClass().getClassLoader().getResourceAsStream(FISH_IMAGE));
-		return image;
+			color = Color.AQUA;
+		return color;
 	}
 
 	@Override
@@ -128,7 +129,7 @@ public class SimulationWaTor extends Simulation {
 //				    potentialBreedCell.setImage(chooseImage(1));
 				}
 			}
-			updateImages();
+			updateColors();
 		}
 		
 		ArrayList<Cell> allFish=findallType(2);
@@ -164,11 +165,11 @@ public class SimulationWaTor extends Simulation {
 
 	private void fishMove(CellWaTor fish,CellWaTor randomEmpty) {
 		randomEmpty.changeState(2);
-		randomEmpty.setImage(chooseImage(2));
+		randomEmpty.setColor(chooseColor(2));
 		randomEmpty.setBreedDays(fish.getBreedDays()+1);
 		fish.changeState(0);
 		fish.setBreedDays(0);
-		fish.setImage(chooseImage(0));
+		fish.setColor(chooseColor(0));
 		
 	}
 
@@ -185,7 +186,7 @@ public class SimulationWaTor extends Simulation {
 			CellWaTor shark,
 			CellWaTor randomSlot, String code) {
 		randomSlot.changeState(1);
-		randomSlot.setImage(chooseImage(1));
+		randomSlot.setColor(chooseColor(1));
 		randomSlot.setBreedDays(shark.getBreedDays()+1);
 		if (code=="eat") {
 			randomSlot.setStarveDays(0);	
@@ -196,7 +197,7 @@ public class SimulationWaTor extends Simulation {
 		shark.changeState(0);
 		shark.setBreedDays(0);
 		shark.setStarveDays(0);
-		shark.setImage(chooseImage(0));
+		shark.setColor(chooseColor(0));
 	}
 
 	

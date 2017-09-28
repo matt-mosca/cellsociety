@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 public class Simulation{
 	protected Cell[][] array;
@@ -78,7 +79,7 @@ public class Simulation{
 					% cellNumberHorizontal;
 			array[rowNumber][columnNumber]
 					.changeState(state);
-			array[rowNumber][columnNumber].setImage(chooseImage(state));
+			array[rowNumber][columnNumber].setColor(chooseColor(state));
 		}
 	}
 
@@ -118,7 +119,7 @@ public class Simulation{
 	}
 	
 
-	protected Image chooseImage(int state) {
+	protected Color chooseColor(int state) {
 		return null;
 	}
 
@@ -130,10 +131,10 @@ public class Simulation{
 		return new Random().ints(0, range).distinct().limit(Number).toArray();
 	}
 	
-	protected void updateImages() {
+	protected void updateColors() {
 		for(int i = 0; i < cellNumberHorizontal; i++) {
 			for(int j = 0; j < cellNumberVertical; j++) {
-				array[i][j].setImage(chooseImage(array[i][j].getState()));
+				array[i][j].setColor(chooseColor(array[i][j].getState()));
 			}
 		}
 	}
