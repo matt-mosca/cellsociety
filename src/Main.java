@@ -31,22 +31,9 @@ public class Main extends Application{
 		window.show();
 	}
 	
-	
-//	public Scene getSimulation(SimDisplay sim) {
-//		return sim.makeSimulation();
-//	}
-	
 	public Scene getStartScene(SimDisplay sim) {
 		return sim.startScreen();
 	}
-	
-//	public void step() {
-//		s.getSimulation().update();
-//	}
-//	
-//	public void playSim() {
-//		
-//	}
 	
 	public static void main(String[] args) {
 		launch(args);
