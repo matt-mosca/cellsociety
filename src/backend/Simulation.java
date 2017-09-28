@@ -4,8 +4,6 @@ package backend;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public abstract class Simulation{
