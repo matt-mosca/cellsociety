@@ -130,7 +130,8 @@ public class SimulationFire extends Simulation{
 		updateColors();
 	}
 	
-	protected void updateColors() {
+	//Should this be internal to the cell?
+	protected void updateImages() {
 		for(int i = 0; i < cellNumberHorizontal; i++) {
 			for(int j = 0; j < cellNumberVertical; j++) {
 				array[i][j].setColor(chooseColor(array[i][j].getState()));
@@ -173,6 +174,7 @@ public class SimulationFire extends Simulation{
 		probCatch = prob;
 	}
 	
+	//Is this the best way? We are casting immediately
 	@Override
 	public CellFire[][] getArray() {
 		return (CellFire[][])array;
