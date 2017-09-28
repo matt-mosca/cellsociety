@@ -15,7 +15,6 @@ public class Main extends Application{
 	private static final String INITIAL_TITLE = "CellSociety!";
 	
 	
-	
 	private Stage window;
 	private Scene myScene;
 	private SimDisplay s;
@@ -24,7 +23,7 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		window = primaryStage;
-		s = new SimDisplay(SIZEx, SIZEy, window);
+		s = new SimDisplay(SIZEx, SIZEy, window, "English_Text");
 		window.setTitle(INITIAL_TITLE);
 		myScene = getStartScene(s);
 		window.setScene(myScene);
