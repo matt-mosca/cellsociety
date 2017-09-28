@@ -65,6 +65,7 @@ public class Simulation{
 		return 0;
 	}
 	
+	//Is this the best way to do this?
 	public void update() {
 		System.out.println("superclass");
 	}
@@ -116,7 +117,6 @@ public class Simulation{
 			}
 		}
 	}
-	
 
 	protected Image chooseImage(int state) {
 		return null;
