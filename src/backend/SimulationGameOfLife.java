@@ -72,7 +72,6 @@ public class SimulationGameOfLife extends Simulation {
 		return color;
 	}
 
-	@Override
 	public void update() {
 		int[][] temp = new int[cellNumberHorizontal][cellNumberVertical];
 		for(int i = 0; i < cellNumberHorizontal; i++) {

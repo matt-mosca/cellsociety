@@ -31,39 +31,7 @@ public class SimulationSegregation extends Simulation {
 		}
 	
 		this.satisfactionPercentage = satisfactionPercentage;
-		initializeScene();
-		
-		
-	    /*
-		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
-				System.out.println(super.array[rowNumber][columnNumber].getState());
-			}
-		}
-		System.out.println("separate here");
-		
-		
-		
-		
-		update();
-		
-	   
-		
-		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
-				System.out.println(array[rowNumber][columnNumber].getState());
-			
-			}
-		}
-		
-		*/
-		
-		
-		
-		
-		
-		
-		
+		initializeScene();		
 	}
 	
 
@@ -82,7 +50,6 @@ public class SimulationSegregation extends Simulation {
 		return color;
 	}
 	
-	@Override
 	public void update() {
 		// set up a loop, go through every cell
 		// call whetherSatisfied
