@@ -1,11 +1,10 @@
 package backend;
 
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class SimulationGameOfLife extends Simulation {
-	private static final String EMPTY_IMAGE = "empty_block.gif";
-	private static final String LIVE_IMAGE = "live_block.gif";
+	private static final int UPPERBOUNDARY = 3;
+	private static final int LOWERBOUNDARY = 2;
 	
 //	private CellGameOfLife[][] array;
 	private int numberOfCells;
@@ -85,13 +84,13 @@ public class SimulationGameOfLife extends Simulation {
 				temp[i][j] = array[i][j].getState();
 				//Any live cell with two or three live neighbors lives on to the next generation, so do nothing
 				//Any live cell with fewer than two live neighbors dies
-				if(cell.getState() == CellGameOfLife.LIVE && liveCount < 2)
+				if(cell.getState() == CellGameOfLife.LIVE && liveCount < LOWERBOUNDARY)
 					temp[i][j] = CellGameOfLife.EMPTY;
 				//Any live cell with more than three live neighbors dies
-				if(cell.getState() == CellGameOfLife.LIVE && liveCount > 3)
+				if(cell.getState() == CellGameOfLife.LIVE && liveCount > UPPERBOUNDARY)
 					temp[i][j] = CellGameOfLife.EMPTY;
 				//Any dead cell with exactly three live neighbors becomes a live cell
-				if(cell.getState() == CellGameOfLife.EMPTY && liveCount == 3)
+				if(cell.getState() == CellGameOfLife.EMPTY && liveCount ==UPPERBOUNDARY)
 					temp[i][j] = CellGameOfLife.LIVE;
 			}
 		}

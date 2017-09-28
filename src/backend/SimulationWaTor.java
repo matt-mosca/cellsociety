@@ -5,6 +5,8 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class SimulationWaTor extends Simulation {
+	private static final String SHARKSTARVE = "starve";
+	private static final String SHARKEAT = "eat";
 	private static final String EMPTY_IMAGE = "blue_block.gif";
 	private static final String SHARK_IMAGE = "predator_block.gif";
 	private static final String FISH_IMAGE = "prey_block.gif";
@@ -94,16 +96,16 @@ public class SimulationWaTor extends Simulation {
 			if (allNeighborFish.size()>0) {
 				
 				CellWaTor randomFish = findRandomNeighbor(allNeighborFish);
-				sharkMove(shark,randomFish,"eat");
+				sharkMove(shark,randomFish,SHARKEAT);
 				shark=randomFish;
 				
 			}
 			
 			//no fish, move to an empty cell
 			if(allNeighborFish.size()==0 && allNeighborEmpty.size()>0) {
-				System.out.println("test");
+				
 				CellWaTor randomEmpty = findRandomNeighbor(allNeighborEmpty);
-				sharkMove(shark,randomEmpty,"starve");
+				sharkMove(shark,randomEmpty,SHARKSTARVE);
 				shark=randomEmpty;
 				
 			}
@@ -196,10 +198,10 @@ public class SimulationWaTor extends Simulation {
 		randomSlot.changeState(1);
 		randomSlot.setColor(chooseColor(1));
 		randomSlot.setBreedDays(shark.getBreedDays()+1);
-		if (code.equals("eat")) {
+		if (code.equals(SHARKEAT)) {
 			randomSlot.setStarveDays(0);	
 		}
-		if (code.equals("starve")) {
+		if (code.equals(SHARKSTARVE)) {
 			randomSlot.setStarveDays(shark.getStarveDays()+1);	
 		}
 		shark.changeState(0);

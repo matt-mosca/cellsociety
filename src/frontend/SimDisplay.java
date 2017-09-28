@@ -45,6 +45,10 @@ import javafx.geometry.*;
 
 
 public class SimDisplay {
+	private static final String GAMEOFLIFETITLE = "Game of Life";
+	private static final String SEGREGATIONTITLE = "Segregation";
+	private static final String FIRETITLE = "Fire";
+	private static final String WATORTITLE = "WaTor";
 	private static final int VBOX_SPACING = 7;
 	private static final int MILLISECOND_DELAY = 1000;
 	private static final int GRID_FIT_CONSTANT = 650;
@@ -120,10 +124,10 @@ public class SimDisplay {
 		Font f = new Font("Arial", 30);
 		Label startMessage = new Label("Which Simulation would you like to see?");
 		startMessage.setFont(f);
-		Button b1 = chooseScene("WaTor");
-		Button b2 = chooseScene("Fire");
-		Button b3 = chooseScene("Segregation");
-		Button b4 = chooseScene("Game of Life");
+		Button b1 = chooseScene(WATORTITLE);
+		Button b2 = chooseScene(FIRETITLE);
+		Button b3 = chooseScene(SEGREGATIONTITLE);
+		Button b4 = chooseScene(GAMEOFLIFETITLE);
 		layout.getChildren().addAll(startMessage, b1,b2,b3,b4);
 		this.scene = startScene;
 		return this.scene;
@@ -136,22 +140,22 @@ public class SimDisplay {
 		b.setOnAction(e -> {
 			//shouldn't this call the XML reader and start passing information to the backend?
 			//I think that it should definitely do that. 
-			if(s.equals("WaTor")) {
+			if(s.equals(WATORTITLE)) {
 				inputArray = UI.getWaTor();
 				this.sim = new SimulationWaTor((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
 				changeSimName(WATOR_TITLE);
 			}
-			if(s.equals("Fire")) {
+			if(s.equals(FIRETITLE)) {
 				inputArray = UI.getFire();
 				this.sim = new SimulationFire((int) inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
 				changeSimName(FIRE_TITLE);
 			}
-			if(s.equals("Segregation")) {
+			if(s.equals(SEGREGATIONTITLE)) {
 				inputArray = UI.getSegregation();
 				this.sim = new SimulationSegregation((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
 				changeSimName(SEGREGATION_TITLE);
 			}
-			if(s.equals("Game of Life")) {
+			if(s.equals(GAMEOFLIFETITLE)) {
 				inputArray = UI.getGameOfLife();
 				this.sim = new SimulationGameOfLife((int)inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3]);
 				changeSimName(GAME_OF_LIFE_TITLE);
