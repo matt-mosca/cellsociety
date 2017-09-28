@@ -10,8 +10,8 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application{
-	private static final int SIZEx = 700;
-	private static final int SIZEy = 700;
+	private static final int SIZEx = 800;
+	private static final int SIZEy = 800;
 	private static final String INITIAL_TITLE = "CellSociety!";
 	
 	

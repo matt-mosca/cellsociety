@@ -71,9 +71,9 @@ public class UserInput {
 		String minBreedDaysForFish = doc.getElementsByTagName("minBreedDaysForFish").item(0).getTextContent();
 		String maxStarveDaysForSharks = doc.getElementsByTagName("maxStarveDaysForSharks").item(0).getTextContent();
 		double[] basic = new double[3];
-		basic[0] = Double.parseDouble(minBreedDaysForSharks);
-		basic[1] = Double.parseDouble(minBreedDaysForFish);
-		basic[2] = Double.parseDouble(maxStarveDaysForSharks);
+		basic[0] = Double.parseDouble(maxStarveDaysForSharks);
+		basic[1] = Double.parseDouble(minBreedDaysForSharks);
+		basic[2] = Double.parseDouble(minBreedDaysForFish);
 		getInitialSetUp(doc, basic);
 //		makeFinalArray();
 		
