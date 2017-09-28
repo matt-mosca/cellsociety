@@ -4,12 +4,12 @@
     </title>
 
     <parameters>
-        <probCatch>0.8</probCatch>
+        <probCatch>0.95</probCatch>
     </parameters>
 
     <initialSetting>
-        <cellNumberHorizontal>10</cellNumberHorizontal>
-        <cellNumberVertical>10</cellNumberVertical>
+        <cellNumberHorizontal>50</cellNumberHorizontal>
+        <cellNumberVertical>50</cellNumberVertical>
         <emptyPercentage>0.3</emptyPercentage>
         <redToBlueRatio>0</redToBlueRatio>
     </initialSetting>

@@ -222,7 +222,6 @@ public class SimDisplay {
 		grid.setPrefWidth(GRID_FIT_CONSTANT);
 		grid.getColumnConstraints().add(new ColumnConstraints(GRID_FIT_CONSTANT / Cells[0].length));
 		grid.getRowConstraints().add(new RowConstraints(GRID_FIT_CONSTANT / Cells.length));
-		grid.setStyle("-fx-background-color: white; -fx-grid-lines-visible: true");
 		myGrid=grid;
 		return myGrid;
 	}
@@ -232,7 +231,6 @@ public class SimDisplay {
 	
 	private void fillGrid() {
 		myGrid.getChildren().clear();
-		myGrid.setStyle("-fx-background-color: white; -fx-grid-lines-visible: true");
 		for(int i=0;i<Cells.length;i++) {
 			for (int j=0; j<Cells[i].length; j++) {
 //				myGrid.add(Images[i][j], j, i);
@@ -246,6 +244,7 @@ public class SimDisplay {
 		for(int i=0; i<cells.length; i++) {
 			for(int j=0; j<cells[i].length; j++) {
 				recs[i][j] = new Rectangle();
+				recs[i][j].setStroke(Color.BLACK);
 				recs[i][j].setFill(cells[i][j].getColor());
 				recs[i][j].setWidth(GRID_FIT_CONSTANT / Cells[0].length);
 				recs[i][j].setHeight(GRID_FIT_CONSTANT / Cells.length);
