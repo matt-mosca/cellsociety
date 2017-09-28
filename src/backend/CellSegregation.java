@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 
 public class CellSegregation extends Cell{
 	
-	public CellSegregation(int state, Image image, ArrayList<Cell> neighborCells, int rowNumber, int columnNumber) {
-		super(state, image, neighborCells, rowNumber, columnNumber);
+	public CellSegregation(int state, Color color, ArrayList<Cell> neighborCells, int rowNumber, int columnNumber) {
+		super(state, color, neighborCells, rowNumber, columnNumber);
 		// TODO Auto-generated constructor stub
 	}
 	

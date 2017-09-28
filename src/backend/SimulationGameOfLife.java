@@ -1,6 +1,7 @@
 package backend;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 public class SimulationGameOfLife extends Simulation {
 	private static final String EMPTY_IMAGE = "empty_block.gif";
@@ -31,7 +32,7 @@ public class SimulationGameOfLife extends Simulation {
 	
 	private void initializeGridStates() {
 		fillGridStates();
-		updateImages();
+		updateColors();
 	}
 	
 	private int findNumberEmpty() {
@@ -61,14 +62,14 @@ public class SimulationGameOfLife extends Simulation {
 
     
 	@Override
-	protected Image chooseImage(int state) {
-		Image image = null;
+	protected Color chooseColor(int state) {
+		Color color = null;
 
 		if(state == CellGameOfLife.EMPTY)
-			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
+			color=Color.WHITE;
 		if(state == CellGameOfLife.LIVE)
-			image = new Image(getClass().getClassLoader().getResourceAsStream(LIVE_IMAGE));
-		return image;
+			color=Color.BLUE;
+		return color;
 	}
 
 	@Override
@@ -121,7 +122,7 @@ public class SimulationGameOfLife extends Simulation {
 //			}
 //		}
 		findNeighbors();
-		updateImages();
+		updateColors();
 	}
 	
 	@Override

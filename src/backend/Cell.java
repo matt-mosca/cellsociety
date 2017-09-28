@@ -2,21 +2,21 @@ package backend;
 
 import java.util.ArrayList;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 
 //Super class of cell
 public class Cell {
 	private int state;
-	private Image image; 
+	private Color color; 
 	private ArrayList<Cell> neighborCells;
 	private int rowNumber;
 	private int columnNumber;
 	
-	public Cell(int state, Image image, ArrayList<Cell>neighborCells, int rowNumber, int columnNumber) {
+	public Cell(int state, Color color, ArrayList<Cell>neighborCells, int rowNumber, int columnNumber) {
 		this.state=state;
-		this.image=image;
+		this.color=color;
 		this.neighborCells=neighborCells;
 		this.setRowNumber(rowNumber);
 		this.setColumnNumber(columnNumber);
@@ -29,12 +29,12 @@ public class Cell {
 	public void changeState(int state) {
 		this.state = state;
 	}
-	public Image getImage() {
-		return this.image;
+	public Paint getColor() {
+		return this.color;
 	}
-	public void setImage(
-			Image image) {
-		this.image = image;
+	public void setColor(
+			Color color) {
+		this.color = color;
 	}
 	
 	public ArrayList<Cell> getNeighborCells() {

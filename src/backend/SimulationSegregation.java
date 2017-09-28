@@ -2,8 +2,10 @@ package backend;
 
 import java.util.ArrayList;
 
+import javafx.scene.paint.Color;
 
-import javafx.scene.image.Image;
+
+
 
 public class SimulationSegregation extends Simulation {
 	private static final String EMPTY_IMAGE = "empty_block.gif";
@@ -67,17 +69,17 @@ public class SimulationSegregation extends Simulation {
 
 
 	@Override
-	protected Image chooseImage(int state) {
-		Image image = null;
+	protected Color chooseColor(int state) {
+		Color color = null;
 
 		if(state == 0)
-			image = new Image(getClass().getClassLoader().getResourceAsStream(EMPTY_IMAGE));
+			color=Color.WHITE;
 
 		if(state == 1)
-			image = new Image(getClass().getClassLoader().getResourceAsStream(RED_IMAGE));
+			color=Color.RED;
 		if(state == 2)
-			image = new Image(getClass().getClassLoader().getResourceAsStream(BLUE_IMAGE));
-		return image;
+			color=Color.BLUE;
+		return color;
 	}
 	
 	@Override
@@ -101,10 +103,10 @@ public class SimulationSegregation extends Simulation {
 			if (emptyCells.size()>0){
 				int previousState=dissatisfied.get(needMove).getState();
 				dissatisfied.get(needMove).changeState(0);
-				dissatisfied.get(needMove).setImage(chooseImage(0));
+				dissatisfied.get(needMove).setColor(chooseColor(0));
 				int theEmptyReadyForFill=random(1,emptyCells.size())[0];
 				emptyCells.get(theEmptyReadyForFill).changeState(previousState);
-				emptyCells.get(theEmptyReadyForFill).setImage(chooseImage(previousState));
+				emptyCells.get(theEmptyReadyForFill).setColor(chooseColor(previousState));
 				emptyCells.remove(theEmptyReadyForFill);
 				}
 		}

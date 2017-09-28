@@ -2,7 +2,7 @@ package backend;
 
 import java.util.ArrayList;
 
-import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 public class CellFire extends Cell{
 	
@@ -10,8 +10,8 @@ public class CellFire extends Cell{
 	public static final int TREE = 1;
 	public static final int BURNING = 2;
 	
-	public CellFire(int state, Image image, ArrayList<Cell> neighborCells, int rowNumber, int columnNumber) {
-		super(state, image, neighborCells, rowNumber, columnNumber);
+	public CellFire(int state, Color color, ArrayList<Cell> neighborCells, int rowNumber, int columnNumber) {
+		super(state, color, neighborCells, rowNumber, columnNumber);
 	}
 	
 	public void catchFire() {
@@ -25,6 +25,7 @@ public class CellFire extends Cell{
 	}
 
 	//For testing
+	/*
 	public static void main(String[] args) {
 //		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
 		Image image = new Image("the");
@@ -32,4 +33,5 @@ public class CellFire extends Cell{
 		CellFire test = new CellFire(TREE, image, neighbors, 1, 1);
 		test.changeState(BURNING);
 	}
+	*/
 }
