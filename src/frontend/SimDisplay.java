@@ -25,7 +25,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 //import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+//import javafx.scene.image.ImageView;
 //import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -34,7 +34,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
-//import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
 //import javafx.scene.paint.ImagePattern;
 //import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -57,7 +58,8 @@ public class SimDisplay {
 	private int width;
 	private int height;
 	private GridPane myGrid;
-	private ImageView[][] Images;
+//	private ImageView[][] Images;
+	private Rectangle[][] Rectangles;
 	private String simName;
 	private Stage window;
 	private Simulation sim;
@@ -76,7 +78,8 @@ public class SimDisplay {
 		border = new BorderPane();
 		
 		this.Cells = sim.getArray();
-		Images = makeImageArray(Cells);
+//		Images = makeImageArray(Cells);
+		Rectangles = makeRectangleArray(Cells);
 		makeGrid();
 		fillGrid();
 //		drawLines();
@@ -98,6 +101,7 @@ public class SimDisplay {
 		return fun;
 		//return this.scene;
 	}
+	
 	
 	public Scene startScreen() {
 		VBox layout = new VBox(VBOX_SPACING);
@@ -231,27 +235,42 @@ public class SimDisplay {
 		myGrid.setStyle("-fx-background-color: white; -fx-grid-lines-visible: true");
 		for(int i=0;i<Cells.length;i++) {
 			for (int j=0; j<Cells[i].length; j++) {
-				myGrid.add(Images[i][j], j, i);
+//				myGrid.add(Images[i][j], j, i);
+				myGrid.add(Rectangles[i][j], j, i);
 			}
 		}
 	}
-	
+
+	private Rectangle[][] makeRectangleArray(Cell[][] cells) {
+		Rectangle[][] recs = new Rectangle[cells.length][Cells[0].length];
+		for(int i=0; i<cells.length; i++) {
+			for(int j=0; j<cells[i].length; j++) {
+				recs[i][j] = new Rectangle();
+				recs[i][j].setFill(cells[i][j].getColor());
+				recs[i][j].setWidth(GRID_FIT_CONSTANT / Cells[0].length);
+				recs[i][j].setHeight(GRID_FIT_CONSTANT / Cells.length);
+			}
+		}
+		this.Rectangles = recs;
+		return this.Rectangles;
+	}
+
 	
 //UNCOMMENT THIS IF YOU END UP NEEDING TO HAVE AN IMAGEVIEW ARRAY
 //Looks like we're using an ImageView array. Seems to make sense.
 	
-	private ImageView[][] makeImageArray(Cell[][] cells){
-		ImageView[][] images = new ImageView[cells.length][Cells[0].length];
-		for(int i=0; i<cells.length; i++) {
-			for (int j=0; j<cells[i].length; j++) {
-				images[i][j] = new ImageView(cells[i][j].getImage());
-				images[i][j].setFitWidth(GRID_FIT_CONSTANT / Cells[0].length);
-				images[i][j].setFitHeight(GRID_FIT_CONSTANT / Cells.length);
-			}
-		}
-		this.Images = images;
-		return this.Images;
-	}
+//	private ImageView[][] makeImageArray(Cell[][] cells){
+//		ImageView[][] images = new ImageView[cells.length][Cells[0].length];
+//		for(int i=0; i<cells.length; i++) {
+//			for (int j=0; j<cells[i].length; j++) {
+//				images[i][j] = new ImageView(cells[i][j].getImage());
+//				images[i][j].setFitWidth(GRID_FIT_CONSTANT / Cells[0].length);
+//				images[i][j].setFitHeight(GRID_FIT_CONSTANT / Cells.length);
+//			}
+//		}
+//		this.Images = images;
+//		return this.Images;
+//	}
 	
 	public void changeSimName(String s) {
 		this.simName = s;
@@ -285,7 +304,7 @@ public class SimDisplay {
 //		}
 		for (int i=0; i<cells.length; i++) {
 			for(int j=0; j<cells[i].length; j++) {
-				this.Images[i][j].setImage(cells[i][j].getImage()); //the n^2 algo is really starting to make me sad, but I'm not sure how to get it to be faster. Suggestions? -V
+				this.Rectangles[i][j].setFill(cells[i][j].getColor()); //the n^2 algo is really starting to make me sad, but I'm not sure how to get it to be faster. Suggestions? -V
 				
 			}
 		}
