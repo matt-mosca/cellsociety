@@ -83,6 +83,7 @@ public class SimulationWaTor extends Simulation {
 	
 		//finish all sharks, eat/breed/die, checked correct
 		ArrayList<Cell> allSharks=findallType(1);
+		System.out.println(allSharks.size());
 	
 		for (int sharkNumber = 0; sharkNumber < allSharks.size();sharkNumber++) {
 			CellWaTor shark=(CellWaTor) allSharks.get(sharkNumber);
@@ -92,6 +93,7 @@ public class SimulationWaTor extends Simulation {
 			
 			//if there is fish, eat it
 			if (allNeighborFish.size()>0) {
+				
 				CellWaTor randomFish = findRandomNeighbor(allNeighborFish);
 				sharkMove(shark,randomFish,"eat");
 				shark=randomFish;
@@ -100,6 +102,7 @@ public class SimulationWaTor extends Simulation {
 			
 			//no fish, move to an empty cell
 			if(allNeighborFish.size()==0 && allNeighborEmpty.size()>0) {
+				System.out.println("test");
 				CellWaTor randomEmpty = findRandomNeighbor(allNeighborEmpty);
 				sharkMove(shark,randomEmpty,"starve");
 				shark=randomEmpty;
@@ -114,6 +117,7 @@ public class SimulationWaTor extends Simulation {
 			
 			//check whether will die
 			if (shark.getStarveDays()>maxStarveDaysForSharks) {
+				
 				shark.changeState(0);
 //				shark.setImage(chooseImage(0));
 				shark.setBreedDays(0);
@@ -127,9 +131,12 @@ public class SimulationWaTor extends Simulation {
 				    CellWaTor potentialBreedCell = findRandomNeighbor(allNeighborEmpty);
 				    potentialBreedCell.changeState(1);
 //				    potentialBreedCell.setImage(chooseImage(1));
+				    shark.setBreedDays(0);
 				}
 			}
-			updateColors();
+			
+			System.out.println(shark.getStarveDays());
+			
 		}
 		
 		ArrayList<Cell> allFish=findallType(2);
@@ -155,9 +162,11 @@ public class SimulationWaTor extends Simulation {
 				    CellWaTor potentialBreedCell = findRandomNeighbor(allNeighborEmpty);
 				    potentialBreedCell.changeState(2);
 //				    potentialBreedCell.setImage(chooseImage(2));
+				    fish.setBreedDays(0);
 				}	
 			}
 		}
+		updateColors();
 		
 				
 	}
@@ -188,10 +197,10 @@ public class SimulationWaTor extends Simulation {
 		randomSlot.changeState(1);
 		randomSlot.setColor(chooseColor(1));
 		randomSlot.setBreedDays(shark.getBreedDays()+1);
-		if (code=="eat") {
+		if (code.equals("eat")) {
 			randomSlot.setStarveDays(0);	
 		}
-		if (code=="starve") {
+		if (code.equals("starve")) {
 			randomSlot.setStarveDays(shark.getStarveDays()+1);	
 		}
 		shark.changeState(0);
@@ -239,13 +248,13 @@ public class SimulationWaTor extends Simulation {
 	}
 	
 	public static void main(String[] args) {
-		SimulationWaTor test = new SimulationWaTor(5, 5, 0.5, 0.1, 2,2,2);
+		SimulationWaTor test = new SimulationWaTor(5, 5, 0.5, 0.1, 2,4,2);
 		testArrayPrinter(test.getArray());
 //		System.out.println(test.getArray()[1][1].getNeighborCells());
 //		System.out.println();
 //		System.out.print(test.findNumberEmpty());
 //		System.out.println();
-		int iterations = 5;
+		int iterations = 30;
 		//Drives test simulation
 		for(int i = 0; i < iterations; i++) {
 			test.update();
