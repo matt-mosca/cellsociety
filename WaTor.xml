@@ -6,7 +6,7 @@
     <parameters>
         <maxStarveDaysForSharks>3</maxStarveDaysForSharks>
         <minBreedDaysForSharks>7</minBreedDaysForSharks>
-        <minBreedDaysForFish>5</minBreedDaysForFish>
+        <minBreedDaysForFish>3</minBreedDaysForFish>
     </parameters>
 
     <initialSetting>

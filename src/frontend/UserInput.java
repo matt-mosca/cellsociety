@@ -41,7 +41,8 @@ public class UserInput {
 	    try {
 	    
 		Document doc = getFile("Segregation.xml");
-		doc.getDocumentElement().normalize();	
+		doc.getDocumentElement().normalize();
+		String simulationType=doc.getElementsByTagName("name").item(0).getTextContent();
 		String satisfactionPercentage = doc.getElementsByTagName("satisfactionPercentage").item(0).getTextContent();
 //		finalParams = new String[SEG_ARRAY_LENGTH];
 		double[] basic = new double[1];
