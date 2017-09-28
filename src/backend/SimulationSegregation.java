@@ -1,17 +1,11 @@
 package backend;
 
 import java.util.ArrayList;
-
 import javafx.scene.paint.Color;
 
 
-
-
 public class SimulationSegregation extends Simulation {
-	private static final String EMPTY_IMAGE = "empty_block.gif";
-	private static final String RED_IMAGE = "red_block.gif";
-	private static final String BLUE_IMAGE = "blue_block.gif";
-	
+
 	//	private CellSegregation[][] array;
 	private double satisfactionPercentage;
 	// 0 is empty, 1 is red, 2 is blue

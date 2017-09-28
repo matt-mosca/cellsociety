@@ -2,14 +2,9 @@ package backend;
 
 import java.util.ArrayList;
 
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-//Add images
 public class SimulationFire extends Simulation{
-	private static final String EMPTY_IMAGE = "empty_block.gif";
-	private static final String TREE_IMAGE = "tree_block.gif";
-	private static final String BURNING_IMAGE = "fire_block.gif";
 	
 //	private CellFire[][] array;
 	private int numberOfCells;

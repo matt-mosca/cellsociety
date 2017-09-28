@@ -2,15 +2,13 @@ package backend;
 
 //simulation super class
 
-
-
 import java.util.ArrayList;
 import java.util.Random;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-public class Simulation{
+public abstract class Simulation{
 	protected Cell[][] array;
 	protected int numberOfCells;
 	protected double emptyPercentage;
@@ -66,10 +64,7 @@ public class Simulation{
 		return 0;
 	}
 	
-	//Is this the best way to do this?
-	public void update() {
-		System.out.println("superclass");
-	}
+	public abstract void update();
 	
 	protected void fillInitialRedAndBlue(int[] slots, int state) {
 		for (int i = 0; i < slots.length; i++) {
@@ -123,9 +118,6 @@ public class Simulation{
 		return null;
 	}
 
-//
-//	public int[] random(int Number, int range) {
-//=======
 	protected int[] random(int Number, int range) {
 
 		return new Random().ints(0, range).distinct().limit(Number).toArray();

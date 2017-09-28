@@ -1,11 +1,8 @@
 package backend;
 
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class SimulationGameOfLife extends Simulation {
-	private static final String EMPTY_IMAGE = "empty_block.gif";
-	private static final String LIVE_IMAGE = "live_block.gif";
 	
 //	private CellGameOfLife[][] array;
 	private int numberOfCells;

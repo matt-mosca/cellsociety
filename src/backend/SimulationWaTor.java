@@ -1,16 +1,10 @@
 package backend;
-import java.util.ArrayList;
 
-import javafx.scene.image.Image;
+import java.util.ArrayList;
 import javafx.scene.paint.Color;
 
 public class SimulationWaTor extends Simulation {
-	private static final String EMPTY_IMAGE = "blue_block.gif";
-	private static final String SHARK_IMAGE = "predator_block.gif";
-	private static final String FISH_IMAGE = "prey_block.gif";
 	
-
-
 	private int maxStarveDaysForSharks;
 	private int minBreedDaysForSharks;
 	private int minBreedDaysForFish;
