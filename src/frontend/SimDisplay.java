@@ -62,7 +62,6 @@ public class SimDisplay {
 	private int width;
 	private int height;
 	private GridPane myGrid;
-//	private ImageView[][] Images;
 	private Rectangle[][] Rectangles;
 	private String simName;
 	private Stage window;
@@ -116,8 +115,6 @@ public class SimDisplay {
 //		Image backGround = new Image(getClass().getClassLoader().getResourceAsStream("brickwall.jpeg"));
 //		ImagePattern pattern = new ImagePattern(backGround);	
 //		startScene.setFill(pattern);
-		
-		
 		//get some buttons to choose which of the four simulations they want to do
 		//replace the following code with a for loop and a resource file.
 		
@@ -160,7 +157,6 @@ public class SimDisplay {
 				this.sim = new SimulationGameOfLife((int)inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3]);
 				changeSimName(GAME_OF_LIFE_TITLE);
 			}
-//			makeSimulation();
 			playSim();
 		});
 		return b;
@@ -170,7 +166,6 @@ public class SimDisplay {
 	private Button pauseButton() {
 		Button b = new Button("Pause");
 		b.setOnAction(e -> {
-			//do the pause stuff by pausing the animation I guess
 			animation.pause();
 		});
 		return b;
@@ -179,7 +174,6 @@ public class SimDisplay {
 	private Button playButton() {
 		Button b = new Button("Play");
 		b.setOnAction(e ->{
-			//do the play stuff by resuming the animation, starting the animation, idk.
 			animation.play();
 		});
 		return b;
@@ -188,7 +182,6 @@ public class SimDisplay {
 	private Button stepButton() {
 		Button b = new Button("Step");
 		b.setOnAction(e ->{
-			//do the step stuff here by calling the step function wtf idk
 			animation.pause();
 			step();
 		});
@@ -212,16 +205,12 @@ public class SimDisplay {
 				this.sim = new SimulationWaTor((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
 			}
 			playSim();
-			//do the reset stuff here
-			
 		});
 		return b;
 	}
 	
 	private GridPane makeGrid(){
 		GridPane grid = new GridPane();
-//		grid.getColumnConstraints().add(new ColumnConstraints(width/Cells[0].length));
-//		grid.getRowConstraints().add(new RowConstraints(height/Cells.length));
 		grid.setPrefHeight(GRID_FIT_CONSTANT);
 		grid.setPrefWidth(GRID_FIT_CONSTANT);
 		grid.getColumnConstraints().add(new ColumnConstraints(GRID_FIT_CONSTANT / Cells[0].length));
@@ -237,7 +226,6 @@ public class SimDisplay {
 		myGrid.getChildren().clear();
 		for(int i=0;i<Cells.length;i++) {
 			for (int j=0; j<Cells[i].length; j++) {
-//				myGrid.add(Images[i][j], j, i);
 				myGrid.add(Rectangles[i][j], j, i);
 			}
 		}
@@ -259,22 +247,6 @@ public class SimDisplay {
 	}
 
 	
-//UNCOMMENT THIS IF YOU END UP NEEDING TO HAVE AN IMAGEVIEW ARRAY
-//Looks like we're using an ImageView array. Seems to make sense.
-	
-//	private ImageView[][] makeImageArray(Cell[][] cells){
-//		ImageView[][] images = new ImageView[cells.length][Cells[0].length];
-//		for(int i=0; i<cells.length; i++) {
-//			for (int j=0; j<cells[i].length; j++) {
-//				images[i][j] = new ImageView(cells[i][j].getImage());
-//				images[i][j].setFitWidth(GRID_FIT_CONSTANT / Cells[0].length);
-//				images[i][j].setFitHeight(GRID_FIT_CONSTANT / Cells.length);
-//			}
-//		}
-//		this.Images = images;
-//		return this.Images;
-//	}
-	
 	public void changeSimName(String s) {
 		this.simName = s;
 		window.setTitle(simName);
@@ -292,19 +264,13 @@ public class SimDisplay {
 		sim.update();
 		Cells = sim.getArray(); //I can't help but feel that this is stupidly inefficient. Is there an easier way? - V 
 		//I don't think you guys are updating this array in the backend, because I'm not getting an animation. 
-		updateImageArray(Cells);
+		updateColorArray(Cells);
 		fillGrid();
 		myGrid.setGridLinesVisible(true);
 		
 	}
 	
-	private void updateImageArray(Cell[][] cells) {
-		//does this fix the memory issue?
-//		for (int i=0; i<Cells.length; i++) {
-//			for(int j = 0; j<Cells.length; j++) {
-//				Images[i][j].setImage(null);
-//			}
-//		}
+	private void updateColorArray(Cell[][] cells) {
 		for (int i=0; i<cells.length; i++) {
 			for(int j=0; j<cells[i].length; j++) {
 				this.Rectangles[i][j].setFill(cells[i][j].getColor()); //the n^2 algo is really starting to make me sad, but I'm not sure how to get it to be faster. Suggestions? -V

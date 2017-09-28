@@ -4,7 +4,7 @@
     </title>
 
     <parameters>
-        <maxStarveDaysForSharks>3</maxStarveDaysForSharks>
+        <maxStarveDaysForSharks>2</maxStarveDaysForSharks>
         <minBreedDaysForSharks>7</minBreedDaysForSharks>
         <minBreedDaysForFish>3</minBreedDaysForFish>
     </parameters>
