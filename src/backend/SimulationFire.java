@@ -109,17 +109,6 @@ public class SimulationFire extends Simulation{
 				array[i][j].changeState(temp[i][j]);
 			}
 		}
-//		for(int i = 0; i < cellNumberHorizontal; i++) {
-//			for(int j = 0; j < cellNumberVertical; j++) {
-//				if(array[i][j].getState() == CellFire.BURNING)
-//					array[i][j].changeState(CellFire.EMPTY);
-//				if(array[i][j].getState() == CellFire.TREE) {
-//					if(potentialForFire(array[i][j]))
-//						if(getRandomNum(1) <= probCatch)
-//							array[i][j].changeState(CellFire.BURNING);
-//				}
-//			}
-//		}
 		findNeighbors();
 		updateColors();
 	}
@@ -167,33 +156,27 @@ public class SimulationFire extends Simulation{
 	public void setProbCatch(double prob) {
 		probCatch = prob;
 	}
-	
-	//Is this the best way? We are casting immediately
-	@Override
-	public CellFire[][] getArray() {
-		return (CellFire[][])array;
-	}
 
 	public void setArray(CellFire[][] array) {
 		this.array = array;
 	}
 	
-	private static void testArrayPrinter(Cell[][] testArray) {
+//	private static void testArrayPrinter(Cell[][] testArray) {
+////		for(int i = 0; i < testArray.length; i++) {
+////			for(int j = 0; j < testArray[0].length; j++) {
+////				System.out.print(testArray[i][j].getImage() + " ");
+////			}
+////			System.out.println();
+////		}
+//		System.out.println();
 //		for(int i = 0; i < testArray.length; i++) {
 //			for(int j = 0; j < testArray[0].length; j++) {
-//				System.out.print(testArray[i][j].getImage() + " ");
+//				System.out.print(testArray[i][j].getState() + " ");
 //			}
 //			System.out.println();
 //		}
-		System.out.println();
-		for(int i = 0; i < testArray.length; i++) {
-			for(int j = 0; j < testArray[0].length; j++) {
-				System.out.print(testArray[i][j].getState() + " ");
-			}
-			System.out.println();
-		}
-		System.out.println();
-	}
+//		System.out.println();
+//	}
 	
 //	public static void main(String[] args) {
 //		SimulationFire test = new SimulationFire(5, 5, 0.2, 0.5, 0.5);
