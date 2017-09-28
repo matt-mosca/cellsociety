@@ -6,6 +6,7 @@ package frontend;
 //import java.util.ArrayList;
 //import java.util.Iterator;
 //import java.util.Scanner;
+import java.util.ResourceBundle;
 
 import backend.Cell;
 import backend.Simulation;
@@ -56,6 +57,7 @@ public class SimDisplay {
 	private static final String FIRE_TITLE  = "FIYAH!";
 	private static final String SEGREGATION_TITLE = "SEGREGATION!";
 	private static final String GAME_OF_LIFE_TITLE = "GAME OF LIFE!";
+	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	
 	private Scene scene;
 	private Cell[][] Cells;
@@ -70,22 +72,22 @@ public class SimDisplay {
 	private double[] inputArray;
 	private Timeline animation;
 	private BorderPane border;
+	private ResourceBundle myResources;
 	
-	public SimDisplay(int x, int y, Stage s) {
+	
+	public SimDisplay(int x, int y, Stage s, String filename) {
 		this.width=x;
 		this.height=y;
 		this.window = s;
+		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + filename);
 	}
 	
 	private Scene makeSimulation(){
 		border = new BorderPane();
-		
 		this.Cells = sim.getArray();
-//		Images = makeImageArray(Cells);
 		Rectangles = makeRectangleArray(Cells);
 		makeGrid();
 		fillGrid();
-//		drawLines();
 		Scene fun = new Scene(border, width, height);
 		border.setCenter(myGrid);
 		myGrid.setAlignment(Pos.CENTER);
@@ -99,10 +101,7 @@ public class SimDisplay {
 		controls.getChildren().addAll(play, pause, step, reset);
 		border.setBottom(controls);
 		controls.setAlignment(Pos.CENTER);
-//		this.scene = fun;
-//		window.setScene(scene);
 		return fun;
-		//return this.scene;
 	}
 	
 	
@@ -119,7 +118,7 @@ public class SimDisplay {
 		//replace the following code with a for loop and a resource file.
 		
 		Font f = new Font("Arial", 30);
-		Label startMessage = new Label("Which Simulation would you like to see?");
+		Label startMessage = new Label(myResources.getString("simprompt"));
 		startMessage.setFont(f);
 		Button b1 = chooseScene(WATORTITLE);
 		Button b2 = chooseScene(FIRETITLE);
@@ -136,8 +135,6 @@ public class SimDisplay {
 		b.setPrefSize(100, 50);
 		b.setOnAction(e -> {
 			inputArray = UI.getArray(s);
-			//shouldn't this call the XML reader and start passing information to the backend?
-			//I think that it should definitely do that. 
 			if(s.equals(WATORTITLE)) {
 				this.sim = new SimulationWaTor((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
 				changeSimName(WATOR_TITLE);
@@ -161,7 +158,7 @@ public class SimDisplay {
 	
 	
 	private Button pauseButton() {
-		Button b = new Button("Pause");
+		Button b = new Button(myResources.getString("pausebutton"));
 		b.setOnAction(e -> {
 			animation.pause();
 		});
@@ -169,7 +166,7 @@ public class SimDisplay {
 	}
 	
 	private Button playButton() {
-		Button b = new Button("Play");
+		Button b = new Button(myResources.getString("playbutton"));
 		b.setOnAction(e ->{
 			animation.play();
 		});
@@ -177,7 +174,7 @@ public class SimDisplay {
 	}
 	
 	private Button stepButton() {
-		Button b = new Button("Step");
+		Button b = new Button(myResources.getString("stepbutton"));
 		b.setOnAction(e ->{
 			animation.pause();
 			step();
@@ -186,7 +183,7 @@ public class SimDisplay {
 	}
 	
 	private Button resetButton() {
-		Button b = new Button("Reset");
+		Button b = new Button(myResources.getString("resetbutton"));
 		b.setOnAction(e-> {
 			animation.pause();
 			if(simName.equals(GAME_OF_LIFE_TITLE)) {
