@@ -13,6 +13,10 @@ import java.io.File;
 import java.io.IOException;
 
 public class UserInput {
+	private static final String GAMEOFLIFETITLE = "Game of Life";
+	private static final String SEGREGATIONTITLE = "Segregation";
+	private static final String FIRETITLE = "Fire";
+	private static final String WATORTITLE = "WaTor";
 //	private static final int NORMAL_ARRAY_LENGTH = 5;
 //	private static final int WATOR_ARRAY_LENGTH = 8;
 //	private static final int SEG_ARRAY_LENGTH = 6;
@@ -32,10 +36,24 @@ public class UserInput {
 		  
 	  }
 	
+	  
+	  public double[] getArray(String s) {
+		if(s.equals(WATORTITLE)) {
+			getWaTor();
+		}
+		if(s.equals(FIRETITLE)) {
+			getFire();
+		}
+		if(s.equals(SEGREGATIONTITLE)) {
+			getSegregation();
+		}
+		if(s.equals(GAMEOFLIFETITLE)) {
+			getGameOfLife();
+		}
+		return finalParams;
+	  }
 
-
-
-	  public double[] getSegregation() {
+	  private void getSegregation() {
 	
 		
 	    try {
@@ -56,11 +74,11 @@ public class UserInput {
 	    } catch (Exception e) {
 		e.printStackTrace();
 	    }
-	    return finalParams;
+//	    return finalParams;
 	  }
 	  
 	  
-	  public double[] getWaTor() {
+	  private void getWaTor() {
 		
 		
 	    try {
@@ -76,21 +94,17 @@ public class UserInput {
 		basic[2] = Double.parseDouble(minBreedDaysForFish);
 		getInitialSetUp(doc, basic);
 //		makeFinalArray();
-		
-		
-	
-		
 	    } catch (Exception e) {
 		e.printStackTrace();
 	    }
-	    return finalParams;
+//	    return finalParams;
 	  }
 	  
 	
 
 
 
-	public double[] getFire() {
+	public void getFire() {
 			
 			
 		    try {
@@ -110,10 +124,10 @@ public class UserInput {
 		    } catch (Exception e) {
 			e.printStackTrace();
 		    }
-			return finalParams;
+//			return finalParams;
      }
 	  
-	  public double[] getGameOfLife() {
+	  public void getGameOfLife() {
 			
 			
 		    try {
@@ -128,7 +142,7 @@ public class UserInput {
 		    } catch (Exception e) {
 			e.printStackTrace();
 		    }
-			return finalParams;
+//			return finalParams;
    }
 
 

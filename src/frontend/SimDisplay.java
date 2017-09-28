@@ -135,25 +135,22 @@ public class SimDisplay {
 		Button b = new Button(s);
 		b.setPrefSize(100, 50);
 		b.setOnAction(e -> {
+			inputArray = UI.getArray(s);
 			//shouldn't this call the XML reader and start passing information to the backend?
 			//I think that it should definitely do that. 
 			if(s.equals(WATORTITLE)) {
-				inputArray = UI.getWaTor();
 				this.sim = new SimulationWaTor((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
 				changeSimName(WATOR_TITLE);
 			}
 			if(s.equals(FIRETITLE)) {
-				inputArray = UI.getFire();
 				this.sim = new SimulationFire((int) inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
 				changeSimName(FIRE_TITLE);
 			}
 			if(s.equals(SEGREGATIONTITLE)) {
-				inputArray = UI.getSegregation();
 				this.sim = new SimulationSegregation((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
 				changeSimName(SEGREGATION_TITLE);
 			}
 			if(s.equals(GAMEOFLIFETITLE)) {
-				inputArray = UI.getGameOfLife();
 				this.sim = new SimulationGameOfLife((int)inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3]);
 				changeSimName(GAME_OF_LIFE_TITLE);
 			}
