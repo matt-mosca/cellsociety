@@ -11,7 +11,7 @@ public class CellWaTor extends Cell{
 
 	public CellWaTor(int state, Color color, List<Cell> neighborCells, int rowNumber, int columnNumber) {
 		super(state, color, neighborCells, rowNumber, columnNumber);
-		this.starveDays=0;
+		this.starveDays = 0;
 		this.setBreedDays(0);
 	}
 	

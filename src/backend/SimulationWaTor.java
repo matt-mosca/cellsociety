@@ -20,13 +20,13 @@ public class SimulationWaTor extends Simulation {
 			int maxStarveDaysForSharks, int minBreedDaysForSharks, int minBreedDaysForFish) {
 		// set up instance variables, put 0s in every cell
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
-		this.maxStarveDaysForSharks=maxStarveDaysForSharks;
-		this.minBreedDaysForSharks=minBreedDaysForSharks;
-		this.minBreedDaysForFish=minBreedDaysForFish;
+		this.maxStarveDaysForSharks = maxStarveDaysForSharks;
+		this.minBreedDaysForSharks = minBreedDaysForSharks;
+		this.minBreedDaysForFish = minBreedDaysForFish;
 		setArray(new CellWaTor[cellNumberVertical][cellNumberHorizontal]);
 		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
-				array[rowNumber][columnNumber]=new CellWaTor(0, null, null, rowNumber, columnNumber);
+				array[rowNumber][columnNumber] = new CellWaTor(0, null, null, rowNumber, columnNumber);
 			}
 		}
 		neighbors = new FourNeighborFinder(array, 0, 0);
@@ -77,35 +77,35 @@ public class SimulationWaTor extends Simulation {
 		//1 is shark, 2 is fish
 	
 		//finish all sharks, eat/breed/die, checked correct
-		ArrayList<Cell> allSharks=findallType(1);
+		ArrayList<Cell> allSharks = findallType(1);
 //		System.out.println(allSharks.size());
 	
 		for (int sharkNumber = 0; sharkNumber < allSharks.size();sharkNumber++) {
-			CellWaTor shark=(CellWaTor) allSharks.get(sharkNumber);
-			List <Cell> allNeighborFish= Neighbortype(shark,2);
-			List <Cell> allNeighborEmpty= Neighbortype(shark,0);
+			CellWaTor shark = (CellWaTor) allSharks.get(sharkNumber);
+			List <Cell> allNeighborFish = Neighbortype(shark,2);
+			List <Cell> allNeighborEmpty = Neighbortype(shark,0);
 			//if there is fish, eat it
-			if (allNeighborFish.size()>0) {
+			if (allNeighborFish.size() > 0) {
 				CellWaTor randomFish = findRandomNeighbor(allNeighborFish);
 				sharkMove(shark,randomFish,SHARKEAT);
-				shark=randomFish;
+				shark = randomFish;
 			}
 			//no fish, move to an empty cell
-			if(allNeighborFish.size()==0 && allNeighborEmpty.size()>0) {
+			if(allNeighborFish.size() == 0 && allNeighborEmpty.size() > 0) {
 				
 				CellWaTor randomEmpty = findRandomNeighbor(allNeighborEmpty);
 				sharkMove(shark,randomEmpty,SHARKSTARVE);
-				shark=randomEmpty;
+				shark = randomEmpty;
 			}
 			
 			//cannot move, cannot eat
-			if (allNeighborEmpty.size()==0 && allNeighborFish.size()==0) {
+			if (allNeighborEmpty.size() == 0 && allNeighborFish.size() == 0) {
 				shark.setBreedDays(shark.getBreedDays()+1);
 				shark.setStarveDays(shark.getStarveDays()+1);
 			}
 			
 			//check whether will die
-			if (shark.getStarveDays()>maxStarveDaysForSharks) {	
+			if (shark.getStarveDays() > maxStarveDaysForSharks) {	
 				shark.changeState(0);
 //				shark.setImage(chooseImage(0));
 				shark.setBreedDays(0);
@@ -113,9 +113,9 @@ public class SimulationWaTor extends Simulation {
 			}
 			
 			//check whether will breed
-			if (shark.getBreedDays()>=minBreedDaysForSharks) {
-				allNeighborEmpty= Neighbortype(shark,0);
-				if (allNeighborEmpty.size()>0) {
+			if (shark.getBreedDays() >= minBreedDaysForSharks) {
+				allNeighborEmpty = Neighbortype(shark, 0);
+				if (allNeighborEmpty.size() > 0) {
 				    CellWaTor potentialBreedCell = findRandomNeighbor(allNeighborEmpty);
 				    potentialBreedCell.changeState(1);
 //				    potentialBreedCell.setImage(chooseImage(1));
@@ -124,24 +124,24 @@ public class SimulationWaTor extends Simulation {
 			}
 //			System.out.println(shark.getStarveDays());
 		}
-		ArrayList<Cell> allFish=findallType(2);
+		ArrayList<Cell> allFish = findallType(2);
 		for (int fishNumber = 0; fishNumber < allFish.size();fishNumber++) {
-			CellWaTor fish=(CellWaTor) allFish.get(fishNumber);
-			List <Cell> allNeighborEmpty = Neighbortype(fish,0);
+			CellWaTor fish = (CellWaTor) allFish.get(fishNumber);
+			List <Cell> allNeighborEmpty = Neighbortype(fish, 0);
 			//fish move
-			if (allNeighborEmpty.size()>0) {
+			if (allNeighborEmpty.size() > 0) {
 			    CellWaTor randomEmpty = findRandomNeighbor(allNeighborEmpty);
 			    fishMove(fish, randomEmpty);
-			    fish=randomEmpty;
+			    fish = randomEmpty;
 			}
 			//fish not move, but still breed days increase
-			if (allNeighborEmpty.size()==0) {
-				fish.setBreedDays(fish.getBreedDays()+1);
+			if (allNeighborEmpty.size() == 0) {
+				fish.setBreedDays(fish.getBreedDays() + 1);
 			}
 			//check whether breed
-			if (fish.getBreedDays()>=minBreedDaysForFish) {
-				allNeighborEmpty = Neighbortype(fish,0);
-				if (allNeighborEmpty.size()>0) {
+			if (fish.getBreedDays() >= minBreedDaysForFish) {
+				allNeighborEmpty = Neighbortype(fish, 0);
+				if (allNeighborEmpty.size() > 0) {
 				    CellWaTor potentialBreedCell = findRandomNeighbor(allNeighborEmpty);
 				    potentialBreedCell.changeState(2);
 //				    potentialBreedCell.setImage(chooseImage(2));
@@ -162,22 +162,20 @@ public class SimulationWaTor extends Simulation {
 	}
 
 	public CellWaTor findRandomNeighbor(List<Cell> allNeighbor) {
-		int randomIndex=random(1,allNeighbor.size())[0];
-		CellWaTor random=(CellWaTor) allNeighbor.get(randomIndex);
+		int randomIndex = random(1,allNeighbor.size())[0];
+		CellWaTor random = (CellWaTor) allNeighbor.get(randomIndex);
 		return random;
 	}
 	
-	public void sharkMove(
-			CellWaTor shark,
-			CellWaTor randomSlot, String code) {
+	public void sharkMove(CellWaTor shark, CellWaTor randomSlot, String code) {
 		randomSlot.changeState(1);
 		randomSlot.setColor(chooseColor(1));
-		randomSlot.setBreedDays(shark.getBreedDays()+1);
+		randomSlot.setBreedDays(shark.getBreedDays() + 1);
 		if (code.equals(SHARKEAT)) {
 			randomSlot.setStarveDays(0);	
 		}
 		if (code.equals(SHARKSTARVE)) {
-			randomSlot.setStarveDays(shark.getStarveDays()+1);	
+			randomSlot.setStarveDays(shark.getStarveDays() + 1);	
 		}
 		shark.changeState(0);
 		shark.setBreedDays(0);
@@ -188,11 +186,11 @@ public class SimulationWaTor extends Simulation {
 	
 
 	private ArrayList<Cell> findallType(int state) {
-		ArrayList<Cell> allSharks=new ArrayList<Cell>();
+		ArrayList<Cell> allSharks = new ArrayList<Cell>();
 		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
 				CellWaTor cell = (CellWaTor) super.array[rowNumber][columnNumber];
-				if (cell.getState()==state) {
+				if (cell.getState() == state) {
 					allSharks.add(cell);	
 				}
 			}
@@ -203,8 +201,8 @@ public class SimulationWaTor extends Simulation {
 	private List<Cell> Neighbortype(CellWaTor cell, int type) {
 		List<Cell> neighbors = cell.getNeighborCells();
 		List<Cell> neighborFish = new ArrayList<Cell>();
-		for (int i=0;i<neighbors.size();i++) {
-			if (neighbors.get(i).getState()==type) {
+		for (int i = 0;i<neighbors.size();i++) {
+			if (neighbors.get(i).getState() == type) {
 				neighborFish.add(neighbors.get(i));
 			}
 		}
