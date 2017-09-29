@@ -26,9 +26,9 @@ public abstract class NeighborFinder {
 		return myYPosition;
 	}
 	
-	protected ArrayList<Cell> getMyNeighbors() {
-		return myNeighbors;
+	protected void setMyNeighbors(ArrayList<Cell> neighbors) {
+		myNeighbors = neighbors;
 	}
 	
-	public abstract void findNeighbors();
+	public abstract ArrayList<Cell> findNeighbors();
 }

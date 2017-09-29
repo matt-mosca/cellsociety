@@ -22,9 +22,9 @@ public class SimulationFire extends Simulation{
 		this.cellNumberHorizontal = cellNumberHorizontal;
 		this.cellNumberVertical = cellNumberVertical;
 //		initialEmptyPercentage = 0.25;
-		array = new CellFire[cellNumberHorizontal][cellNumberVertical];
-		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
+		array = new CellFire[cellNumberVertical][cellNumberHorizontal];
+		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
+			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
 				array[rowNumber][columnNumber] = new CellFire(CellFire.EMPTY, null, null, rowNumber, columnNumber);
 			}
 		}
@@ -63,13 +63,13 @@ public class SimulationFire extends Simulation{
 	private void setRandomFire() {
 		int rand = (int) getRandomNum(numberOfCells);
 		if(cellNumberVertical != 0)
-			array[rand % cellNumberHorizontal][rand / cellNumberVertical].changeState(CellFire.BURNING);
+			array[rand % cellNumberVertical][rand / cellNumberHorizontal].changeState(CellFire.BURNING);
 	}
 	
 	@Override
 	public void findNeighbors() {
-		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
+		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
+			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
 				Cell cell = array[rowNumber][columnNumber];
 			    ArrayList<Cell> neighbors=new ArrayList<Cell>();
 				if (rowNumber-1>=0) {
@@ -78,10 +78,10 @@ public class SimulationFire extends Simulation{
 				if (columnNumber-1>=0) {
 					neighbors.add(array[rowNumber][columnNumber-1]);
 				}
-				if (columnNumber+1<=cellNumberVertical-1) {
+				if (columnNumber+1<=cellNumberHorizontal-1) {
 					neighbors.add(array[rowNumber][columnNumber+1]);
 				}
-				if (rowNumber+1<=cellNumberHorizontal-1) {
+				if (rowNumber+1<=cellNumberVertical-1) {
 					neighbors.add(array[rowNumber+1][columnNumber]);		
 				}
 				cell.setNeighborCells(neighbors);
@@ -91,9 +91,9 @@ public class SimulationFire extends Simulation{
 	
 	public void update() {
 //		System.out.println("fire update");
-		int[][] temp = new int[cellNumberHorizontal][cellNumberVertical];
-		for(int i = 0; i < cellNumberHorizontal; i++) {
-			for(int j = 0; j < cellNumberVertical; j++) {
+		int[][] temp = new int[cellNumberVertical][cellNumberHorizontal];
+		for(int i = 0; i < cellNumberVertical; i++) {
+			for(int j = 0; j < cellNumberHorizontal; j++) {
 				temp[i][j] = array[i][j].getState();
 				if(array[i][j].getState() == CellFire.BURNING)
 					temp[i][j] = CellFire.EMPTY;
@@ -104,8 +104,8 @@ public class SimulationFire extends Simulation{
 				}
 			}
 		}
-		for(int i = 0; i < cellNumberHorizontal; i++) {
-			for(int j = 0; j < cellNumberVertical; j++) {
+		for(int i = 0; i < cellNumberVertical; i++) {
+			for(int j = 0; j < cellNumberHorizontal; j++) {
 				array[i][j].changeState(temp[i][j]);
 			}
 		}
@@ -115,8 +115,8 @@ public class SimulationFire extends Simulation{
 	
 	//Should this be internal to the cell?
 	protected void updateImages() {
-		for(int i = 0; i < cellNumberHorizontal; i++) {
-			for(int j = 0; j < cellNumberVertical; j++) {
+		for(int i = 0; i < cellNumberVertical; i++) {
+			for(int j = 0; j < cellNumberHorizontal; j++) {
 				array[i][j].setColor(chooseColor(array[i][j].getState()));
 			}
 		}
