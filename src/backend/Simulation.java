@@ -1,9 +1,7 @@
 package backend;
 
-//simulation super class
-
-import java.util.ArrayList;
 import java.util.Random;
+
 import javafx.scene.paint.Color;
 
 public abstract class Simulation{
@@ -16,8 +14,7 @@ public abstract class Simulation{
 	
 	// 0 is empty, 1 is red, 2 is blue
 
-	public Simulation(int cellNumberHorizontal, int cellNumberVertical, double emptyPercentage,
-			double redToBlueRatio) {
+	public Simulation(int cellNumberHorizontal, int cellNumberVertical, double emptyPercentage, double redToBlueRatio) {
 		// set up instance variables, put 0s in every cell
 		this.emptyPercentage = emptyPercentage;
 		this.redToBlueRatio = redToBlueRatio;
@@ -42,7 +39,6 @@ public abstract class Simulation{
 		for (int i=0;i<redSlots.length;i++) {
 			redSlots[i]=randomSlots[redSlots[i]];
 		}
-		
 		fillInitialRedAndBlue(redSlots, 1);
 		assignNeighbors(neighborAssigner);
 //		findNeighbors();
@@ -79,7 +75,7 @@ public abstract class Simulation{
 	public abstract void update();
 
 	//neighbors counted as 8 surrounding cells
-		protected void assignNeighbors(NeighborFinder neighborAssigner) {
+	protected void assignNeighbors(NeighborFinder neighborAssigner) {
 			neighborAssigner.setMyXPosition(0);
 			neighborAssigner.setMyYPosition(0);
 			for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {

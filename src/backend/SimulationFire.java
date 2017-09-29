@@ -1,7 +1,5 @@
 package backend;
 
-import java.util.ArrayList;
-
 import javafx.scene.paint.Color;
 
 public class SimulationFire extends Simulation{
@@ -117,14 +115,14 @@ public class SimulationFire extends Simulation{
 		updateColors();
 	}
 	
-	//Should this be internal to the cell?
-	protected void updateImages() {
-		for(int i = 0; i < cellNumberVertical; i++) {
-			for(int j = 0; j < cellNumberHorizontal; j++) {
-				array[i][j].setColor(chooseColor(array[i][j].getState()));
-			}
-		}
-	}
+//	//Should this be internal to the cell?
+//	protected void updateImages() {
+//		for(int i = 0; i < cellNumberVertical; i++) {
+//			for(int j = 0; j < cellNumberHorizontal; j++) {
+//				array[i][j].setColor(chooseColor(array[i][j].getState()));
+//			}
+//		}
+//	}
 	
 	private boolean potentialForFire(Cell cell) {
 		for(int i = 0; i < cell.getNeighborCells().size(); i++) {

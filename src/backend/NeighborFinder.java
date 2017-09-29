@@ -1,6 +1,6 @@
 package backend;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public abstract class NeighborFinder {
 	private Cell[][] myCellArray;
@@ -33,5 +33,5 @@ public abstract class NeighborFinder {
 		myYPosition = y;
 	}
 	
-	public abstract ArrayList<Cell> findNeighbors();
+	public abstract List<Cell> findNeighbors();
 }

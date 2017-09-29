@@ -1,6 +1,8 @@
 package backend;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.paint.Color;
 
 public class SimulationWaTor extends Simulation {
@@ -80,8 +82,8 @@ public class SimulationWaTor extends Simulation {
 	
 		for (int sharkNumber = 0; sharkNumber < allSharks.size();sharkNumber++) {
 			CellWaTor shark=(CellWaTor) allSharks.get(sharkNumber);
-			ArrayList <Cell> allNeighborFish= Neighbortype(shark,2);
-			ArrayList <Cell> allNeighborEmpty= Neighbortype(shark,0);
+			List <Cell> allNeighborFish= Neighbortype(shark,2);
+			List <Cell> allNeighborEmpty= Neighbortype(shark,0);
 			//if there is fish, eat it
 			if (allNeighborFish.size()>0) {
 				CellWaTor randomFish = findRandomNeighbor(allNeighborFish);
@@ -125,7 +127,7 @@ public class SimulationWaTor extends Simulation {
 		ArrayList<Cell> allFish=findallType(2);
 		for (int fishNumber = 0; fishNumber < allFish.size();fishNumber++) {
 			CellWaTor fish=(CellWaTor) allFish.get(fishNumber);
-			ArrayList <Cell> allNeighborEmpty= Neighbortype(fish,0);
+			List <Cell> allNeighborEmpty = Neighbortype(fish,0);
 			//fish move
 			if (allNeighborEmpty.size()>0) {
 			    CellWaTor randomEmpty = findRandomNeighbor(allNeighborEmpty);
@@ -138,7 +140,7 @@ public class SimulationWaTor extends Simulation {
 			}
 			//check whether breed
 			if (fish.getBreedDays()>=minBreedDaysForFish) {
-				allNeighborEmpty= Neighbortype(fish,0);
+				allNeighborEmpty = Neighbortype(fish,0);
 				if (allNeighborEmpty.size()>0) {
 				    CellWaTor potentialBreedCell = findRandomNeighbor(allNeighborEmpty);
 				    potentialBreedCell.changeState(2);
@@ -159,8 +161,7 @@ public class SimulationWaTor extends Simulation {
 		fish.setColor(chooseColor(0));
 	}
 
-	public CellWaTor findRandomNeighbor(
-			ArrayList<Cell> allNeighbor) {
+	public CellWaTor findRandomNeighbor(List<Cell> allNeighbor) {
 		int randomIndex=random(1,allNeighbor.size())[0];
 		CellWaTor random=(CellWaTor) allNeighbor.get(randomIndex);
 		return random;
@@ -199,9 +200,9 @@ public class SimulationWaTor extends Simulation {
 		return allSharks;
 	}
 
-	private ArrayList<Cell> Neighbortype(CellWaTor cell, int type) {
-		ArrayList<Cell> neighbors=cell.getNeighborCells();
-		ArrayList<Cell> neighborFish=new ArrayList<Cell>();
+	private List<Cell> Neighbortype(CellWaTor cell, int type) {
+		List<Cell> neighbors = cell.getNeighborCells();
+		List<Cell> neighborFish = new ArrayList<Cell>();
 		for (int i=0;i<neighbors.size();i++) {
 			if (neighbors.get(i).getState()==type) {
 				neighborFish.add(neighbors.get(i));

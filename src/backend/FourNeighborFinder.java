@@ -1,19 +1,20 @@
 package backend;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FourNeighborFinder extends NeighborFinder {
 	public FourNeighborFinder(Cell[][] cells, int xPos, int yPos) {
 		super(cells, xPos, yPos);
 	}
 	
-	public ArrayList<Cell> findNeighbors() {
+	public List<Cell> findNeighbors() {
 		Cell[][] cellArray = getMyCellArray();
 		int xPos = getMyXPosition();
 		int yPos = getMyYPosition();
 		int cellNumberVertical = cellArray.length;
 		int cellNumberHorizontal = cellArray[0].length;
-		ArrayList<Cell> neighbors = new ArrayList<Cell>();
+		List<Cell> neighbors = new ArrayList<Cell>();
 		if (yPos - 1 >= 0)
 			neighbors.add(cellArray[yPos - 1][xPos]);
 		if (xPos-1>=0)

@@ -1,6 +1,8 @@
 package backend;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.paint.Color;
 
 
@@ -85,7 +87,7 @@ public class SimulationSegregation extends Simulation {
 	}
 
 	private boolean whetherSatisfied(CellSegregation cell) {
-		ArrayList<Cell> neighbors=cell.getNeighborCells();
+		List<Cell> neighbors = cell.getNeighborCells();
 		int countFilled=0;
 		int countSatisfied=0;
 		for (int i=0;i<neighbors.size();i++) {
