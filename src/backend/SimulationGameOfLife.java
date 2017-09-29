@@ -10,17 +10,17 @@ public class SimulationGameOfLife extends Simulation {
 	private int numberOfCells;
 	private int cellNumberHorizontal;
 	private int cellNumberVertical;
-	private double initialEmptyPercentage;
+	private double emptyPercentage;
 	private NeighborFinder neighbors;
 	
 	public SimulationGameOfLife(int cellNumberHorizontal, int cellNumberVertical, double emptyPercentage, 
 			double redToBlueRatio) {
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
-		this.initialEmptyPercentage = emptyPercentage;
+		this.emptyPercentage = emptyPercentage;
 		this.numberOfCells = cellNumberHorizontal * cellNumberVertical;
 		this.cellNumberHorizontal = cellNumberHorizontal;
 		this.cellNumberVertical = cellNumberVertical;
-		array = new CellGameOfLife[cellNumberVertical][cellNumberHorizontal];
+		setArray(new CellGameOfLife[cellNumberVertical][cellNumberHorizontal]);
 		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
 				array[rowNumber][columnNumber] = new CellGameOfLife(CellGameOfLife.EMPTY, null, null, rowNumber, columnNumber);
@@ -38,7 +38,7 @@ public class SimulationGameOfLife extends Simulation {
 	}
 	
 	private int findNumberEmpty() {
-		int empty = (int) (numberOfCells * initialEmptyPercentage);
+		int empty = (int) (numberOfCells * emptyPercentage);
 		return empty;
 	}
 	

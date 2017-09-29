@@ -147,6 +147,29 @@ public abstract class Simulation{
 	public Cell[][] getArray() {
 		return array;
 	}
-
+	
+	protected void setArray(Cell[][] newArray) {
+		array = newArray;
+	}
+	
+	protected int getNumberOfCells() {
+		return numberOfCells;
+	}
+	
+	protected double getEmptyPercentage() {
+		return emptyPercentage;
+	}
+	
+	protected double getRedToBlueRatio() {
+		return redToBlueRatio;
+	}
+	
+	protected int getCellNumberHorizontal() {
+		return cellNumberHorizontal;
+	}
+	
+	protected int getCellNumberVertical() {
+		return cellNumberVertical;
+	}
 }
 

@@ -21,7 +21,7 @@ public class SimulationWaTor extends Simulation {
 		this.maxStarveDaysForSharks=maxStarveDaysForSharks;
 		this.minBreedDaysForSharks=minBreedDaysForSharks;
 		this.minBreedDaysForFish=minBreedDaysForFish;
-		super.array = new CellWaTor[cellNumberVertical][cellNumberHorizontal];
+		setArray(new CellWaTor[cellNumberVertical][cellNumberHorizontal]);
 		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
 				array[rowNumber][columnNumber]=new CellWaTor(0, null, null, rowNumber, columnNumber);

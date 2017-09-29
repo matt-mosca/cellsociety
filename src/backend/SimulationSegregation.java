@@ -15,7 +15,7 @@ public class SimulationSegregation extends Simulation {
 			double redToBlueRatio) {
 		// set up instance variables, put 0s in every cell
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
-		array = new CellSegregation[cellNumberVertical][cellNumberHorizontal];
+		setArray(new CellSegregation[cellNumberVertical][cellNumberHorizontal]);
 //		Image image = new Image(getClass().getClassLoader().getResourceAsStream(RED_IMAGE));
 		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
