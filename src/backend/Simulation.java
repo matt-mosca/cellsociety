@@ -5,12 +5,12 @@ import java.util.Random;
 import javafx.scene.paint.Color;
 
 public abstract class Simulation{
-	protected Cell[][] array;
-	protected int numberOfCells;
-	protected double emptyPercentage;
-	protected double redToBlueRatio;
-	protected int cellNumberHorizontal;
-	protected int cellNumberVertical;
+	private Cell[][] array;
+	private int numberOfCells;
+	private double emptyPercentage;
+	private double redToBlueRatio;
+	private int cellNumberHorizontal;
+	private int cellNumberVertical;
 	
 	// 0 is empty, 1 is red, 2 is blue
 

@@ -7,8 +7,6 @@ import javafx.scene.paint.Color;
 
 
 public class SimulationSegregation extends Simulation {
-
-	//	private CellSegregation[][] array;
 	private double satisfactionPercentage;
 	private NeighborFinder neighbors;
 	// 0 is empty, 1 is red, 2 is blue
@@ -17,14 +15,13 @@ public class SimulationSegregation extends Simulation {
 			double redToBlueRatio) {
 		// set up instance variables, put 0s in every cell
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
-		setArray(new CellSegregation[cellNumberVertical][cellNumberHorizontal]);
-//		Image image = new Image(getClass().getClassLoader().getResourceAsStream(RED_IMAGE));
-		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
-				array[rowNumber][columnNumber]=new CellSegregation(0, null, null, rowNumber, columnNumber);
+		setArray(new CellSegregation[getCellNumberVertical()][getCellNumberHorizontal()]);
+		for (int rowNumber = 0; rowNumber < getCellNumberVertical(); rowNumber++) {
+			for (int columnNumber = 0; columnNumber < getCellNumberHorizontal(); columnNumber++) {
+				getArray()[rowNumber][columnNumber]=new CellSegregation(0, null, null, rowNumber, columnNumber);
 			}
 		}
-		neighbors = new EightNeighborFinder(array, 0, 0);
+		neighbors = new EightNeighborFinder(getArray(), 0, 0);
 		this.satisfactionPercentage = satisfactionPercentage;
 		initializeScene(neighbors);
 //		initializeScene();		
@@ -45,11 +42,11 @@ public class SimulationSegregation extends Simulation {
 	public void update() {
 		// set up a loop, go through every cell
 		// call whetherSatisfied
-		ArrayList<Cell> emptyCells = findAllEmpty();
-		ArrayList<Cell> dissatisfied = new ArrayList<Cell>();
-		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
-				CellSegregation cell = (CellSegregation) array[rowNumber][columnNumber];
+		List<Cell> emptyCells = findAllEmpty();
+		List<Cell> dissatisfied = new ArrayList<Cell>();
+		for (int rowNumber = 0; rowNumber < getCellNumberVertical(); rowNumber++) {
+			for (int columnNumber = 0; columnNumber < getCellNumberHorizontal(); columnNumber++) {
+				CellSegregation cell = (CellSegregation) getArray()[rowNumber][columnNumber];
 				if (cell.getState() == 0) {continue;}
 				else if (!whetherSatisfied(cell)) {
 					dissatisfied.add(cell);	
@@ -70,20 +67,17 @@ public class SimulationSegregation extends Simulation {
 		}
 	}
 
-	private ArrayList<Cell> findAllEmpty() {
-		ArrayList<Cell> empty = new ArrayList<Cell>();
-		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
-				CellSegregation cell = (CellSegregation) array[rowNumber][columnNumber];
+	private List<Cell> findAllEmpty() {
+		List<Cell> empty = new ArrayList<Cell>();
+		for (int rowNumber = 0; rowNumber < getCellNumberVertical(); rowNumber++) {
+			for (int columnNumber = 0; columnNumber < getCellNumberHorizontal(); columnNumber++) {
+				CellSegregation cell = (CellSegregation) getArray()[rowNumber][columnNumber];
 				if (cell.getState() == 0) {
 					empty.add(cell);
 				}
 			}
 		}
 		return empty;
-		//Are you actually updating the Cell array here? I can't find the point at which you do that. That 
-		//might just be because I'm blind. -V
-		
 	}
 
 	private boolean whetherSatisfied(CellSegregation cell) {
@@ -104,9 +98,5 @@ public class SimulationSegregation extends Simulation {
 			return true;	
 		}
 		return false;
-	}
-
-	public void setArray(CellSegregation[][] newArray) {
-		array = newArray;
 	}
 }
