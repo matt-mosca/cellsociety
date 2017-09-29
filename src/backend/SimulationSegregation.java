@@ -14,10 +14,10 @@ public class SimulationSegregation extends Simulation {
 			double redToBlueRatio) {
 		// set up instance variables, put 0s in every cell
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
-		array = new CellSegregation[cellNumberHorizontal][cellNumberVertical];
+		array = new CellSegregation[cellNumberVertical][cellNumberHorizontal];
 //		Image image = new Image(getClass().getClassLoader().getResourceAsStream(RED_IMAGE));
-		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
+		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
+			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
 				array[rowNumber][columnNumber]=new CellSegregation(0, null, null, rowNumber, columnNumber);
 			}
 		}
@@ -42,8 +42,8 @@ public class SimulationSegregation extends Simulation {
 		// call whetherSatisfied
 		ArrayList<Cell> emptyCells=findAllEmpty();
 		ArrayList<Cell> dissatisfied=new ArrayList<Cell>();
-		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
+		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
+			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
 				CellSegregation cell = (CellSegregation) array[rowNumber][columnNumber];
 				if (cell.getState()==0) {continue;}
 				else if (!whetherSatisfied(cell)) {
@@ -67,8 +67,8 @@ public class SimulationSegregation extends Simulation {
 
 	private ArrayList<Cell> findAllEmpty() {
 		ArrayList<Cell> empty= new ArrayList<Cell>();
-		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
+		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
+			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
 				CellSegregation cell=(CellSegregation) array[rowNumber][columnNumber];
 				if (cell.getState()==0) {
 					empty.add(cell);

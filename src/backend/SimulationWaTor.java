@@ -17,13 +17,12 @@ public class SimulationWaTor extends Simulation {
 			int maxStarveDaysForSharks, int minBreedDaysForSharks, int minBreedDaysForFish) {
 		// set up instance variables, put 0s in every cell
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
-		
 		this.maxStarveDaysForSharks=maxStarveDaysForSharks;
 		this.minBreedDaysForSharks=minBreedDaysForSharks;
 		this.minBreedDaysForFish=minBreedDaysForFish;
-		super.array = new CellWaTor[cellNumberHorizontal][cellNumberVertical];
-		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
+		super.array = new CellWaTor[cellNumberVertical][cellNumberHorizontal];
+		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
+			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
 				super.array[rowNumber][columnNumber]=new CellWaTor(0, null, null, rowNumber, columnNumber);
 			}
 		}
@@ -34,8 +33,8 @@ public class SimulationWaTor extends Simulation {
 	@Override
 	protected void findNeighbors() {
 		//only four neighbors
-		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
+		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
+			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
 				Cell cell = array[rowNumber][columnNumber];
 			    ArrayList<Cell> neighbors=new ArrayList<Cell>();
 				if (rowNumber-1>=0) {
@@ -44,10 +43,10 @@ public class SimulationWaTor extends Simulation {
 				if (columnNumber-1>=0) {
 					neighbors.add(array[rowNumber][columnNumber-1]);
 				}
-				if (columnNumber+1<=cellNumberVertical-1) {
+				if (columnNumber+1<=cellNumberHorizontal-1) {
 					neighbors.add(array[rowNumber][columnNumber+1]);
 				}
-				if (rowNumber+1<=cellNumberHorizontal-1) {
+				if (rowNumber+1<=cellNumberVertical-1) {
 					neighbors.add(array[rowNumber+1][columnNumber]);
 				}
 				cell.setNeighborCells(neighbors);
@@ -186,8 +185,8 @@ public class SimulationWaTor extends Simulation {
 
 	private ArrayList<Cell> findallType(int state) {
 		ArrayList<Cell> allSharks=new ArrayList<Cell>();
-		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
+		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
+			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
 				CellWaTor cell = (CellWaTor) super.array[rowNumber][columnNumber];
 				if (cell.getState()==state) {
 					allSharks.add(cell);	
