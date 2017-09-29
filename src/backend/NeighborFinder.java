@@ -6,7 +6,6 @@ public abstract class NeighborFinder {
 	private Cell[][] myCellArray;
 	private int myXPosition;
 	private int myYPosition;
-	private ArrayList<Cell> myNeighbors;
 	
 	public NeighborFinder(Cell[][] cells, int xPos, int yPos) {
 		myCellArray = cells;
@@ -26,8 +25,12 @@ public abstract class NeighborFinder {
 		return myYPosition;
 	}
 	
-	protected void setMyNeighbors(ArrayList<Cell> neighbors) {
-		myNeighbors = neighbors;
+	public void setMyXPosition(int x) {
+		myXPosition = x;
+	}
+	
+	public void setMyYPosition(int y) {
+		myYPosition = y;
 	}
 	
 	public abstract ArrayList<Cell> findNeighbors();

@@ -8,6 +8,7 @@ public class SimulationSegregation extends Simulation {
 
 	//	private CellSegregation[][] array;
 	private double satisfactionPercentage;
+	private NeighborFinder neighbors;
 	// 0 is empty, 1 is red, 2 is blue
 
 	public SimulationSegregation(int cellNumberHorizontal, int cellNumberVertical, double emptyPercentage, double satisfactionPercentage,
@@ -21,8 +22,10 @@ public class SimulationSegregation extends Simulation {
 				array[rowNumber][columnNumber]=new CellSegregation(0, null, null, rowNumber, columnNumber);
 			}
 		}
+		neighbors = new EightNeighborFinder(array, 0, 0);
 		this.satisfactionPercentage = satisfactionPercentage;
-		initializeScene();		
+		initializeScene(neighbors);
+//		initializeScene();		
 	}
 
 	@Override

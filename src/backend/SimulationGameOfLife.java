@@ -11,6 +11,7 @@ public class SimulationGameOfLife extends Simulation {
 	private int cellNumberHorizontal;
 	private int cellNumberVertical;
 	private double initialEmptyPercentage;
+	private NeighborFinder neighbors;
 	
 	public SimulationGameOfLife(int cellNumberHorizontal, int cellNumberVertical, double emptyPercentage, 
 			double redToBlueRatio) {
@@ -25,8 +26,10 @@ public class SimulationGameOfLife extends Simulation {
 				array[rowNumber][columnNumber] = new CellGameOfLife(CellGameOfLife.EMPTY, null, null, rowNumber, columnNumber);
 			}
 		}
+		neighbors = new EightNeighborFinder(array, 0, 0);
 		initializeGridStates();
-		findNeighbors();
+//		findNeighbors();
+		assignNeighbors(neighbors);
 	}
 	
 	private void initializeGridStates() {
@@ -97,7 +100,8 @@ public class SimulationGameOfLife extends Simulation {
 				array[i][j].changeState(temp[i][j]);
 			}
 		}
-		findNeighbors();
+//		findNeighbors();
+		assignNeighbors(neighbors);
 		updateColors();
 	}
 	

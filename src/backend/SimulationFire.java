@@ -12,6 +12,7 @@ public class SimulationFire extends Simulation{
 	private int cellNumberVertical;
 	private double probCatch;
 	private double initialEmptyPercentage;
+	private NeighborFinder neighbors;
 
 	public SimulationFire(int cellNumberHorizontal, int  cellNumberVertical, double emptyPercentage, 
 			double redToBlueRatio, double probCatch) {
@@ -28,9 +29,11 @@ public class SimulationFire extends Simulation{
 				array[rowNumber][columnNumber] = new CellFire(CellFire.EMPTY, null, null, rowNumber, columnNumber);
 			}
 		}
+		neighbors = new FourNeighborFinder(array, 0, 0);
 //		System.out.println(numberOfCells);
 		initializeGridStates();
-		findNeighbors();
+//		findNeighbors();
+		assignNeighbors(neighbors);
 	}
 	
 	private void initializeGridStates() {
@@ -66,28 +69,28 @@ public class SimulationFire extends Simulation{
 			array[rand % cellNumberVertical][rand / cellNumberHorizontal].changeState(CellFire.BURNING);
 	}
 	
-	@Override
-	public void findNeighbors() {
-		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
-				Cell cell = array[rowNumber][columnNumber];
-			    ArrayList<Cell> neighbors=new ArrayList<Cell>();
-				if (rowNumber-1>=0) {
-					neighbors.add(array[rowNumber-1][columnNumber]);
-				}
-				if (columnNumber-1>=0) {
-					neighbors.add(array[rowNumber][columnNumber-1]);
-				}
-				if (columnNumber+1<=cellNumberHorizontal-1) {
-					neighbors.add(array[rowNumber][columnNumber+1]);
-				}
-				if (rowNumber+1<=cellNumberVertical-1) {
-					neighbors.add(array[rowNumber+1][columnNumber]);		
-				}
-				cell.setNeighborCells(neighbors);
-			}
-		}
-	}
+//	@Override
+//	public void findNeighbors() {
+//		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
+//			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
+//				Cell cell = array[rowNumber][columnNumber];
+//			    ArrayList<Cell> neighbors=new ArrayList<Cell>();
+//				if (rowNumber-1>=0) {
+//					neighbors.add(array[rowNumber-1][columnNumber]);
+//				}
+//				if (columnNumber-1>=0) {
+//					neighbors.add(array[rowNumber][columnNumber-1]);
+//				}
+//				if (columnNumber+1<=cellNumberHorizontal-1) {
+//					neighbors.add(array[rowNumber][columnNumber+1]);
+//				}
+//				if (rowNumber+1<=cellNumberVertical-1) {
+//					neighbors.add(array[rowNumber+1][columnNumber]);		
+//				}
+//				cell.setNeighborCells(neighbors);
+//			}
+//		}
+//	}
 	
 	public void update() {
 //		System.out.println("fire update");
@@ -109,7 +112,8 @@ public class SimulationFire extends Simulation{
 				array[i][j].changeState(temp[i][j]);
 			}
 		}
-		findNeighbors();
+//		findNeighbors();
+		assignNeighbors(neighbors);
 		updateColors();
 	}
 	

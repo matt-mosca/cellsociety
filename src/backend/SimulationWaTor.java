@@ -10,6 +10,7 @@ public class SimulationWaTor extends Simulation {
 	private int maxStarveDaysForSharks;
 	private int minBreedDaysForSharks;
 	private int minBreedDaysForFish;
+	private NeighborFinder neighbors;
 	
 	// 0 is empty, 1 is shark, 2 is fish
 
@@ -23,36 +24,38 @@ public class SimulationWaTor extends Simulation {
 		super.array = new CellWaTor[cellNumberVertical][cellNumberHorizontal];
 		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
-				super.array[rowNumber][columnNumber]=new CellWaTor(0, null, null, rowNumber, columnNumber);
+				array[rowNumber][columnNumber]=new CellWaTor(0, null, null, rowNumber, columnNumber);
 			}
 		}
-		initializeScene();
+		neighbors = new FourNeighborFinder(array, 0, 0);
+		initializeScene(neighbors);
+//		initializeScene();
 		updateColors();
 	}
 
-	@Override
-	protected void findNeighbors() {
-		//only four neighbors
-		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
-				Cell cell = array[rowNumber][columnNumber];
-			    ArrayList<Cell> neighbors=new ArrayList<Cell>();
-				if (rowNumber-1>=0) {
-					neighbors.add(array[rowNumber-1][columnNumber]);
-				}
-				if (columnNumber-1>=0) {
-					neighbors.add(array[rowNumber][columnNumber-1]);
-				}
-				if (columnNumber+1<=cellNumberHorizontal-1) {
-					neighbors.add(array[rowNumber][columnNumber+1]);
-				}
-				if (rowNumber+1<=cellNumberVertical-1) {
-					neighbors.add(array[rowNumber+1][columnNumber]);
-				}
-				cell.setNeighborCells(neighbors);
-			}
-		}
-	}
+//	@Override
+//	protected void findNeighbors() {
+//		//only four neighbors
+//		for (int rowNumber = 0; rowNumber < cellNumberVertical; rowNumber++) {
+//			for (int columnNumber = 0; columnNumber < cellNumberHorizontal; columnNumber++) {
+//				Cell cell = array[rowNumber][columnNumber];
+//			    ArrayList<Cell> neighbors=new ArrayList<Cell>();
+//				if (rowNumber-1>=0) {
+//					neighbors.add(array[rowNumber-1][columnNumber]);
+//				}
+//				if (columnNumber-1>=0) {
+//					neighbors.add(array[rowNumber][columnNumber-1]);
+//				}
+//				if (columnNumber+1<=cellNumberHorizontal-1) {
+//					neighbors.add(array[rowNumber][columnNumber+1]);
+//				}
+//				if (rowNumber+1<=cellNumberVertical-1) {
+//					neighbors.add(array[rowNumber+1][columnNumber]);
+//				}
+//				cell.setNeighborCells(neighbors);
+//			}
+//		}
+//	}
 	
 	@Override
 	protected Color chooseColor(int state) {
@@ -73,7 +76,7 @@ public class SimulationWaTor extends Simulation {
 	
 		//finish all sharks, eat/breed/die, checked correct
 		ArrayList<Cell> allSharks=findallType(1);
-		System.out.println(allSharks.size());
+//		System.out.println(allSharks.size());
 	
 		for (int sharkNumber = 0; sharkNumber < allSharks.size();sharkNumber++) {
 			CellWaTor shark=(CellWaTor) allSharks.get(sharkNumber);
@@ -117,7 +120,7 @@ public class SimulationWaTor extends Simulation {
 				    shark.setBreedDays(0);
 				}
 			}
-			System.out.println(shark.getStarveDays());
+//			System.out.println(shark.getStarveDays());
 		}
 		ArrayList<Cell> allFish=findallType(2);
 		for (int fishNumber = 0; fishNumber < allFish.size();fishNumber++) {
