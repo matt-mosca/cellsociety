@@ -11,10 +11,33 @@ public class SimulationSegregation extends Simulation {
 	private NeighborFinder neighbors;
 	// 0 is empty, 1 is red, 2 is blue
 
-	public SimulationSegregation(int cellNumberHorizontal, int cellNumberVertical, double emptyPercentage, double satisfactionPercentage,
-			double redToBlueRatio) {
+	public SimulationSegregation(int cellNumberHorizontal, int cellNumberVertical, double emptyPercentage, 
+			double redToBlueRatio,double satisfactionPercentage) {
 		// set up instance variables, put 0s in every cell
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
+		specificSetUp(
+				satisfactionPercentage);
+		
+		initializeScene(neighbors);
+		updateColors();
+		
+
+			
+		
+	
+	}
+	
+	public SimulationSegregation(int cellNumberHorizontal, int cellNumberVertical, int[][]specificLocation,double satisfactionPercentage) {
+		super(cellNumberHorizontal,cellNumberVertical,specificLocation);
+		specificSetUp(
+				satisfactionPercentage);
+		super.initializeScene2(neighbors);
+		updateColors();
+	}
+
+
+	public void specificSetUp(
+			double satisfactionPercentage) {
 		setArray(new CellSegregation[getCellNumberVertical()][getCellNumberHorizontal()]);
 		for (int rowNumber = 0; rowNumber < getCellNumberVertical(); rowNumber++) {
 			for (int columnNumber = 0; columnNumber < getCellNumberHorizontal(); columnNumber++) {
@@ -22,10 +45,11 @@ public class SimulationSegregation extends Simulation {
 			}
 		}
 		neighbors = new EightNeighborFinder(getArray(), 0, 0);
-		this.satisfactionPercentage = satisfactionPercentage;
-		initializeScene(neighbors);
-//		initializeScene();		
+		
 	}
+	
+	
+
 
 	@Override
 	protected Color chooseColor(int state) {
@@ -65,6 +89,7 @@ public class SimulationSegregation extends Simulation {
 				emptyCells.remove(theEmptyReadyForFill);
 			}
 		}
+		updateColors();
 	}
 
 	private List<Cell> findAllEmpty() {
