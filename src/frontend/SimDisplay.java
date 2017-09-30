@@ -195,7 +195,7 @@ public class SimDisplay {
 			if(simName.equals(SEGREGATION_TITLE)) {
 				this.sim = new SimulationSegregation((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
 			}
-			if(simName.equalsIgnoreCase(WATOR_TITLE)) {
+			if(simName.equals(WATOR_TITLE)) {
 				this.sim = new SimulationWaTor((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
 			}
 			playSim();
