@@ -1,6 +1,6 @@
 package backend;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javafx.scene.paint.Color;
 
@@ -10,7 +10,7 @@ public class CellFire extends Cell{
 	public static final int TREE = 1;
 	public static final int BURNING = 2;
 	
-	public CellFire(int state, Color color, ArrayList<Cell> neighborCells, int rowNumber, int columnNumber) {
+	public CellFire(int state, Color color, List<Cell> neighborCells, int rowNumber, int columnNumber) {
 		super(state, color, neighborCells, rowNumber, columnNumber);
 	}
 	

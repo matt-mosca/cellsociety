@@ -5,28 +5,19 @@ import javafx.scene.paint.Color;
 public class SimulationGameOfLife extends Simulation {
 	private static final int UPPERBOUNDARY = 3;
 	private static final int LOWERBOUNDARY = 2;
+	private NeighborFinder neighbors;
 	
-//	private CellGameOfLife[][] array;
-	private int numberOfCells;
-	private int cellNumberHorizontal;
-	private int cellNumberVertical;
-	private double initialEmptyPercentage;
-	
-	public SimulationGameOfLife(int cellNumberHorizontal, int  cellNumberVertical, double emptyPercentage, 
-			double redToBlueRatio) {
+	public SimulationGameOfLife(int cellNumberHorizontal, int cellNumberVertical, double emptyPercentage, double redToBlueRatio) {
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
-		this.initialEmptyPercentage = emptyPercentage;
-		this.numberOfCells = cellNumberHorizontal * cellNumberVertical;
-		this.cellNumberHorizontal = cellNumberHorizontal;
-		this.cellNumberVertical = cellNumberVertical;
-		array = new CellGameOfLife[cellNumberHorizontal][cellNumberVertical];
-		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
-			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
-				array[rowNumber][columnNumber] = new CellGameOfLife(CellGameOfLife.EMPTY, null, null, rowNumber, columnNumber);
+		setArray(new CellGameOfLife[getCellNumberVertical()][getCellNumberHorizontal()]);
+		for (int rowNumber = 0; rowNumber < getCellNumberVertical(); rowNumber++) {
+			for (int columnNumber = 0; columnNumber < getCellNumberHorizontal(); columnNumber++) {
+				getArray()[rowNumber][columnNumber] = new CellGameOfLife(CellGameOfLife.EMPTY, null, null, rowNumber, columnNumber);
 			}
 		}
+		neighbors = new EightNeighborFinder(getArray(), 0, 0);
 		initializeGridStates();
-		findNeighbors();
+		assignNeighbors(neighbors);
 	}
 	
 	private void initializeGridStates() {
@@ -35,21 +26,21 @@ public class SimulationGameOfLife extends Simulation {
 	}
 	
 	private int findNumberEmpty() {
-		int empty = (int) (numberOfCells * initialEmptyPercentage);
+		int empty = (int) (getNumberOfCells() * getEmptyPercentage());
 		return empty;
 	}
 	
 	private void fillGridStates() {
 		int rand = 0;
 		int empty = findNumberEmpty();
-		for(int i = numberOfCells; i > 0; i--) {
+		for(int i = getNumberOfCells(); i > 0; i--) {
 			rand = (int) getRandomNum(i);
 			if(empty > 0 && rand <= empty) {
-					array[(numberOfCells - i) % cellNumberHorizontal][(numberOfCells - i) / cellNumberVertical].changeState(CellGameOfLife.EMPTY);
+					getArray()[(getNumberOfCells() - i) % getCellNumberVertical()][(getNumberOfCells() - i) / getCellNumberHorizontal()].changeState(CellGameOfLife.EMPTY);
 					empty--;
 			}
 			else {
-				array[(numberOfCells - i) % cellNumberHorizontal][(numberOfCells - i) / cellNumberVertical].changeState(CellGameOfLife.LIVE);
+				getArray()[(getNumberOfCells() - i) % getCellNumberVertical()][(getNumberOfCells() - i) / getCellNumberHorizontal()].changeState(CellGameOfLife.LIVE);
 			}
 		}
 	}
@@ -70,16 +61,16 @@ public class SimulationGameOfLife extends Simulation {
 	}
 
 	public void update() {
-		int[][] temp = new int[cellNumberHorizontal][cellNumberVertical];
-		for(int i = 0; i < cellNumberHorizontal; i++) {
-			for(int j = 0; j < cellNumberVertical; j++) {
-				CellGameOfLife cell = (CellGameOfLife)array[i][j];
+		int[][] temp = new int[getCellNumberVertical()][getCellNumberHorizontal()];
+		for(int i = 0; i < getCellNumberVertical(); i++) {
+			for(int j = 0; j < getCellNumberHorizontal(); j++) {
+				CellGameOfLife cell = (CellGameOfLife)getArray()[i][j];
 				int liveCount = 0;
 				for(int k = 0; k < cell.getNeighborCells().size(); k++) {
 					if(cell.getNeighborCells().get(k).getState() == CellGameOfLife.LIVE)
 						liveCount++;
 				}
-				temp[i][j] = array[i][j].getState();
+				temp[i][j] = getArray()[i][j].getState();
 				//Any live cell with two or three live neighbors lives on to the next generation, so do nothing
 				//Any live cell with fewer than two live neighbors dies
 				if(cell.getState() == CellGameOfLife.LIVE && liveCount < LOWERBOUNDARY)
@@ -92,16 +83,12 @@ public class SimulationGameOfLife extends Simulation {
 					temp[i][j] = CellGameOfLife.LIVE;
 			}
 		}
-		for(int i = 0; i < cellNumberHorizontal; i++) {
-			for(int j = 0; j < cellNumberVertical; j++) {
-				array[i][j].changeState(temp[i][j]);
+		for(int i = 0; i < getCellNumberVertical(); i++) {
+			for(int j = 0; j < getCellNumberHorizontal(); j++) {
+				getArray()[i][j].changeState(temp[i][j]);
 			}
 		}
-		findNeighbors();
+		assignNeighbors(neighbors);
 		updateColors();
-	}
-	
-	public void setArray(CellGameOfLife[][] array) {
-		this.array = array;
 	}
 }

@@ -1,12 +1,11 @@
 package backend;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public abstract class NeighborFinder {
 	private Cell[][] myCellArray;
 	private int myXPosition;
 	private int myYPosition;
-	private ArrayList<Cell> myNeighbors;
 	
 	public NeighborFinder(Cell[][] cells, int xPos, int yPos) {
 		myCellArray = cells;
@@ -26,9 +25,13 @@ public abstract class NeighborFinder {
 		return myYPosition;
 	}
 	
-	protected ArrayList<Cell> getMyNeighbors() {
-		return myNeighbors;
+	public void setMyXPosition(int x) {
+		myXPosition = x;
 	}
 	
-	public abstract void findNeighbors();
+	public void setMyYPosition(int y) {
+		myYPosition = y;
+	}
+	
+	public abstract List<Cell> findNeighbors();
 }
