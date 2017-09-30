@@ -9,6 +9,29 @@ public class SimulationFire extends Simulation{
 	public SimulationFire(int cellNumberHorizontal, int  cellNumberVertical, double emptyPercentage, 
 			double redToBlueRatio, double probCatch) {
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
+		specificSetUp(probCatch);
+		
+		initializeGridStates();
+	
+		
+		
+		assignNeighbors(neighbors);
+	}
+	
+	public SimulationFire(int cellNumberHorizontal, int cellNumberVertical, int[][] specificLocation,double probCatch) {
+		super(cellNumberHorizontal,cellNumberVertical,specificLocation);
+		specificSetUp(probCatch);
+         super.initializeScene2(neighbors);
+		
+		
+		assignNeighbors(neighbors);
+		updateColors();
+		
+	}
+	
+
+	public void specificSetUp(
+			double probCatch) {
 		this.probCatch = probCatch;
 		setArray(new CellFire[getCellNumberVertical()][getCellNumberHorizontal()]);
 		for (int rowNumber = 0; rowNumber < getCellNumberVertical(); rowNumber++) {
@@ -17,9 +40,10 @@ public class SimulationFire extends Simulation{
 			}
 		}
 		neighbors = new FourNeighborFinder(getArray(), 0, 0);
-		initializeGridStates();
-		assignNeighbors(neighbors);
 	}
+	
+
+	
 	
 	private void initializeGridStates() {
 		fillGridStates();

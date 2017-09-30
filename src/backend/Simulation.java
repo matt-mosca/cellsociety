@@ -11,6 +11,8 @@ public abstract class Simulation{
 	private double redToBlueRatio;
 	private int cellNumberHorizontal;
 	private int cellNumberVertical;
+	private int[][]specificLocation;
+	private int initialSetting;
 	
 	// 0 is empty, 1 is red, 2 is blue
 
@@ -21,6 +23,25 @@ public abstract class Simulation{
 		this.numberOfCells = cellNumberHorizontal * cellNumberVertical;
 		this.cellNumberHorizontal = cellNumberHorizontal;
 		this.cellNumberVertical = cellNumberVertical;
+		this.setInitialSetting(1);
+		
+	}
+	
+	public Simulation(int cellNumberHorizontal, int cellNumberVertical, int[][] specificLocation) {
+		this.numberOfCells = cellNumberHorizontal * cellNumberVertical;
+		this.cellNumberHorizontal = cellNumberHorizontal;
+		this.cellNumberVertical = cellNumberVertical;
+		this.specificLocation=specificLocation;
+		this.setInitialSetting(2);
+	}
+	
+	protected void initializeScene2(NeighborFinder neighborAssigner) {
+		for(int i = 0; i < cellNumberVertical; i++) {
+			for(int j = 0; j < cellNumberHorizontal; j++) {
+				array[i][j].changeState(specificLocation[i][j]);
+			}
+		}
+		assignNeighbors(neighborAssigner);
 	}
 	
 	
@@ -166,6 +187,15 @@ public abstract class Simulation{
 	
 	protected int getCellNumberVertical() {
 		return cellNumberVertical;
+	}
+
+	public int getInitialSetting() {
+		return initialSetting;
+	}
+
+	public void setInitialSetting(
+			int initialSetting) {
+		this.initialSetting = initialSetting;
 	}
 }
 
