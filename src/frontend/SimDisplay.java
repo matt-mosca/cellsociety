@@ -160,18 +160,15 @@ public class SimDisplay {
 				if (UI.getType()==2) {
 					int[][] fixedInitial={{1,0,1,1,0},{2,0,1,0,0},{0,0,1,2,2},{1,0,2,0,0},{0,0,1,0,0}};
 					this.sim = new SimulationWaTor(fixedInitial.length,fixedInitial[0].length,fixedInitial,(int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
-					
-				
 				}
 				changeSimName(WATOR_TITLE);
-			
-			
 			}
 			if(s.equals(FIRETITLE)) {
 				this.sim = new SimulationFire((int) inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
 				changeSimName(FIRE_TITLE);
 			}
 			if(s.equals(SEGREGATIONTITLE)) {
+				
 				this.sim = new SimulationSegregation((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
 				changeSimName(SEGREGATION_TITLE);
 			}
@@ -295,7 +292,7 @@ public class SimDisplay {
 		animation = new Timeline();
 		animation.setCycleCount(Animation.INDEFINITE);
 		animation.getKeyFrames().add(frame);
-		animation.setRate(10);
+		animation.setRate(5);
 	}
 	
 //	private void changeSpeed(double speed) {
@@ -306,12 +303,12 @@ public class SimDisplay {
 //	}
 	
 	private Slider speedSlider() {
-		Slider s = new Slider(0,20,10);
+		Slider s = new Slider(0,10,5);
 		s.setShowTickLabels(true);
 		s.setShowTickMarks(true);
-		s.setMajorTickUnit(10);
-		s.setMinorTickCount(2);
-		s.setBlockIncrement(2);
+		s.setMajorTickUnit(5);
+		s.setMinorTickCount(1);
+		s.setBlockIncrement(1);
 		s.valueProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
             		animation.setRate(new_val.doubleValue());

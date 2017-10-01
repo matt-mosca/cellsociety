@@ -12,12 +12,12 @@ public class SimulationSegregation extends Simulation {
 	// 0 is empty, 1 is red, 2 is blue
 
 	public SimulationSegregation(int cellNumberHorizontal, int cellNumberVertical, double emptyPercentage, 
-			double redToBlueRatio,double satisfactionPercentage) {
+			double redToBlueRatio,double SatisfactionPercentage) {
 		// set up instance variables, put 0s in every cell
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
+		satisfactionPercentage = SatisfactionPercentage;
 		specificSetUp(
 				satisfactionPercentage);
-		
 		initializeScene(neighbors);
 		updateColors();
 		
@@ -74,6 +74,7 @@ public class SimulationSegregation extends Simulation {
 				if (cell.getState() == 0) {continue;}
 				else if (!whetherSatisfied(cell)) {
 					dissatisfied.add(cell);	
+					System.out.println(dissatisfied.size());
 				}
 			}
 		}
@@ -111,7 +112,7 @@ public class SimulationSegregation extends Simulation {
 		int countSatisfied = 0;
 		for (int i = 0;i<neighbors.size();i++) {
 			if (neighbors.get(i).getState() != 0) {
-				countFilled++;
+				countFilled++; 
 				if (neighbors.get(i).getState() == cell.getState()) {
 					countSatisfied++;
 				}
@@ -119,6 +120,8 @@ public class SimulationSegregation extends Simulation {
 		}
 		if (countFilled == 0) {return true;}
 		double satisfaction = (double)countSatisfied / (double)countFilled;
+		System.out.println(satisfaction);
+		System.out.println("required percentage:" + satisfactionPercentage);
 		if (satisfaction >= satisfactionPercentage) {
 			return true;	
 		}
