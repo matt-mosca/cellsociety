@@ -9,6 +9,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -17,6 +21,9 @@ public class UserInput {
 	private static final String SEGREGATIONTITLE = "Segregation";
 	private static final String FIRETITLE = "Fire";
 	private static final String WATORTITLE = "WaTor";
+	
+	  private Document doc;
+	  private String simulationType;
 	
 	  private int type;
 
@@ -48,24 +55,40 @@ public class UserInput {
 		
 	    try {
 	    
-		Document doc = getFile("Segregation.xml");
+
+		doc = getFile("Segregation.xml");
+	
 		doc.getDocumentElement().normalize();
-		String simulationType=doc.getElementsByTagName("name").item(0).getTextContent();
-		String satisfactionPercentage = doc.getElementsByTagName("satisfactionPercentage").item(0).getTextContent();
-//		finalParams = new String[SEG_ARRAY_LENGTH];
-		double[] basic = new double[1];
-		basic[0] = Double.parseDouble(satisfactionPercentage);
-		getInitialSetUp(doc, basic);
-//		makeFinalArray(fun);
+		simulationType=doc.getElementsByTagName("name").item(0).getTextContent();
+		
+		segregationSetUpWithoutType();
+
 		
 		
 			
 		
 	    } catch (Exception e) {
-		e.printStackTrace();
+	    	    if (simulationType==null) {
+		    showError("Simulation name is not given, will use the default value");
+			simulationType="Segregation";
+			segregationSetUpWithoutType();
+	    	    }
+			
+		
 	    }
 //	    return finalParams;
 	  }
+
+
+	public void segregationSetUpWithoutType() {
+		
+		
+		String satisfactionPercentage = doc.getElementsByTagName("satisfactionPercentage").item(0).getTextContent();
+
+		double[] basic = new double[1];
+		basic[0] = Double.parseDouble(satisfactionPercentage);
+		getInitialSetUp(doc, basic);
+	}
 	  
 	  
 	  private void getWaTor() {
@@ -73,8 +96,25 @@ public class UserInput {
 		
 	    try {
 	    
-		Document doc = getFile("WaTor.xml");
-		doc.getDocumentElement().normalize();	
+		doc = getFile("WaTor.xml");
+		doc.getDocumentElement().normalize();
+		simulationType=doc.getElementsByTagName("name").item(0).getTextContent();
+		
+		waTorSetUpWithoutType();
+//		makeFinalArray();
+	    } catch (Exception e) {
+		    if (simulationType==null) {
+		    	   showError("Simulation name is not given, will use the default value");
+			   simulationType="WaTor";
+		    	   waTorSetUpWithoutType();
+		    	
+		    }
+	    }
+//	    return finalParams;
+	  }
+
+
+	public void waTorSetUpWithoutType() {
 		String minBreedDaysForSharks = doc.getElementsByTagName("minBreedDaysForSharks").item(0).getTextContent();
 		String minBreedDaysForFish = doc.getElementsByTagName("minBreedDaysForFish").item(0).getTextContent();
 		String maxStarveDaysForSharks = doc.getElementsByTagName("maxStarveDaysForSharks").item(0).getTextContent();
@@ -83,12 +123,7 @@ public class UserInput {
 		basic[1] = Double.parseDouble(minBreedDaysForSharks);
 		basic[2] = Double.parseDouble(minBreedDaysForFish);
 		getInitialSetUp(doc, basic);
-//		makeFinalArray();
-	    } catch (Exception e) {
-		e.printStackTrace();
-	    }
-//	    return finalParams;
-	  }
+	}
 	  
 	
 
@@ -99,38 +134,55 @@ public class UserInput {
 			
 		    try {
 		    
-			Document doc = getFile("Fire.xml");
-			doc.getDocumentElement().normalize();	
-		    String probCatch = doc.getElementsByTagName("probCatch").item(0).getTextContent();
-//		    finalParams = new String[SEG_ARRAY_LENGTH];
-		    double[] basic = new double[1];
-		    basic[0] = Double.parseDouble(probCatch);
-			getInitialSetUp(doc, basic);
-//			makeFinalArray(fun);
+			doc = getFile("Fire.xml");
+			doc.getDocumentElement().normalize();
+			simulationType=doc.getElementsByTagName("name").item(0).getTextContent();
+		    fireSetUpWithoutType();
+
 			
 			
 				
 			
 		    } catch (Exception e) {
-			e.printStackTrace();
+		    	if (simulationType==null) {
+			    	   showError("Simulation name is not given, will use the default value");
+				   simulationType="Fire";
+			    	   fireSetUpWithoutType();
+			    	
+			    }
 		    }
 //			return finalParams;
      }
+
+
+	public void fireSetUpWithoutType() {
+		String probCatch = doc.getElementsByTagName("probCatch").item(0).getTextContent();
+
+		double[] basic = new double[1];
+		basic[0] = Double.parseDouble(probCatch);
+		getInitialSetUp(doc, basic);
+	}
 	  
 	  public void getGameOfLife() {
 			
 			
 		    try {
 		    
-			Document doc = getFile("GameOfLife.xml");
-			doc.getDocumentElement().normalize();	
+			doc = getFile("GameOfLife.xml");
+			doc.getDocumentElement().normalize();
+			simulationType=doc.getElementsByTagName("name").item(0).getTextContent();
 			getInitialSetUp(doc, null);
 //			makeFinalArray(fun);
 			
 				
 			
 		    } catch (Exception e) {
-			e.printStackTrace();
+		    	if (simulationType==null) {
+			    	   showError("Simulation name is not given, will use the default value");
+				   simulationType="Game Of Life";
+				   getInitialSetUp(doc, null);
+			    	
+			    }
 		    }
 //			return finalParams;
    }
@@ -192,6 +244,14 @@ public class UserInput {
 	public void setType(int type) {
 		this.type = type;
 	}
+	
+	public void showError (String message) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 			
 	
 
