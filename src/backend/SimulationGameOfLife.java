@@ -64,11 +64,11 @@ public class SimulationGameOfLife extends Simulation {
 		for(int i = getNumberOfCells(); i > 0; i--) {
 			rand = (int) getRandomNum(i);
 			if(empty > 0 && rand <= empty) {
-					getArray()[(getNumberOfCells() - i) % getCellNumberHorizontal()][(getNumberOfCells() - i) / getCellNumberVertical()].changeState(CellGameOfLife.EMPTY);
+					getArray()[(getNumberOfCells() - i) / getCellNumberVertical()][(getNumberOfCells() - i) % getCellNumberVertical()].changeState(CellGameOfLife.EMPTY);
 					empty--;
 			}
 			else {
-				getArray()[(getNumberOfCells() - i) % getCellNumberHorizontal()][(getNumberOfCells() - i) / getCellNumberVertical()].changeState(CellGameOfLife.LIVE);
+				getArray()[(getNumberOfCells() - i) / getCellNumberVertical()][(getNumberOfCells() - i) % getCellNumberVertical()].changeState(CellGameOfLife.LIVE);
 			}
 		}
 	}
@@ -89,7 +89,7 @@ public class SimulationGameOfLife extends Simulation {
 	}
 
 	public void update() {
-		int[][] temp = new int[getCellNumberVertical()][getCellNumberHorizontal()];
+		int[][] temp = new int[getCellNumberHorizontal()][getCellNumberVertical()];
 		for(int i = 0; i < getCellNumberHorizontal(); i++) {
 			for(int j = 0; j < getCellNumberVertical(); j++) {
 				CellGameOfLife cell = (CellGameOfLife)getArray()[i][j];
@@ -111,8 +111,8 @@ public class SimulationGameOfLife extends Simulation {
 					temp[i][j] = CellGameOfLife.LIVE;
 			}
 		}
-		for(int i = 0; i < getCellNumberVertical(); i++) {
-			for(int j = 0; j < getCellNumberHorizontal(); j++) {
+		for(int i = 0; i < getCellNumberHorizontal(); i++) {
+			for(int j = 0; j < getCellNumberVertical(); j++) {
 				getArray()[i][j].changeState(temp[i][j]);
 			}
 		}

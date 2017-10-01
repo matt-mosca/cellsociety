@@ -37,7 +37,7 @@ public class UserSaveSimulation{
 			    array = new int[maxRowNumber][maxColumnNumber];
                 for  (int i=0;i<maxRowNumber;i++) {
                 	     for (int j=0;j<maxColumnNumber;j++) {
-                	    	     char t=cells.charAt(i*maxRowNumber+j);
+                	    	     char t=cells.charAt(i*maxColumnNumber+j);
                 	    	     array[i][j]=Character.getNumericValue(t) ;
                 	    	    
                 	     }
@@ -84,8 +84,8 @@ public class UserSaveSimulation{
 			
 			//set config
 			Node cellNumberHorizontal = doc.getElementsByTagName("cellNumberHorizontal").item(0);
-			int i=needSave[0].length;
-			int j=needSave.length;
+			int i=needSave.length;
+			int j=needSave[0].length;
 			cellNumberHorizontal.setTextContent(Integer.toString(i));
 			
 			Node cellNumberVertical = doc.getElementsByTagName("cellNumberVertical").item(0);
@@ -94,8 +94,8 @@ public class UserSaveSimulation{
 			Node config = doc.getElementsByTagName("config").item(0);
 			
 			String configCells="";
-			for (int rowNumber = 0; rowNumber < needSave[0].length; rowNumber++) {
-				for (int columnNumber = 0; columnNumber < needSave.length; columnNumber++) {
+			for (int rowNumber = 0; rowNumber < needSave.length; rowNumber++) {
+				for (int columnNumber = 0; columnNumber < needSave[0].length; columnNumber++) {
 					configCells=configCells+needSave[rowNumber][columnNumber].getState();
 				}
 			}

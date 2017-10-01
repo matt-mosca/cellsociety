@@ -33,7 +33,7 @@ public class SimulationFire extends Simulation{
 	public void specificSetUp(
 			double probCatch) {
 		this.probCatch = probCatch;
-		setArray(new CellFire[getCellNumberVertical()][getCellNumberHorizontal()]);
+		setArray(new CellFire[getCellNumberHorizontal()][getCellNumberVertical()]);
 		for (int rowNumber = 0; rowNumber < getCellNumberHorizontal(); rowNumber++) {
 			for (int columnNumber = 0; columnNumber < getCellNumberVertical(); columnNumber++) {
 				getArray()[rowNumber][columnNumber] = new CellFire(CellFire.EMPTY, null, null, rowNumber, columnNumber);
@@ -62,11 +62,11 @@ public class SimulationFire extends Simulation{
 		for(int i = getNumberOfCells(); i > 0; i--) {
 			rand = (int) getRandomNum(i);
 			if(empty > 0 && rand <= empty) {
-					getArray()[(getNumberOfCells() - i) % getCellNumberHorizontal()][(getNumberOfCells() - i) / getCellNumberVertical()].changeState(CellFire.EMPTY);
+					getArray()[(getNumberOfCells() - i) / getCellNumberVertical()][(getNumberOfCells() - i) % getCellNumberVertical()].changeState(CellFire.EMPTY);
 					empty--;
 			}
 			else {
-				getArray()[(getNumberOfCells() - i) % getCellNumberHorizontal()][(getNumberOfCells() - i) / getCellNumberVertical()].changeState(CellFire.TREE);
+				getArray()[(getNumberOfCells() - i) / getCellNumberVertical()][(getNumberOfCells() - i) % getCellNumberVertical()].changeState(CellFire.TREE);
 			}
 		}
 	}
@@ -74,13 +74,13 @@ public class SimulationFire extends Simulation{
 	private void setRandomFire() {
 		int rand = (int) getRandomNum(getNumberOfCells());
 		if(getCellNumberVertical() != 0)
-			getArray()[rand % getCellNumberVertical()][rand / getCellNumberHorizontal()].changeState(CellFire.BURNING);
+			getArray()[rand / getCellNumberVertical()][rand % getCellNumberVertical()].changeState(CellFire.BURNING);
 	}
 	
 	public void update() {
-		int[][] temp = new int[getCellNumberVertical()][getCellNumberHorizontal()];
-		for(int i = 0; i < getCellNumberVertical(); i++) {
-			for(int j = 0; j < getCellNumberHorizontal(); j++) {
+		int[][] temp = new int[getCellNumberHorizontal()][getCellNumberVertical()];
+		for(int i = 0; i < getCellNumberHorizontal(); i++) {
+			for(int j = 0; j < getCellNumberVertical(); j++) {
 				temp[i][j] = getArray()[i][j].getState();
 				if(getArray()[i][j].getState() == CellFire.BURNING)
 					temp[i][j] = CellFire.EMPTY;
@@ -91,8 +91,8 @@ public class SimulationFire extends Simulation{
 				}
 			}
 		}
-		for(int i = 0; i < getCellNumberVertical(); i++) {
-			for(int j = 0; j < getCellNumberHorizontal(); j++) {
+		for(int i = 0; i < getCellNumberHorizontal(); i++) {
+			for(int j = 0; j < getCellNumberVertical(); j++) {
 				getArray()[i][j].changeState(temp[i][j]);
 			}
 		}
