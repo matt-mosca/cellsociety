@@ -27,8 +27,9 @@ public class SimulationSegregation extends Simulation {
 	
 	}
 	
-	public SimulationSegregation(int cellNumberHorizontal, int cellNumberVertical, int[][]specificLocation,double satisfactionPercentage) {
+	public SimulationSegregation(int cellNumberHorizontal, int cellNumberVertical, int[][]specificLocation,double SatisfactionPercentage) {
 		super(cellNumberHorizontal,cellNumberVertical,specificLocation);
+		satisfactionPercentage = SatisfactionPercentage;
 		specificSetUp(
 				satisfactionPercentage);
 		super.initializeScene2(neighbors);
@@ -120,8 +121,6 @@ public class SimulationSegregation extends Simulation {
 		}
 		if (countFilled == 0) {return true;}
 		double satisfaction = (double)countSatisfied / (double)countFilled;
-		System.out.println(satisfaction);
-		System.out.println("required percentage:" + satisfactionPercentage);
 		if (satisfaction >= satisfactionPercentage) {
 			return true;	
 		}
