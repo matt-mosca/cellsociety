@@ -60,11 +60,11 @@ public class SimDisplay {
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	
 	private Scene scene;
-	private Cell[][] Cells;
+//	private Cell[][] Cells;
 	private int width;
 	private int height;
-	private GridPane myGrid;
-	private Rectangle[][] Rectangles;
+//	private GridPane myGrid;
+//	private Rectangle[][] Rectangles;
 	private String simName;
 	private Stage window;
 	private Simulation sim;
@@ -73,8 +73,8 @@ public class SimDisplay {
 	private Timeline animation;
 	private BorderPane border;
 	private ResourceBundle myResources;
-	
-	//for extension: save scene
+	private GridDisplay myGrid;
+	//for save scene
 	private UserSaveSimulation saveUI=new UserSaveSimulation();
 
 	
@@ -91,13 +91,14 @@ public class SimDisplay {
 	
 	private Scene makeSimulation(){
 		border = new BorderPane();
-		this.Cells = sim.getArray();
-		Rectangles = makeRectangleArray(Cells);
-		makeGrid();
-		fillGrid();
+		myGrid = new GridDisplay(sim);
+//		this.Cells = sim.getArray();
+//		Rectangles = makeRectangleArray(Cells);
+//		makeGrid();
+//		fillGrid();
 		Scene fun = new Scene(border, width, height);
-		border.setCenter(myGrid);
-		myGrid.setAlignment(Pos.CENTER);
+		border.setCenter(myGrid.getGrid());
+//		myGrid.setAlignment(Pos.CENTER);
 		//This could use some serious refactoring, potentially creating a new class for just all of the buttons seems
 		//to make sense.
 		HBox controls = new HBox(VBOX_SPACING);
@@ -181,7 +182,8 @@ public class SimDisplay {
 		Button b = new Button(myResources.getString("savebutton"));
 		b.setOnAction(e -> {
 			animation.pause();
-			saveUI.save(Cells,simName);
+//			saveUI.save(Cells,simName);
+			saveUI.save(sim.getArray(), simName);
 		
 			
 			
@@ -259,7 +261,7 @@ public class SimDisplay {
 			if(simName.equals(SEGREGATION_TITLE)) {
 				this.sim = new SimulationSegregation((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
 			}
-			if(simName.equalsIgnoreCase(WATOR_TITLE)) {
+			if(simName.equals(WATOR_TITLE)) {
 				this.sim = new SimulationWaTor((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
 			}
 			playSim();
@@ -267,42 +269,42 @@ public class SimDisplay {
 		return b;
 	}
 	
-	private GridPane makeGrid(){
-		GridPane grid = new GridPane();
-		grid.setPrefHeight(GRID_FIT_CONSTANT);
-		grid.setPrefWidth(GRID_FIT_CONSTANT);
-		grid.getColumnConstraints().add(new ColumnConstraints(GRID_FIT_CONSTANT / Cells[0].length));
-		grid.getRowConstraints().add(new RowConstraints(GRID_FIT_CONSTANT / Cells.length));
-		myGrid=grid;
-		return myGrid;
-	}
+//	private GridPane makeGrid(){
+//		GridPane grid = new GridPane();
+//		grid.setPrefHeight(GRID_FIT_CONSTANT);
+//		grid.setPrefWidth(GRID_FIT_CONSTANT);
+//		grid.getColumnConstraints().add(new ColumnConstraints(GRID_FIT_CONSTANT / Cells[0].length));
+//		grid.getRowConstraints().add(new RowConstraints(GRID_FIT_CONSTANT / Cells.length));
+//		myGrid=grid;
+//		return myGrid;
+//	}
+//
+//	
+//	
+//	
+//	private void fillGrid() {
+//		myGrid.getChildren().clear();
+//		for(int i=0;i<Cells.length;i++) {
+//			for (int j=0; j<Cells[i].length; j++) {
+//				myGrid.add(Rectangles[i][j], j, i);
+//			}
+//		}
+//	}
 
-	
-	
-	
-	private void fillGrid() {
-		myGrid.getChildren().clear();
-		for(int i=0;i<Cells.length;i++) {
-			for (int j=0; j<Cells[i].length; j++) {
-				myGrid.add(Rectangles[i][j], j, i);
-			}
-		}
-	}
-
-	private Rectangle[][] makeRectangleArray(Cell[][] cells) {
-		Rectangle[][] recs = new Rectangle[cells.length][Cells[0].length];
-		for(int i=0; i<cells.length; i++) {
-			for(int j=0; j<cells[i].length; j++) {
-				recs[i][j] = new Rectangle();
-				recs[i][j].setStroke(Color.BLACK);
-				recs[i][j].setFill(cells[i][j].getColor());
-				recs[i][j].setWidth(GRID_FIT_CONSTANT / Cells[0].length);
-				recs[i][j].setHeight(GRID_FIT_CONSTANT / Cells.length);
-			}
-		}
-		this.Rectangles = recs;
-		return this.Rectangles;
-	}
+//	private Rectangle[][] makeRectangleArray(Cell[][] cells) {
+//		Rectangle[][] recs = new Rectangle[cells.length][Cells[0].length];
+//		for(int i=0; i<cells.length; i++) {
+//			for(int j=0; j<cells[i].length; j++) {
+//				recs[i][j] = new Rectangle();
+//				recs[i][j].setStroke(Color.BLACK);
+//				recs[i][j].setFill(cells[i][j].getColor());
+//				recs[i][j].setWidth(GRID_FIT_CONSTANT / Cells[0].length);
+//				recs[i][j].setHeight(GRID_FIT_CONSTANT / Cells.length);
+//			}
+//		}
+//		this.Rectangles = recs;
+//		return this.Rectangles;
+//	}
 
 	
 	public void changeSimName(String s) {
@@ -320,23 +322,22 @@ public class SimDisplay {
 	
 	private void step() {
 		sim.update();
-		Cells = sim.getArray(); //I can't help but feel that this is stupidly inefficient. Is there an easier way? - V 
-		//I don't think you guys are updating this array in the backend, because I'm not getting an animation. 
-		updateColorArray(Cells);
-		fillGrid();
-		myGrid.setGridLinesVisible(true);
-		
+//		Cells = sim.getArray(); //I can't help but feel that this is stupidly inefficient. Is there an easier way? - V 
+//		//I don't think you guys are updating this array in the backend, because I'm not getting an animation. 
+//		updateColorArray(Cells);
+//		fillGrid();
+		myGrid.update();
 	}
 	
-	private void updateColorArray(Cell[][] cells) {
-		for (int i=0; i<cells.length; i++) {
-			for(int j=0; j<cells[i].length; j++) {
-				this.Rectangles[i][j].setFill(cells[i][j].getColor()); //the n^2 algo is really starting to make me sad, but I'm not sure how to get it to be faster. Suggestions? -V
-				
-			}
-		}
-		
-	}
+//	private void updateColorArray(Cell[][] cells) {
+//		for (int i=0; i<cells.length; i++) {
+//			for(int j=0; j<cells[i].length; j++) {
+//				this.Rectangles[i][j].setFill(cells[i][j].getColor()); //the n^2 algo is really starting to make me sad, but I'm not sure how to get it to be faster. Suggestions? -V
+//				
+//			}
+//		}
+//		
+//	}
 
 	private void playSim() {
 		this.scene = makeSimulation();
