@@ -11,7 +11,7 @@ import javafx.scene.shape.Rectangle;
 
 public class GridDisplay {
 	
-	private static final int GRID_FIT_CONSTANT = 650;
+	private static final int GRID_FIT_CONSTANT = 550;
 	private GridPane myGrid;
 	private Cell[][] Cells;
 	private Rectangle[][] Rectangles;
