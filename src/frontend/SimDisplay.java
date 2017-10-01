@@ -167,6 +167,7 @@ public class SimDisplay {
 			}
 			if(s.equals(SEGREGATIONTITLE)) {
 				segregationConstruct();
+				changeSimName(SEGREGATION_TITLE);
 			}
 			if(s.equals(GAMEOFLIFETITLE)) {
 				gameOfLifeConstruct();
@@ -221,7 +222,7 @@ public class SimDisplay {
 			getStartScene();
 			window.setScene(scene);
 			});
-		return b;
+		return b;	
 		
 	}
 	
