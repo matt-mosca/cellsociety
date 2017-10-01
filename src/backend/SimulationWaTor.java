@@ -54,8 +54,8 @@ public class SimulationWaTor extends Simulation {
 		this.minBreedDaysForSharks = minBreedDaysForSharks;
 		this.minBreedDaysForFish = minBreedDaysForFish;
 		setArray(new CellWaTor[getCellNumberVertical()][getCellNumberHorizontal()]);
-		for (int rowNumber = 0; rowNumber < getCellNumberVertical(); rowNumber++) {
-			for (int columnNumber = 0; columnNumber < getCellNumberHorizontal(); columnNumber++) {
+		for (int rowNumber = 0; rowNumber < getCellNumberHorizontal(); rowNumber++) {
+			for (int columnNumber = 0; columnNumber < getCellNumberVertical(); columnNumber++) {
 				getArray()[rowNumber][columnNumber] = new CellWaTor(0, null, null, rowNumber, columnNumber);
 			}
 		}

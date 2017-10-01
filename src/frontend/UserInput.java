@@ -17,19 +17,9 @@ public class UserInput {
 	private static final String SEGREGATIONTITLE = "Segregation";
 	private static final String FIRETITLE = "Fire";
 	private static final String WATORTITLE = "WaTor";
-//	private static final int NORMAL_ARRAY_LENGTH = 5;
-//	private static final int WATOR_ARRAY_LENGTH = 8;
-//	private static final int SEG_ARRAY_LENGTH = 6;
-//	  private String title;
-//	  private String cellNumberHorizontal;
-//	  private String cellNumberVertical;
-//	  private String emptyPercentage;
-//	  private String redToBlueRatio;
-//	  private String satisfactionPercentage;
-//	  private String minBreedDaysForSharks;
-//	  private String minBreedDaysForFish;
-//	  private String maxStarveDaysForSharks;
-//	  private String probCatch;
+	
+	  private int type;
+
 	  private double [] finalParams;
 	  
 	  public UserInput() {
@@ -166,11 +156,14 @@ public class UserInput {
 		String cellNumberVertical = doc.getElementsByTagName("cellNumberVertical").item(0).getTextContent();
 		String emptyPercentage = doc.getElementsByTagName("emptyPercentage").item(0).getTextContent();
 		String redToBlueRatio = doc.getElementsByTagName("redToBlueRatio").item(0).getTextContent();
+		String typeS = doc.getElementsByTagName("type").item(0).getTextContent();
+		type=Integer.parseInt(typeS);
 //		things[0] = title;
 		things[0] = Double.parseDouble(cellNumberHorizontal);
 		things[1] = Double.parseDouble(cellNumberVertical);
 		things[2] = Double.parseDouble(emptyPercentage);
 		things[3] = Double.parseDouble(redToBlueRatio);
+		
 		makeFinalArray(things, second);
 //		return things;
 	}
@@ -189,6 +182,16 @@ public class UserInput {
 		   }
 		   this.finalParams = thing;
 		  }
+
+
+	public int getType() {
+		return type;
+	}
+
+
+	public void setType(int type) {
+		this.type = type;
+	}
 			
 	
 

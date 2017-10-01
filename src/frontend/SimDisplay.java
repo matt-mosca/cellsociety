@@ -76,7 +76,10 @@ public class SimDisplay {
 	private GridDisplay myGrid;
 	//for save scene
 	private UserSaveSimulation saveUI=new UserSaveSimulation();
-	private Cell[][] savedCells;
+
+	
+	//for extension: set up the scene using fixed locations
+	
 	
 	
 	public SimDisplay(int x, int y, Stage s, String filename) {
@@ -137,14 +140,26 @@ public class SimDisplay {
 	}
 	
 	
+	
+	
 	private Button chooseScene(String s){
 		Button b = new Button(s);
 		b.setPrefSize(100, 50);
 		b.setOnAction(e -> {
 			inputArray = UI.getArray(s);
 			if(s.equals(WATORTITLE)) {
+				if (UI.getType()==1) {
 				this.sim = new SimulationWaTor((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
+				}
+				if (UI.getType()==2) {
+					int[][] fixedInitial={{1,0,1,1,0},{2,0,1,0,0},{0,0,1,2,2},{1,0,2,0,0},{0,0,1,0,0}};
+					this.sim = new SimulationWaTor(fixedInitial.length,fixedInitial[0].length,fixedInitial,(int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
+					
+				
+				}
 				changeSimName(WATOR_TITLE);
+			
+			
 			}
 			if(s.equals(FIRETITLE)) {
 				this.sim = new SimulationFire((int) inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3], inputArray[4]);

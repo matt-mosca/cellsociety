@@ -23,7 +23,7 @@ public class UserSaveSimulation{
 
 	
 	public int[][] getBack(){
-		  int array[][]=null;
+		  int array[][] = null;
 		  try {
 			   
 			    Document doc = getFile("SavedData.xml");

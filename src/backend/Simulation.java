@@ -36,8 +36,10 @@ public abstract class Simulation{
 	}
 	
 	protected void initializeScene2(NeighborFinder neighborAssigner) {
-		for(int i = 0; i < cellNumberVertical; i++) {
-			for(int j = 0; j < cellNumberHorizontal; j++) {
+		System.out.println(cellNumberHorizontal);
+		System.out.println(cellNumberVertical);
+		for(int i = 0; i < cellNumberHorizontal; i++) {
+			for(int j = 0; j < cellNumberVertical; j++) {
 				array[i][j].changeState(specificLocation[i][j]);
 			}
 		}
