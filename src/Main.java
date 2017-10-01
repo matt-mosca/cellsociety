@@ -25,14 +25,14 @@ public class Main extends Application{
 		window = primaryStage;
 		s = new SimDisplay(SIZEx, SIZEy, window, "English_Text");
 		window.setTitle(INITIAL_TITLE);
-		myScene = getStartScene(s);
+		myScene = s.getStartScene();
 		window.setScene(myScene);
 		window.show();
 	}
 	
-	public Scene getStartScene(SimDisplay sim) {
-		return sim.startScreen();
-	}
+//	public Scene getStartScene(SimDisplay sim) {
+//		return sim.startScreen();
+//	}
 	
 	public static void main(String[] args) {
 		launch(args);

@@ -103,7 +103,8 @@ public class SimDisplay {
 		Button reset = resetButton();
 		Button save=saveButton();
 		Button resume=resumeButton();
-		controls.getChildren().addAll(play, pause, step, reset,save,resume);
+		Button switcher=switchSim();
+		controls.getChildren().addAll(play, pause, step, reset,save,resume, switcher);
 		
 		GridPane sliders = new GridPane();
 		sliders.setVgap(10);
@@ -121,7 +122,7 @@ public class SimDisplay {
 	}
 	
 	
-	public Scene startScreen() {
+	private Scene startScreen() {
 		VBox layout = new VBox(VBOX_SPACING);
 		Scene startScene= new Scene(layout, width, height);
 		layout.setAlignment(Pos.CENTER);
@@ -145,6 +146,9 @@ public class SimDisplay {
 		return this.scene;
 	}
 	
+	public Scene getStartScene() {
+		return startScreen();
+	}
 	
 	
 	
@@ -195,7 +199,13 @@ public class SimDisplay {
 	}
 	
 	private Button switchSim() {
-		return null;
+		Button b = new Button(myResources.getString("switchbutton"));
+		b.setOnAction(e ->{
+			animation.pause();
+			getStartScene();
+			window.setScene(scene);
+			});
+		return b;
 		
 	}
 	
