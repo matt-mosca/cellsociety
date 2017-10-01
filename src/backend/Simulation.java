@@ -86,9 +86,9 @@ public abstract class Simulation{
 		for (int i = 0; i < slots.length; i++) {
 			int position = slots[i];
 			int rowNumber = (int) (position
-					/ cellNumberHorizontal);
+					/ cellNumberVertical);
 			int columnNumber = position
-					% cellNumberHorizontal;
+					% cellNumberVertical;
 			array[rowNumber][columnNumber]
 					.changeState(state);
 			array[rowNumber][columnNumber].setColor(chooseColor(state));
