@@ -40,9 +40,9 @@ public class SimulationGameOfLife extends Simulation {
 	
 
 	public void specificSetUp() {
-		setArray(new CellGameOfLife[getCellNumberVertical()][getCellNumberHorizontal()]);
-		for (int rowNumber = 0; rowNumber < getCellNumberVertical(); rowNumber++) {
-			for (int columnNumber = 0; columnNumber < getCellNumberHorizontal(); columnNumber++) {
+		setArray(new CellGameOfLife[getCellNumberHorizontal()][getCellNumberVertical()]);
+		for (int rowNumber = 0; rowNumber < getCellNumberHorizontal(); rowNumber++) {
+			for (int columnNumber = 0; columnNumber < getCellNumberVertical(); columnNumber++) {
 				getArray()[rowNumber][columnNumber] = new CellGameOfLife(CellGameOfLife.EMPTY, null, null, rowNumber, columnNumber);
 			}
 		}
@@ -64,11 +64,11 @@ public class SimulationGameOfLife extends Simulation {
 		for(int i = getNumberOfCells(); i > 0; i--) {
 			rand = (int) getRandomNum(i);
 			if(empty > 0 && rand <= empty) {
-					getArray()[(getNumberOfCells() - i) % getCellNumberVertical()][(getNumberOfCells() - i) / getCellNumberHorizontal()].changeState(CellGameOfLife.EMPTY);
+					getArray()[(getNumberOfCells() - i) % getCellNumberHorizontal()][(getNumberOfCells() - i) / getCellNumberVertical()].changeState(CellGameOfLife.EMPTY);
 					empty--;
 			}
 			else {
-				getArray()[(getNumberOfCells() - i) % getCellNumberVertical()][(getNumberOfCells() - i) / getCellNumberHorizontal()].changeState(CellGameOfLife.LIVE);
+				getArray()[(getNumberOfCells() - i) % getCellNumberHorizontal()][(getNumberOfCells() - i) / getCellNumberVertical()].changeState(CellGameOfLife.LIVE);
 			}
 		}
 	}
@@ -90,8 +90,8 @@ public class SimulationGameOfLife extends Simulation {
 
 	public void update() {
 		int[][] temp = new int[getCellNumberVertical()][getCellNumberHorizontal()];
-		for(int i = 0; i < getCellNumberVertical(); i++) {
-			for(int j = 0; j < getCellNumberHorizontal(); j++) {
+		for(int i = 0; i < getCellNumberHorizontal(); i++) {
+			for(int j = 0; j < getCellNumberVertical(); j++) {
 				CellGameOfLife cell = (CellGameOfLife)getArray()[i][j];
 				int liveCount = 0;
 				for(int k = 0; k < cell.getNeighborCells().size(); k++) {
