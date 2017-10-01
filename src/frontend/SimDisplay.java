@@ -156,8 +156,7 @@ public class SimDisplay {
 			if(s.equals(WATORTITLE)) {
 				if (UI.getType()==1) {
 				    this.sim = new SimulationWaTor((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
-				}
-				if (UI.getType()==2) {
+				}else{
 					int[][] fixedInitial={{1,0,1,1,0},{0,0,1,2,2},{1,0,2,0,0},{0,0,1,0,0}};
 					this.sim = new SimulationWaTor(fixedInitial.length,fixedInitial[0].length,fixedInitial,(int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
 				}
@@ -166,8 +165,7 @@ public class SimDisplay {
 			if(s.equals(FIRETITLE)) {
 				if (UI.getType()==1) {
 				    this.sim = new SimulationFire((int) inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
-				}
-				if (UI.getType()==2) {
+				}else{
 					int[][] fixedInitial={{1,0,1,1,0},{2,0,1,0,0},{0,0,1,0,0},{1,0,2,0,0},{0,0,1,0,0},{1,1,1,1,1}};
 					this.sim = new SimulationFire(fixedInitial.length,fixedInitial[0].length,fixedInitial, inputArray[4]);
 				}
@@ -176,8 +174,7 @@ public class SimDisplay {
 			if(s.equals(SEGREGATIONTITLE)) {
 				if (UI.getType()==1) {
 				    this.sim = new SimulationSegregation((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
-				}
-				if (UI.getType()==2) {
+				} else {
 					int[][] fixedInitial={{1,0,1,1,0},{2,0,1,0,0},{0,0,1,0,0},{1,0,2,0,0},{0,0,1,0,0},{1,1,1,1,1}};
 					this.sim = new SimulationSegregation(fixedInitial.length,fixedInitial[0].length,fixedInitial, inputArray[4]);
 				}
@@ -186,16 +183,20 @@ public class SimDisplay {
 				if (UI.getType()==1) {
 				    this.sim = new SimulationGameOfLife((int)inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3]);
 				}
-				if (UI.getType()==2) {
+				else {
 					int[][] fixedInitial={{1,0,1,1,0},{1,0,1,0,0},{0,0,1,0,0},{1,0,1,0,0},{0,0,1,0,0},{1,1,1,1,1}};
 					this.sim = new SimulationGameOfLife(fixedInitial.length,fixedInitial[0].length,fixedInitial);
 				}
-				
 				changeSimName(GAME_OF_LIFE_TITLE);
 			}
 			playSim();
 		});
 		return b;
+	}
+	
+	private Button switchSim() {
+		return null;
+		
 	}
 	
 	private Button saveButton() {
