@@ -74,6 +74,10 @@ public class SimDisplay {
 	private BorderPane border;
 	private ResourceBundle myResources;
 	
+	//for save scene
+	private UserSaveSimulation saveUI=new UserSaveSimulation();
+	private Cell[][] savedCells;
+	
 	
 	public SimDisplay(int x, int y, Stage s, String filename) {
 		this.width=x;
@@ -98,7 +102,9 @@ public class SimDisplay {
 		Button pause = pauseButton();
 		Button step = stepButton();
 		Button reset = resetButton();
-		controls.getChildren().addAll(play, pause, step, reset);
+		Button save=saveButton();
+		Button resume=resumeButton();
+		controls.getChildren().addAll(play, pause, step, reset,save,resume);
 		border.setBottom(controls);
 		controls.setAlignment(Pos.CENTER);
 		return fun;
@@ -156,6 +162,49 @@ public class SimDisplay {
 		return b;
 	}
 	
+	private Button saveButton() {
+		Button b = new Button(myResources.getString("savebutton"));
+		b.setOnAction(e -> {
+			animation.pause();
+			saveUI.save(Cells,simName);
+		
+			
+			
+		});
+		return b;
+		
+	}
+	
+	private Button resumeButton() {
+		Button b = new Button(myResources.getString("resumebutton"));
+		b.setOnAction(e -> {
+			animation.pause();
+			int[][] resumedArray=saveUI.getBack();
+			System.out.println(resumedArray);
+			if(simName.equals(GAME_OF_LIFE_TITLE)) {
+				this.sim = new SimulationGameOfLife(resumedArray.length,resumedArray[0].length,resumedArray);
+			}
+			
+			if(simName.equals(FIRE_TITLE)) {
+				this.sim = new SimulationFire(resumedArray.length,resumedArray[0].length,resumedArray,inputArray[4]);
+			}
+			if(simName.equals(SEGREGATION_TITLE)) {
+				this.sim = new SimulationSegregation(resumedArray.length,resumedArray[0].length,resumedArray,inputArray[4]);
+			}
+			if(simName.equalsIgnoreCase(WATOR_TITLE)) {
+				this.sim = new SimulationWaTor(resumedArray.length,resumedArray[0].length,resumedArray,(int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
+			}
+			
+			
+			
+			playSim();
+			
+			
+			
+		});
+		return b;
+		
+	}
 	
 	private Button pauseButton() {
 		Button b = new Button(myResources.getString("pausebutton"));

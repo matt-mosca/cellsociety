@@ -16,10 +16,40 @@ public class SimulationWaTor extends Simulation {
 	
 	// 0 is empty, 1 is shark, 2 is fish
 
-	public SimulationWaTor(int cellNumberHorizontal, int cellNumberVertical, double emptyPercentage,double redToBlueRatio,
+	public SimulationWaTor( int cellNumberHorizontal, int cellNumberVertical, double emptyPercentage,double redToBlueRatio,
 			int maxStarveDaysForSharks, int minBreedDaysForSharks, int minBreedDaysForFish) {
 		// set up instance variables, put 0s in every cell
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
+		specificSetUp(
+				maxStarveDaysForSharks,
+				minBreedDaysForSharks,
+				minBreedDaysForFish);
+		
+	   initializeScene(neighbors);
+		
+		
+		
+	
+		updateColors();
+	}
+	
+	
+	public SimulationWaTor(int cellNumberHorizontal, int cellNumberVertical, int[][]specificLocation, int maxStarveDaysForSharks,
+			int minBreedDaysForSharks,int minBreedDaysForFish) {
+		super(cellNumberHorizontal,cellNumberVertical,specificLocation);
+		specificSetUp(
+				maxStarveDaysForSharks,
+				minBreedDaysForSharks,
+				minBreedDaysForFish);
+		super.initializeScene2(neighbors);
+		updateColors();
+	}
+
+
+	public void specificSetUp(
+			int maxStarveDaysForSharks,
+			int minBreedDaysForSharks,
+			int minBreedDaysForFish) {
 		this.maxStarveDaysForSharks = maxStarveDaysForSharks;
 		this.minBreedDaysForSharks = minBreedDaysForSharks;
 		this.minBreedDaysForFish = minBreedDaysForFish;
@@ -30,9 +60,9 @@ public class SimulationWaTor extends Simulation {
 			}
 		}
 		neighbors = new FourNeighborFinder(getArray(), 0, 0);
-		initializeScene(neighbors);
-		updateColors();
 	}
+	
+
 	
 	@Override
 	protected Color chooseColor(int state) {
