@@ -38,9 +38,9 @@ public class SimulationSegregation extends Simulation {
 
 	public void specificSetUp(
 			double satisfactionPercentage) {
-		setArray(new CellSegregation[getCellNumberVertical()][getCellNumberHorizontal()]);
-		for (int rowNumber = 0; rowNumber < getCellNumberVertical(); rowNumber++) {
-			for (int columnNumber = 0; columnNumber < getCellNumberHorizontal(); columnNumber++) {
+		setArray(new CellSegregation[getCellNumberHorizontal()][getCellNumberVertical()]);
+		for (int rowNumber = 0; rowNumber < getCellNumberHorizontal(); rowNumber++) {
+			for (int columnNumber = 0; columnNumber < getCellNumberVertical(); columnNumber++) {
 				getArray()[rowNumber][columnNumber]=new CellSegregation(0, null, null, rowNumber, columnNumber);
 			}
 		}
@@ -68,8 +68,8 @@ public class SimulationSegregation extends Simulation {
 		// call whetherSatisfied
 		List<Cell> emptyCells = findAllEmpty();
 		List<Cell> dissatisfied = new ArrayList<Cell>();
-		for (int rowNumber = 0; rowNumber < getCellNumberVertical(); rowNumber++) {
-			for (int columnNumber = 0; columnNumber < getCellNumberHorizontal(); columnNumber++) {
+		for (int rowNumber = 0; rowNumber < getCellNumberHorizontal(); rowNumber++) {
+			for (int columnNumber = 0; columnNumber < getCellNumberVertical(); columnNumber++) {
 				CellSegregation cell = (CellSegregation) getArray()[rowNumber][columnNumber];
 				if (cell.getState() == 0) {continue;}
 				else if (!whetherSatisfied(cell)) {
@@ -82,10 +82,10 @@ public class SimulationSegregation extends Simulation {
 			if (emptyCells.size() > 0){
 				int previousState = dissatisfied.get(needMove).getState();
 				dissatisfied.get(needMove).changeState(0);
-				dissatisfied.get(needMove).setColor(chooseColor(0));
+				
 				int theEmptyReadyForFill = random(1,emptyCells.size())[0];
 				emptyCells.get(theEmptyReadyForFill).changeState(previousState);
-				emptyCells.get(theEmptyReadyForFill).setColor(chooseColor(previousState));
+				
 				emptyCells.remove(theEmptyReadyForFill);
 			}
 		}
@@ -94,8 +94,8 @@ public class SimulationSegregation extends Simulation {
 
 	private List<Cell> findAllEmpty() {
 		List<Cell> empty = new ArrayList<Cell>();
-		for (int rowNumber = 0; rowNumber < getCellNumberVertical(); rowNumber++) {
-			for (int columnNumber = 0; columnNumber < getCellNumberHorizontal(); columnNumber++) {
+		for (int rowNumber = 0; rowNumber < getCellNumberHorizontal(); rowNumber++) {
+			for (int columnNumber = 0; columnNumber < getCellNumberVertical(); columnNumber++) {
 				CellSegregation cell = (CellSegregation) getArray()[rowNumber][columnNumber];
 				if (cell.getState() == 0) {
 					empty.add(cell);

@@ -8,8 +8,9 @@
     </parameters>
 
     <initialSetting>
-        <cellNumberHorizontal>10</cellNumberHorizontal>
-        <cellNumberVertical>10</cellNumberVertical>
+        <type>1</type>
+        <cellNumberHorizontal>20</cellNumberHorizontal>
+        <cellNumberVertical>30</cellNumberVertical>
         <emptyPercentage>0.3</emptyPercentage>
         <redToBlueRatio>0.8</redToBlueRatio>
     </initialSetting>

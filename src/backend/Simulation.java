@@ -36,8 +36,10 @@ public abstract class Simulation{
 	}
 	
 	protected void initializeScene2(NeighborFinder neighborAssigner) {
-		for(int i = 0; i < cellNumberVertical; i++) {
-			for(int j = 0; j < cellNumberHorizontal; j++) {
+		System.out.println(cellNumberHorizontal);
+		System.out.println(cellNumberVertical);
+		for(int i = 0; i < cellNumberHorizontal; i++) {
+			for(int j = 0; j < cellNumberVertical; j++) {
 				array[i][j].changeState(specificLocation[i][j]);
 			}
 		}
@@ -84,9 +86,9 @@ public abstract class Simulation{
 		for (int i = 0; i < slots.length; i++) {
 			int position = slots[i];
 			int rowNumber = (int) (position
-					/ cellNumberHorizontal);
+					/ cellNumberVertical);
 			int columnNumber = position
-					% cellNumberHorizontal;
+					% cellNumberVertical;
 			array[rowNumber][columnNumber]
 					.changeState(state);
 			array[rowNumber][columnNumber].setColor(chooseColor(state));

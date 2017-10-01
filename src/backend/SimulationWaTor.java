@@ -53,9 +53,9 @@ public class SimulationWaTor extends Simulation {
 		this.maxStarveDaysForSharks = maxStarveDaysForSharks;
 		this.minBreedDaysForSharks = minBreedDaysForSharks;
 		this.minBreedDaysForFish = minBreedDaysForFish;
-		setArray(new CellWaTor[getCellNumberVertical()][getCellNumberHorizontal()]);
-		for (int rowNumber = 0; rowNumber < getCellNumberVertical(); rowNumber++) {
-			for (int columnNumber = 0; columnNumber < getCellNumberHorizontal(); columnNumber++) {
+		setArray(new CellWaTor[getCellNumberHorizontal()][getCellNumberVertical()]);
+		for (int rowNumber = 0; rowNumber < getCellNumberHorizontal(); rowNumber++) {
+			for (int columnNumber = 0; columnNumber < getCellNumberVertical(); columnNumber++) {
 				getArray()[rowNumber][columnNumber] = new CellWaTor(0, null, null, rowNumber, columnNumber);
 			}
 		}
@@ -184,8 +184,8 @@ public class SimulationWaTor extends Simulation {
 
 	private List<Cell> findallType(int state) {
 		List<Cell> allSharks = new ArrayList<Cell>();
-		for (int rowNumber = 0; rowNumber < getCellNumberVertical(); rowNumber++) {
-			for (int columnNumber = 0; columnNumber < getCellNumberHorizontal(); columnNumber++) {
+		for (int rowNumber = 0; rowNumber < getCellNumberHorizontal(); rowNumber++) {
+			for (int columnNumber = 0; columnNumber < getCellNumberVertical(); columnNumber++) {
 				CellWaTor cell = (CellWaTor) super.getArray()[rowNumber][columnNumber];
 				if (cell.getState() == state) {
 					allSharks.add(cell);	
