@@ -75,7 +75,7 @@ public class SimulationSegregation extends Simulation {
 				if (cell.getState() == 0) {continue;}
 				else if (!whetherSatisfied(cell)) {
 					dissatisfied.add(cell);	
-					System.out.println(dissatisfied.size());
+					
 				}
 			}
 		}
