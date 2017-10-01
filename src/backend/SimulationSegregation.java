@@ -21,11 +21,6 @@ public class SimulationSegregation extends Simulation {
 				satisfactionPercentage);
 		initializeScene(neighbors);
 		updateColors();
-		
-
-			
-		
-	
 	}
 	
 	public SimulationSegregation(int cellNumberHorizontal, int cellNumberVertical, int[][]specificLocation,double SatisfactionPercentage) {
@@ -37,7 +32,6 @@ public class SimulationSegregation extends Simulation {
 		updateColors();
 	}
 
-
 	public void specificSetUp(
 			double satisfactionPercentage) {
 		setArray(new CellSegregation[getCellNumberHorizontal()][getCellNumberVertical()]);
@@ -47,11 +41,7 @@ public class SimulationSegregation extends Simulation {
 			}
 		}
 		neighbors = new EightNeighborFinder(getArray(), 0, 0);
-		
 	}
-	
-	
-
 
 	@Override
 	protected Color chooseColor(int state) {

@@ -12,13 +12,7 @@ public class SimulationGameOfLife extends Simulation {
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
 		specificSetUp();
 		neighbors = new EightNeighborFinder(getArray(), 0, 0);
-		
 		initializeGridStates();
-		
-		
-	
-	
-		
 		assignNeighbors(neighbors);
 	}
 	
@@ -26,20 +20,11 @@ public class SimulationGameOfLife extends Simulation {
 		super(cellNumberHorizontal,cellNumberVertical,specificLocation);
 		specificSetUp();
 		neighbors = new EightNeighborFinder(getArray(), 0, 0);
-		
-	
-		
-		
-	
 	    super.initializeScene2(neighbors);
-	
-		
 		assignNeighbors(neighbors);
 		updateColors();
 	}
 	
-	
-
 	public void specificSetUp() {
 		setArray(new CellGameOfLife[getCellNumberHorizontal()][getCellNumberVertical()]);
 		for (int rowNumber = 0; rowNumber < getCellNumberHorizontal(); rowNumber++) {
@@ -121,6 +106,7 @@ public class SimulationGameOfLife extends Simulation {
 		updateColors();
 		count();
 	}
+	
 	private void count() {
 		number[0]=0;
 		number[1]=0;

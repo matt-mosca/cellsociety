@@ -25,15 +25,9 @@ public class SimulationWaTor extends Simulation {
 				maxStarveDaysForSharks,
 				minBreedDaysForSharks,
 				minBreedDaysForFish);
-		
 	   initializeScene(neighbors);
-		
-		
-		
-	
 		updateColors();
 	}
-	
 	
 	public SimulationWaTor(int cellNumberHorizontal, int cellNumberVertical, int[][]specificLocation, int maxStarveDaysForSharks,
 			int minBreedDaysForSharks,int minBreedDaysForFish) {
@@ -45,7 +39,6 @@ public class SimulationWaTor extends Simulation {
 		super.initializeScene2(neighbors);
 		updateColors();
 	}
-
 
 	public void specificSetUp(
 			int maxStarveDaysForSharks,
@@ -62,8 +55,6 @@ public class SimulationWaTor extends Simulation {
 		}
 		neighbors = new FourNeighborFinder(getArray(), 0, 0);
 	}
-	
-
 	
 	@Override
 	protected Color chooseColor(int state) {

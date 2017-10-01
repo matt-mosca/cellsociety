@@ -11,11 +11,7 @@ public class SimulationFire extends Simulation{
 			double redToBlueRatio, double probCatch) {
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
 		specificSetUp(probCatch);
-		
 		initializeGridStates();
-	
-		
-		
 		assignNeighbors(neighbors);
 	}
 	
