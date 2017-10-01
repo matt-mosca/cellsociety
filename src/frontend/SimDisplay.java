@@ -20,11 +20,14 @@ import backend.SimulationWaTor;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 //import javafx.application.Application;
 //import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 //import javafx.scene.image.Image;
 //import javafx.scene.image.ImageView;
 //import javafx.scene.input.KeyCode;
@@ -52,19 +55,16 @@ public class SimDisplay {
 	private static final String WATORTITLE = "WaTor";
 	private static final int VBOX_SPACING = 7;
 	private static final int MILLISECOND_DELAY = 1000;
-	private static final int GRID_FIT_CONSTANT = 650;
 	private static final String WATOR_TITLE = "WaTor!";
 	private static final String FIRE_TITLE  = "FIYAH!";
 	private static final String SEGREGATION_TITLE = "SEGREGATION!";
 	private static final String GAME_OF_LIFE_TITLE = "GAME OF LIFE!";
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	private static final String SPEED_LABEL = "Speed";
 	
 	private Scene scene;
-//	private Cell[][] Cells;
 	private int width;
 	private int height;
-//	private GridPane myGrid;
-//	private Rectangle[][] Rectangles;
 	private String simName;
 	private Stage window;
 	private Simulation sim;
@@ -89,13 +89,8 @@ public class SimDisplay {
 	private Scene makeSimulation(){
 		border = new BorderPane();
 		myGrid = new GridDisplay(sim);
-//		this.Cells = sim.getArray();
-//		Rectangles = makeRectangleArray(Cells);
-//		makeGrid();
-//		fillGrid();
 		Scene fun = new Scene(border, width, height);
 		border.setCenter(myGrid.getGrid());
-//		myGrid.setAlignment(Pos.CENTER);
 		//This could use some serious refactoring, potentially creating a new class for just all of the buttons seems
 		//to make sense.
 		HBox controls = new HBox(VBOX_SPACING);
@@ -106,6 +101,17 @@ public class SimDisplay {
 		Button save=saveButton();
 		Button resume=resumeButton();
 		controls.getChildren().addAll(play, pause, step, reset,save,resume);
+		
+		GridPane sliders = new GridPane();
+		sliders.setVgap(10);
+        sliders.setHgap(20);
+		Slider speed = speedSlider();
+		GridPane.setConstraints(speed, 1,1);
+		sliders.getChildren().addAll(speed);//have to add slider names
+		
+		sliders.setAlignment(Pos.CENTER);
+		border.setRight(sliders);
+	
 		border.setBottom(controls);
 		controls.setAlignment(Pos.CENTER);
 		return fun;
@@ -167,11 +173,7 @@ public class SimDisplay {
 		Button b = new Button(myResources.getString("savebutton"));
 		b.setOnAction(e -> {
 			animation.pause();
-//			saveUI.save(Cells,simName);
-			saveUI.save(sim.getArray(), simName);
-		
-			
-			
+			saveUI.save(sim.getArray(), simName);	
 		});
 		return b;
 		
@@ -196,13 +198,7 @@ public class SimDisplay {
 			if(simName.equalsIgnoreCase(WATOR_TITLE)) {
 				this.sim = new SimulationWaTor(resumedArray.length,resumedArray[0].length,resumedArray,(int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
 			}
-			
-			
-			
-			playSim();
-			
-			
-			
+			playSim();	
 		});
 		return b;
 		
@@ -253,43 +249,6 @@ public class SimDisplay {
 		});
 		return b;
 	}
-	
-//	private GridPane makeGrid(){
-//		GridPane grid = new GridPane();
-//		grid.setPrefHeight(GRID_FIT_CONSTANT);
-//		grid.setPrefWidth(GRID_FIT_CONSTANT);
-//		grid.getColumnConstraints().add(new ColumnConstraints(GRID_FIT_CONSTANT / Cells[0].length));
-//		grid.getRowConstraints().add(new RowConstraints(GRID_FIT_CONSTANT / Cells.length));
-//		myGrid=grid;
-//		return myGrid;
-//	}
-//
-//	
-//	
-//	
-//	private void fillGrid() {
-//		myGrid.getChildren().clear();
-//		for(int i=0;i<Cells.length;i++) {
-//			for (int j=0; j<Cells[i].length; j++) {
-//				myGrid.add(Rectangles[i][j], j, i);
-//			}
-//		}
-//	}
-
-//	private Rectangle[][] makeRectangleArray(Cell[][] cells) {
-//		Rectangle[][] recs = new Rectangle[cells.length][Cells[0].length];
-//		for(int i=0; i<cells.length; i++) {
-//			for(int j=0; j<cells[i].length; j++) {
-//				recs[i][j] = new Rectangle();
-//				recs[i][j].setStroke(Color.BLACK);
-//				recs[i][j].setFill(cells[i][j].getColor());
-//				recs[i][j].setWidth(GRID_FIT_CONSTANT / Cells[0].length);
-//				recs[i][j].setHeight(GRID_FIT_CONSTANT / Cells.length);
-//			}
-//		}
-//		this.Rectangles = recs;
-//		return this.Rectangles;
-//	}
 
 	
 	public void changeSimName(String s) {
@@ -297,32 +256,18 @@ public class SimDisplay {
 		window.setTitle(simName);
 	}
 	
-	public Simulation getSimulation() {
-		return this.sim;
-	}
-	
-	public Scene getScene() {
-		return this.scene;
-	}
+//	public Simulation getSimulation() {
+//		return this.sim;
+//	}
+//	
+//	public Scene getScene() {
+//		return this.scene;
+//	}
 	
 	private void step() {
 		sim.update();
-//		Cells = sim.getArray(); //I can't help but feel that this is stupidly inefficient. Is there an easier way? - V 
-//		//I don't think you guys are updating this array in the backend, because I'm not getting an animation. 
-//		updateColorArray(Cells);
-//		fillGrid();
 		myGrid.update();
 	}
-	
-//	private void updateColorArray(Cell[][] cells) {
-//		for (int i=0; i<cells.length; i++) {
-//			for(int j=0; j<cells[i].length; j++) {
-//				this.Rectangles[i][j].setFill(cells[i][j].getColor()); //the n^2 algo is really starting to make me sad, but I'm not sure how to get it to be faster. Suggestions? -V
-//				
-//			}
-//		}
-//		
-//	}
 
 	private void playSim() {
 		this.scene = makeSimulation();
@@ -335,8 +280,31 @@ public class SimDisplay {
 		animation = new Timeline();
 		animation.setCycleCount(Animation.INDEFINITE);
 		animation.getKeyFrames().add(frame);
-//		animation.play();
+		animation.setRate(10);
 	}
+	
+//	private void changeSpeed(double speed) {
+//		animation.pause();
+//		animation.getKeyFrames().clear();
+//		KeyFrame frame = new KeyFrame(Duration.millis(speed), e->step());
+//		animation.getKeyFrames().add(frame);
+//	}
+	
+	private Slider speedSlider() {
+		Slider s = new Slider(0,20,10);
+		s.setShowTickLabels(true);
+		s.setShowTickMarks(true);
+		s.setMajorTickUnit(10);
+		s.setMinorTickCount(2);
+		s.setBlockIncrement(2);
+		s.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
+            		animation.setRate(new_val.doubleValue());
+            }	
+            });
+		return s;
+	}
+	
 	
 	
 }
