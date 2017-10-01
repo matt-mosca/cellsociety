@@ -182,6 +182,7 @@ public class SimDisplay {
 					int[][] fixedInitial={{1,0,1,1,0},{2,0,1,0,0},{0,0,1,0,0},{1,0,2,0,0},{0,0,1,0,0},{1,1,1,1,1}};
 					this.sim = new SimulationSegregation(fixedInitial.length,fixedInitial[0].length,fixedInitial, inputArray[4]);
 				}
+				changeSimName(SEGREGATION_TITLE);
 			}
 			if(s.equals(GAMEOFLIFETITLE)) {
 				if (UI.getType()==1) {
@@ -205,7 +206,7 @@ public class SimDisplay {
 			getStartScene();
 			window.setScene(scene);
 			});
-		return b;
+		return b;	
 		
 	}
 	
