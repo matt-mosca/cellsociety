@@ -10,7 +10,7 @@ import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.NumberAxis;
 public class GraphFire {
 	private static final double GRAPH_HEIGHT_CONSTANT = 200;
-	private static final double GRAPH_WIDTH_CONSTANT = 0;
+	private static final double GRAPH_WIDTH_CONSTANT = 750;
 	LineChart<Number, Number> myGraph;
 	int[] proportions;
 	final NumberAxis xAxis = new NumberAxis();
@@ -65,6 +65,9 @@ public class GraphFire {
 		proportions = sim.getCellProportion();
 		if(line.getName().equals(resources.getString("treename"))) {
 			line.getData().add(new Data<Number, Number>(time+=1, proportions[0]));
+		}
+		if(line.getName().equals(resources.getString("firename"))) {
+			line.getData().add(new Data<Number, Number>(time+=1, proportions[1]));
 		}	
 	}
 }
