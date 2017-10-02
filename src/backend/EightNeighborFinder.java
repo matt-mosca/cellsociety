@@ -12,25 +12,25 @@ public class EightNeighborFinder extends NeighborFinder {
 		Cell[][] cellArray = getMyCellArray();
 		int xPos = getMyXPosition();
 		int yPos = getMyYPosition();
-		int cellNumberVertical = cellArray[0].length;
-		int cellNumberHorizontal = cellArray.length;
+		int cellWidth = cellArray[0].length;
+		int cellHeight = cellArray.length;
 	    List<Cell> neighbors = new ArrayList<Cell>();
 		if (yPos - 1 >= 0) {
 			neighbors.add(cellArray[yPos - 1][xPos]);
 			if (xPos - 1 >= 0)
 				neighbors.add(cellArray[yPos - 1][xPos - 1]);
-			if (xPos + 1 <= cellNumberVertical - 1)
+			if (xPos + 1 <= cellWidth - 1)
 				neighbors.add(cellArray[yPos - 1][xPos + 1]);
 		}
 		if (xPos - 1 >= 0)
 			neighbors.add(cellArray[yPos][xPos - 1]);
-		if (xPos + 1 <= cellNumberVertical - 1)
+		if (xPos + 1 <= cellWidth - 1)
 			neighbors.add(cellArray[yPos][xPos + 1]);
-		if (yPos + 1 <= cellNumberHorizontal - 1) {
+		if (yPos + 1 <= cellHeight - 1) {
 			neighbors.add(cellArray[yPos + 1][xPos]);
 			if (xPos - 1 >= 0)
 				neighbors.add(cellArray[yPos + 1][xPos - 1]);
-			if (xPos + 1 <= cellNumberVertical - 1)
+			if (xPos + 1 <= cellWidth - 1)
 				neighbors.add(cellArray[yPos + 1][xPos + 1]);
 		}
 		return neighbors;
