@@ -12,15 +12,16 @@ public class SimulationRPS extends Simulation {
 		specificSetUp();
 		assignNeighbors(neighbors);
 		updateColors();
+		setRandomRGBCells();
 	}
 	
-	public SimulationRPS(int cellNumberHorizontal, int cellNumberVertical, int[][] specificLocation,double probCatch) {
+	public SimulationRPS(int cellNumberHorizontal, int cellNumberVertical, int[][] specificLocation) {
 		super(cellNumberHorizontal,cellNumberVertical,specificLocation);
 		specificSetUp();
         super.initializeScene2(neighbors);
 		assignNeighbors(neighbors);
 		updateColors();
-		
+		setRandomRGBCells();
 	}
 	
 	public void specificSetUp() {
@@ -154,11 +155,16 @@ public class SimulationRPS extends Simulation {
 		return Math.random() * upperBound;
 	}
 	
-//	private void setRandomFire() {
-//		int rand = (int) getRandomNum(getNumberOfCells());
-//		if(getCellNumberVertical() != 0)
-//			getArray()[rand / getCellNumberVertical()][rand % getCellNumberVertical()].changeState(CellFire.BURNING);
-//	}
+	private void setRandomRGBCells() {
+		int randOne = (int) getRandomNum(getNumberOfCells());
+		int randTwo = (int) getRandomNum(getNumberOfCells());
+		int randThree = (int) getRandomNum(getNumberOfCells());
+		if(getCellNumberVertical() != 0) {
+			getArray()[randOne / getCellNumberVertical()][randOne % getCellNumberVertical()].changeState(CellRPS.RED);
+			getArray()[randTwo / getCellNumberVertical()][randTwo % getCellNumberVertical()].changeState(CellRPS.GREEN);
+			getArray()[randThree / getCellNumberVertical()][randThree % getCellNumberVertical()].changeState(CellRPS.BLUE);
+		}
+	}
 	
 	private void count() {
 		number[0]=0;
