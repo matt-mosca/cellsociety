@@ -137,7 +137,7 @@ public class SimulationSegregation extends Simulation {
 	}
 	
 	public static void main(String[] args) {
-	SimulationSegregation test = new SimulationSegregation(5, 5, 0.2, 0.5, 0.5);
+	SimulationSegregation test = new SimulationSegregation(5, 5, 0.2, 1, 0.5);
 	testArrayPrinter(test.getArray());
 //	System.out.println(test.getArray()[1][1].getNeighborCells());
 //	System.out.println();
