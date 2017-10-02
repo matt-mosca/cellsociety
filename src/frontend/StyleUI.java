@@ -10,6 +10,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import javafx.scene.paint.Color;
+
 public class StyleUI {
 	
 	public boolean gridVisibility() {
@@ -40,9 +42,32 @@ public class StyleUI {
 			doc = getFile("Style.xml");
 			doc.getDocumentElement().normalize();
 			String message=doc.getElementsByTagName("shape").item(0).getTextContent();
-			return message;
-			
+			return message;			
 		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+	
+	public Color emptyColor() {
+		Document doc;
+		try {
+			doc = getFile("Style.xml");
+			doc.getDocumentElement().normalize();
+			String message=doc.getElementsByTagName("empty").item(0).getTextContent();
+			if (message.equals("Water world")){
+				return Color.BLUE;
+			}
+			if (message.equals("Space world")) {
+				return Color.BLACK;
+			}
+			if (message.equals("Normal world")) {
+				return Color.WHITE;
+			}
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

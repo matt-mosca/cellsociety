@@ -1,11 +1,13 @@
 package backend;
 
+import frontend.StyleUI;
 import javafx.scene.paint.Color;
 
 public class SimulationGameOfLife extends Simulation {
 	private static final int UPPERBOUNDARY = 3;
 	private static final int LOWERBOUNDARY = 2;
 	private NeighborFinder neighbors;
+	private StyleUI style=new StyleUI();
 	
 	
 	public SimulationGameOfLife(int cellNumberHorizontal, int cellNumberVertical, double emptyPercentage, double redToBlueRatio) {
@@ -68,9 +70,9 @@ public class SimulationGameOfLife extends Simulation {
 		Color color = null;
 
 		if(state == CellGameOfLife.EMPTY)
-			color=Color.WHITE;
+			color=style.emptyColor();
 		if(state == CellGameOfLife.LIVE)
-			color=Color.BLUE;
+			color=Color.RED;
 		return color;
 	}
 

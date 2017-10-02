@@ -1,8 +1,11 @@
 <Style>
     <grid>
-        <visibility>Y</visibility>
+        <visibility>N</visibility>
         <shape>Square</shape>
     </grid>
+    <color>
+        <empty>Water world</empty>
+    </color>
 
 
 </Style>

@@ -3,12 +3,14 @@ package backend;
 import java.util.ArrayList;
 import java.util.List;
 
+import frontend.StyleUI;
 import javafx.scene.paint.Color;
 
 
 public class SimulationSegregation extends Simulation {
 	private double satisfactionPercentage;
 	private NeighborFinder neighbors;
+	private StyleUI style=new StyleUI();
 
 	// 0 is empty, 1 is red, 2 is blue
 
@@ -46,11 +48,11 @@ public class SimulationSegregation extends Simulation {
 	protected Color chooseColor(int state) {
 		Color color = null;
 		if(state == 0)
-			color = Color.WHITE;
+			color = style.emptyColor();
 		if(state == 1)
 			color = Color.RED;
 		if(state == 2)
-			color = Color.BLUE;
+			color = Color.YELLOW;
 		return color;
 	}
 	
