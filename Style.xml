@@ -1,6 +1,6 @@
 <Style>
     <grid>
-        <visibility>N</visibility>
+        <visibility>Y</visibility>
         <shape>Square</shape>
     </grid>
     <color>
