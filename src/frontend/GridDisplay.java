@@ -45,9 +45,7 @@ public class GridDisplay {
 		for(int i=0; i<Cells.length; i++) {
 			for(int j=0; j<Cells[i].length; j++) {
 				Rectangles[i][j] = new Rectangle();
-				if (style.gridVisibility()==true) {
-			    Rectangles[i][j].setStroke(Color.BLACK);
-				}
+				Rectangles[i][j].setStroke(Color.BLACK);
 				Rectangles[i][j].setFill(Cells[i][j].getColor());
 				Rectangles[i][j].setWidth(GRID_FIT_CONSTANT / Cells[0].length);
 				Rectangles[i][j].setHeight(GRID_FIT_CONSTANT / Cells.length);
@@ -110,9 +108,8 @@ public class GridDisplay {
 				
 				
 				
-				if (style.gridVisibility()==true) {
-				    tem.setStroke(Color.BLACK);
-				}
+				
+				tem.setStroke(Color.BLACK);
 				tem.setFill(Cells[i][j].getColor());
 				Triangles[i][j]=tem;
 				
