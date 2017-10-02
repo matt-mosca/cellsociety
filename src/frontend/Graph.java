@@ -76,10 +76,10 @@ public  class Graph {
 			}
 		}
 		if (simName.equals(GAME_OF_LIFE_TITLE)) {
-			if(state==1) {
+			if(state==2) {
 				line.setName(resources.getString("lifename"));
 			}
-			if(state==0) {
+			if(state==1) {
 				line.setName(resources.getString("deadname"));
 			}
 		}
