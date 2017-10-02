@@ -21,7 +21,7 @@ public class SimulationSegregation extends Simulation {
 		satisfactionPercentage = SatisfactionPercentage;
 		specificSetUp(
 				satisfactionPercentage);
-		initializeScene(neighbors);
+		super.initializeScene(neighbors);
 		updateColors();
 	}
 	
@@ -46,13 +46,16 @@ public class SimulationSegregation extends Simulation {
 
 	@Override
 	protected Color chooseColor(int state) {
+		
 		Color color = null;
 		if(state == 0)
 			color = style.emptyColor();
 		if(state == 1)
 			color = Color.RED;
-		if(state == 2)
-			color = Color.YELLOW;
+		if(state == 2) {
+			
+			color = Color.GREEN;
+		}
 		return color;
 	}
 	

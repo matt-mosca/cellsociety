@@ -8,7 +8,7 @@
     </parameters>
 
     <initialSetting>
-        <type>1</type>
+        <type>2</type>
         <cellNumberHorizontal>5</cellNumberHorizontal>
         <cellNumberVertical>5</cellNumberVertical>
         <emptyPercentage>0.3</emptyPercentage>
