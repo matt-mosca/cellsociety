@@ -124,9 +124,6 @@ public class SimulationSegregation extends Simulation {
 	}
 	
 	private static void testArrayPrinter(Cell[][] testArray) {
-	
-		
-		
 		for(int i = 0; i < testArray.length; i++) {
 			for(int j = 0; j < testArray[0].length; j++) {
 				System.out.print(testArray[i][j].getState() + " ");
@@ -153,7 +150,9 @@ public class SimulationSegregation extends Simulation {
 }
 
 
-
+	public double getSatisfactionPercentage() {
+		return satisfactionPercentage;
+	}
 	
 	
 }
