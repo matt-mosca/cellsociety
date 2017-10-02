@@ -6,7 +6,7 @@ public class SimulationGameOfLife extends Simulation {
 	private static final int UPPERBOUNDARY = 3;
 	private static final int LOWERBOUNDARY = 2;
 	private NeighborFinder neighbors;
-	private int[] number = new int[2];
+	
 	
 	public SimulationGameOfLife(int cellNumberHorizontal, int cellNumberVertical, double emptyPercentage, double redToBlueRatio) {
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
@@ -104,25 +104,8 @@ public class SimulationGameOfLife extends Simulation {
 		}
 		assignNeighbors(neighbors);
 		updateColors();
-		count();
+		super.count(0,1);
 	}
 	
-	private void count() {
-		number[0]=0;
-		number[1]=0;
-		for(int i=0; i<getArray().length; i++) {
-			for(int j=0; j<getArray()[i].length; j++) {
-				if (getArray()[i][j].getState()==0) {
-					number[0]+=1;
-				}
-				else if(getArray()[i][j].getState()==1) {
-					number[1]+=1;
-				}
-			}
-		}
-	}
-	
-	public int[]getCellProportion(){
-		return number;
-	}
+
 }
