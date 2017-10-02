@@ -52,20 +52,25 @@ public class StyleUI {
 		
 	}
 	
-	public int getGridEdge() {
+	public boolean getGridEdge() {
 		Document doc;
 		try {
 			doc = getFile("Style.xml");
 			doc.getDocumentElement().normalize();
 			String message=doc.getElementsByTagName("gridEdge").item(0).getTextContent();
-			return Integer.parseInt(message);
+			if (message=="Y") {
+				return true;	
+			}
+			if (message.equals("N")) {
+				return false;
+			}
 		
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 0;
+		return true;
 		
 	}
 		

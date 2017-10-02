@@ -2,7 +2,7 @@
     <grid>
         <visibility>Y</visibility>
         <shape>Square</shape>
-        <gridEdge>0</gridEdge>
+        <gridEdge>Y</gridEdge>
     </grid>
     <color>
         <empty>Normal world</empty>
