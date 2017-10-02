@@ -5,6 +5,7 @@ import backend.Simulation;
 import javafx.geometry.Pos;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
@@ -13,7 +14,7 @@ import javafx.scene.shape.Rectangle;
 public class GridDisplay {
 	
 	private static final int GRID_FIT_CONSTANT = 350;
-	private GridPane myGrid;
+	private Pane myGrid;
 	private Cell[][] Cells;
 	private Rectangle[][] Rectangles;
 	private Polygon[][] Triangles;
@@ -23,12 +24,12 @@ public class GridDisplay {
 	
 	public GridDisplay(Simulation s) {
 		sim = s;
-		myGrid=new GridPane();
+		myGrid = new Pane();
 		Cells = s.getArray();
 		myGrid.setPrefHeight(GRID_FIT_CONSTANT);
 		myGrid.setPrefWidth(GRID_FIT_CONSTANT);
-		myGrid.getColumnConstraints().add(new ColumnConstraints(GRID_FIT_CONSTANT / Cells[0].length));
-		myGrid.getRowConstraints().add(new RowConstraints(GRID_FIT_CONSTANT / Cells.length));
+//		myGrid.getColumnConstraints().add(new ColumnConstraints(GRID_FIT_CONSTANT / Cells[0].length));
+//		myGrid.getRowConstraints().add(new RowConstraints(GRID_FIT_CONSTANT / Cells.length));
 		shape=style.gridShape();
 		if (shape.equals("Square")){
 			makeRectangleArray();
@@ -37,7 +38,7 @@ public class GridDisplay {
 		makeTriangleArray();
 		}
 		fillGrid();
-		myGrid.setAlignment(Pos.CENTER);
+//		myGrid.setAlignment(Pos.CENTER);
 	}
 	
 	private void makeRectangleArray() {
@@ -130,11 +131,11 @@ public class GridDisplay {
 		for(int i=0;i<Cells.length;i++) {
 			for (int j=0; j<Cells[i].length; j++) {
 				if (shape.equals("Triangle")){
-				    myGrid.add(Triangles[i][j], j, i);
+				    myGrid.getChildren().add(Triangles[i][j]);
 				}
-				if (shape.equals("Square")){
-				    myGrid.add(Rectangles[i][j], j, i);
-				}
+//				if (shape.equals("Square")){
+//				    myGrid.add(Rectangles[i][j], j, i);
+//				}
 			}
 		}
 	}
@@ -155,7 +156,7 @@ public class GridDisplay {
 		
 	}
 	
-	public GridPane getGrid() {
+	public Pane getGrid() {
 		return myGrid;
 	}
 	
