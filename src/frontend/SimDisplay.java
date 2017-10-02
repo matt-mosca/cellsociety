@@ -93,9 +93,9 @@ public class SimDisplay {
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + filename);
 	}
 	
-//	public String getSimName() {
-//		return simName;
-//	}
+	public String getSimName() {
+		return simName;
+	}
 	
 	private Scene makeSimulation(){
 		border = new BorderPane();
