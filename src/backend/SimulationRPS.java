@@ -33,7 +33,7 @@ public class SimulationRPS extends Simulation {
 				getArray()[rowNumber][columnNumber] = new CellRPS(CellRPS.EMPTY, null, null, rowNumber, columnNumber, 0);
 			}
 		}
-		neighbors = new EightNeighborFinder(getArray(), 0, 0);
+		neighbors = new EightNeighborFinder(getArray(), 0, 0, false);
 	}
 	
 	private void prepareGrid() {

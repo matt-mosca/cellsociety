@@ -33,7 +33,7 @@ public class SimulationFire extends Simulation{
 				getArray()[rowNumber][columnNumber] = new CellFire(CellFire.EMPTY, null, null, rowNumber, columnNumber);
 			}
 		}
-		neighbors = new FourNeighborFinder(getArray(), 0, 0);
+		neighbors = new FourNeighborFinder(getArray(), 0, 0, false);
 	}
 	
 	private void initializeGridStates() {
