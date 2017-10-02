@@ -129,10 +129,10 @@ public class SimulationFire extends Simulation{
 		number[1]=0;
 		for(int i=0; i<getArray().length; i++) {
 			for(int j=0; j<getArray()[i].length; j++) {
-				if (getArray()[i][j].getState()==0) {
+				if (getArray()[i][j].getState()==1) {
 					number[0]+=1;
 				}
-				else if(getArray()[i][j].getState()==1) {
+				else if(getArray()[i][j].getState()==2) {
 					number[1]+=1;
 				}
 			}
