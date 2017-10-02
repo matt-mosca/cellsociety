@@ -194,18 +194,10 @@ public class UserInput {
 				  showError("Simulation name is not given, will use the default value");
 				  simulationType = "Rock Paper Scissors";
 				  getInitialSetUp(doc,null);
-				  RPSsetUpWithoutType();
 			  }
 		  }
 	  }
 
-
-
-
-	private void RPSsetUpWithoutType() {
-		
-		
-	}
 
 
 	public Document getFile(String fileName) throws ParserConfigurationException, SAXException, IOException {

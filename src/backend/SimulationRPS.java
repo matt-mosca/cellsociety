@@ -4,6 +4,7 @@ import javafx.scene.paint.Color;
 
 public class SimulationRPS extends Simulation {
 	private NeighborFinder neighbors;
+	private int gradientLevel;
 	private int[] number = new int[2];
 	
 	public SimulationRPS(int cellNumberHorizontal, int  cellNumberVertical, double emptyPercentage, 
