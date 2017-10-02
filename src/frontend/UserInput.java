@@ -181,7 +181,7 @@ public class UserInput {
 			    }
 		    }
 
-   }
+     }
 	  
 	  public void getRPS() {
 		  try {
@@ -199,6 +199,8 @@ public class UserInput {
 	  }
 
 
+	  
+	  
 
 	public Document getFile(String fileName) throws ParserConfigurationException, SAXException, IOException {
 		File fXmlFile = new File(fileName);

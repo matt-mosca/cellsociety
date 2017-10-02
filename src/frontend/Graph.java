@@ -43,7 +43,7 @@ public  class Graph {
 		fun.getData().addAll(getLine(1), getLine(2));
 		updateLine(fun.getData().get(0));
 		updateLine(fun.getData().get(1));
-		System.out.println(fun.getData().size());
+		
 		return fun;
 	}
 	
