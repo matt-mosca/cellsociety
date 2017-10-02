@@ -21,6 +21,7 @@ public class UserInput {
 	private static final String SEGREGATIONTITLE = "Segregation";
 	private static final String FIRETITLE = "Fire";
 	private static final String WATORTITLE = "WaTor";
+    private static final String RPSTITLE="Rock Paper Scissors";
 	
 	  private Document doc;
 	  private String simulationType;
@@ -46,6 +47,9 @@ public class UserInput {
 		}
 		if(s.equals(GAMEOFLIFETITLE)) {
 			getGameOfLife();
+		}
+		if (s.equals(RPSTITLE)) {
+			getRPS();
 		}
 		return finalParams;
 	  }
@@ -185,6 +189,7 @@ public class UserInput {
 	  
 	  public void getRPS() {
 		  try {
+			 
 			  doc = getFile("RPS.xml");
 			  doc.getDocumentElement().normalize();
 			  simulationType=doc.getElementsByTagName("name").item(0).getTextContent();
