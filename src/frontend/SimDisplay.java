@@ -223,9 +223,12 @@ public class SimDisplay {
 	}
 
 	private void segregationConstruct() {
+		
 		if (UI.getType()==1) {
 		    this.sim = new SimulationSegregation((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
+		    
 		} else {
+			System.out.println(inputArray[4]);
 			int[][] fixedInitial={{1,0,1,1,0},{2,0,1,0,0},{0,0,1,0,0},{1,0,2,0,0},{0,0,1,0,0},{1,1,1,1,1}};
 			this.sim = new SimulationSegregation(fixedInitial.length,fixedInitial[0].length,fixedInitial, inputArray[4]);
 		}
@@ -289,9 +292,9 @@ public class SimDisplay {
 			if(simName.equalsIgnoreCase(WATOR_TITLE)) {
 				this.sim = new SimulationWaTor(resumedArray.length,resumedArray[0].length,resumedArray,(int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
 			}
-//			if(simName.equals(RPS_TITLE)) {
-//				this.sim = new SimulationRPS(resumedArray.length, resumedArray[0].length, resumedArray)
-//			}
+			if(simName.equals(RPS_TITLE)) {
+			this.sim = new SimulationRPS(resumedArray.length, resumedArray[0].length, resumedArray);
+			}
 			playSim();	
 		});
 		return b;

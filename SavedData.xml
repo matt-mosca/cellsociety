@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><Saved>
-    <title>WaTor!</title>
+    <title>ROCK PAPER SCISSORS!</title>
 
     <parameters>
-        <cellNumberHorizontal>5</cellNumberHorizontal>
-        <cellNumberVertical>5</cellNumberVertical>
-        <config>2222212222222222222212222</config>
+        <cellNumberHorizontal>20</cellNumberHorizontal>
+        <cellNumberVertical>10</cellNumberVertical>
+        <config>00000111110000101111000000111100000011100000000110000222222220222222222222222222222222222222222222222222222222222222222222222222232022223333002023333300003333330003333333000033333300003333330000333333</config>
     </parameters>
 
 
