@@ -18,6 +18,8 @@ public class GridDisplay {
 	private Rectangle[][] Rectangles;
 	private Polygon[][] Triangles;
 	private Simulation sim;
+	private StyleUI style=new StyleUI();
+	private String shape;
 	
 	public GridDisplay(Simulation s) {
 		sim = s;
@@ -27,7 +29,13 @@ public class GridDisplay {
 		myGrid.setPrefWidth(GRID_FIT_CONSTANT);
 		myGrid.getColumnConstraints().add(new ColumnConstraints(GRID_FIT_CONSTANT / Cells[0].length));
 		myGrid.getRowConstraints().add(new RowConstraints(GRID_FIT_CONSTANT / Cells.length));
+		shape=style.gridShape();
+		if (shape.equals("Square")){
+			makeRectangleArray();
+		}
+		if (shape.equals("Triangle")) {
 		makeTriangleArray();
+		}
 		fillGrid();
 		myGrid.setAlignment(Pos.CENTER);
 	}
@@ -121,7 +129,12 @@ public class GridDisplay {
 		myGrid.getChildren().clear();
 		for(int i=0;i<Cells.length;i++) {
 			for (int j=0; j<Cells[i].length; j++) {
-				myGrid.add(Triangles[i][j], j, i);
+				if (shape.equals("Triangle")){
+				    myGrid.add(Triangles[i][j], j, i);
+				}
+				if (shape.equals("Square")){
+				    myGrid.add(Rectangles[i][j], j, i);
+				}
 			}
 		}
 	}
@@ -129,7 +142,13 @@ public class GridDisplay {
 	private void updateColorArray() {
 		for (int i=0; i<Cells.length; i++) {
 			for(int j=0; j<Cells[i].length; j++) {
-				this.Triangles[i][j].setFill(Cells[i][j].getColor()); //the n^2 algo is really starting to make me sad, but I'm not sure how to get it to be faster. Suggestions? -V
+				 
+				if (shape.equals("Triangle")){
+					this.Triangles[i][j].setFill(Cells[i][j].getColor());
+				}
+				if (shape.equals("Square")){
+					this.Rectangles[i][j].setFill(Cells[i][j].getColor());
+				}
 				
 			}
 		}

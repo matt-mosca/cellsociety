@@ -34,6 +34,23 @@ public class StyleUI {
 		
 	}
 	
+	public String gridShape() {
+		Document doc;
+		try {
+			doc = getFile("Style.xml");
+			doc.getDocumentElement().normalize();
+			String message=doc.getElementsByTagName("shape").item(0).getTextContent();
+			return message;
+			
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+	
 	public Document getFile(String fileName) throws ParserConfigurationException, SAXException, IOException {
 		File fXmlFile = new File(fileName);
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
