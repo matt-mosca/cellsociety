@@ -74,6 +74,7 @@ public class SimDisplay {
 	private BorderPane border;
 	private ResourceBundle myResources;
 	private GridDisplay myGrid;
+	private GraphFire graph;
 	//for save scene
 	private UserSaveSimulation saveUI=new UserSaveSimulation();
 
@@ -92,8 +93,10 @@ public class SimDisplay {
 	private Scene makeSimulation(){
 		border = new BorderPane();
 		myGrid = new GridDisplay(sim);
+		graph = new GraphFire((SimulationFire) sim, myResources);
 		Scene fun = new Scene(border, width, height);
 		border.setCenter(myGrid.getGrid());
+		border.setTop(graph.myGraph);
 		//This could use some serious refactoring, potentially creating a new class for just all of the buttons seems
 		//to make sense.
 		HBox controls = new HBox(VBOX_SPACING);
@@ -326,6 +329,7 @@ public class SimDisplay {
 	private void step() {
 		sim.update();
 		myGrid.update();
+		graph.update();
 	}
 
 	private void playSim() {

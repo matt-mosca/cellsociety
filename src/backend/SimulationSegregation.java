@@ -32,8 +32,7 @@ public class SimulationSegregation extends Simulation {
 		updateColors();
 	}
 
-	public void specificSetUp(
-			double satisfactionPercentage) {
+	public void specificSetUp(double satisfactionPercentage) {
 		setArray(new CellSegregation[getCellNumberHorizontal()][getCellNumberVertical()]);
 		for (int rowNumber = 0; rowNumber < getCellNumberHorizontal(); rowNumber++) {
 			for (int columnNumber = 0; columnNumber < getCellNumberVertical(); columnNumber++) {

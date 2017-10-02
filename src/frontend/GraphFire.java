@@ -8,7 +8,8 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 //import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
-public class GraphFire {
+public class GraphFire{
+	private static final int SCALING_FACTOR = 100;
 	private static final double GRAPH_HEIGHT_CONSTANT = 200;
 	private static final double GRAPH_WIDTH_CONSTANT = 750;
 	LineChart<Number, Number> myGraph;
@@ -17,40 +18,44 @@ public class GraphFire {
     final NumberAxis yAxis = new NumberAxis();
     SimulationFire sim;
     ResourceBundle resources;
-    int time;
+    private int time=0;
     
     
     
 	
 	public GraphFire(SimulationFire s, ResourceBundle rb) {
-		xAxis.setLabel("Time elapsed");
+		xAxis.setLabel("Iterations");
 		yAxis.setLabel("Proportion");
 		sim=s;
 		proportions = s.getCellProportion();
+//		System.out.println(resources.getString("playbutton"));
+		resources=rb;
 		myGraph = createGraph();
 		myGraph.setPrefHeight(GRAPH_HEIGHT_CONSTANT);
 		myGraph.setPrefWidth(GRAPH_WIDTH_CONSTANT);
-		resources=rb;	
+			
+		
+//		super(s, rb);
 	}
 
 
-
-
-	private LineChart<Number, Number> createGraph() {
+	public LineChart<Number, Number> createGraph() {
 		LineChart<Number, Number> fun = new LineChart<Number, Number>(xAxis, yAxis);
 		fun.getData().addAll(getLine(1), getLine(2));
 		updateLine(fun.getData().get(0));
 		updateLine(fun.getData().get(1));
+		System.out.println(fun.getData().size());
 		return fun;
 	}
 	
 	
 	private XYChart.Series<Number, Number> getLine(int state) {
-		XYChart.Series<Number, Number> line = new XYChart.Series();
+		XYChart.Series<Number, Number> line = new XYChart.Series<Number, Number>();
 		if (state==1) {
 			line.setName(resources.getString("treename"));
 		}
 		if(state==2) {
+			System.out.println("hello");
 			line.setName(resources.getString("firename"));
 		}
 		return line;
@@ -59,15 +64,17 @@ public class GraphFire {
 	public void update() {
 		updateLine(myGraph.getData().get(0));
 		updateLine(myGraph.getData().get(1));
+		time+=1;
 	}
 	
 	private void updateLine(XYChart.Series<Number, Number> line) {
 		proportions = sim.getCellProportion();
 		if(line.getName().equals(resources.getString("treename"))) {
-			line.getData().add(new Data<Number, Number>(time+=1, proportions[0]));
+			line.getData().add(new Data<Number, Number>(time, (double)proportions[0]/SCALING_FACTOR));
 		}
 		if(line.getName().equals(resources.getString("firename"))) {
-			line.getData().add(new Data<Number, Number>(time+=1, proportions[1]));
-		}	
+			line.getData().add(new Data<Number, Number>(time, (double)proportions[1]/SCALING_FACTOR));
+		}
+		
 	}
 }
