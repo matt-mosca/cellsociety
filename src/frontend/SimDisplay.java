@@ -194,16 +194,18 @@ public class SimDisplay {
 	}
 
 	public void RPSConstruct() {
+		
 		if (UI.getType()==1) {
+		
 		    this.sim = new SimulationRPS((int)inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3]);
 		
-		/*
+		}
 		else {
 			int[][] fixedInitial={{1,0,1,1,0},{1,0,1,0,0},{0,0,1,0,0},{1,0,1,0,0},{0,0,1,0,0},{1,1,1,1,1}};
 			this.sim = new SimulationRPS(fixedInitial.length,fixedInitial[0].length,fixedInitial);
 		}
-		*/
-		}
+		
+		
 	}
 
 	public void gameOfLifeConstruct() {
