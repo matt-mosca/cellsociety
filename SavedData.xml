@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><Saved>
-    <title>ROCK PAPER SCISSORS!</title>
+
+<Save>
+    <title>GAME OF LIFE!</title>
 
     <parameters>
-        <cellNumberHorizontal>20</cellNumberHorizontal>
+        <cellNumberHorizontal>10</cellNumberHorizontal>
         <cellNumberVertical>10</cellNumberVertical>
-        <config>00000111110000101111000000111100000011100000000110000222222220222222222222222222222222222222222222222222222222222222222222222222232022223333002023333300003333330003333333000033333300003333330000333333</config>
+        <config>0100100000100011000010000010001100100000000011101000000011000000000010000011010000001110000000011000</config>
+
     </parameters>
 
 
