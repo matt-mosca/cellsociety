@@ -5,6 +5,8 @@ import java.util.List;
 
 import frontend.StyleUI;
 import javafx.scene.paint.Color;
+import util.FourNeighborFinder;
+import util.NeighborFinder;
 
 public class SimulationWaTor extends Simulation {
 	private static final String SHARKSTARVE = "starve";

@@ -3,6 +3,7 @@ package backend;
 import java.util.Random;
 
 import javafx.scene.paint.Color;
+import util.NeighborFinder;
 
 public abstract class Simulation{
 	private Cell[][] array;

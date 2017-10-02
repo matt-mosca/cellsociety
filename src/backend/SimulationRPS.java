@@ -2,6 +2,8 @@ package backend;
 
 import frontend.StyleUI;
 import javafx.scene.paint.Color;
+import util.EightNeighborFinder;
+import util.NeighborFinder;
 
 public class SimulationRPS extends Simulation {
 	private NeighborFinder neighbors;

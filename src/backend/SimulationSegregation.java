@@ -5,6 +5,8 @@ import java.util.List;
 
 import frontend.StyleUI;
 import javafx.scene.paint.Color;
+import util.EightNeighborFinder;
+import util.NeighborFinder;
 
 
 public class SimulationSegregation extends Simulation {

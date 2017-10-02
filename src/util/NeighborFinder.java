@@ -1,7 +1,9 @@
-package backend;
+package util;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import backend.Cell;
 
 public abstract class NeighborFinder {
 	private Cell[][] myCellArray;

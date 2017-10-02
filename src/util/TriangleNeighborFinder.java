@@ -1,7 +1,9 @@
-package backend;
+package util;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import backend.Cell;
 
 public class TriangleNeighborFinder extends NeighborFinder {
 	public TriangleNeighborFinder(Cell[][] cells, int xPos, int yPos, boolean toroidal) {

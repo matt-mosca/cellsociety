@@ -2,6 +2,8 @@ package backend;
 
 import frontend.StyleUI;
 import javafx.scene.paint.Color;
+import util.FourNeighborFinder;
+import util.NeighborFinder;
 
 public class SimulationFire extends Simulation{
 	private double probCatch;

@@ -2,6 +2,8 @@ package backend;
 
 import frontend.StyleUI;
 import javafx.scene.paint.Color;
+import util.EightNeighborFinder;
+import util.NeighborFinder;
 
 public class SimulationGameOfLife extends Simulation {
 	private static final int UPPERBOUNDARY = 3;
