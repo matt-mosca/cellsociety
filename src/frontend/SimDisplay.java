@@ -120,16 +120,8 @@ public class SimDisplay {
 		controls.getChildren().addAll(play, pause, step, reset,save,resume, switcher, another);
 		Sliders = new SimSlider(this);
 		GridPane sliders = Sliders.getSliders();
-//		GridPane sliders = new GridPane();
-//		sliders.setVgap(10);
-//        sliders.setHgap(20);
-//		Slider speed = speedSlider();
-//		GridPane.setConstraints(speed, 1,1);
-//		sliders.getChildren().addAll(speed);//have to add slider names
-		
 		sliders.setAlignment(Pos.CENTER);
 		border.setRight(sliders);
-	
 		border.setBottom(controls);
 		controls.setAlignment(Pos.CENTER);
 		return fun;
@@ -412,6 +404,10 @@ public class SimDisplay {
 		});
 		
 		return b;
+	}
+	
+	public Scene getScene() {
+		return scene;
 	}
 	
 	
