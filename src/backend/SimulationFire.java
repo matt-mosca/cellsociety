@@ -18,17 +18,12 @@ public class SimulationFire extends Simulation{
 	public SimulationFire(int cellNumberHorizontal, int cellNumberVertical, int[][] specificLocation,double probCatch) {
 		super(cellNumberHorizontal,cellNumberVertical,specificLocation);
 		specificSetUp(probCatch);
-         super.initializeScene2(neighbors);
-		
-		
+        super.initializeScene2(neighbors);
 		assignNeighbors(neighbors);
 		updateColors();
-		
 	}
 	
-
-	public void specificSetUp(
-			double probCatch) {
+	public void specificSetUp(double probCatch) {
 		this.probCatch = probCatch;
 		setArray(new CellFire[getCellNumberHorizontal()][getCellNumberVertical()]);
 		for (int rowNumber = 0; rowNumber < getCellNumberHorizontal(); rowNumber++) {
@@ -38,9 +33,6 @@ public class SimulationFire extends Simulation{
 		}
 		neighbors = new FourNeighborFinder(getArray(), 0, 0);
 	}
-	
-
-	
 	
 	private void initializeGridStates() {
 		fillGridStates();
