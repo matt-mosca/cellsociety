@@ -24,5 +24,10 @@ public class FourNeighborFinder extends NeighborFinder {
 		if (yPos+1<=cellNumberVertical - 1)
 			neighbors.add(cellArray[yPos + 1][xPos]);
 		return neighbors;
+//		addNorth();
+//		addSouth();
+//		addEast();
+//		addWest();
+//		return getMyNeighbors();
 	}
 }

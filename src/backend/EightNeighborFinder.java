@@ -34,5 +34,14 @@ public class EightNeighborFinder extends NeighborFinder {
 				neighbors.add(cellArray[yPos + 1][xPos + 1]);
 		}
 		return neighbors;
+//		addNorthwest();
+//		addNorth();
+//		addNortheast();
+//		addEast();
+//		addSoutheast();
+//		addSouth();
+//		addSouthwest();
+//		addWest();
+//		return getMyNeighbors();
 	}
 }
