@@ -55,7 +55,7 @@ public class SimulationWaTor extends Simulation {
 				getArray()[rowNumber][columnNumber] = new CellWaTor(0, null, null, rowNumber, columnNumber);
 			}
 		}
-		neighbors = new FourNeighborFinder(getArray(), 0, 0);
+		neighbors = new FourNeighborFinder(getArray(), 0, 0, false);
 	}
 	
 	@Override
