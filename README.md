@@ -3,7 +3,7 @@
 ### CompSci 308 Cell Society Project
 By Matthew Mosca, Venkat Subramaniam, and Yiqin Zhou
 
-The program runs five simulations: Fire, Game of Life, Segregation, Wa-Tor, and Rock, Paper, Scissors
+The program runs five simulations: Fire, Game of Life, Segregation, Wa-Tor, and Rock, Paper, Scissors.
 
 * Error checking for incorrect file data
       * When no simulation type (simulation title) is given, it will use the default simulation type, but the screen will show an error message saying that "No simulation is given"
