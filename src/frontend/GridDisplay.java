@@ -13,10 +13,10 @@ import javafx.scene.shape.Rectangle;
 
 public class GridDisplay {
 	
-	private static final int GRID_FIT_CONSTANT = 350;
+	private static final int GRID_FIT_CONSTANT = 450;
 	private Pane myGrid;
 	private Cell[][] Cells;
-	private Rectangle[][] Rectangles;
+	private Polygon[][] Rectangles;
 	private Polygon[][] Triangles;
 	private Simulation sim;
 	private StyleUI style=new StyleUI();
@@ -42,14 +42,24 @@ public class GridDisplay {
 	}
 	
 	private void makeRectangleArray() {
-		Rectangles = new Rectangle[Cells.length][Cells[0].length];
+		Rectangles = new Polygon[Cells.length][Cells[0].length];
+		double width=GRID_FIT_CONSTANT/Cells[0].length;
+		double height=GRID_FIT_CONSTANT/Cells.length;
 		for(int i=0; i<Cells.length; i++) {
 			for(int j=0; j<Cells[i].length; j++) {
-				Rectangles[i][j] = new Rectangle();
-				Rectangles[i][j].setStroke(Color.BLACK);
-				Rectangles[i][j].setFill(Cells[i][j].getColor());
-				Rectangles[i][j].setWidth(GRID_FIT_CONSTANT / Cells[0].length);
-				Rectangles[i][j].setHeight(GRID_FIT_CONSTANT / Cells.length);
+				Polygon tem=new Polygon();
+				tem.getPoints().addAll(new Double[] {
+						j*width, (i+1)*height,
+						j*width+width, (i+1)*height,
+						j*width, i*height,
+						j*width+width, i*height 
+						
+					});
+				tem.setStroke(Color.BLACK);
+				tem.setFill(Cells[i][j].getColor());
+				Rectangles[i][j]=tem;
+				
+				
 			}
 		}
 	}
@@ -133,9 +143,9 @@ public class GridDisplay {
 				if (shape.equals("Triangle")){
 				    myGrid.getChildren().add(Triangles[i][j]);
 				}
-//				if (shape.equals("Square")){
-//				    myGrid.add(Rectangles[i][j], j, i);
-//				}
+				if (shape.equals("Square")){
+					myGrid.getChildren().add(Rectangles[i][j]);
+				}
 			}
 		}
 	}
