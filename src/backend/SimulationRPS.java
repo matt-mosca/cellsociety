@@ -5,14 +5,15 @@ import javafx.scene.paint.Color;
 public class SimulationRPS extends Simulation {
 	private NeighborFinder neighbors;
 	private int gradientLevel;
-	private int[] number = new int[2];
+	private int[] number = new int[3];
 	
 	public SimulationRPS(int cellNumberHorizontal, int  cellNumberVertical, double emptyPercentage, 
 			double redToBlueRatio) {
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
 		specificSetUp();
 		assignNeighbors(neighbors);
-		updateColors();
+		prepareGrid();
+		//updateColors();
 		setRandomRGBCells();
 	}
 	
@@ -29,10 +30,20 @@ public class SimulationRPS extends Simulation {
 		setArray(new CellRPS[getCellNumberHorizontal()][getCellNumberVertical()]);
 		for (int rowNumber = 0; rowNumber < getCellNumberHorizontal(); rowNumber++) {
 			for (int columnNumber = 0; columnNumber < getCellNumberVertical(); columnNumber++) {
-				getArray()[rowNumber][columnNumber] = new CellRPS(0, null, null, rowNumber, columnNumber, 0);
+				getArray()[rowNumber][columnNumber] = new CellRPS(CellRPS.EMPTY, null, null, rowNumber, columnNumber, 0);
 			}
 		}
 		neighbors = new EightNeighborFinder(getArray(), 0, 0);
+	}
+	
+	private void prepareGrid() {
+		for (int rowNumber = 0; rowNumber < getCellNumberHorizontal(); rowNumber++) {
+			for (int columnNumber = 0; columnNumber < getCellNumberVertical(); columnNumber++) {
+				getArray()[rowNumber][columnNumber].changeState(CellRPS.EMPTY);
+				getArray()[rowNumber][columnNumber].setColor(Color.WHITE);
+				((CellRPS)getArray()[rowNumber][columnNumber]).setGradientLevel(0);
+			}
+		}
 	}
 	
 	public void update() {
@@ -43,7 +54,7 @@ public class SimulationRPS extends Simulation {
 				CellRPS cellOfFocus = (CellRPS)getArray()[i][j];
 				tempStates[i][j] = cellOfFocus.getState();
 				tempGradients[i][j] = cellOfFocus.getGradientLevel();
-				CellRPS randomNeighbor = (CellRPS) cellOfFocus.getNeighborCells().get((int) getRandomNum(8));
+				CellRPS randomNeighbor = (CellRPS) cellOfFocus.getNeighborCells().get((int) getRandomNum(cellOfFocus.getNeighborCells().size()));
 				//Growing
 				if(cellOfFocus.getState() == CellRPS.EMPTY && randomNeighbor.getState() != CellRPS.EMPTY && 
 						randomNeighbor.getGradientLevel() < 9) {
@@ -149,7 +160,7 @@ public class SimulationRPS extends Simulation {
 	}
 	
 	private int calcIntensityValue(int gradientLevel) {
-		return 255 - gradientLevel * 25;
+		return 125 + gradientLevel * 13;
 	}
 	
 	private double getRandomNum(int upperBound) {
@@ -171,16 +182,19 @@ public class SimulationRPS extends Simulation {
 	}
 	
 	private void count() {
-		number[0]=0;
-		number[1]=0;
-		for(int i=0; i<getArray().length; i++) {
-			for(int j=0; j<getArray()[i].length; j++) {
-				if (getArray()[i][j].getState()==1) {
-					number[0]+=1;
+		number[0] = 0;
+		number[1] = 0;
+		number[2] = 0;
+		for(int i = 0; i < getArray().length; i++) {
+			for(int j = 0; j < getArray()[i].length; j++) {
+				if (getArray()[i][j].getState() == 1) {
+					number[0] += 1;
 				}
-				else if(getArray()[i][j].getState()==2) {
-					number[1]+=1;
+				else if(getArray()[i][j].getState() == 2) {
+					number[1] += 1;
 				}
+				else if(getArray()[i][j].getState() == 3)
+					number[2] += 1;
 			}
 		}
 	}
