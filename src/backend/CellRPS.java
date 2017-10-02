@@ -6,8 +6,8 @@ import javafx.scene.paint.Color;
 public class CellRPS extends Cell{
 	public static final int EMPTY = 0;
 	public static final int RED = 1;
-	public static final int BLUE = 2;
-	public static final int GREEN = 3;
+	public static final int GREEN = 2;
+	public static final int BLUE = 3;
 	
 	//0 is darkest, 9 is lightest
 	private int gradientLevel;
