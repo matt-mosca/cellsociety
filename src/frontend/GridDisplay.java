@@ -71,7 +71,9 @@ public class GridDisplay {
 		for (int i =0; i<Cells.length; i++) {
 			for (int j=0; j<Cells[i].length; j++) {
 				Rectangle r = new Rectangle(j*width, i*height, width, height);
-				r.setStroke(Color.BLACK);
+				if (style.gridVisibility()==true) {
+				    r.setStroke(Color.BLACK);
+				}
 				r.setFill(Cells[i][j].getColor());
 				Rectangles[i][j] = r;
 			}
@@ -113,8 +115,10 @@ public class GridDisplay {
   							j*(width/2)+0.5*width,i*height
   						});
   				}
-				tem.setStroke(Color.BLACK);
-//				tem.setFill(Cells[i][j].getColor());
+                if (style.gridVisibility()==true) {
+				    tem.setStroke(Color.BLACK);
+                }
+				tem.setFill(Cells[i][j].getColor());
 				Triangles[i][j]=tem;	
 			}
 		}
