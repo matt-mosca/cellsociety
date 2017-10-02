@@ -1,7 +1,7 @@
 <Style>
     <grid>
         <visibility>Y</visibility>
-        <shape>Triangle</shape>
+        <shape>Square</shape>
         <gridEdge>0</gridEdge>
     </grid>
     <color>
