@@ -161,8 +161,11 @@ public class SimulationRPS extends Simulation {
 		int randThree = (int) getRandomNum(getNumberOfCells());
 		if(getCellNumberVertical() != 0) {
 			getArray()[randOne / getCellNumberVertical()][randOne % getCellNumberVertical()].changeState(CellRPS.RED);
+			((CellRPS)getArray()[randOne / getCellNumberVertical()][randOne % getCellNumberVertical()]).setGradientLevel(0);
 			getArray()[randTwo / getCellNumberVertical()][randTwo % getCellNumberVertical()].changeState(CellRPS.GREEN);
+			((CellRPS)getArray()[randTwo / getCellNumberVertical()][randTwo % getCellNumberVertical()]).setGradientLevel(0);
 			getArray()[randThree / getCellNumberVertical()][randThree % getCellNumberVertical()].changeState(CellRPS.BLUE);
+			((CellRPS)getArray()[randThree / getCellNumberVertical()][randThree % getCellNumberVertical()]).setGradientLevel(0);
 		}
 	}
 	
