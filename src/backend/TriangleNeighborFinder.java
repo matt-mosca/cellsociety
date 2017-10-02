@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TriangleNeighborFinder extends NeighborFinder {
-	public TriangleNeighborFinder(Cell[][] cells, int xPos, int yPos) {
-		super(cells, xPos, yPos);
+	public TriangleNeighborFinder(Cell[][] cells, int xPos, int yPos, boolean toroidal) {
+		super(cells, xPos, yPos, toroidal);
 	}
 	
 	public List<Cell> findNeighbors() {

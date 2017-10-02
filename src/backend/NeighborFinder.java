@@ -10,14 +10,16 @@ public abstract class NeighborFinder {
 	private int arrayCellWidth;
 	private int arrayCellHeight;
 	private List<Cell> myNeighbors;
+	private boolean toroidal;
 	
-	public NeighborFinder(Cell[][] cells, int xPos, int yPos) {
+	public NeighborFinder(Cell[][] cells, int xPos, int yPos, boolean tor) {
 		myCellArray = cells;
 		myXPosition = xPos;
 		myYPosition = yPos;
 		arrayCellWidth = myCellArray[0].length;
 		arrayCellHeight = myCellArray.length;
 		myNeighbors = new ArrayList<Cell>();
+		toroidal = tor;
 	}
 	
 //	if (yPos - 1 >= 0) {
@@ -88,6 +90,10 @@ public abstract class NeighborFinder {
 	
 	protected int getMyYPosition() {
 		return myYPosition;
+	}
+	
+	protected boolean getToroidal() {
+		return toroidal;
 	}
 	
 	public void setMyXPosition(int x) {

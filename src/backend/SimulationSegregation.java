@@ -41,7 +41,7 @@ public class SimulationSegregation extends Simulation {
 				getArray()[rowNumber][columnNumber]=new CellSegregation(0, null, null, rowNumber, columnNumber);
 			}
 		}
-		neighbors = new EightNeighborFinder(getArray(), 0, 0);
+		neighbors = new EightNeighborFinder(getArray(), 0, 0, false);
 	}
 
 	@Override
