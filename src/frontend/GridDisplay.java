@@ -13,7 +13,7 @@ import javafx.scene.shape.Rectangle;
 
 public class GridDisplay {
 	
-	private static final int GRID_FIT_CONSTANT = 450;
+	private static final int GRID_FIT_CONSTANT = 400;
 	private Pane myGrid;
 	private Cell[][] Cells;
 	private Rectangle[][] Rectangles;

@@ -120,5 +120,37 @@ public class SimulationSegregation extends Simulation {
 		return false;
 	}
 	
+	private static void testArrayPrinter(Cell[][] testArray) {
+	
+		
+		
+		for(int i = 0; i < testArray.length; i++) {
+			for(int j = 0; j < testArray[0].length; j++) {
+				System.out.print(testArray[i][j].getState() + " ");
+			}
+			System.out.println();
+		}
+		System.out.println();
+	}
+	
+	public static void main(String[] args) {
+	SimulationSegregation test = new SimulationSegregation(5, 5, 0.2, 0.5, 0.5);
+	testArrayPrinter(test.getArray());
+//	System.out.println(test.getArray()[1][1].getNeighborCells());
+//	System.out.println();
+//	System.out.print(test.findNumberEmpty());
+//	System.out.println();
+	int iterations = 10;
+	//Drives test simulation
+	for(int i = 0; i < iterations; i++) {
+		test.update();
+		System.out.println("Iteration " + (i + 1));
+		testArrayPrinter(test.getArray());
+	}
+}
+
+
+
+	
 	
 }
