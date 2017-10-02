@@ -78,6 +78,7 @@ public class SimDisplay {
 	private ResourceBundle myResources;
 	private GridDisplay myGrid;
 	private Graph graph;
+	private SimSlider Sliders;
 	//for save scene
 	private UserSaveSimulation saveUI=new UserSaveSimulation();
 
@@ -100,6 +101,7 @@ public class SimDisplay {
 	private Scene makeSimulation(){
 		border = new BorderPane();
 		myGrid = new GridDisplay(sim);
+		
 		graph = new Graph(sim, myResources, simName);
 		Scene fun = new Scene(border, width, height);
 		border.setCenter(myGrid.getGrid());
@@ -115,13 +117,14 @@ public class SimDisplay {
 		Button resume=resumeButton();
 		Button switcher=switchSim();
 		controls.getChildren().addAll(play, pause, step, reset,save,resume, switcher);
-		
-		GridPane sliders = new GridPane();
-		sliders.setVgap(10);
-        sliders.setHgap(20);
-		Slider speed = speedSlider();
-		GridPane.setConstraints(speed, 1,1);
-		sliders.getChildren().addAll(speed);//have to add slider names
+		Sliders = new SimSlider(this);
+		GridPane sliders = Sliders.getSliders();
+//		GridPane sliders = new GridPane();
+//		sliders.setVgap(10);
+//        sliders.setHgap(20);
+//		Slider speed = speedSlider();
+//		GridPane.setConstraints(speed, 1,1);
+//		sliders.getChildren().addAll(speed);//have to add slider names
 		
 		sliders.setAlignment(Pos.CENTER);
 		border.setRight(sliders);
@@ -193,7 +196,7 @@ public class SimDisplay {
 		return b;
 	}
 
-	public void RPSConstruct() {
+	private void RPSConstruct() {
 		
 		if (UI.getType()==1) {
 		
@@ -208,7 +211,7 @@ public class SimDisplay {
 		
 	}
 
-	public void gameOfLifeConstruct() {
+	private void gameOfLifeConstruct() {
 		if (UI.getType()==1) {
 		    this.sim = new SimulationGameOfLife((int)inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3]);
 		}
@@ -218,7 +221,7 @@ public class SimDisplay {
 		}
 	}
 
-	public void segregationConstruct() {
+	private void segregationConstruct() {
 		if (UI.getType()==1) {
 		    this.sim = new SimulationSegregation((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
 		} else {
@@ -227,7 +230,7 @@ public class SimDisplay {
 		}
 	}
 
-	public void fireConstruct() {
+	private void fireConstruct() {
 		if (UI.getType()==1) {
 		    this.sim = new SimulationFire((int) inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
 		}else{
@@ -236,7 +239,7 @@ public class SimDisplay {
 		}
 	}
 
-	public void waTorConstruct() {
+	private void waTorConstruct() {
 		if (UI.getType()==1) {
 		    this.sim = new SimulationWaTor((int)inputArray[0], (int)inputArray[1], inputArray[2], inputArray[3], (int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
 		}else{
@@ -351,24 +354,16 @@ public class SimDisplay {
 		window.setTitle(simName);
 	}
 	
-//	public Simulation getSimulation() {
-//		return this.sim;
-//	}
-//	
-//	public Scene getScene() {
-//		return this.scene;
-//	}
-	
 	private void step() {
 		sim.update();
 		myGrid.update();
 		graph.update();
 	}
 
-	private void playSim() {
+	public void playSim() {
+		createAnimation();
 		this.scene = makeSimulation();
 		window.setScene(scene);
-		createAnimation();
 	}
 
 	private void createAnimation() {
@@ -378,13 +373,6 @@ public class SimDisplay {
 		animation.getKeyFrames().add(frame);
 		animation.setRate(5);
 	}
-	
-//	private void changeSpeed(double speed) {
-//		animation.pause();
-//		animation.getKeyFrames().clear();
-//		KeyFrame frame = new KeyFrame(Duration.millis(speed), e->step());
-//		animation.getKeyFrames().add(frame);
-//	}
 	
 	public Timeline getAnimation() {
 		return animation;
@@ -404,6 +392,15 @@ public class SimDisplay {
             }	
             });
 		return s;
+	}
+
+	
+	public Simulation getSimulation() {
+		return sim;
+	}
+	
+	public void setSimulation(Simulation s) {
+		this.sim = s;
 	}
 	
 	

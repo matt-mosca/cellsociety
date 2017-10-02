@@ -120,5 +120,9 @@ public class SimulationSegregation extends Simulation {
 		return false;
 	}
 	
+	public double getSatisfactionPercentage() {
+		return satisfactionPercentage;
+	}
+	
 	
 }
