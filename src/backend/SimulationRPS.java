@@ -34,22 +34,89 @@ public class SimulationRPS extends Simulation {
 	}
 	
 	public void update() {
-		int[][] temp = new int[getCellNumberHorizontal()][getCellNumberVertical()];
+		int[][] tempStates = new int[getCellNumberHorizontal()][getCellNumberVertical()];
+		int[][] tempGradients = new int[getCellNumberHorizontal()][getCellNumberVertical()];
 		for(int i = 0; i < getCellNumberHorizontal(); i++) {
 			for(int j = 0; j < getCellNumberVertical(); j++) {
-//				temp[i][j] = getArray()[i][j].getState();
-//				if(getArray()[i][j].getState() == CellFire.BURNING)
-//					temp[i][j] = CellFire.EMPTY;
-//				if(getArray()[i][j].getState() == CellFire.TREE) {
-//					if(potentialForFire(getArray()[i][j]))
-//						if(getRandomNum(1) <= probCatch)
-//							temp[i][j] = CellFire.BURNING;
-//				}
+				CellRPS cellOfFocus = (CellRPS)getArray()[i][j];
+				tempStates[i][j] = cellOfFocus.getState();
+				tempGradients[i][j] = cellOfFocus.getGradientLevel();
+				CellRPS randomNeighbor = (CellRPS) cellOfFocus.getNeighborCells().get((int) getRandomNum(8));
+				//Growing
+				if(cellOfFocus.getState() == CellRPS.EMPTY && randomNeighbor.getState() != CellRPS.EMPTY && 
+						randomNeighbor.getGradientLevel() < 9) {
+					tempStates[i][j] = randomNeighbor.getState();
+					tempGradients[i][j] = randomNeighbor.getGradientLevel() + 1;
+				}
+				//Eating
+				if(cellOfFocus.getState() == CellRPS.RED) {
+					//Red eats blue
+					if(randomNeighbor.getState() == CellRPS.BLUE) {
+						if(randomNeighbor.getGradientLevel() < 9)
+							tempGradients[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()]++;
+						else
+							tempStates[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()] = CellRPS.RED;
+						if(cellOfFocus.getGradientLevel() > 0)
+							tempGradients[i][j]--;
+					}
+					//Green eats red
+					if(randomNeighbor.getState() == CellRPS.GREEN) {
+						if(cellOfFocus.getGradientLevel() < 9)
+							tempGradients[i][j]++;
+						else
+							tempStates[i][j] = CellRPS.GREEN;
+						if(randomNeighbor.getGradientLevel() > 0)
+							tempGradients[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()]--;
+					}
+				}
+				
+				if(cellOfFocus.getState() == CellRPS.GREEN) {
+					//Green eats red
+					if(randomNeighbor.getState() == CellRPS.RED) {
+						if(randomNeighbor.getGradientLevel() < 9)
+							tempGradients[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()]++;
+						else
+							tempStates[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()] = CellRPS.GREEN;
+						if(cellOfFocus.getGradientLevel() > 0)
+							tempGradients[i][j]--;
+					}
+					//Blue eats green
+					if(randomNeighbor.getState() == CellRPS.BLUE) {
+						if(cellOfFocus.getGradientLevel() < 9)
+							tempGradients[i][j]++;
+						else
+							tempStates[i][j] = CellRPS.BLUE;
+						if(randomNeighbor.getGradientLevel() > 0)
+							tempGradients[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()]--;
+					}
+				}
+				
+				if(cellOfFocus.getState() == CellRPS.BLUE) {
+					//Blue eats green
+					if(randomNeighbor.getState() == CellRPS.GREEN) {
+						if(randomNeighbor.getGradientLevel() < 9)
+							tempGradients[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()]++;
+						else
+							tempStates[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()] = CellRPS.BLUE;
+						if(cellOfFocus.getGradientLevel() > 0)
+							tempGradients[i][j]--;
+					}
+					//Red eats blue
+					if(randomNeighbor.getState() == CellRPS.BLUE) {
+						if(cellOfFocus.getGradientLevel() < 9)
+							tempGradients[i][j]++;
+						else
+							tempStates[i][j] = CellRPS.BLUE;
+						if(randomNeighbor.getGradientLevel() > 0)
+							tempGradients[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()]--;
+					}
+				}
 			}
 		}
 		for(int i = 0; i < getCellNumberHorizontal(); i++) {
 			for(int j = 0; j < getCellNumberVertical(); j++) {
-//				getArray()[i][j].changeState(temp[i][j]);
+				getArray()[i][j].changeState(tempStates[i][j]);
+				((CellRPS)getArray()[i][j]).setGradientLevel(tempGradients[i][j]);
 			}
 		}
 		assignNeighbors(neighbors);
@@ -82,6 +149,16 @@ public class SimulationRPS extends Simulation {
 	private int calcIntensityValue(int gradientLevel) {
 		return 255 - gradientLevel * 25;
 	}
+	
+	private double getRandomNum(int upperBound) {
+		return Math.random() * upperBound;
+	}
+	
+//	private void setRandomFire() {
+//		int rand = (int) getRandomNum(getNumberOfCells());
+//		if(getCellNumberVertical() != 0)
+//			getArray()[rand / getCellNumberVertical()][rand % getCellNumberVertical()].changeState(CellFire.BURNING);
+//	}
 	
 	private void count() {
 		number[0]=0;
