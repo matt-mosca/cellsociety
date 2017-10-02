@@ -1,5 +1,6 @@
 package backend;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class NeighborFinder {
@@ -8,7 +9,7 @@ public abstract class NeighborFinder {
 	private int myYPosition;
 	private int arrayCellWidth;
 	private int arrayCellHeight;
-	private List<Cell> neighbors;
+	private List<Cell> myNeighbors;
 	
 	public NeighborFinder(Cell[][] cells, int xPos, int yPos) {
 		myCellArray = cells;
@@ -16,6 +17,7 @@ public abstract class NeighborFinder {
 		myYPosition = yPos;
 		arrayCellWidth = myCellArray[0].length;
 		arrayCellHeight = myCellArray.length;
+		myNeighbors = new ArrayList<Cell>();
 	}
 	
 //	if (yPos - 1 >= 0) {
@@ -38,42 +40,42 @@ public abstract class NeighborFinder {
 //	}
 	protected void addNorthwest() {
 		if(myYPosition - 1 >= 0 && myXPosition - 1 >= 0)
-			neighbors.add(myCellArray[myYPosition - 1][myXPosition - 1]);
+			myNeighbors.add(myCellArray[myYPosition - 1][myXPosition - 1]);
 	}
 	
 	protected void addNorth() {
 		if(myYPosition - 1 >= 0)
-			neighbors.add(myCellArray[myYPosition - 1][myXPosition]);
+			myNeighbors.add(myCellArray[myYPosition - 1][myXPosition]);
 	}
 	
 	protected void addNortheast() {
 		if(myYPosition - 1 >= 0 && myXPosition + 1 <= arrayCellWidth - 1)
-			neighbors.add(myCellArray[myYPosition - 1][myXPosition + 1]);
+			myNeighbors.add(myCellArray[myYPosition - 1][myXPosition + 1]);
 	}
 
 	protected void addEast() {
 		if(myXPosition + 1 <= arrayCellWidth - 1)
-			neighbors.add(myCellArray[myYPosition][myXPosition + 1]);
+			myNeighbors.add(myCellArray[myYPosition][myXPosition + 1]);
 	}
 
 	protected void addSoutheast() {
 		if(myYPosition + 1 <= arrayCellHeight - 1 && myXPosition + 1 <= arrayCellWidth - 1)
-			neighbors.add(myCellArray[myYPosition + 1][myXPosition + 1]);
+			myNeighbors.add(myCellArray[myYPosition + 1][myXPosition + 1]);
 	}
 	
 	protected void addSouth() {
 		if(myYPosition + 1 <= arrayCellHeight - 1)
-			neighbors.add(myCellArray[myYPosition + 1][myXPosition]);
+			myNeighbors.add(myCellArray[myYPosition + 1][myXPosition]);
 	}
 
 	protected void addSouthwest() {
 		if(myYPosition + 1 <= arrayCellHeight - 1 && myXPosition - 1 >= 0)
-			neighbors.add(myCellArray[myYPosition + 1][myXPosition - 1]);
+			myNeighbors.add(myCellArray[myYPosition + 1][myXPosition - 1]);
 	}
 	
 	protected void addWest() {
 		if(myXPosition - 1 >= 0)
-			neighbors.add(myCellArray[myYPosition][myXPosition - 1]);
+			myNeighbors.add(myCellArray[myYPosition][myXPosition - 1]);
 	}
 	
 	protected Cell[][] getMyCellArray() {
@@ -94,6 +96,10 @@ public abstract class NeighborFinder {
 	
 	public void setMyYPosition(int y) {
 		myYPosition = y;
+	}
+	
+	public List<Cell> getMyNeighbors() {
+		return myNeighbors;
 	}
 	
 	public abstract List<Cell> findNeighbors();
