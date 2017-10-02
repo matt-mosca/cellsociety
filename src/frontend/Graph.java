@@ -50,11 +50,9 @@ public  class Graph {
 	
 	private XYChart.Series<Number, Number> getLine(int state) {
 		XYChart.Series<Number, Number> line = new XYChart.Series<Number, Number>();
-		System.out.println("hey!"); System.out.println(state);
 		if (simName.equals(FIRE_TITLE)){
 			if (state==1) {
 			line.setName(resources.getString("treename"));
-			System.out.println(line.getName());
 		}
 			if(state==2) {
 			line.setName(resources.getString("firename"));
