@@ -183,12 +183,24 @@ public class UserInput {
 
      }
 	  
+	  public void getRPS() {
+		  try {
+			  doc = getFile("RPS.xml");
+			  doc.getDocumentElement().normalize();
+			  simulationType=doc.getElementsByTagName("name").item(0).getTextContent();
+			  getInitialSetUp(doc, null);
+		  } catch(Exception e) {
+			  if (simulationType==null) {
+				  showError("Simulation name is not given, will use the default value");
+				  simulationType = "Rock Paper Scissors";
+				  getInitialSetUp(doc,null);
+			  }
+		  }
+	  }
+
 
 	  
 	  
-
-
-
 
 	public Document getFile(String fileName) throws ParserConfigurationException, SAXException, IOException {
 		File fXmlFile = new File(fileName);

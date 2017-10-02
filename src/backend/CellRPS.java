@@ -21,16 +21,6 @@ public class CellRPS extends Cell{
 		return gradientLevel;
 	}
 	
-	public void upgrade() {
-		if(gradientLevel != 0)
-			gradientLevel--;
-	}
-	
-	public void downgrade() {
-		if(gradientLevel < 9)
-			gradientLevel++;
-	}
-	
 	public void setGradientLevel(int gradient) {
 		gradientLevel = gradient;
 	}
