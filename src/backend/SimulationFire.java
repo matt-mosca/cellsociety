@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 public class SimulationFire extends Simulation{
 	private double probCatch;
 	private NeighborFinder neighbors;
-	private StyleUI style=new StyleUI();
+	private StyleUI style = new StyleUI();
 	
 
 	public SimulationFire(int cellNumberHorizontal, int  cellNumberVertical, double emptyPercentage, 
@@ -33,7 +33,7 @@ public class SimulationFire extends Simulation{
 				getArray()[rowNumber][columnNumber] = new CellFire(CellFire.EMPTY, null, null, rowNumber, columnNumber);
 			}
 		}
-		neighbors = new FourNeighborFinder(getArray(), 0, 0, false);
+		neighbors = new FourNeighborFinder(getArray(), 0, 0, style.getGridEdge());
 	}
 	
 	private void initializeGridStates() {

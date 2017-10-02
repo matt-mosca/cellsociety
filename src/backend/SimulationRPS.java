@@ -1,11 +1,13 @@
 package backend;
 
+import frontend.StyleUI;
 import javafx.scene.paint.Color;
 
 public class SimulationRPS extends Simulation {
 	private NeighborFinder neighbors;
 	private int gradientLevel;
 	private int[] number = new int[3];
+	private StyleUI style = new StyleUI();
 	
 	public SimulationRPS(int cellNumberHorizontal, int  cellNumberVertical, double emptyPercentage, 
 			double redToBlueRatio) {
@@ -33,7 +35,7 @@ public class SimulationRPS extends Simulation {
 				getArray()[rowNumber][columnNumber] = new CellRPS(CellRPS.EMPTY, null, null, rowNumber, columnNumber, 0);
 			}
 		}
-		neighbors = new EightNeighborFinder(getArray(), 0, 0, false);
+		neighbors = new EightNeighborFinder(getArray(), 0, 0, style.getGridEdge());
 	}
 	
 	private void prepareGrid() {

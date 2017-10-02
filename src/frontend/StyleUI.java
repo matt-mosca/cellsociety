@@ -58,7 +58,7 @@ public class StyleUI {
 			doc = getFile("Style.xml");
 			doc.getDocumentElement().normalize();
 			String message=doc.getElementsByTagName("gridEdge").item(0).getTextContent();
-			if (message=="Y") {
+			if (message.equals("Y")) {
 				return true;	
 			}
 			if (message.equals("N")) {

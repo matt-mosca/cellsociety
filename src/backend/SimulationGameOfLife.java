@@ -7,7 +7,7 @@ public class SimulationGameOfLife extends Simulation {
 	private static final int UPPERBOUNDARY = 3;
 	private static final int LOWERBOUNDARY = 2;
 	private NeighborFinder neighbors;
-	private StyleUI style=new StyleUI();
+	private StyleUI style = new StyleUI();
 	
 	
 	public SimulationGameOfLife(int cellNumberHorizontal, int cellNumberVertical, double emptyPercentage, double redToBlueRatio) {
@@ -32,7 +32,7 @@ public class SimulationGameOfLife extends Simulation {
 				getArray()[rowNumber][columnNumber] = new CellGameOfLife(CellGameOfLife.EMPTY, null, null, rowNumber, columnNumber);
 			}
 		}
-		neighbors = new EightNeighborFinder(getArray(), 0, 0, false);
+		neighbors = new EightNeighborFinder(getArray(), 0, 0, style.getGridEdge());
 	}
 	
 	private void initializeGridStates() {

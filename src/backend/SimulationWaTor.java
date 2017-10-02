@@ -14,7 +14,7 @@ public class SimulationWaTor extends Simulation {
 	private int minBreedDaysForSharks;
 	private int minBreedDaysForFish;
 	private NeighborFinder neighbors;
-	private StyleUI style=new StyleUI();
+	private StyleUI style = new StyleUI();
 
 	
 	// 0 is empty, 1 is shark, 2 is fish
@@ -55,7 +55,7 @@ public class SimulationWaTor extends Simulation {
 				getArray()[rowNumber][columnNumber] = new CellWaTor(0, null, null, rowNumber, columnNumber);
 			}
 		}
-		neighbors = new FourNeighborFinder(getArray(), 0, 0, false);
+		neighbors = new FourNeighborFinder(getArray(), 0, 0, style.getGridEdge());
 	}
 	
 	@Override
