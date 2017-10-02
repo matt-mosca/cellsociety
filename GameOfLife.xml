@@ -9,8 +9,8 @@
 
     <initialSetting>
         <type>1</type>
-        <cellNumberHorizontal>5</cellNumberHorizontal>
-        <cellNumberVertical>5</cellNumberVertical>
+        <cellNumberHorizontal>10</cellNumberHorizontal>
+        <cellNumberVertical>10</cellNumberVertical>
         <emptyPercentage>0.6</emptyPercentage>
         <redToBlueRatio>0</redToBlueRatio>
     </initialSetting>
