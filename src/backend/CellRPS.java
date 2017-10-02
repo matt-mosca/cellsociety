@@ -30,4 +30,8 @@ public class CellRPS extends Cell{
 		if(gradientLevel < 9)
 			gradientLevel++;
 	}
+	
+	public void setGradientLevel(int gradient) {
+		gradientLevel = gradient;
+	}
 }
