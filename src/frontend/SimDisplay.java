@@ -384,6 +384,11 @@ public class SimDisplay {
 //		animation.getKeyFrames().add(frame);
 //	}
 	
+	public Timeline getAnimation() {
+		return animation;
+	}
+	
+	
 	private Slider speedSlider() {
 		Slider s = new Slider(0,10,5);
 		s.setShowTickLabels(true);
@@ -398,6 +403,7 @@ public class SimDisplay {
             });
 		return s;
 	}
+	
 	
 	
 }
