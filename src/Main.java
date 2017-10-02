@@ -10,8 +10,9 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application{
-	private static final int SIZEx = 650;
-	private static final int SIZEy = 650;
+	private static final String FILENAME = "English_Text";
+	private static final int SIZEx = 750;
+	private static final int SIZEy = 750;
 	private static final String INITIAL_TITLE = "CellSociety!";
 	
 	
@@ -23,7 +24,7 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		window = primaryStage;
-		s = new SimDisplay(SIZEx, SIZEy, window, "English_Text");
+		s = new SimDisplay(SIZEx, SIZEy, window, FILENAME);
 		window.setTitle(INITIAL_TITLE);
 		myScene = s.getStartScene();
 		window.setScene(myScene);

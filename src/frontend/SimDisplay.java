@@ -116,7 +116,8 @@ public class SimDisplay {
 		Button save=saveButton();
 		Button resume=resumeButton();
 		Button switcher=switchSim();
-		controls.getChildren().addAll(play, pause, step, reset,save,resume, switcher);
+		Button another = newSim();
+		controls.getChildren().addAll(play, pause, step, reset,save,resume, switcher, another);
 		Sliders = new SimSlider(this);
 		GridPane sliders = Sliders.getSliders();
 //		GridPane sliders = new GridPane();
@@ -401,6 +402,16 @@ public class SimDisplay {
 	
 	public void setSimulation(Simulation s) {
 		this.sim = s;
+	}
+	
+	private Button newSim() {
+		Button b = new Button(myResources.getString("newbutton"));
+		b.setOnAction(e->{
+			Stage t = new Stage();
+			NewSimulation s = new NewSimulation(t);
+		});
+		
+		return b;
 	}
 	
 	
