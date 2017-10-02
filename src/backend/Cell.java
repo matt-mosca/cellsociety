@@ -59,4 +59,6 @@ public class Cell {
 	public void setColumnNumber(int columnNumber) {
 		this.columnNumber = columnNumber;
 	}
+
+	
 }
