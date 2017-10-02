@@ -1,0 +1,18 @@
+<RPS>
+    <title>
+        <name>RPS</name>
+    </title>
+
+    <parameters>
+        <gradientLevel>0</gradientLevel>
+
+    </parameters>
+
+    <initialSetting>
+        <type>2</type>
+        <cellNumberHorizontal>20</cellNumberHorizontal>
+        <cellNumberVertical>10</cellNumberVertical>
+        <emptyPercentage>0.6</emptyPercentage>
+        <redToBlueRatio>0</redToBlueRatio>
+    </initialSetting>
+</RPS>
