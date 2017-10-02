@@ -3,6 +3,7 @@ package backend;
 import java.util.ArrayList;
 import java.util.List;
 
+import frontend.StyleUI;
 import javafx.scene.paint.Color;
 
 public class SimulationWaTor extends Simulation {
@@ -13,6 +14,7 @@ public class SimulationWaTor extends Simulation {
 	private int minBreedDaysForSharks;
 	private int minBreedDaysForFish;
 	private NeighborFinder neighbors;
+	private StyleUI style=new StyleUI();
 
 	
 	// 0 is empty, 1 is shark, 2 is fish
@@ -60,12 +62,12 @@ public class SimulationWaTor extends Simulation {
 	protected Color chooseColor(int state) {
 		Color color = null;
 		if(state == 0)
-			color = Color.WHITE;
+			color = style.emptyColor();
 		if(state == 1){
-			color = Color.PINK;
+			color = Color.RED;
 		}
 		if(state == 2)
-			color = Color.AQUA;
+			color = Color.GREEN;
 		return color;
 	}
 

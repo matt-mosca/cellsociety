@@ -1,10 +1,12 @@
 package backend;
 
+import frontend.StyleUI;
 import javafx.scene.paint.Color;
 
 public class SimulationFire extends Simulation{
 	private double probCatch;
 	private NeighborFinder neighbors;
+	private StyleUI style=new StyleUI();
 	
 
 	public SimulationFire(int cellNumberHorizontal, int  cellNumberVertical, double emptyPercentage, 
@@ -107,7 +109,7 @@ public class SimulationFire extends Simulation{
 		Color color = null;
 
 		if(state == CellFire.EMPTY)
-			color=Color.WHITE;
+			color=style.emptyColor();
 		if(state == CellFire.TREE)
 			color=Color.GREEN;
 		if(state == CellFire.BURNING) {

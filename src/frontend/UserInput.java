@@ -99,7 +99,6 @@ public class UserInput {
 		doc = getFile("WaTor.xml");
 		doc.getDocumentElement().normalize();
 		simulationType=doc.getElementsByTagName("name").item(0).getTextContent();
-		
 		waTorSetUpWithoutType();
 //		makeFinalArray();
 	    } catch (Exception e) {
@@ -172,9 +171,6 @@ public class UserInput {
 			doc.getDocumentElement().normalize();
 			simulationType=doc.getElementsByTagName("name").item(0).getTextContent();
 			getInitialSetUp(doc, null);
-//			makeFinalArray(fun);
-			
-				
 			
 		    } catch (Exception e) {
 		    	if (simulationType==null) {
@@ -184,7 +180,7 @@ public class UserInput {
 			    	
 			    }
 		    }
-//			return finalParams;
+
    }
 
 
