@@ -12,6 +12,7 @@ import backend.Cell;
 import backend.Simulation;
 import backend.SimulationFire;
 import backend.SimulationGameOfLife;
+import backend.SimulationRPS;
 import backend.SimulationSegregation;
 import backend.SimulationWaTor;
 
@@ -53,12 +54,14 @@ public class SimDisplay {
 	private static final String SEGREGATIONTITLE = "Segregation";
 	private static final String FIRETITLE = "Fire";
 	private static final String WATORTITLE = "WaTor";
+	private static final String RPSTITLE = "Rock Paper Scissors";
 	private static final int VBOX_SPACING = 7;
 	private static final int MILLISECOND_DELAY = 1000;
 	private static final String WATOR_TITLE = "WaTor!";
 	private static final String FIRE_TITLE  = "FIYAH!";
 	private static final String SEGREGATION_TITLE = "SEGREGATION!";
 	private static final String GAME_OF_LIFE_TITLE = "GAME OF LIFE!";
+	private static final String RPS_TITLE = "ROCK PAPER SCISSORS!";
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private static final String SPEED_LABEL = "Speed";
 	
@@ -148,7 +151,8 @@ public class SimDisplay {
 		Button b2 = chooseScene(FIRETITLE);
 		Button b3 = chooseScene(SEGREGATIONTITLE);
 		Button b4 = chooseScene(GAMEOFLIFETITLE);
-		layout.getChildren().addAll(startMessage, b1,b2,b3,b4);
+		Button b5 = chooseScene(RPSTITLE);
+		layout.getChildren().addAll(startMessage, b1,b2,b3,b4,b5);
 		this.scene = startScene;
 		return this.scene;
 	}
@@ -180,9 +184,23 @@ public class SimDisplay {
 				gameOfLifeConstruct();
 				changeSimName(GAME_OF_LIFE_TITLE);
 			}
+			if(s.equals(RPSTITLE)) {
+				RPSConstruct();
+				changeSimName(RPS_TITLE);
+			}
 			playSim();
 		});
 		return b;
+	}
+
+	private void RPSConstruct() {
+		if (UI.getType()==1) {
+		    this.sim = new SimulationRPS((int)inputArray[0], (int) inputArray[1], inputArray[2], inputArray[3]);
+		}
+		else {
+			int[][] fixedInitial={{1,0,1,1,0},{1,0,1,0,0},{0,0,1,0,0},{1,0,1,0,0},{0,0,1,0,0},{1,1,1,1,1}};
+			this.sim = new SimulationRPS(fixedInitial.length,fixedInitial[0].length,fixedInitial);
+		}
 	}
 
 	public void gameOfLifeConstruct() {
@@ -262,6 +280,9 @@ public class SimDisplay {
 			if(simName.equalsIgnoreCase(WATOR_TITLE)) {
 				this.sim = new SimulationWaTor(resumedArray.length,resumedArray[0].length,resumedArray,(int)inputArray[4], (int)inputArray[5], (int)inputArray[6]);
 			}
+//			if(simName.equals(RPS_TITLE)) {
+//				this.sim = new SimulationRPS(resumedArray.length, resumedArray[0].length, resumedArray)
+//			}
 			playSim();	
 		});
 		return b;
@@ -310,6 +331,9 @@ public class SimDisplay {
 			if(simName.equals(WATOR_TITLE)) {
 				waTorConstruct();
 				
+			}
+			if(simName.equals(RPS_TITLE)) {
+				RPSConstruct();
 			}
 			playSim();
 		});
