@@ -1,11 +1,12 @@
 package backend;
 
+import frontend.StyleUI;
 import javafx.scene.paint.Color;
 
 public class SimulationRPS extends Simulation {
 	private NeighborFinder neighbors;
-	private int gradientLevel;
 	private int[] number = new int[3];
+	private StyleUI style = new StyleUI();
 	
 	public SimulationRPS(int cellNumberHorizontal, int  cellNumberVertical, double emptyPercentage, 
 			double redToBlueRatio) {
@@ -33,7 +34,7 @@ public class SimulationRPS extends Simulation {
 				getArray()[rowNumber][columnNumber] = new CellRPS(CellRPS.EMPTY, null, null, rowNumber, columnNumber, 0);
 			}
 		}
-		neighbors = new EightNeighborFinder(getArray(), 0, 0, false);
+		neighbors = new EightNeighborFinder(getArray(), 0, 0, style.getGridEdge());
 	}
 	
 	private void prepareGrid() {
@@ -57,7 +58,7 @@ public class SimulationRPS extends Simulation {
 				CellRPS randomNeighbor = (CellRPS) cellOfFocus.getNeighborCells().get((int) getRandomNum(cellOfFocus.getNeighborCells().size()));
 				//Growing
 				if(cellOfFocus.getState() == CellRPS.EMPTY && randomNeighbor.getState() != CellRPS.EMPTY && 
-						randomNeighbor.getGradientLevel() < 9) {
+						randomNeighbor.getGradientLevel() < 9 && tempGradients[i][j] < 9) {
 					tempStates[i][j] = randomNeighbor.getState();
 					tempGradients[i][j] = randomNeighbor.getGradientLevel() + 1;
 				}
@@ -65,20 +66,20 @@ public class SimulationRPS extends Simulation {
 				if(cellOfFocus.getState() == CellRPS.RED) {
 					//Red eats blue
 					if(randomNeighbor.getState() == CellRPS.BLUE) {
-						if(randomNeighbor.getGradientLevel() < 9)
+						if(randomNeighbor.getGradientLevel() < 9 && tempGradients[i][j] < 9)
 							tempGradients[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()]++;
 						else
 							tempStates[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()] = CellRPS.RED;
-						if(cellOfFocus.getGradientLevel() > 0)
+						if(cellOfFocus.getGradientLevel() > 0 && tempGradients[i][j] > 0)
 							tempGradients[i][j]--;
 					}
 					//Green eats red
 					if(randomNeighbor.getState() == CellRPS.GREEN) {
-						if(cellOfFocus.getGradientLevel() < 9)
+						if(cellOfFocus.getGradientLevel() < 9 && tempGradients[i][j] < 9)
 							tempGradients[i][j]++;
 						else
 							tempStates[i][j] = CellRPS.GREEN;
-						if(randomNeighbor.getGradientLevel() > 0)
+						if(randomNeighbor.getGradientLevel() > 0 && tempGradients[i][j] > 0)
 							tempGradients[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()]--;
 					}
 				}
@@ -86,20 +87,20 @@ public class SimulationRPS extends Simulation {
 				if(cellOfFocus.getState() == CellRPS.GREEN) {
 					//Green eats red
 					if(randomNeighbor.getState() == CellRPS.RED) {
-						if(randomNeighbor.getGradientLevel() < 9)
+						if(randomNeighbor.getGradientLevel() < 9 && tempGradients[i][j] < 9)
 							tempGradients[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()]++;
 						else
 							tempStates[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()] = CellRPS.GREEN;
-						if(cellOfFocus.getGradientLevel() > 0)
+						if(cellOfFocus.getGradientLevel() > 0 && tempGradients[i][j] > 0)
 							tempGradients[i][j]--;
 					}
 					//Blue eats green
 					if(randomNeighbor.getState() == CellRPS.BLUE) {
-						if(cellOfFocus.getGradientLevel() < 9)
+						if(cellOfFocus.getGradientLevel() < 9 && tempGradients[i][j] < 9)
 							tempGradients[i][j]++;
 						else
 							tempStates[i][j] = CellRPS.BLUE;
-						if(randomNeighbor.getGradientLevel() > 0)
+						if(randomNeighbor.getGradientLevel() > 0 && tempGradients[i][j] > 0)
 							tempGradients[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()]--;
 					}
 				}
@@ -107,20 +108,20 @@ public class SimulationRPS extends Simulation {
 				if(cellOfFocus.getState() == CellRPS.BLUE) {
 					//Blue eats green
 					if(randomNeighbor.getState() == CellRPS.GREEN) {
-						if(randomNeighbor.getGradientLevel() < 9)
+						if(randomNeighbor.getGradientLevel() < 9 && tempGradients[i][j] < 9)
 							tempGradients[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()]++;
 						else
 							tempStates[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()] = CellRPS.BLUE;
-						if(cellOfFocus.getGradientLevel() > 0)
+						if(cellOfFocus.getGradientLevel() > 0 && tempGradients[i][j] > 0)
 							tempGradients[i][j]--;
 					}
 					//Red eats blue
 					if(randomNeighbor.getState() == CellRPS.BLUE) {
-						if(cellOfFocus.getGradientLevel() < 9)
+						if(cellOfFocus.getGradientLevel() < 9 && tempGradients[i][j] < 9)
 							tempGradients[i][j]++;
 						else
 							tempStates[i][j] = CellRPS.BLUE;
-						if(randomNeighbor.getGradientLevel() > 0)
+						if(randomNeighbor.getGradientLevel() > 0 && tempGradients[i][j] > 0)
 							tempGradients[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()]--;
 					}
 				}

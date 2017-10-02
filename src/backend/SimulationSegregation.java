@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 public class SimulationSegregation extends Simulation {
 	private double satisfactionPercentage;
 	private NeighborFinder neighbors;
-	private StyleUI style=new StyleUI();
+	private StyleUI style = new StyleUI();
 
 	// 0 is empty, 1 is red, 2 is blue
 
@@ -41,7 +41,7 @@ public class SimulationSegregation extends Simulation {
 				getArray()[rowNumber][columnNumber]=new CellSegregation(0, null, null, rowNumber, columnNumber);
 			}
 		}
-		neighbors = new EightNeighborFinder(getArray(), 0, 0, false);
+		neighbors = new EightNeighborFinder(getArray(), 0, 0, style.getGridEdge());
 	}
 
 	@Override

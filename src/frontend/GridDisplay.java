@@ -1,8 +1,10 @@
 package frontend;
 
+
 import backend.Cell;
 import backend.Simulation;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -39,6 +41,7 @@ public class GridDisplay {
 		}
 		fillGrid();
 //		myGrid.setAlignment(Pos.CENTER);
+		myGrid.setOnMouseClicked(e-> handleClick(e.getX(),e.getY()));
 	}
 	
 //	private void makeRectangleArray() {
@@ -165,6 +168,30 @@ public class GridDisplay {
 	public Pane getGrid() {
 		return myGrid;
 	}
+
+	public void handleClick(double x, double y) {
+		if (shape.equals("Square")){
+			for (int i=0; i<Rectangles.length; i++) {
+				for(int j=0; j<Rectangles[i].length; j++) {
+					if (Rectangles[i][j].contains(x,y)) {
+						if (Cells[i][j].getState()==0) {
+						Cells[i][j].changeState(1);
+						//Change color here
+					}
+						if(Cells[i][j].getState()==1) {
+							Cells[i][j].changeState(2);
+						}
+						if (Cells[i][j].getState()==2) {
+							Cells[i][j].changeState(0);
+							Rectangles[i][j].setFill(Color.WHITE);
+						}
+				}
+			}
+	}
+	}
+}
+	
+	
 	
 	
 	
