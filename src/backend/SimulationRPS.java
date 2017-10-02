@@ -160,6 +160,7 @@ public class SimulationRPS extends Simulation {
 	}
 	
 	private int calcIntensityValue(int gradientLevel) {
+		
 		return 125 + gradientLevel * 13;
 	}
 	
