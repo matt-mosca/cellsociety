@@ -13,6 +13,7 @@ public abstract class Simulation{
 	private int cellNumberVertical;
 	private int[][]specificLocation;
 	private int initialSetting;
+	private int[] number = new int[2];
 	
 	// 0 is empty, 1 is red, 2 is blue
 
@@ -197,6 +198,25 @@ public abstract class Simulation{
 	public void setInitialSetting(
 			int initialSetting) {
 		this.initialSetting = initialSetting;
+	}
+	
+	public int[]getCellProportion(){
+		return number;
+	}
+	
+	public void count(int first, int second) {
+		number[0]=0;
+		number[1]=0;
+		for(int i=0; i<getArray().length; i++) {
+			for(int j=0; j<getArray()[i].length; j++) {
+				if (getArray()[i][j].getState()==first) {
+					number[0]+=1;
+				}
+				else if(getArray()[i][j].getState()==second) {
+					number[1]+=1;
+				}
+			}
+		}
 	}
 }
 

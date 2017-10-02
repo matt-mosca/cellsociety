@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 public class SimulationFire extends Simulation{
 	private double probCatch;
 	private NeighborFinder neighbors;
-	private int[] number = new int[2];
+	
 
 	public SimulationFire(int cellNumberHorizontal, int  cellNumberVertical, double emptyPercentage, 
 			double redToBlueRatio, double probCatch) {
@@ -87,7 +87,7 @@ public class SimulationFire extends Simulation{
 		}
 		assignNeighbors(neighbors);
 		updateColors();
-		count();
+		super.count(1,2);
 	}
 	
 	private boolean potentialForFire(Cell cell) {
@@ -124,23 +124,6 @@ public class SimulationFire extends Simulation{
 		probCatch = prob;
 	}
 	
-	private void count() {
-		number [0]=0;
-		number[1]=0;
-		for(int i=0; i<getArray().length; i++) {
-			for(int j=0; j<getArray()[i].length; j++) {
-				if (getArray()[i][j].getState()==1) {
-					number[0]+=1;
-				}
-				else if(getArray()[i][j].getState()==2) {
-					number[1]+=1;
-				}
-			}
-		}
-	}
 	
-	public int[]getCellProportion(){
-		return number;
-	}
 
 }

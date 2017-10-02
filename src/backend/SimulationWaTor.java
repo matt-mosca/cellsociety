@@ -13,7 +13,7 @@ public class SimulationWaTor extends Simulation {
 	private int minBreedDaysForSharks;
 	private int minBreedDaysForFish;
 	private NeighborFinder neighbors;
-	private int[] number = new int[2];
+
 	
 	// 0 is empty, 1 is shark, 2 is fish
 
@@ -141,7 +141,7 @@ public class SimulationWaTor extends Simulation {
 			}
 		}
 		updateColors();	
-		count();
+		super.count(1,2);
 	}
 
 	private void fishMove(CellWaTor fish,CellWaTor randomEmpty) {
@@ -199,23 +199,8 @@ public class SimulationWaTor extends Simulation {
 		return neighborFish;
 	}
 	
-	private void count() {
-		number[0]=0;
-		number[1]=0;
-		for(int i=0; i<getArray().length; i++) {
-			for(int j=0; j<getArray()[i].length; j++) {
-				if (getArray()[i][j].getState()==1) {
-					number[0]+=1;
-				}
-				else if(getArray()[i][j].getState()==2) {
-					number[1]+=1;
-				}
-			}
-		}
-	}
+
 	
-	public int[]getCellProportion(){
-		return number;
-	}
+
 
 }

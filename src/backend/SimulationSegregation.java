@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 public class SimulationSegregation extends Simulation {
 	private double satisfactionPercentage;
 	private NeighborFinder neighbors;
-	private int[] number = new int[2];
+
 	// 0 is empty, 1 is red, 2 is blue
 
 	public SimulationSegregation(int cellNumberHorizontal, int cellNumberVertical, double emptyPercentage, 
@@ -82,7 +82,7 @@ public class SimulationSegregation extends Simulation {
 			}
 		}
 		updateColors();
-		count();
+		super.count(1,2);
 	}
 
 	private List<Cell> findAllEmpty() {
@@ -118,22 +118,5 @@ public class SimulationSegregation extends Simulation {
 		return false;
 	}
 	
-	private void count() {
-		number[0]=0;
-		number[1]=0;
-		for(int i=0; i<getArray().length; i++) {
-			for(int j=0; j<getArray()[i].length; j++) {
-				if (getArray()[i][j].getState()==1) {
-					number[0]+=1;
-				}
-				else if(getArray()[i][j].getState()==2) {
-					number[1]+=1;
-				}
-			}
-		}
-	}
 	
-	public int[]getCellProportion(){
-		return number;
-	}
 }

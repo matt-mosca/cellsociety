@@ -113,7 +113,7 @@ public class UserSaveSimulation{
 			StreamResult result = new StreamResult(new File(filepath));
 			transformer.transform(source, result);
 
-			System.out.println("Done");
+			
 
 		   } catch (ParserConfigurationException pce) {
 			pce.printStackTrace();
