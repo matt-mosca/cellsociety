@@ -22,16 +22,48 @@ public class EightNeighborFinder extends NeighborFinder {
 			if (xPos + 1 <= cellWidth - 1)
 				neighbors.add(cellArray[yPos - 1][xPos + 1]);
 		}
+		//Toroidal
+		else if(yPos - 1 < 0 && getToroidal()) {
+			neighbors.add(cellArray[cellHeight - 1][xPos]);
+			if (xPos - 1 >= 0)
+				neighbors.add(cellArray[cellHeight - 1][xPos - 1]);
+			else {
+				neighbors.add(cellArray[cellHeight - 1][cellWidth - 1]);
+			}
+			if (xPos + 1 <= cellWidth - 1)
+				neighbors.add(cellArray[cellHeight - 1][xPos + 1]);
+			else {
+				neighbors.add(cellArray[cellHeight - 1][0]);
+			}
+		}
 		if (xPos - 1 >= 0)
 			neighbors.add(cellArray[yPos][xPos - 1]);
 		if (xPos + 1 <= cellWidth - 1)
 			neighbors.add(cellArray[yPos][xPos + 1]);
+		//Toroidal
+		if (xPos - 1 < 0 && getToroidal())
+			neighbors.add(cellArray[yPos][cellWidth - 1]);
+		//Toroidal
+		if(xPos + 1 > cellWidth - 1 && getToroidal())
+			neighbors.add(cellArray[yPos][0]);
 		if (yPos + 1 <= cellHeight - 1) {
 			neighbors.add(cellArray[yPos + 1][xPos]);
 			if (xPos - 1 >= 0)
 				neighbors.add(cellArray[yPos + 1][xPos - 1]);
 			if (xPos + 1 <= cellWidth - 1)
 				neighbors.add(cellArray[yPos + 1][xPos + 1]);
+		}
+		//Toroidal
+		else if (yPos + 1 > cellHeight - 1 && getToroidal()) {
+			neighbors.add(cellArray[0][xPos]);
+			if (xPos - 1 >= 0)
+				neighbors.add(cellArray[0][xPos - 1]);
+			else
+				neighbors.add(cellArray[0][cellWidth - 1]);
+			if (xPos + 1 <= cellWidth - 1)
+				neighbors.add(cellArray[0][xPos + 1]);
+			else
+				neighbors.add(cellArray[0][0]);
 		}
 		return neighbors;
 //		addNorthwest();

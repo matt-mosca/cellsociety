@@ -12,17 +12,29 @@ public class FourNeighborFinder extends NeighborFinder {
 		Cell[][] cellArray = getMyCellArray();
 		int xPos = getMyXPosition();
 		int yPos = getMyYPosition();
-		int cellNumberVertical = cellArray.length;
-		int cellNumberHorizontal = cellArray[0].length;
+		int cellWidth = cellArray[0].length;
+		int cellHeight = cellArray.length;
 		List<Cell> neighbors = new ArrayList<Cell>();
 		if (yPos - 1 >= 0)
 			neighbors.add(cellArray[yPos - 1][xPos]);
-		if (xPos-1>=0)
+		//Toroidal
+		else if(yPos - 1 < 0 && getToroidal())
+			neighbors.add(cellArray[cellHeight - 1][xPos]);
+		if (xPos - 1 >= 0)
 			neighbors.add(cellArray[yPos][xPos - 1]);
-		if (xPos+1<=cellNumberHorizontal - 1)
+		//Toroidal
+		else if(xPos - 1 < 0 && getToroidal())
+			neighbors.add(cellArray[yPos][cellWidth - 1]);
+		if (xPos + 1 <= cellWidth - 1)
 			neighbors.add(cellArray[yPos][xPos + 1]);
-		if (yPos+1<=cellNumberVertical - 1)
+		//Toroidal
+		else if(xPos + 1 > cellWidth - 1 && getToroidal())
+			neighbors.add(cellArray[yPos][0]);
+		if (yPos + 1 <= cellHeight - 1)
 			neighbors.add(cellArray[yPos + 1][xPos]);
+		//Toroidal
+		else if(yPos + 1 > cellHeight - 1)
+			neighbors.add(cellArray[0][xPos]);
 		return neighbors;
 //		addNorth();
 //		addSouth();
