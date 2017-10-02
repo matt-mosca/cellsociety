@@ -9,6 +9,7 @@ import backend.SimulationWaTor;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 
@@ -55,16 +56,25 @@ public class SimSlider {
 			minBreedDaysForFish = ((SimulationWaTor) sim).getFishBreed();
 		}
 		Slider s1 = speedSlider();
+		Label l1 = new Label("Speed");
+
 		Slider s2 = ratioSlider();
+		Label l2 = new Label("Ratio");
 		Slider s3 = EmptySlider();
+		Label l3 = new Label("Empty");
 		Slider s4 = SizeSlider();
+		Label l4 = new Label("Size");
 		layout.setVgap(10);
         layout.setHgap(20);
         GridPane.setConstraints(s1, 1, 1);
+        GridPane.setConstraints(l1, 0, 1);
         GridPane.setConstraints(s2, 1, 2);
+        GridPane.setConstraints(l2, 0, 2);
         GridPane.setConstraints(s3, 1, 3);
+        GridPane.setConstraints(l3, 0, 3);
         GridPane.setConstraints(s4, 1, 4);
-        layout.getChildren().addAll(s1,s2,s3,s4);
+        GridPane.setConstraints(l4, 0, 4);
+        layout.getChildren().addAll(s1,s2,s3,s4,l1,l2,l3,l4);
 	}
 	
 	private Slider speedSlider() {
