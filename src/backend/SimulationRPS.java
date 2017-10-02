@@ -7,7 +7,7 @@ public class SimulationRPS extends Simulation {
 	private int[] number = new int[2];
 	
 	public SimulationRPS(int cellNumberHorizontal, int  cellNumberVertical, double emptyPercentage, 
-			double redToBlueRatio, double probCatch) {
+			double redToBlueRatio) {
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
 		specificSetUp();
 		assignNeighbors(neighbors);
