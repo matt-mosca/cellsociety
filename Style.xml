@@ -1,7 +1,7 @@
 <Style>
     <grid>
         <visibility>Y</visibility>
-        <shape>Triangle</shape>
+        <shape>Square</shape>
     </grid>
     <color>
         <empty>Water world</empty>
