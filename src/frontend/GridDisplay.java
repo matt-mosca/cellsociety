@@ -70,21 +70,14 @@ public class GridDisplay {
 		double height = GRID_FIT_CONSTANT / Cells.length; 
 		for(int i=0; i<Cells.length; i++) {
 			for(int j=0; j<Cells[i].length; j++) {
-				
-			
 				Polygon tem = new Polygon();
-				if (i%2==0 && j%2==0) {
-				
-						
+				if (i%2==0 && j%2==0) {	
 					tem.getPoints().addAll(new Double[] {
 							(j/2)*width,(i+1)*height,
 							(j/2)*width+width,(i+1)*height,
 							(j/2)*width+0.5*width,i*height
 						});
 				}
-					
-				
-				
 				if (i%2==0 && j%2==1) {
 					
 					tem.getPoints().addAll(new Double[] {
@@ -92,41 +85,26 @@ public class GridDisplay {
 							j*(width/2)+width,i*height,
 							(j/2)*width+width,(i+1)*height
 						});
-					
-				}
-				
+					}
                 if (i%2==1 && j%2==0) {
-					
 					tem.getPoints().addAll(new Double[] {
 							(j/2)*width,i*height,
 							(j/2)*width+width,i*height,
 							(j/2)*width+0.5*width,(i+1)*height
 						});
-					
 				}
-                
                 if (i%2==1 && j%2==1) {
-					
   					tem.getPoints().addAll(new Double[] {
   							j*(width/2),(i+1)*height,
   							j*(width/2)+width,(i+1)*height,
   							j*(width/2)+0.5*width,i*height
   						});
-  					
   				}
-  				
-				
-				
-				
-				
-				
 				tem.setStroke(Color.BLACK);
 				tem.setFill(Cells[i][j].getColor());
-				Triangles[i][j]=tem;
-				
+				Triangles[i][j]=tem;	
 			}
 		}
-		
 	}
 	
 	public void update(){
@@ -144,6 +122,7 @@ public class GridDisplay {
 				    myGrid.getChildren().add(Triangles[i][j]);
 				}
 				if (shape.equals("Square")){
+					System.out.println("I'm here");
 					myGrid.getChildren().add(Rectangles[i][j]);
 				}
 			}
