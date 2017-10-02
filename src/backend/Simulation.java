@@ -151,7 +151,6 @@ public abstract class Simulation{
 	}
 
 	protected int[] random(int Number, int range) {
-
 		return new Random().ints(0, range).distinct().limit(Number).toArray();
 	}
 	
@@ -175,19 +174,19 @@ public abstract class Simulation{
 		return numberOfCells;
 	}
 	
-	protected double getEmptyPercentage() {
+	public double getEmptyPercentage() {
 		return emptyPercentage;
 	}
 	
-	protected double getRedToBlueRatio() {
+	public double getRedToBlueRatio() {
 		return redToBlueRatio;
 	}
 	
-	protected int getCellNumberHorizontal() {
+	public int getCellNumberHorizontal() {
 		return cellNumberHorizontal;
 	}
 	
-	protected int getCellNumberVertical() {
+	public int getCellNumberVertical() {
 		return cellNumberVertical;
 	}
 

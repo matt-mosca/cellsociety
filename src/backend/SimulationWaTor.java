@@ -201,6 +201,17 @@ public class SimulationWaTor extends Simulation {
 		return neighborFish;
 	}
 	
+	public int getStarveDays() {
+		return maxStarveDaysForSharks;
+	}
+	
+	public int getSharkBreed() {
+		return minBreedDaysForSharks;
+	}
+	
+	public int getFishBreed() {
+		return minBreedDaysForFish;
+	}
 
 	
 
