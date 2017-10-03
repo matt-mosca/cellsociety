@@ -179,6 +179,7 @@ public abstract class Simulation{
 	public void count(int first, int second, int third) {
 		number[0]=0;
 		number[1]=0;
+		number[2]=0;
 		for(int i=0; i<getArray().length; i++) {
 			for(int j=0; j<getArray()[i].length; j++) {
 				if (getArray()[i][j].getState()==first) {
