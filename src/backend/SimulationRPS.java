@@ -8,7 +8,6 @@ import util.TriangleNeighborFinder;
 
 public class SimulationRPS extends Simulation {
 	private NeighborFinder neighbors;
-	private int[] number = new int[3];
 	private StyleUI style = new StyleUI();
 	
 	public SimulationRPS(int cellNumberHorizontal, int  cellNumberVertical, double emptyPercentage, 
@@ -188,22 +187,4 @@ public class SimulationRPS extends Simulation {
 			((CellRPS)getArray()[randThree / getCellNumberVertical()][randThree % getCellNumberVertical()]).setGradientLevel(0);
 		}
 	}
-	
-//	public void count() {
-//		number[0] = 0;
-//		number[1] = 0;
-//		number[2] = 0;
-//		for(int i = 0; i < getArray().length; i++) {
-//			for(int j = 0; j < getArray()[i].length; j++) {
-//				if (getArray()[i][j].getState() == 1) {
-//					number[0] += 1;
-//				}
-//				else if(getArray()[i][j].getState() == 2) {
-//					number[1] += 1;
-//				}
-//				else if(getArray()[i][j].getState() == 3)
-//					number[2] += 1;
-//			}
-//		}
-//	}
 }
