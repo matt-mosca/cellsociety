@@ -79,6 +79,7 @@ public class SimDisplay {
 	private GridDisplay myGrid;
 	private Graph graph;
 	private SimSlider Sliders;
+	private boolean first=true;
 	//for save scene
 	private UserSaveSimulation saveUI=new UserSaveSimulation();
 
@@ -118,7 +119,10 @@ public class SimDisplay {
 		Button switcher=switchSim();
 		Button another = newSim();
 		controls.getChildren().addAll(play, pause, step, reset,save,resume, switcher, another);
-		Sliders = new SimSlider(this);
+		if (first) {
+			Sliders = new SimSlider(this);
+			first=false;
+		}
 		GridPane sliders = Sliders.getSliders();
 		sliders.setAlignment(Pos.CENTER);
 		border.setRight(sliders);

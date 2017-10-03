@@ -102,6 +102,7 @@ public class SimSlider {
 		s.valueProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
             		animation.pause();
+            		
             		if(display.getSimName().equals(FIRE_TITLE)) {
             			sim= new SimulationFire(cellNumberHorizontal, cellNumberVertical, emptyPercentage, new_val.doubleValue(), probCatch );
             		}
