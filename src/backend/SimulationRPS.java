@@ -3,7 +3,6 @@ package backend;
 import frontend.StyleUI;
 import javafx.scene.paint.Color;
 import util.EightNeighborFinder;
-import util.FourNeighborFinder;
 import util.NeighborFinder;
 import util.TriangleNeighborFinder;
 
