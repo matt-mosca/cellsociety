@@ -5,6 +5,13 @@ import java.util.Random;
 import javafx.scene.paint.Color;
 import util.NeighborFinder;
 
+/**
+ * Simulation.java
+ * @author matthewmosca
+ * Super class for simulation objects. Contains variables and methods that all the simulation classes 
+ * require. It is helpful to avoid repeated code and group similar classes in an inheritance structure.
+ * @version 10.03.17
+ */
 public abstract class Simulation{
 	private Cell[][] array;
 	private int numberOfCells;
@@ -111,41 +118,6 @@ public abstract class Simulation{
 				}
 			}
 		}
-	
-	//neighbors counted as 8 surrounding cells
-//	protected void findNeighbors() {
-//		for (int rowNumber = 0; rowNumber < cellNumberHorizontal; rowNumber++) {
-//			for (int columnNumber = 0; columnNumber < cellNumberVertical; columnNumber++) {
-//				Cell cell = array[rowNumber][columnNumber];
-//			    ArrayList<Cell> neighbors=new ArrayList<Cell>();
-//				if (rowNumber-1>=0) {
-//					neighbors.add(array[rowNumber-1][columnNumber]);
-//					if (columnNumber-1>=0) {
-//						neighbors.add(array[rowNumber-1][columnNumber-1]);
-//					}
-//					if (columnNumber+1<=cellNumberVertical-1) {
-//						neighbors.add(array[rowNumber-1][columnNumber+1]);
-//					}	
-//				}
-//				if (columnNumber-1>=0) {
-//					neighbors.add(array[rowNumber][columnNumber-1]);
-//				}
-//				if (columnNumber+1<=cellNumberVertical-1) {
-//					neighbors.add(array[rowNumber][columnNumber+1]);
-//				}
-//				if (rowNumber+1<=cellNumberHorizontal-1) {
-//					neighbors.add(array[rowNumber+1][columnNumber]);
-//					if (columnNumber-1>=0) {
-//						neighbors.add(array[rowNumber+1][columnNumber-1]);
-//					}
-//					if (columnNumber+1<=cellNumberVertical-1) {
-//						neighbors.add(array[rowNumber+1][columnNumber+1]);
-//					}
-//				}
-//				cell.setNeighborCells(neighbors);
-//			}
-//		}
-//	}
 
 	protected Color chooseColor(int state) {
 		return null;

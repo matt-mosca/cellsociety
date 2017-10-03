@@ -2,9 +2,15 @@ package util;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import backend.Cell;
 
+/**
+ * NeighborFinder.java
+ * @author matthewmosca
+ * Super class for all NeighborFinder objects. General template for classes that finds the neighbors for a 
+ * given cell in any simulation. The subclasses represent different possible neighborhoods for a cell.
+ * @version 10.01.17
+ */
 public abstract class NeighborFinder {
 	private Cell[][] myCellArray;
 	private int myXPosition;

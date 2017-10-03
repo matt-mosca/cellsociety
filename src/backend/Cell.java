@@ -4,7 +4,13 @@ import java.util.List;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
-//Super class of cell
+/**
+ * Cell.java
+ * @author matthewmosca
+ * Super class for cell objects. Contains variables and methods that the cells for all the different 
+ * simulations require.
+ * @version 10.01.17
+ */
 public class Cell {
 	private int state;
 	private Color color; 

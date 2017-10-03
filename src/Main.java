@@ -1,5 +1,8 @@
-/*
- * Author: Venkat
+/**
+ * Main.java
+ * @author Venkat Subramaniam
+ * Main class for simulation-running program. The program is initiated through this class.
+ * @version 10.01.17
  */
 
 import frontend.SimDisplay;
@@ -20,7 +23,9 @@ public class Main extends Application{
 	private Scene myScene;
 	private SimDisplay s;
 	
-	
+	/**
+	 * Initializes stage and scene and calls methods to display and launch simulation.
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		window = primaryStage;
@@ -34,6 +39,11 @@ public class Main extends Application{
 //	public Scene getStartScene(SimDisplay sim) {
 //		return sim.startScreen();
 //	}
+	
+	/**
+	 * Main method for class Main.java.
+	 * @param args
+	 */
 	
 	public static void main(String[] args) {
 		launch(args);
