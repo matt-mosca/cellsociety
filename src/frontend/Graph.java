@@ -16,6 +16,7 @@ public  class Graph {
 	private static final String FIRE_TITLE  = "FIYAH!";
 	private static final String SEGREGATION_TITLE = "SEGREGATION!";
 	private static final String GAME_OF_LIFE_TITLE = "GAME OF LIFE!";
+	private static final String RPS_TITLE = "ROCK PAPER SCISSORS!";
 	private LineChart<Number, Number> myGraph;
 	private int[] proportions;
 	private final NumberAxis xAxis = new NumberAxis();
@@ -43,7 +44,11 @@ public  class Graph {
 		fun.getData().addAll(getLine(1), getLine(2));
 		updateLine(fun.getData().get(0));
 		updateLine(fun.getData().get(1));
-		
+		if(simName.equals(RPS_TITLE)) {
+			fun.getData().add(getLine(3));
+			System.out.println("hey");
+			updateLine(fun.getData().get(2));
+		}
 		return fun;
 	}
 	
@@ -83,28 +88,27 @@ public  class Graph {
 				line.setName(resources.getString("deadname"));
 			}
 		}
+		if (simName.equals(RPS_TITLE)) {
+			if(state==1) {
+				line.setName(resources.getString("redname"));
+			}
+			if(state==2) {
+				line.setName(resources.getString("greenname"));
+			}
+			if(state==3) {
+				line.setName(resources.getString("bluename"));
+			}
+		}
 		return line;
 	}
-	
-//	private void nameLine(XYChart.Series<Number, Number> line, String s1, String s2, int state) {
-//		if (state==0) {
-//			line.setName(resources.getString(s2));
-//		}
-//		if(state==1) {
-//			line.setName(resources.getString(s1));
-//		}
-//		if(state==2) {
-//			line.setName(resources.getString(s2));
-//		}
-//	}
-	
-	
-		
-	
+
 	
 	public void update() {
 		updateLine(myGraph.getData().get(0));
 		updateLine(myGraph.getData().get(1));
+		if (simName==RPS_TITLE) {
+			updateLine(myGraph.getData().get(2));
+		}
 		time+=1;
 	}
 	
@@ -140,6 +144,17 @@ public  class Graph {
 			}
 			if(line.getName().equals(resources.getString("lifename"))) {
 				line.getData().add(new Data<Number, Number>(time, (double)proportions[1]/SCALING_FACTOR));
+			}
+		}
+		if (simName.equals(RPS_TITLE)){
+			if(line.getName().equals(resources.getString("redname"))) {
+				line.getData().add(new Data<Number, Number>(time, (double)proportions[0]/SCALING_FACTOR));
+			}
+			if(line.getName().equals(resources.getString("greenname"))) {
+				line.getData().add(new Data<Number, Number>(time, (double)proportions[1]/SCALING_FACTOR));
+			}
+			if(line.getName().equals(resources.getString("bluename"))) {
+				line.getData().add(new Data<Number, Number>(time, (double)proportions[2]/SCALING_FACTOR));
 			}
 		}
 		

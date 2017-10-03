@@ -93,7 +93,7 @@ public class SimulationSegregation extends Simulation {
 			}
 		}
 		updateColors();
-		super.count(1,2);
+		super.count(1,2,0);
 	}
 
 	private List<Cell> findAllEmpty() {

@@ -149,7 +149,7 @@ public class SimulationWaTor extends Simulation {
 			}
 		}
 		updateColors();	
-		super.count(1,2);
+		super.count(1,2,0);
 	}
 
 	private void fishMove(CellWaTor fish,CellWaTor randomEmpty) {
