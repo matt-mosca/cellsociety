@@ -32,7 +32,7 @@ The program runs five simulations: Fire, Game of Life, Segregation, Wa-Tor, and 
 
 ### Known bugs:
 * When the window appears, the buttons do not show up, but as soon as the window size is adjusted even slightly, the buttons appear and function correctly.
-* The slider that adjusts speed works well, but the other sliders are buggy. They function correctly for the most part if the user clicks in the correct
+* The slider that adjusts speed works well, but the other sliders are buggy. They function correctly for the most part if the user clicks in the correct location, but does not "slide" per se.
 
 ### Impressions
 We enjoyed this project. We found it interesting, and seeing the result of a properly functioning design was quite rewarding. However, it was very difficult to complete all the required tasks in the amount of time we were given.
