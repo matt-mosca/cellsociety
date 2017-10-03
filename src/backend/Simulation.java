@@ -7,7 +7,7 @@ import util.NeighborFinder;
 
 /**
  * Simulation.java
- * @author matthewmosca
+ * @author Yiqin Zhou and Matthew Mosca
  * Super class for simulation objects. Contains variables and methods that all the simulation classes 
  * require. It is helpful to avoid repeated code and group similar classes in an inheritance structure.
  * @version 10.03.17
