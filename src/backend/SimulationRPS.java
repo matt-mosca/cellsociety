@@ -122,11 +122,11 @@ public class SimulationRPS extends Simulation {
 							tempGradients[i][j]--;
 					}
 					//Red eats blue
-					if(randomNeighbor.getState() == CellRPS.BLUE) {
+					if(randomNeighbor.getState() == CellRPS.RED) {
 						if(cellOfFocus.getGradientLevel() < 9 && tempGradients[i][j] < 9)
 							tempGradients[i][j]++;
 						else
-							tempStates[i][j] = CellRPS.BLUE;
+							tempStates[i][j] = CellRPS.RED;
 						if(randomNeighbor.getGradientLevel() > 0 && tempGradients[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()] > 0)
 							tempGradients[randomNeighbor.getRowNumber()][randomNeighbor.getColumnNumber()]--;
 					}
