@@ -4,6 +4,7 @@ import frontend.StyleUI;
 import javafx.scene.paint.Color;
 import util.FourNeighborFinder;
 import util.NeighborFinder;
+import util.TriangleNeighborFinder;
 
 public class SimulationFire extends Simulation{
 	private double probCatch;
@@ -35,7 +36,10 @@ public class SimulationFire extends Simulation{
 				getArray()[rowNumber][columnNumber] = new CellFire(CellFire.EMPTY, null, null, rowNumber, columnNumber);
 			}
 		}
-		neighbors = new FourNeighborFinder(getArray(), 0, 0, style.getGridEdge());
+		if(style.gridShape().equals("Triangle"))
+			neighbors = new TriangleNeighborFinder(getArray(), 0, 0, style.getGridEdge());
+		else
+			neighbors = new FourNeighborFinder(getArray(), 0, 0, style.getGridEdge());
 	}
 	
 	private void initializeGridStates() {

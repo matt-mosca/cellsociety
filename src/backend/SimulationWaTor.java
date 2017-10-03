@@ -7,6 +7,7 @@ import frontend.StyleUI;
 import javafx.scene.paint.Color;
 import util.FourNeighborFinder;
 import util.NeighborFinder;
+import util.TriangleNeighborFinder;
 
 public class SimulationWaTor extends Simulation {
 	private static final String SHARKSTARVE = "starve";
@@ -57,7 +58,10 @@ public class SimulationWaTor extends Simulation {
 				getArray()[rowNumber][columnNumber] = new CellWaTor(0, null, null, rowNumber, columnNumber);
 			}
 		}
-		neighbors = new FourNeighborFinder(getArray(), 0, 0, style.getGridEdge());
+		if(style.gridShape().equals("Triangle"))
+			neighbors = new TriangleNeighborFinder(getArray(), 0, 0, style.getGridEdge());
+		else
+			neighbors = new FourNeighborFinder(getArray(), 0, 0, style.getGridEdge());
 	}
 	
 	@Override

@@ -6,7 +6,9 @@ import java.util.List;
 import frontend.StyleUI;
 import javafx.scene.paint.Color;
 import util.EightNeighborFinder;
+import util.FourNeighborFinder;
 import util.NeighborFinder;
+import util.TriangleNeighborFinder;
 
 
 public class SimulationSegregation extends Simulation {
@@ -43,7 +45,10 @@ public class SimulationSegregation extends Simulation {
 				getArray()[rowNumber][columnNumber]=new CellSegregation(0, null, null, rowNumber, columnNumber);
 			}
 		}
-		neighbors = new EightNeighborFinder(getArray(), 0, 0, style.getGridEdge());
+		if(style.gridShape().equals("Triangle"))
+			neighbors = new TriangleNeighborFinder(getArray(), 0, 0, style.getGridEdge());
+		else
+			neighbors = new EightNeighborFinder(getArray(), 0, 0, style.getGridEdge());
 	}
 
 	@Override
@@ -125,36 +130,7 @@ public class SimulationSegregation extends Simulation {
 		return false;
 	}
 	
-	private static void testArrayPrinter(Cell[][] testArray) {
-		for(int i = 0; i < testArray.length; i++) {
-			for(int j = 0; j < testArray[0].length; j++) {
-				System.out.print(testArray[i][j].getState() + " ");
-			}
-			System.out.println();
-		}
-		System.out.println();
-	}
-	
-	public static void main(String[] args) {
-	SimulationSegregation test = new SimulationSegregation(5, 5, 0.2, 1, 0.5);
-	testArrayPrinter(test.getArray());
-//	System.out.println(test.getArray()[1][1].getNeighborCells());
-//	System.out.println();
-//	System.out.print(test.findNumberEmpty());
-//	System.out.println();
-	int iterations = 10;
-	//Drives test simulation
-	for(int i = 0; i < iterations; i++) {
-		test.update();
-		System.out.println("Iteration " + (i + 1));
-		testArrayPrinter(test.getArray());
-	}
-}
-
-
 	public double getSatisfactionPercentage() {
 		return satisfactionPercentage;
 	}
-	
-	
 }

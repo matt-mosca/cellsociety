@@ -3,7 +3,9 @@ package backend;
 import frontend.StyleUI;
 import javafx.scene.paint.Color;
 import util.EightNeighborFinder;
+import util.FourNeighborFinder;
 import util.NeighborFinder;
+import util.TriangleNeighborFinder;
 
 public class SimulationGameOfLife extends Simulation {
 	private static final int UPPERBOUNDARY = 3;
@@ -34,7 +36,10 @@ public class SimulationGameOfLife extends Simulation {
 				getArray()[rowNumber][columnNumber] = new CellGameOfLife(CellGameOfLife.EMPTY, null, null, rowNumber, columnNumber);
 			}
 		}
-		neighbors = new EightNeighborFinder(getArray(), 0, 0, style.getGridEdge());
+		if(style.gridShape().equals("Triangle"))
+			neighbors = new TriangleNeighborFinder(getArray(), 0, 0, style.getGridEdge());
+		else
+			neighbors = new EightNeighborFinder(getArray(), 0, 0, style.getGridEdge());
 	}
 	
 	private void initializeGridStates() {

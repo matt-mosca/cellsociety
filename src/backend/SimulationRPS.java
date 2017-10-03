@@ -3,7 +3,9 @@ package backend;
 import frontend.StyleUI;
 import javafx.scene.paint.Color;
 import util.EightNeighborFinder;
+import util.FourNeighborFinder;
 import util.NeighborFinder;
+import util.TriangleNeighborFinder;
 
 public class SimulationRPS extends Simulation {
 	private NeighborFinder neighbors;
@@ -36,7 +38,10 @@ public class SimulationRPS extends Simulation {
 				getArray()[rowNumber][columnNumber] = new CellRPS(CellRPS.EMPTY, null, null, rowNumber, columnNumber, 0);
 			}
 		}
-		neighbors = new EightNeighborFinder(getArray(), 0, 0, style.getGridEdge());
+		if(style.gridShape().equals("Triangle"))
+			neighbors = new TriangleNeighborFinder(getArray(), 0, 0, style.getGridEdge());
+		else
+			neighbors = new EightNeighborFinder(getArray(), 0, 0, style.getGridEdge());
 	}
 	
 	private void prepareGrid() {

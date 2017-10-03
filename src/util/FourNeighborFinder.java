@@ -35,13 +35,8 @@ public class FourNeighborFinder extends NeighborFinder {
 		if (yPos + 1 <= cellHeight - 1)
 			neighbors.add(cellArray[yPos + 1][xPos]);
 		//Toroidal
-		else if(yPos + 1 > cellHeight - 1)
+		else if(yPos + 1 > cellHeight - 1 && getToroidal())
 			neighbors.add(cellArray[0][xPos]);
 		return neighbors;
-//		addNorth();
-//		addSouth();
-//		addEast();
-//		addWest();
-//		return getMyNeighbors();
 	}
 }
