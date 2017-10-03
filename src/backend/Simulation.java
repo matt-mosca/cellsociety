@@ -21,7 +21,7 @@ public abstract class Simulation{
 	private int cellNumberVertical;
 	private int[][]specificLocation;
 	private int initialSetting;
-	private int[] number = new int[2];
+	private int[] number = new int[3];
 	
 	// 0 is empty, 1 is red, 2 is blue
 
@@ -176,7 +176,7 @@ public abstract class Simulation{
 		return number;
 	}
 	
-	public void count(int first, int second) {
+	public void count(int first, int second, int third) {
 		number[0]=0;
 		number[1]=0;
 		for(int i=0; i<getArray().length; i++) {
@@ -186,6 +186,9 @@ public abstract class Simulation{
 				}
 				else if(getArray()[i][j].getState()==second) {
 					number[1]+=1;
+				}
+				if(third==3 && getArray()[i][j].getState()==third) {
+					number[2]+=1;
 				}
 			}
 		}

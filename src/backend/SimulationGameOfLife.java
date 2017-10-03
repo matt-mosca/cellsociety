@@ -111,7 +111,7 @@ public class SimulationGameOfLife extends Simulation {
 		}
 		assignNeighbors(neighbors);
 		updateColors();
-		super.count(0,1);
+		super.count(0,1,0);
 	}
 	
 

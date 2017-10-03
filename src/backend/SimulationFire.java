@@ -95,7 +95,7 @@ public class SimulationFire extends Simulation{
 		}
 		assignNeighbors(neighbors);
 		updateColors();
-		super.count(1,2);
+		super.count(1,2, 0);
 	}
 	
 	private boolean potentialForFire(Cell cell) {

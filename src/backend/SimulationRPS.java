@@ -141,7 +141,7 @@ public class SimulationRPS extends Simulation {
 		}
 		assignNeighbors(neighbors);
 		updateColors();
-		count();
+		count(1,2,3);
 	}
 	
 	private Color chooseColor(int state, int gradientLevel) {
@@ -189,21 +189,21 @@ public class SimulationRPS extends Simulation {
 		}
 	}
 	
-	private void count() {
-		number[0] = 0;
-		number[1] = 0;
-		number[2] = 0;
-		for(int i = 0; i < getArray().length; i++) {
-			for(int j = 0; j < getArray()[i].length; j++) {
-				if (getArray()[i][j].getState() == 1) {
-					number[0] += 1;
-				}
-				else if(getArray()[i][j].getState() == 2) {
-					number[1] += 1;
-				}
-				else if(getArray()[i][j].getState() == 3)
-					number[2] += 1;
-			}
-		}
-	}
+//	public void count() {
+//		number[0] = 0;
+//		number[1] = 0;
+//		number[2] = 0;
+//		for(int i = 0; i < getArray().length; i++) {
+//			for(int j = 0; j < getArray()[i].length; j++) {
+//				if (getArray()[i][j].getState() == 1) {
+//					number[0] += 1;
+//				}
+//				else if(getArray()[i][j].getState() == 2) {
+//					number[1] += 1;
+//				}
+//				else if(getArray()[i][j].getState() == 3)
+//					number[2] += 1;
+//			}
+//		}
+//	}
 }
