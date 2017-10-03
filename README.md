@@ -4,7 +4,9 @@
 Authors: Matthew Mosca, Venkat Subramaniam, and Yiqin Zhou
 
 Start date: 09.14.17
+
 End date: 10.02.17
+
 Approximate hours spent: 100 hours (total for all three of us)
 
 ### Group member roles:
