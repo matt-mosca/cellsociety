@@ -6,7 +6,7 @@ import backend.Cell;
 
 /**
  * NeighborFinder.java
- * @author matthewmosca
+ * @author Matthew Mosca
  * Super class for all NeighborFinder objects. General template for classes that finds the neighbors for a 
  * given cell in any simulation. The subclasses represent different possible neighborhoods for a cell.
  * @version 10.01.17

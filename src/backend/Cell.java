@@ -6,7 +6,7 @@ import javafx.scene.paint.Paint;
 
 /**
  * Cell.java
- * @author matthewmosca
+ * @author Yiqin Zhou and Matthew Mosca
  * Super class for cell objects. Contains variables and methods that the cells for all the different 
  * simulations require.
  * @version 10.01.17
