@@ -8,7 +8,6 @@ import util.TriangleNeighborFinder;
 
 public class SimulationRPS extends Simulation {
 	private NeighborFinder neighbors;
-	private int[] number = new int[3];
 	private StyleUI style = new StyleUI();
 	
 	public SimulationRPS(int cellNumberHorizontal, int  cellNumberVertical, double emptyPercentage, 
