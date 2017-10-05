@@ -6,20 +6,40 @@ import util.EightNeighborFinder;
 import util.NeighborFinder;
 import util.TriangleNeighborFinder;
 
+/**
+ * SimulationRPS.java
+ * @author matthewmosca
+ * Simulation subclass specific to the Rock, Paper, Scissors simulation. In this simulation, red beats 
+ * blue, blue beats green, and green beats red.
+ */
 public class SimulationRPS extends Simulation {
 	private NeighborFinder neighbors;
 	private StyleUI style = new StyleUI();
 	
+	/**
+	 * Parameterized constructor for this class. Parameters are passed into the superclass constructor.
+	 * @param cellNumberHorizontal - the number of rows in the grid
+	 * @param cellNumberVertical - the number of columns in the grid
+	 * @param emptyPercentage - the percentage of cells in the grid that should be initially empty
+	 * @param redToBlueRatio
+	 */
 	public SimulationRPS(int cellNumberHorizontal, int  cellNumberVertical, double emptyPercentage, 
 			double redToBlueRatio) {
 		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
 		specificSetUp();
 		assignNeighbors(neighbors);
 		prepareGrid();
-		//updateColors();
 		setRandomRGBCells();
 	}
 	
+	/**
+	 * Parameterized constructor that accepts as a parameter a 2D array of states, which allows the states
+	 * of the grid to be set to predetermined values specified in the XML.
+	 * @param cellNumberHorizontal - the number of rows in the grid
+	 * @param cellNumberVertical - the number of columns in the grid
+	 * @param specificLocation - a 2D array of cell states, which can be used to set the initial states 
+	 * of the grids
+	 */
 	public SimulationRPS(int cellNumberHorizontal, int cellNumberVertical, int[][] specificLocation) {
 		super(cellNumberHorizontal,cellNumberVertical,specificLocation);
 		specificSetUp();
@@ -29,6 +49,9 @@ public class SimulationRPS extends Simulation {
 		setRandomRGBCells();
 	}
 	
+	/**
+	 * Creates the cells in the grid and determines the type of neighborhood that the cells will have.
+	 */
 	public void specificSetUp() {
 		setArray(new CellRPS[getCellNumberHorizontal()][getCellNumberVertical()]);
 		for (int rowNumber = 0; rowNumber < getCellNumberHorizontal(); rowNumber++) {
@@ -42,6 +65,9 @@ public class SimulationRPS extends Simulation {
 			neighbors = new EightNeighborFinder(getArray(), 0, 0, style.getGridEdge());
 	}
 	
+	/**
+	 * Sets the state of every cell to be initially empty.
+	 */
 	private void prepareGrid() {
 		for (int rowNumber = 0; rowNumber < getCellNumberHorizontal(); rowNumber++) {
 			for (int columnNumber = 0; columnNumber < getCellNumberVertical(); columnNumber++) {
@@ -52,6 +78,11 @@ public class SimulationRPS extends Simulation {
 		}
 	}
 	
+	/**
+	 * Changes the state of each cell based on the neighborhood of cells around it. In this simulation,
+	 * empty cells can become colored cells (growing), and colored cells can "eat" or be "eaten" when they
+	 * come into contact with other cells.
+	 */
 	public void update() {
 		int[][] tempStates = new int[getCellNumberHorizontal()][getCellNumberVertical()];
 		int[][] tempGradients = new int[getCellNumberHorizontal()][getCellNumberVertical()];
@@ -143,6 +174,14 @@ public class SimulationRPS extends Simulation {
 		count(1,2,3);
 	}
 	
+	/**
+	 * Determines and returns the color with which a cell should be represented based on its state and
+	 * color brightness level.
+	 * @param state
+	 * @param gradientLevel - a number from 0 to 9 representing the brightness of the color, 0 being the 
+	 * darkest
+	 * @return the color that should be used to represent the cell 
+	 */
 	private Color chooseColor(int state, int gradientLevel) {
 		Color color = null;
 		if(state == CellRPS.EMPTY)
@@ -156,6 +195,10 @@ public class SimulationRPS extends Simulation {
 		return color;
 	}
 	
+	/**
+	 * Updates the colors of the cells in the grid. This method overrides a method in the superclass 
+	 * because it must take into account the brightness gradient of the color.
+	 */
 	@Override
 	protected void updateColors() {
 		for(int i = 0; i < getCellNumberHorizontal(); i++) {
@@ -165,15 +208,27 @@ public class SimulationRPS extends Simulation {
 		}
 	}
 	
+	/**
+	 * Calculates the RGB intensity value from a given gradient level
+	 * @param gradientLevel
+	 * @return the RGB intensity
+	 */
 	private int calcIntensityValue(int gradientLevel) {
-		
 		return 125 + gradientLevel * 13;
 	}
 	
+	/**
+	 * Generates a random double from 0 to the upper bound specified as a parameter
+	 * @param upperBound
+	 * @return the random double
+	 */
 	private double getRandomNum(int upperBound) {
 		return Math.random() * upperBound;
 	}
 	
+	/**
+	 * Sets three random cells to be initially colored, one of each color.
+	 */
 	private void setRandomRGBCells() {
 		int randOne = (int) getRandomNum(getNumberOfCells());
 		int randTwo = (int) getRandomNum(getNumberOfCells());

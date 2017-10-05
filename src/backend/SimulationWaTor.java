@@ -45,10 +45,7 @@ public class SimulationWaTor extends Simulation {
 		updateColors();
 	}
 
-	public void specificSetUp(
-			int maxStarveDaysForSharks,
-			int minBreedDaysForSharks,
-			int minBreedDaysForFish) {
+	public void specificSetUp(int maxStarveDaysForSharks, int minBreedDaysForSharks, int minBreedDaysForFish) {
 		this.maxStarveDaysForSharks = maxStarveDaysForSharks;
 		this.minBreedDaysForSharks = minBreedDaysForSharks;
 		this.minBreedDaysForFish = minBreedDaysForFish;

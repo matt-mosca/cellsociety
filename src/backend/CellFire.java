@@ -33,7 +33,6 @@ public class CellFire extends Cell{
 	 * Changes the state of a cell representing a tree to the value representing a fire.
 	 */
 	public void catchFire() {
-		if(getState() == TREE)
 			changeState(BURNING);
 	}
 	
