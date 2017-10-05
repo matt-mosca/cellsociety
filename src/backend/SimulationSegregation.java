@@ -1,5 +1,4 @@
 package backend;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +7,6 @@ import javafx.scene.paint.Color;
 import util.EightNeighborFinder;
 import util.NeighborFinder;
 import util.TriangleNeighborFinder;
-
 
 public class SimulationSegregation extends Simulation {
 	private double satisfactionPercentage;
