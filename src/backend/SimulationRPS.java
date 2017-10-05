@@ -8,7 +8,7 @@ import util.TriangleNeighborFinder;
 
 /**
  * SimulationRPS.java
- * @author matthewmosca
+ * @author Matthew Mosca
  * Simulation subclass specific to the Rock, Paper, Scissors simulation. In this simulation, red beats 
  * blue, blue beats green, and green beats red.
  */

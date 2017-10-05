@@ -5,11 +5,28 @@ import java.util.List;
 
 import backend.Cell;
 
+/**
+ * TriangleNeighborFinder.java
+ * @author Matthew Mosca
+ * NeighborFinder subclass that finds the twelve neighbors surrounding a triangular cell. It most aptly 
+ * applied when the cell of interest is triangular, though the functionality works for any cell.
+ * 
+ */
 public class TriangleNeighborFinder extends NeighborFinder {
+	/**
+	 * Parameterized constructor for this class.
+	 * @param cells
+	 * @param xPos
+	 * @param yPos
+	 * @param toroidal
+	 */
 	public TriangleNeighborFinder(Cell[][] cells, int xPos, int yPos, boolean toroidal) {
 		super(cells, xPos, yPos, toroidal);
 	}
 	
+	/**
+	 * Finds and returns the twelve neighbors of the cell of interest.
+	 */
 	public List<Cell> findNeighbors() {
 		Cell[][] cellArray = getMyCellArray();
 		int xPos = getMyXPosition();

@@ -5,11 +5,26 @@ import java.util.List;
 
 import backend.Cell;
 
+/**
+ * EightNeighborFinder.java
+ * @author matthewmosca
+ * NeighborFinder subclass that finds the eight neighbors surrounding a square cell.
+ */
 public class EightNeighborFinder extends NeighborFinder {
+	/**
+	 * Parameterized constructor for this class.
+	 * @param cells
+	 * @param xPos
+	 * @param yPos
+	 * @param toroidal
+	 */
 	public EightNeighborFinder(Cell[][] cells, int xPos, int yPos, boolean toroidal) {
 		super(cells, xPos, yPos, toroidal);
 	}
 	
+	/**
+	 * Finds and returns the eight neighboring cells surrounding the cell of interest.
+	 */
 	public List<Cell> findNeighbors() {
 		Cell[][] cellArray = getMyCellArray();
 		int xPos = getMyXPosition();
