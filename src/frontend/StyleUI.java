@@ -1,6 +1,7 @@
 package frontend;
 
 import java.io.File;
+
 import java.io.IOException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -12,7 +13,20 @@ import org.xml.sax.SAXException;
 
 import javafx.scene.paint.Color;
 
+/**
+ * StyleUI.java
+ * @author Yiqin Zhou
+ * Read specific style requirements from XML file
+ * Assumptions: valid input from XML file
+ * @version 10.04.17
+ */
+
 public class StyleUI {
+	
+	/**
+	 * return value from XML file indicating whether the grid should be visible or not
+	 * @return
+	 */
 	
 	public boolean gridVisibility() {
 		Document doc;
@@ -36,6 +50,11 @@ public class StyleUI {
 		
 	}
 	
+	/**
+	 * return grid shape either be square or triangle
+	 * @return
+	 */
+	
 	public String gridShape() {
 		Document doc;
 		try {
@@ -51,6 +70,11 @@ public class StyleUI {
 		return null;
 		
 	}
+	
+	/**
+	 * return grid edge type
+	 * @return
+	 */
 	
 	public boolean getGridEdge() {
 		Document doc;
@@ -73,6 +97,11 @@ public class StyleUI {
 		return true;
 		
 	}
+	
+	/**
+	 * return empty cell's color specified inside XML file, translate it into color
+	 * @return
+	 */
 		
 	
 	
