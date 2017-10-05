@@ -31,7 +31,7 @@ public class Main extends Application{
 		window = primaryStage;
 		s = new SimDisplay(SIZEx, SIZEy, window, FILENAME);
 		window.setTitle(INITIAL_TITLE);
-		myScene = s.getStartScene();
+		myScene = s.startScreen();
 		window.setScene(myScene);
 		window.show();
 	}

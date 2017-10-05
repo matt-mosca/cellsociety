@@ -2,10 +2,15 @@ package frontend;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
-//import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 
 import java.util.ResourceBundle;
+
+/* Graph.java
+ * @author Venkat Subramaniam
+ * Class that creates a graph that displays the proportions of different kinds of cells in any simulation.
+ * @version 10.04.17
+ */
 
 import backend.Simulation;
 public  class Graph {
@@ -26,6 +31,12 @@ public  class Graph {
     private String simName;
     int time;
     
+    /*
+     * Constructor for the class.
+     * @param s
+     * @param rb
+     * @param name
+     */
     public Graph(Simulation s, ResourceBundle rb, String name) {
 		xAxis.setLabel("Time elapsed");
 		yAxis.setLabel("Proportion");
@@ -39,7 +50,10 @@ public  class Graph {
 			
     }
     
-    public LineChart<Number, Number> createGraph() {
+    /*
+     * This method creates a LineChart which serves as the graph itself.
+     */
+    private LineChart<Number, Number> createGraph() {
 		LineChart<Number, Number> fun = new LineChart<Number, Number>(xAxis, yAxis);
 		fun.getData().addAll(getLine(1), getLine(2));
 		updateLine(fun.getData().get(0));
@@ -53,6 +67,10 @@ public  class Graph {
 	}
 	
 	
+    /*
+     * This method creates each line in the graph depending on the kind of simulation.
+     * @param state
+     */
 	private XYChart.Series<Number, Number> getLine(int state) {
 		XYChart.Series<Number, Number> line = new XYChart.Series<Number, Number>();
 		if (simName.equals(FIRE_TITLE)){
@@ -103,6 +121,9 @@ public  class Graph {
 	}
 
 	
+	/*
+	 * This method updates the graph.
+	 */
 	public void update() {
 		updateLine(myGraph.getData().get(0));
 		updateLine(myGraph.getData().get(1));
@@ -112,6 +133,9 @@ public  class Graph {
 		time+=1;
 	}
 	
+	/*
+	 * This method updates each line depending on new data that is received about the cells.
+	 */
 	private void updateLine(XYChart.Series<Number, Number> line) {
 		proportions = sim.getCellProportion();
 		if (simName.equals(FIRE_TITLE)){
@@ -160,6 +184,9 @@ public  class Graph {
 		
 	}
 	
+	/*
+	 * This method returns the myGraph instance variable of this class.
+	 */
 	public LineChart<Number, Number> getGraph(){
 		return myGraph;
 	}
