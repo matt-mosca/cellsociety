@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 
 /**
  * CellGameOfLife.java
- * @author matthewmosca
+ * @author Matthew Mosca
  * Cell object subclass specific to the Game of Life simulation. Contains constants and methods that play 
  * roles particular to this simulation.
  * @version 10.04.17
