@@ -13,6 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 
+/* SimSlider.java
+ * @author Venkat Subramaniam
+ * Class for creating sliders that can dynamically interact with simulations.
+ * @version 10.04.17
+ */
 public class SimSlider {
 	private GridPane layout = new GridPane();
 	private static final String WATOR_TITLE = "WaTor!";
@@ -29,14 +34,15 @@ public class SimSlider {
 	private int minBreedDaysForSharks;
 	private int minBreedDaysForFish;
 	private double satisfactionPercentage;
-//	Slider myRatioSlider;
-//	Slider mySpeedSlider;
-//	Slider myEmptySlider;
-//	Slider mySizeSlider;
 	private SimDisplay display;
 	private Simulation sim;
 	private Timeline animation;
 	
+	/*
+	 * Constructor for this class. It takes one parameter, the SimDisplay that is creating it, so that this class
+	 *  can call some of the public methods from that class.
+	 * @param s
+	 */
 	public SimSlider(SimDisplay s) {
 		display = s;
 		sim = s.getSimulation();
@@ -77,6 +83,9 @@ public class SimSlider {
         layout.getChildren().addAll(s1,s2,s3,s4,l1,l2,l3,l4);
 	}
 	
+	/*
+	 * This method creates a slider that will change the speed of the animation of the simulation.
+	 */
 	private Slider speedSlider() {
 		Slider s = new Slider(0,10,5);
 		s.setShowTickLabels(true);
@@ -92,6 +101,10 @@ public class SimSlider {
 		return s;
 	}
 	
+	/*
+	 * This method creates a slider that will change the ratio of some types of cells to the others within any
+	 * given simulation.
+	 */
 	private Slider ratioSlider() {
 		Slider s = new Slider(0.0, 1.0, 0.5);
 		s.setShowTickLabels(true);
@@ -125,6 +138,10 @@ public class SimSlider {
 		return s;
 	}
 	
+	/*
+	 * This method creates a slider that will change the ratio of empty cells to other kinds of cells within
+	 * any given simulation.
+	 */
 	private Slider EmptySlider() {
 		Slider s = new Slider(0.0, 1.0, 0.5);
 		s.setShowTickLabels(true);
@@ -158,6 +175,9 @@ public class SimSlider {
 		return s;
 	}
 	
+	/*
+	 * This method creates a slider that will change the size of the simulation.
+	 */
 	private Slider SizeSlider() {
 		Slider s = new Slider(0.0, 100, 50);
 		s.setShowTickLabels(true);
@@ -192,6 +212,9 @@ public class SimSlider {
 		return s;
 	}
 	
+	/*
+	 * This method returns the GridPane instance variable of this class.
+	 */
 	public GridPane getSliders() {
 		return layout;
 	}

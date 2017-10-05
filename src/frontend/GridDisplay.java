@@ -13,6 +13,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 
+/* GridDisplay.java
+ * @author Venkat Subramaniam
+ * Class that initializes a GridDisplay object, which allows you to display different kinds of simulations
+ * within a Pane. 
+ * @version 10.04.17
+ */
 public class GridDisplay {
 	
 	private static final int GRID_FIT_CONSTANT = 400;
@@ -23,15 +29,16 @@ public class GridDisplay {
 	private Simulation sim;
 	private StyleUI style=new StyleUI();
 	private String shape;
-	
+	/*
+	 * Constructor for this class. Takes in a simulation s and creates the Pane, then populates it.
+	 * @param s
+	 */
 	public GridDisplay(Simulation s) {
 		sim = s;
 		myGrid = new Pane();
 		Cells = s.getArray();
 		myGrid.setPrefHeight(GRID_FIT_CONSTANT);
 		myGrid.setPrefWidth(GRID_FIT_CONSTANT);
-//		myGrid.getColumnConstraints().add(new ColumnConstraints(GRID_FIT_CONSTANT / Cells[0].length));
-//		myGrid.getRowConstraints().add(new RowConstraints(GRID_FIT_CONSTANT / Cells.length));
 		shape=style.gridShape();
 		if (shape.equals("Square")){
 			makeRectangleArray();
@@ -40,33 +47,12 @@ public class GridDisplay {
 		makeTriangleArray();
 		}
 		fillGrid();
-//		myGrid.setAlignment(Pos.CENTER);
 		myGrid.setOnMouseClicked(e-> handleClick(e.getX(),e.getY()));
 	}
 	
-//	private void makeRectangleArray() {
-//		Rectangles = new Polygon[Cells.length][Cells[0].length];
-//		double width=GRID_FIT_CONSTANT/Cells[0].length;
-//		double height=GRID_FIT_CONSTANT/Cells.length;
-//		for(int i=0; i<Cells.length; i++) {
-//			for(int j=0; j<Cells[i].length; j++) {
-//				Polygon tem=new Polygon();
-//				tem.getPoints().addAll(new Double[] {
-//						j*width, (i+1)*height,
-//						j*width+width, (i+1)*height,
-//						j*width, i*height,
-//						j*width+width, i*height 
-//						
-//					});
-//				tem.setStroke(Color.BLACK);
-//				tem.setFill(Cells[i][j].getColor());
-//				Rectangles[i][j]=tem;
-//				
-//				
-//			}
-//		}
-//	}
-	
+	/*
+	 * This method creates and initializes a Rectangle array with Rectangles that have the required color.
+	 */
 	private void makeRectangleArray() {
 		Rectangles = new Rectangle[Cells.length][Cells[0].length];
 		double width = GRID_FIT_CONSTANT/Cells[0].length;
@@ -82,6 +68,10 @@ public class GridDisplay {
 			}
 		}
 	}
+	
+	/*
+	 * This method creates and initializes a Triangle array with Triangles that have the required color.
+	 */
 	private void makeTriangleArray() {
 		Triangles = new Polygon[Cells.length][Cells[0].length];
 		double width = (GRID_FIT_CONSTANT / (Cells[0].length+1))*2;
@@ -127,13 +117,18 @@ public class GridDisplay {
 		}
 	}
 	
+	/*
+	 * This method updates this object so that it can display the current version of the simulation.
+	 */
 	public void update(){
-		Cells = sim.getArray(); //I can't help but feel that this is stupidly inefficient. Is there an easier way? - V 
-		//I don't think you guys are updating this array in the backend, because I'm not getting an animation. 
+		Cells = sim.getArray();
 		updateColorArray();
 		fillGrid();
 	}
 	
+	/*
+	 * This method populates the grid with the required rectangles or triangles, as the case may be.
+	 */
 	private void fillGrid() {
 		myGrid.getChildren().clear();
 		for(int i=0;i<Cells.length;i++) {
@@ -142,13 +137,15 @@ public class GridDisplay {
 				    myGrid.getChildren().add(Triangles[i][j]);
 				}
 				if (shape.equals("Square")){
-//					System.out.println("I'm here");
 					myGrid.getChildren().add(Rectangles[i][j]);
 				}
 			}
 		}
 	}
 	
+	/*
+	 * This method updates the colors of the Rectangles depending on what is required by the simulation.
+	 */
 	private void updateColorArray() {
 		for (int i=0; i<Cells.length; i++) {
 			for(int j=0; j<Cells[i].length; j++) {
@@ -165,10 +162,16 @@ public class GridDisplay {
 		
 	}
 	
+	/*
+	 * This method returns the myGrid instance variable of this class.
+	 */
 	public Pane getGrid() {
 		return myGrid;
 	}
 
+	/*
+	 * This method handles a mouse input to change the state of a particular cell that is clicked on.
+	 */
 	public void handleClick(double x, double y) {
 		if (shape.equals("Square")){
 			for (int i=0; i<Rectangles.length; i++) {
@@ -176,7 +179,6 @@ public class GridDisplay {
 					if (Rectangles[i][j].contains(x,y)) {
 						if (Cells[i][j].getState()==0) {
 						Cells[i][j].changeState(1);
-						//Change color here
 					}
 						if(Cells[i][j].getState()==1) {
 							Cells[i][j].changeState(2);

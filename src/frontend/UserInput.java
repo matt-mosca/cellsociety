@@ -1,8 +1,6 @@
 package frontend;
 
-/*
- * Authors: Venkat S., Yiqin Zhou
- */
+
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -16,6 +14,12 @@ import javafx.scene.control.Alert.AlertType;
 import java.io.File;
 import java.io.IOException;
 
+
+/* UserInput.java
+ * @author Venkat Subramaniam & Yiqin Zhou
+ * Class that parses and interprets xml files so that parameters can be set for various simulations.
+ * @version 10.04.17
+ */
 public class UserInput {
 	private static final String GAMEOFLIFETITLE = "Game of Life";
 	private static final String SEGREGATIONTITLE = "Segregation";
@@ -30,11 +34,19 @@ public class UserInput {
 
 	  private double [] finalParams;
 	  
+	  /*
+	   * Constructor for this class. It just initializes this object so that other methods can be called.
+	   */
 	  public UserInput() {
 		  
 	  }
 	
 	  
+	  /*
+	   * This method returns the correct finalParams instance variable of this class depending on the 
+	   * kind of simulation that needs to be created.
+	   * @param s
+	   */
 	  public double[] getArray(String s) {
 		if(s.equals(WATORTITLE)) {
 			getWaTor();
@@ -54,70 +66,57 @@ public class UserInput {
 		return finalParams;
 	  }
 
+	  /*
+	   * This method loads in the data related to the Segregation simulation.
+	   */
 	  private void getSegregation() {
-	
-		
 	    try {
-	    
-
 		doc = getFile("Segregation.xml");
-	
 		doc.getDocumentElement().normalize();
 		simulationType=doc.getElementsByTagName("name").item(0).getTextContent();
-		
 		segregationSetUpWithoutType();
-
-		
-		
-			
-		
 	    } catch (Exception e) {
 	    	    if (simulationType==null) {
 		    showError("Simulation name is not given, will use the default value");
 			simulationType="Segregation";
 			segregationSetUpWithoutType();
 	    	    }
-			
-		
 	    }
-//	    return finalParams;
 	  }
 
 
-	public void segregationSetUpWithoutType() {
-		
-		
+	  /*
+	   * This method loads in the data from the xml file related to the Segregation simulation.
+	   */
+	private void segregationSetUpWithoutType() {
 		String satisfactionPercentage = doc.getElementsByTagName("satisfactionPercentage").item(0).getTextContent();
-
 		double[] basic = new double[1];
 		basic[0] = Double.parseDouble(satisfactionPercentage);
 		getInitialSetUp(doc, basic);
 	}
-	  
-	  
+	   
+	  /*
+	   * This method loads in the data  related to the WaTor simulation.
+	   */
 	  private void getWaTor() {
-		
-		
-	    try {
-	    
+	    try { 
 		doc = getFile("WaTor.xml");
 		doc.getDocumentElement().normalize();
 		simulationType=doc.getElementsByTagName("name").item(0).getTextContent();
 		waTorSetUpWithoutType();
-//		makeFinalArray();
 	    } catch (Exception e) {
 		    if (simulationType==null) {
 		    	   showError("Simulation name is not given, will use the default value");
 			   simulationType="WaTor";
-		    	   waTorSetUpWithoutType();
-		    	
+		    	   waTorSetUpWithoutType();	    	
 		    }
 	    }
-//	    return finalParams;
 	  }
 
-
-	public void waTorSetUpWithoutType() {
+	  /*
+	   * This method loads in the data from the xml file related to the WaTor simulation.
+	   */
+	private void waTorSetUpWithoutType() {
 		String minBreedDaysForSharks = doc.getElementsByTagName("minBreedDaysForSharks").item(0).getTextContent();
 		String minBreedDaysForFish = doc.getElementsByTagName("minBreedDaysForFish").item(0).getTextContent();
 		String maxStarveDaysForSharks = doc.getElementsByTagName("maxStarveDaysForSharks").item(0).getTextContent();
@@ -127,69 +126,59 @@ public class UserInput {
 		basic[2] = Double.parseDouble(minBreedDaysForFish);
 		getInitialSetUp(doc, basic);
 	}
-	  
 	
-
-
-
-	public void getFire() {
-			
-			
+	 /*
+	  * This method loads in the data related to the Fire simulation.
+	  */
+	private void getFire() {	
 		    try {
-		    
 			doc = getFile("Fire.xml");
 			doc.getDocumentElement().normalize();
 			simulationType=doc.getElementsByTagName("name").item(0).getTextContent();
 		    fireSetUpWithoutType();
-
-			
-			
-				
-			
 		    } catch (Exception e) {
 		    	if (simulationType==null) {
 			    	   showError("Simulation name is not given, will use the default value");
 				   simulationType="Fire";
-			    	   fireSetUpWithoutType();
-			    	
+			    	   fireSetUpWithoutType();   	
 			    }
 		    }
-//			return finalParams;
      }
 
-
-	public void fireSetUpWithoutType() {
+	 /*
+	  * This method loads in the data from the xml file related to the Fire simulation.
+	  */
+	private void fireSetUpWithoutType() {
 		String probCatch = doc.getElementsByTagName("probCatch").item(0).getTextContent();
-
 		double[] basic = new double[1];
 		basic[0] = Double.parseDouble(probCatch);
 		getInitialSetUp(doc, basic);
 	}
 	  
-	  public void getGameOfLife() {
-			
-			
-		    try {
-		    
+
+	 /*
+	  * This method loads in the data related to the Game of Life simulation.
+	  */
+	  private void getGameOfLife() {
+		  try {   
 			doc = getFile("GameOfLife.xml");
 			doc.getDocumentElement().normalize();
 			simulationType=doc.getElementsByTagName("name").item(0).getTextContent();
-			getInitialSetUp(doc, null);
-			
+			getInitialSetUp(doc, null);	
 		    } catch (Exception e) {
 		    	if (simulationType==null) {
 			    	   showError("Simulation name is not given, will use the default value");
 				   simulationType="Game Of Life";
-				   getInitialSetUp(doc, null);
-			    	
+				   getInitialSetUp(doc, null);    	
 			    }
 		    }
-
      }
 	  
-	  public void getRPS() {
-		  try {
-			 
+	  /*
+		  * This method loads in the data related to the RPS simulation.
+		  */
+	  private void getRPS() {
+		  try {	 
 			  doc = getFile("RPS.xml");
 			  doc.getDocumentElement().normalize();
 			  simulationType=doc.getElementsByTagName("name").item(0).getTextContent();
@@ -206,8 +195,11 @@ public class UserInput {
 
 	  
 	  
-
-	public Document getFile(String fileName) throws ParserConfigurationException, SAXException, IOException {
+/*
+ * This method reads and parses through a particular xml file.
+ * @param fileName
+ */
+	private Document getFile(String fileName) throws ParserConfigurationException, SAXException, IOException {
 		File fXmlFile = new File(fileName);
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -217,26 +209,32 @@ public class UserInput {
 
 
 
-
-	public void getInitialSetUp(Document doc, double[] second) {
+	/*
+	 * This method creates a basic array which contains information loaded from the xml file.
+	 * @param doc
+	 * @param second
+	 */
+	private void getInitialSetUp(Document doc, double[] second) {
 		double[] things = new double[4];
-//		String title = doc.getElementsByTagName("name").item(0).getTextContent();
 		String cellNumberHorizontal = doc.getElementsByTagName("cellNumberHorizontal").item(0).getTextContent();
 		String cellNumberVertical = doc.getElementsByTagName("cellNumberVertical").item(0).getTextContent();
 		String emptyPercentage = doc.getElementsByTagName("emptyPercentage").item(0).getTextContent();
 		String redToBlueRatio = doc.getElementsByTagName("redToBlueRatio").item(0).getTextContent();
 		String typeS = doc.getElementsByTagName("type").item(0).getTextContent();
 		type=Integer.parseInt(typeS);
-//		things[0] = title;
 		things[0] = Double.parseDouble(cellNumberHorizontal);
 		things[1] = Double.parseDouble(cellNumberVertical);
 		things[2] = Double.parseDouble(emptyPercentage);
 		things[3] = Double.parseDouble(redToBlueRatio);
 		
 		makeFinalArray(things, second);
-//		return things;
 	}
 	
+	/*
+	 * This method sets the instance variable finalParams to the value that the particular simulation requires.
+	 * @param fun
+	 * @param second
+	 */
 	  private void makeFinalArray(double[] fun, double[] second) {
 		   if (second==null) {
 			   finalParams = fun;
@@ -253,16 +251,25 @@ public class UserInput {
 		  }
 
 
+	  /*
+	   * This method returns the type instance variable of this class.
+	   */
 	public int getType() {
 		return type;
 	}
 
 
+	/*
+	 * This method sets the type instance variable of this class.
+	 */
 	public void setType(int type) {
 		this.type = type;
 	}
 	
-	public void showError (String message) {
+	/*
+	 * This method displays an error message should there be an incorrect input.
+	 */
+	private void showError (String message) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error");
         alert.setContentText(message);
