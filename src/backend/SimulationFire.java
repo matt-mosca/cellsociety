@@ -13,25 +13,24 @@ import util.TriangleNeighborFinder;
  * for this simulation in particular.
  * @version 10.04.17
  */
-public class SimulationFire extends Simulation{
+public class SimulationFire extends Simulation {
 	private double probCatch;
 	private NeighborFinder neighbors;
-	private StyleUI style = new StyleUI();
+	private StyleUI gridStyle = new StyleUI();
 	
 	/**
 	 * Parameterized constructor for this class. All parameters, with the exception of probCatch, are 
 	 * passed into the super class constructor.
-	 * @param cellNumberHorizontal - the number of rows in the grid
-	 * @param cellNumberVertical - the number of columns in the grid
+	 * @param numRows - the number of rows in the grid
+	 * @param numCols - the number of columns in the grid
 	 * @param emptyPercentage - the percentage of cells in the grid that should be initially empty
 	 * @param redToBlueRatio - the ratio of non-empty cells with two different states
 	 * @param probCatch - the probability that a given tree cell will "catch fire," changing to the state
 	 * representing fire
 	 */
-	public SimulationFire(int cellNumberHorizontal, int  cellNumberVertical, double emptyPercentage, 
-			double redToBlueRatio, double probCatch) {
-		super(cellNumberHorizontal, cellNumberVertical, emptyPercentage, redToBlueRatio);
-		specificSetUp(probCatch);
+	public SimulationFire(int numRows, int  numCols, double emptyPercentage, double redToBlueRatio, double probCatch) {
+		super(numRows, numCols, emptyPercentage, redToBlueRatio);
+		initializeComponents(probCatch);
 		initializeGridStates();
 		assignNeighbors(neighbors);
 	}
@@ -47,8 +46,8 @@ public class SimulationFire extends Simulation{
 	 */
 	public SimulationFire(int cellNumberHorizontal, int cellNumberVertical, int[][] specificLocation,double probCatch) {
 		super(cellNumberHorizontal,cellNumberVertical,specificLocation);
-		specificSetUp(probCatch);
-        super.initializeScene2(neighbors);
+		initializeComponents(probCatch);
+        initializeScene2(neighbors);
 		assignNeighbors(neighbors);
 		updateColors();
 	}
@@ -57,7 +56,7 @@ public class SimulationFire extends Simulation{
 	 * Creates the cells in the grid and determines the type of neighborhood that the cells will have.
 	 * @param probCatch
 	 */
-	public void specificSetUp(double probCatch) {
+	private void initializeComponents(double probCatch) {
 		this.probCatch = probCatch;
 		setArray(new CellFire[getCellNumberHorizontal()][getCellNumberVertical()]);
 		for (int rowNumber = 0; rowNumber < getCellNumberHorizontal(); rowNumber++) {
@@ -65,10 +64,17 @@ public class SimulationFire extends Simulation{
 				getArray()[rowNumber][columnNumber] = new CellFire(CellFire.EMPTY, null, null, rowNumber, columnNumber);
 			}
 		}
-		if(style.gridShape().equals("Triangle"))
-			neighbors = new TriangleNeighborFinder(getArray(), 0, 0, style.getGridEdge());
+		defineNeighbors();
+	}
+	
+	/**
+	 * Determines the default sets of neighbors used by the cells in this simulation.
+	 */
+	private void defineNeighbors() {
+		if(gridStyle.gridShape().equals("Triangle"))
+			neighbors = new TriangleNeighborFinder(getArray(), 0, 0, gridStyle.getGridEdge());
 		else
-			neighbors = new FourNeighborFinder(getArray(), 0, 0, style.getGridEdge());
+			neighbors = new FourNeighborFinder(getArray(), 0, 0, gridStyle.getGridEdge());
 	}
 	
 	/**
@@ -82,7 +88,7 @@ public class SimulationFire extends Simulation{
 	
 	/**
 	 * Calculates the number of cells in the grid that will be empty based on the size of the grid and the 
-	 * percentage that will be empty
+	 * percentage that should be empty
 	 * @return the number of cells in the grid that will be empty
 	 */
 	private int findNumberEmpty() {
@@ -91,20 +97,21 @@ public class SimulationFire extends Simulation{
 	}
 	
 	/**
-	 * Sets the initial states of the cells in the grid.
+	 * Sets the initial states of the cells in the grid randomly, taking into account the number of cells
+	 * that should be empty.
 	 */
 	private void fillGridStates() {
 		int rand = 0;
 		int empty = findNumberEmpty();
 		for(int i = getNumberOfCells(); i > 0; i--) {
 			rand = (int) getRandomNum(i);
+			Cell cellOfInterest = getArray()[(getNumberOfCells() - i) / getCellNumberVertical()][(getNumberOfCells() - i) % getCellNumberVertical()];
 			if(empty > 0 && rand <= empty) {
-					getArray()[(getNumberOfCells() - i) / getCellNumberVertical()][(getNumberOfCells() - i) % getCellNumberVertical()].changeState(CellFire.EMPTY);
+					cellOfInterest.changeState(CellFire.EMPTY);
 					empty--;
 			}
-			else {
-				getArray()[(getNumberOfCells() - i) / getCellNumberVertical()][(getNumberOfCells() - i) % getCellNumberVertical()].changeState(CellFire.TREE);
-			}
+			else
+				cellOfInterest.changeState(CellFire.TREE);
 		}
 	}
 	
@@ -118,7 +125,8 @@ public class SimulationFire extends Simulation{
 	}
 	
 	/**
-	 * Changes the state of each cell based on the neighborhood of cells around it.
+	 * Changes the state of each cell based on the neighborhood of cells around it, then updates
+	 * neighbors, colors, and the count of each state using helper methods.
 	 */
 	public void update() {
 		int[][] temp = new int[getCellNumberHorizontal()][getCellNumberVertical()];
@@ -127,11 +135,8 @@ public class SimulationFire extends Simulation{
 				temp[i][j] = getArray()[i][j].getState();
 				if(getArray()[i][j].getState() == CellFire.BURNING)
 					temp[i][j] = CellFire.EMPTY;
-				if(getArray()[i][j].getState() == CellFire.TREE) {
-					if(potentialForFire(getArray()[i][j]))
-						if(getRandomNum(1) <= probCatch)
+				if(getArray()[i][j].getState() == CellFire.TREE && potentialForFire(getArray()[i][j]) && getRandomNum(1) <= probCatch)
 							temp[i][j] = CellFire.BURNING;
-				}
 			}
 		}
 		for(int i = 0; i < getCellNumberHorizontal(); i++) {
@@ -141,7 +146,7 @@ public class SimulationFire extends Simulation{
 		}
 		assignNeighbors(neighbors);
 		updateColors();
-		super.count(1,2, 0);
+		count(1,2, 0);
 	}
 	
 	/**
@@ -173,11 +178,11 @@ public class SimulationFire extends Simulation{
 	protected Color chooseColor(int state) {
 		Color color = null;
 		if(state == CellFire.EMPTY)
-			color=style.emptyColor();
+			color = gridStyle.emptyColor();
 		if(state == CellFire.TREE)
-			color=Color.GREEN;
+			color = Color.GREEN;
 		if(state == CellFire.BURNING) {
-			color=Color.RED;
+			color = Color.RED;
 		}
 		return color;
 	}
@@ -198,7 +203,4 @@ public class SimulationFire extends Simulation{
 	public void setProbCatch(double prob) {
 		probCatch = prob;
 	}
-	
-	
-
 }
