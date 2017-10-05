@@ -1,8 +1,0 @@
-/**
- * 
- */
-/**
- * @author Armilon
- *
- */
-package frontend;
