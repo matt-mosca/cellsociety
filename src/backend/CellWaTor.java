@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 
 /**
  * CellWaTor.java
- * @author matthewmosca
+ * @author Yiqin Zhou and Matthew Mosca
  * Cell object subclass specific to the Wa-Tor simulation. Contains constants and methods that play 
  * roles particular to this simulation.
  * @version 10.04.17
