@@ -7,13 +7,26 @@ import javafx.scene.paint.Color;
 import util.EightNeighborFinder;
 import util.NeighborFinder;
 import util.TriangleNeighborFinder;
-
+/**
+ * SimulationSegregation.java
+ * @author Yiqin Zhou
+ * Simulation subclass specific to the Segregation simulation. In this simulation, red and blue will be relocated   
+ * to empty cell if unsatisfied
+ */
 public class SimulationSegregation extends Simulation {
 	private double satisfactionPercentage;
 	private NeighborFinder neighbors;
 	private StyleUI style = new StyleUI();
 
 	// 0 is empty, 1 is red, 2 is blue
+	/**
+	 * Parameterized constructor for this class. Parameters are passed into the superclass constructor.
+	 * @param cellNumberHorizontal - the number of rows in the grid
+	 * @param cellNumberVertical - the number of columns in the grid
+	 * @param emptyPercentage - the percentage of cells in the grid that should be initially empty
+	 * @param redToBlueRatio
+	 * @param satisfaction ratio - specific to this simlution
+	 */
 
 	public SimulationSegregation(int cellNumberHorizontal, int cellNumberVertical, double emptyPercentage, 
 			double redToBlueRatio,double SatisfactionPercentage) {
@@ -26,6 +39,16 @@ public class SimulationSegregation extends Simulation {
 		updateColors();
 	}
 	
+	/**
+	 * Parameterized constructor that accepts as a parameter a 2D array of states, which allows the states
+	 * of the grid to be set to predetermined values specified in the XML.
+	 * @param cellNumberHorizontal - the number of rows in the grid
+	 * @param cellNumberVertical - the number of columns in the grid
+	 * @param specificLocation - a 2D array of cell states, which can be used to set the initial states 
+	 * of the grids
+	 * @param satisfactionPercentage - unique parameter
+	 */
+	
 	public SimulationSegregation(int cellNumberHorizontal, int cellNumberVertical, int[][]specificLocation,double SatisfactionPercentage) {
 		super(cellNumberHorizontal,cellNumberVertical,specificLocation);
 		satisfactionPercentage = SatisfactionPercentage;
@@ -34,6 +57,11 @@ public class SimulationSegregation extends Simulation {
 		super.initializeScene2(neighbors);
 		updateColors();
 	}
+	
+	/**
+	 * Set up an empty cell array
+	 * @param satisfactionPercentage
+	 */
 
 	public void specificSetUp(double satisfactionPercentage) {
 		setArray(new CellSegregation[getCellNumberHorizontal()][getCellNumberVertical()]);
@@ -47,6 +75,10 @@ public class SimulationSegregation extends Simulation {
 		else
 			neighbors = new EightNeighborFinder(getArray(), 0, 0, style.getGridEdge());
 	}
+	
+	/**
+	 * choose color for different states
+	 */
 
 	@Override
 	protected Color chooseColor(int state) {
@@ -62,6 +94,10 @@ public class SimulationSegregation extends Simulation {
 		}
 		return color;
 	}
+	
+	/**
+	 * update to new 2D array according to specific logic (whether cell has a higher satisfaction rate than expected)
+	 */
 	
 	public void update() {
 		// set up a loop, go through every cell
@@ -93,6 +129,10 @@ public class SimulationSegregation extends Simulation {
 		updateColors();
 		super.count(1,2,0);
 	}
+	/**
+	 * find all empty cells so that unsatisfied cells can move to those positions
+	 * @return
+	 */
 
 	private List<Cell> findAllEmpty() {
 		List<Cell> empty = new ArrayList<Cell>();
@@ -106,6 +146,11 @@ public class SimulationSegregation extends Simulation {
 		}
 		return empty;
 	}
+	/**
+	 * check whether a particular cell is satisfied or not by using its neighbors and doing comparision to the satisfactionpercentage
+	 * @param cell
+	 * @return
+	 */
 
 	private boolean whetherSatisfied(CellSegregation cell) {
 		List<Cell> neighbors = cell.getNeighborCells();
