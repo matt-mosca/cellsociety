@@ -9,6 +9,12 @@ import util.FourNeighborFinder;
 import util.NeighborFinder;
 import util.TriangleNeighborFinder;
 
+/**
+ * SimulationWaTor.java
+ * @author Yiqin Zhou
+ * Simulation subclass specific to the WaTor simulation. In this simulation, shark will eat fish, both shark and fish  
+ * will reproduce and shark will die if it stays hungry for too long
+ */
 public class SimulationWaTor extends Simulation {
 	private static final String SHARKSTARVE = "starve";
 	private static final String SHARKEAT = "eat";
@@ -21,6 +27,16 @@ public class SimulationWaTor extends Simulation {
 
 	
 	// 0 is empty, 1 is shark, 2 is fish
+	/**
+	 * Parameterized constructor for this class. Parameters are passed into the superclass constructor.
+	 * @param cellNumberHorizontal
+	 * @param cellNumberVertical
+	 * @param emptyPercentage
+	 * @param redToBlueRatio
+	 * @param maxStarveDaysForSharks
+	 * @param minBreedDaysForSharks
+	 * @param minBreedDaysForFish
+	 */
 
 	public SimulationWaTor( int cellNumberHorizontal, int cellNumberVertical, double emptyPercentage,double redToBlueRatio,
 			int maxStarveDaysForSharks, int minBreedDaysForSharks, int minBreedDaysForFish) {
@@ -34,6 +50,17 @@ public class SimulationWaTor extends Simulation {
 		updateColors();
 	}
 	
+	/**
+	 * Parameterized constructor that accepts as a parameter a 2D array of states, which allows the states
+	 * of the grid to be set to predetermined values specified in the XML.
+	 * @param cellNumberHorizontal
+	 * @param cellNumberVertical
+	 * @param specificLocation
+	 * @param maxStarveDaysForSharks
+	 * @param minBreedDaysForSharks
+	 * @param minBreedDaysForFish
+	 */
+	
 	public SimulationWaTor(int cellNumberHorizontal, int cellNumberVertical, int[][]specificLocation, int maxStarveDaysForSharks,
 			int minBreedDaysForSharks,int minBreedDaysForFish) {
 		super(cellNumberHorizontal,cellNumberVertical,specificLocation);
@@ -44,6 +71,12 @@ public class SimulationWaTor extends Simulation {
 		super.initializeScene2(neighbors);
 		updateColors();
 	}
+	/**
+	 * Set up an empty array and set up some instance variables (common set up in both constructors)
+	 * @param maxStarveDaysForSharks
+	 * @param minBreedDaysForSharks
+	 * @param minBreedDaysForFish
+	 */
 
 	public void specificSetUp(int maxStarveDaysForSharks, int minBreedDaysForSharks, int minBreedDaysForFish) {
 		this.maxStarveDaysForSharks = maxStarveDaysForSharks;
@@ -61,6 +94,10 @@ public class SimulationWaTor extends Simulation {
 			neighbors = new FourNeighborFinder(getArray(), 0, 0, style.getGridEdge());
 	}
 	
+	/**
+	 * choose color according to states
+	 */
+	
 	@Override
 	protected Color chooseColor(int state) {
 		Color color = null;
@@ -73,6 +110,9 @@ public class SimulationWaTor extends Simulation {
 			color = Color.GREEN;
 		return color;
 	}
+	/**
+	 * update 2D array according to specific logic of die, breed, eat
+	 */
 
 	public void update() {
 		// set up a loop, go through every cell
@@ -148,6 +188,12 @@ public class SimulationWaTor extends Simulation {
 		updateColors();	
 		super.count(1,2,0);
 	}
+	
+	/**
+	 * a fish will move to a random empty cell
+	 * @param fish
+	 * @param randomEmpty
+	 */
 
 	private void fishMove(CellWaTor fish,CellWaTor randomEmpty) {
 		randomEmpty.changeState(2);
@@ -157,12 +203,25 @@ public class SimulationWaTor extends Simulation {
 		fish.setBreedDays(0);
 		fish.setColor(chooseColor(0));
 	}
+	
+	/**
+	 * find a particular random neighbor among all neighbors of a cell
+	 * @param allNeighbor
+	 * @return
+	 */
 
 	public CellWaTor findRandomNeighbor(List<Cell> allNeighbor) {
 		int randomIndex = random(1,allNeighbor.size())[0];
 		CellWaTor random = (CellWaTor) allNeighbor.get(randomIndex);
 		return random;
 	}
+	
+	/**
+	 * shark moves to a random cell, either fish (in this case eat the fish) or empty (in this case just move)
+	 * @param shark
+	 * @param randomSlot
+	 * @param code
+	 */
 	
 	public void sharkMove(CellWaTor shark, CellWaTor randomSlot, String code) {
 		randomSlot.changeState(1);

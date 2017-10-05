@@ -20,8 +20,20 @@ import org.xml.sax.SAXException;
 import backend.Cell;
 
 public class UserSaveSimulation{
+	
+	/**
+	 * UserSaveSimulation.java
+	 * @author Yiqin Zhou
+	 * Save current grid data into an XML file and read back from this XML file
+	 * Dependencies: SimDisplay, assume current grid data are valid
+	 * @version 10.04.17
+	 */
 
 	
+	/**
+	 * Get back an array of int from saved XML file when resume button is pressed
+	 * @return
+	 */
 	public int[][] getBack(){
 		  int array[][] = null;
 		  try {
@@ -65,7 +77,11 @@ public class UserSaveSimulation{
 }
 	
 	
-	
+	/**
+	 * save the current 2D array into an XML file with a type specifying a particular simulation
+	 * @param needSave
+	 * @param type
+	 */
 
 	public void save(Cell[][]needSave,String type) {
 	
@@ -128,13 +144,7 @@ public class UserSaveSimulation{
 		
 		
 	
-		
-		
-	public static void main(String argv[]) {
-		UserSaveSimulation test=new UserSaveSimulation();
-		test.getBack();
-		
-	}
+	
 	
 	
 }
