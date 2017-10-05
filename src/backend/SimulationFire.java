@@ -19,7 +19,8 @@ public class SimulationFire extends Simulation{
 	private StyleUI style = new StyleUI();
 	
 	/**
-	 * Parameterized constructor for this class. Parameters are passed into the super class constructor.
+	 * Parameterized constructor for this class. All parameters, with the exception of probCatch, are 
+	 * passed into the super class constructor.
 	 * @param cellNumberHorizontal - the number of rows in the grid
 	 * @param cellNumberVertical - the number of columns in the grid
 	 * @param emptyPercentage - the percentage of cells in the grid that should be initially empty
