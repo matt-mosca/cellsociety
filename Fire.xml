@@ -1,7 +1,7 @@
 <Fire>
-    <title>
+<!--     <title>
         <name>Fire</name>
-    </title>
+    </title> -->
 
     <parameters>
         <probCatch>0.95</probCatch>
